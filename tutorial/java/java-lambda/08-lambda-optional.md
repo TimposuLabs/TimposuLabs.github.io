@@ -22,14 +22,28 @@ if (message != null) {
 }
 ```
 
-Jika `message` langsung digunakan tanpa melakukan validasi seperti contoh di atas makan akan menimbulkan `NullPointerException`.
+Jika `message` langsung digunakan tanpa melakukan validasi seperti contoh di atas maka akan menimbulkan `NullPointerException`.
 
 ### Menggunakan `Optional` class
 
-Dengan menggunakan Optional arah program bisa dialirkan dengan lebih efisien, tanpa melakukan validasi seperti cara sebelumnya.
+Dengan menggunakan Optional program kita tidak akan menimbulkan `NullPointerException`, tanpa melakukan validasi seperti cara sebelumnya.
 
 ```java
-Optional<String> optionalName = Optional.ofNullable(message);
+Optional<String> optionalName = Optional.ofNullable(message);  // melakukan validasi message null atau tidak
+Optional<String> optionalNameUpper = optionalName.map((value) -> value.toUpperCase()); // mengubah data string menjadi uppercase
+optionalNameUpper.ifPresent(value -> System.out.println(value)); // jika data ada maka di cetak
+```
+
+Kelihatan memang lebih repot tapi sebenarnya aliran programmnya bisa dibuat lebih sederhana seperti berikut:
+
+```java
+Optional.ofNullable(message)
+        .map(String::toUpperCase)
+//                .ifPresent(System.out::println); //satu kondisi
+        .ifPresentOrElse(
+                value -> System.out.println(value),
+                () -> System.out.println("Data message kosong")
+        );
 ```
 
 Berikut contoh menggunakan Lambda expression pada Optional Class:
