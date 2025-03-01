@@ -18,7 +18,7 @@ interface SimpleAction {
 }
 ```
 
-## 2. Menggunakan Class Anonym
+## 2. Menggunakan Class Anonymous
 
 Setelah memiliki interface function kita dapat menggunakan interface tersebut menggunakan class anonym.
 
