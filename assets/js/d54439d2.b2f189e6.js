@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktimposu=self.webpackChunktimposu||[]).push([[668],{4768:s=>{s.exports=JSON.parse('{"tag":{"label":"spring","permalink":"/blog/tags/spring","allTagsPath":"/blog/tags","count":8,"unlisted":false},"listMetadata":{"permalink":"/blog/tags/spring","page":1,"postsPerPage":10,"totalPages":1,"totalCount":8,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
