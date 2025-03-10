@@ -16,16 +16,7 @@ tags: [springboot, spring, rest, api, h2]
 
 ## 🔁 Alur Arsitektur Aplikasi
 
-```
-                   ┌────────────┐       ┌────────────┐      ┌────────────┐
-          request  │            │       │            │      │            │
-        ──────────►│            ├─────► │            ├─────►│            │
-CLIENT             │ Controller │       │ Repository │      │ H2 Database│
-        ◄──────────┤            │◄──────┤            │◄─────┤            │
-          response │            │       │            │      │            │
-                   └────────────┘       └────────────┘      └────────────┘
-                                                                                                       
-```
+![rest simple](/img/general/spring-boot-rest-simple.jpg)
 
 ### 📌 Client (Pengguna API)
 
@@ -159,7 +150,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
 🚀 Menggunakan `JpaRepository` untuk standar CRUD, dibanding menbuatnya secara manual 😵‍💫.
 
-# ✅ Membuat Controller
+## ✅ Membuat Controller
 
 ```java
 import com.timposulabs.belajar_springboot_h2.model.Product;
