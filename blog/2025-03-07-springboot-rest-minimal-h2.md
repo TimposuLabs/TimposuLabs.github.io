@@ -18,6 +18,10 @@ tags: [springboot, spring, rest, api, h2]
 
 ![rest simple](/img/general/spring-boot-rest-simple.jpg)
 
+:::warning
+Arsitektur yang digunakan bukan merupakan best practice tetapi hanya untuk education purpose/proses pembelajaran dan tidak direkomendasikan untuk digunakan di production.
+:::
+
 ### 📌 Client (Pengguna API)
 
 Client adalah layer yang akan berinteraksi dengan API di antaranya seperti browser, mobile, Postman, frontend app dan sebagainya. Client akan:
