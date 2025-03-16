@@ -263,7 +263,9 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void delete(Long id) {
-        productRepository.deleteById(id);
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("ID Not Found"));
+        productRepository.delete(product);
     }
 
     // Conversion between DTO to Entity
@@ -494,6 +496,13 @@ public ProductDTO update(Long id, ProductDTO productDTO) {
     product.setDescription(productDTO.description());
     product.setPrice(productDTO.price());
     return convertToDTO(productRepository.save(product));
+}
+
+ @Override
+public void delete(Long id) {
+    Product product = productRepository.findById(id)
+            .orElseThrow(() -> new NotFoundException("ID Not Found"));
+    productRepository.delete(product);
 }
 ```
 
