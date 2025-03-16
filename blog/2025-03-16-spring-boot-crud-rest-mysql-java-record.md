@@ -386,10 +386,119 @@ Jalankan aplikasi dan lakukan pengujian dari client bisa menggunakan Postman ata
 
 * URL: `http://localhost:8080/api/product/{id}`
 
+---
+
 ## ⚡ Handle Exception
 
 Dari aplikasi di atas yang sudah dibuat, yang diperlu ditambakan adalah handle Exception. Dimana pada aplikasi di atas masih terdapat Runtime Exception apabila kita mencari data yang tidak terdapat ID nya, yang mana akan menghasilkan HTTP status `500` atau Internal Server Error yang merupakan pesan error yang keliru karena harusnya HTTP status yang benar adalah `NOT_FOUND`.
 
+### 1️⃣ Membuat API Error
+
+Kita akan membuat standard response API seperti berikut:
+
+```json
+{
+  "error": "ID Not Found",
+  "path": "/api/product/1",
+  "status": 404,
+  "timestamp": "2025-03-16T12:40:42.311569409"
+}
+```
+
+Penjelasan:
+
+* `error` : Keterangan Error.
+* `path` : URL Request API penyebab error.
+* `status` : Kode HTTP status.
+* `timestamp` : Keterangan waktu error dalam format timestamp.
+
+Kita akan mengikuti format response API di atas dengan membuat Java Record:
+
+```java
+package com.timposulabs.demo_spring_boot_rest_api.exception;
+
+import java.time.LocalDateTime;
+
+public record ApiError(
+        String error,
+        String path,
+        int status,
+        LocalDateTime timestamp) {
+}
+```
+
+### 2️⃣ Membuat Class NotFoundException
+
+Selanjutnya membuat custom class `NotFoundException` extends dari `RuntimeException`:
+
+```java
+package com.timposulabs.demo_spring_boot_rest_api.exception;
+
+public class NotFoundException extends RuntimeException {
+    public NotFoundException(String message) {
+        super(message);
+    }
+}
+```
+
+### 3️⃣ Membuat Exception Handler
+
+Selanjutnya membuat Exception Handler yang menggunakan annotation `@ControllerAdvice`, yang mana Spring akan menjalankan Advice terlebih dahulu untuk menangkap exception yang ada. Maka dari itu semua class exception yang ada pada `ExceptionHandler` akan dihandle dalam class ini, dalam kasus ini exception `NotFoundException` yang telah kita buat sebelumnya akan dihandle disini.
+
+```java
+package com.timposulabs.demo_spring_boot_rest_api.exception;
+
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.time.LocalDateTime;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ApiError> handleNotFoundException(NotFoundException ex, HttpServletRequest request) {
+        ApiError apiError = new ApiError(
+                ex.getMessage(),
+                request.getRequestURI(),
+                HttpStatus.NOT_FOUND.value(),
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
+    }
+}
+```
+
+💡 Kita dapat menambahkan class Exception lain dalam class ini untuk meng-handle exception-exception lainnya.
+
+### 4️⃣ Update Service Layer
+
+Selanjutnya kita akan mengupdate Service dengan mengubah `RuntimeException` menjadi `NotFoundException`:
+
+```java
+@Override
+public ProductDTO findById(Long id) {
+    return productRepository.findById(id)
+            .map(this::convertToDTO)
+            .orElseThrow(() -> new NotFoundException("ID Not Found"));
+}
+
+@Override
+public ProductDTO update(Long id, ProductDTO productDTO) {
+    Product product = productRepository.findById(id)
+            .orElseThrow(() -> new NotFoundException("ID Not Found"));
+    product.setName(productDTO.name());
+    product.setDescription(productDTO.description());
+    product.setPrice(productDTO.price());
+    return convertToDTO(productRepository.save(product));
+}
+```
+
 ## 🔖 Kesimpulan
 
 Kita sudah membangun aplikasi Spring Boot CRUD REST API dengan MySQL. Kita mengikuti best practice dengan menggunakan Java Record sebagai DTO dan menjaga logic konversi antara Entity dan DTO di layer Service. Dengan memisahkan logic konversi ke dalam layer Service, kita mempertahankan basis kode yang clean dan terstruktur dengan baik yang akan lebih mudah dimaintain dan diperluas/scalability di masa mendatang.
+
+Selain itu kita juga sudah mengimplementasikan Exception Handle yang mana kita mengkustom sendiri exception sesuai kebutuhan.
