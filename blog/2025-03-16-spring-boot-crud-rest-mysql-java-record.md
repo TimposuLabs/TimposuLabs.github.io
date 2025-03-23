@@ -88,7 +88,7 @@ spring.jpa.hibernate.ddl-auto=update
 
 ## 3️⃣ Membuat Entity / Model
 
-Membuat Entity `Product` dalam fotmat POJO, untuk mewakili tabel `product` dalam database:
+Membuat Entity `Product` dalam format POJO, untuk mewakili tabel `product` dalam database:
 
 ```java
 package com.timposulabs.demo_spring_boot_rest_api.model;
@@ -284,7 +284,7 @@ public class ProductServiceImpl implements ProductService{
 ```
 
 * Konversi logic (antara Entitas dan DTO) disimpan di layer service untuk menjaga controller tetap bersih dan hanya berfokus pada penanganan request HTTP.
-* Method ini mengonversi entity __Product__ menjadi __ProductDTO__, begitupun sebaliknya.
+* Method `convertToDTO` ini mengonversi entity __Product__ menjadi __ProductDTO__, begitupun sebaliknya untuk method `convertToEntity`.
 
 ## 7️⃣ Membuat Controller 
 
