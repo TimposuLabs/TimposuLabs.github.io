@@ -2,7 +2,7 @@
 slug: spring-boot-crud-rest-dto-mapstruct
 title: Spring Boot CRUD REST API Java Record DTO + Mapper dengan Mapstruct
 authors: topekox
-tags: [springboot, spring, rest, api, mysql]
+tags: [springboot, spring, rest, api, database]
 ---
 
 Pada tutorial ini, kita akan membuat aplikasi Spring Boot CRUD (Create, Read, Update, Delete) seperti pada [tutorial sebelumnya](/blog/spring-boot-crud-rest-mysql-java-record-dto). Jika pada tutorial sebelumnya kita melakukan mapping untuk konversi DTO ke Entity atau sebaliknya masih menggunakan cara manual, tutorial kita menggunakan generator mapper [Mapstruct](https://mapstruct.org/).
@@ -157,7 +157,7 @@ Dependency pada `pom.xml`:
 
 ## 2️⃣ Konfigurasi `application.properties`
 
-Pada file `src/main/resources/application.properties` kita perlu melakukan konfigurasi agar Spring Boot terhubung ke database MySQL:
+Pada file `src/main/resources/application.properties` kita perlu melakukan konfigurasi agar Spring Boot terhubung ke database:
 
 ```
 spring.datasource.url=jdbc:h2:mem:springapp
@@ -239,28 +239,6 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return Objects.equals(id, person.id) && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(email, person.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email);
-    }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                '}';
     }
 }
 ```
