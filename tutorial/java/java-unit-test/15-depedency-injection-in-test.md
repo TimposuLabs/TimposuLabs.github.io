@@ -35,7 +35,9 @@ public class RandomParameterResolver implements ParameterResolver {
 }
 ```
 
-## Membuat Test
+## Membuat Test Menggunakan Parameter Resolver
+
+Untuk menggunakan parameter resolver yang sudah kita buat, kita bisa menggunakan annontation `@ExtendWith` di test class. Jika lebih dari 1 parameter resolver, kita bisa menggunakan `@Extentions`.
 
 ```java
 import java.util.Random;
@@ -67,3 +69,7 @@ public class RandomTest {
 
 }
 ```
+
+## 
+
+
