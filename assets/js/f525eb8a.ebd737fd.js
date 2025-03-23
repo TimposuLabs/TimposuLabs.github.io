@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktimposu=self.webpackChunktimposu||[]).push([[8787],{39805:a=>{a.exports=JSON.parse('{"tag":{"label":"api","permalink":"/blog/tags/api","allTagsPath":"/blog/tags","count":4,"unlisted":false},"listMetadata":{"permalink":"/blog/tags/api","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
