@@ -103,6 +103,10 @@ const config = {
                 to: '/java/',
                 label: 'Java',
               },
+              {
+                to: '/kotlin/',
+                label: 'Kotlin',
+              },
               // {
               //   to: '#',
               //   label: 'Python',
@@ -221,6 +225,16 @@ const config = {
           id: 'java',
           path: 'tutorial/java/',
           routeBasePath: 'java',
+          sidebarPath: require.resolve('./sidebars.js'),
+          // editUrl: 'https://github.com/TimposuLabs/TimposuLabs.github.io/tree/main/',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+          id: 'kotlin',
+          path: 'tutorial/kotlin/',
+          routeBasePath: 'kotlin',
           sidebarPath: require.resolve('./sidebars.js'),
           // editUrl: 'https://github.com/TimposuLabs/TimposuLabs.github.io/tree/main/',
       },
