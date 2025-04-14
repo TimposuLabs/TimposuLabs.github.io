@@ -1,6 +1,6 @@
 ---
 slug: spring-boot-rest-api-pagination
-title: Cara membuat Pagination di Spring Boot
+title: Cara membuat Pagination REST API di Spring Boot
 authors: topekox
 tags: [springboot, rest, spring]
 ---
@@ -137,6 +137,100 @@ public class JacsonConfig {
 ```
 
 Konfigurasi di atas digunakan untuk secara otomatis mentransform `PageImpl` menjadi `PagedModel`.
+
+## 🔥 Testing
+
+Konfigurasi pada layer controller di atas kita membuat secara default menampilkan data 20, misalnya kita punya data 5 maka akan ditampilkan semua datanya:
+
+* URL: `http://localhost:8080/api/product`
+
+* Body response:
+
+```json
+{
+  "content": [
+    {
+      "id": 1,
+      "name": "Iphone 16",
+      "description": "The new Iphone Generation",
+      "price": 15000000
+    },
+    {
+      "id": 2,
+      "name": "Asus ROG",
+      "description": "The best laptop for gaming",
+      "price": 30000000
+    },
+    {
+      "id": 3,
+      "name": "Infinix Hot 50 Pro+",
+      "description": "The New Best Android Phone Low Price",
+      "price": 3000000
+    },
+    {
+      "id": 4,
+      "name": "Google Pixel 9",
+      "description": "The New Android Phone from Google",
+      "price": 15000000
+    },
+    {
+      "id": 5,
+      "name": "Samsung Galaxy S24 FE",
+      "description": "The New Android Phone from Samsung with Galaxy AI",
+      "price": 10000000
+    }
+  ],
+  "page": {
+    "size": 20,
+    "number": 0,
+    "totalElements": 5,
+    "totalPages": 1
+  }
+}
+```
+
+Informasi page secara otomatis akan digenerate oleh `Page` Spring Boot, seperti:
+* `size` = jumlah data element
+* `number` = index page (index dimulai dari 0)
+* `totalElements` = jumlah element dalam page yang sedang aktif
+* `totalPages` = jumlah total page
+
+Bagaimana kalo misalnya kita ingin custom data yang ingin ditampikan, contoh setiap page hanya ingin menampilkan 2 data saja, maka dari data di atas akan dibuat 3 page.
+
+* URL: `http://localhost:8080/api/product?size=2&page=0`
+
+* Body:
+
+```json
+{
+  "content": [
+    {
+      "id": 1,
+      "name": "Iphone 16",
+      "description": "The new Iphone Generation",
+      "price": 15000000
+    },
+    {
+      "id": 2,
+      "name": "Asus ROG",
+      "description": "The best laptop for gaming",
+      "price": 30000000
+    }
+  ],
+  "page": {
+    "size": 2,
+    "number": 0,
+    "totalElements": 5,
+    "totalPages": 3
+  }
+}
+```
+
+:::info
+__INFO__: Index page dimulai dari 0.
+:::
+
+Untuk pindah halaman page cukup mengganti value path variable, contoh berpindah ke page 1 `http://localhost:8080/api/product?size=2&page=1`.
 
 ## 🌐 Baca Juga
 
