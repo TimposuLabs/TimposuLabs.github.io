@@ -62,11 +62,11 @@ Predicate<String> predicate = new Predicate<String>() {
 };
 ```
 
-## Suplier
+## Supplier
 
-`Suplier` function yang digunakan untuk mengembalikan result tanpa perlu mengirim parameter.
+`Supplier` function yang digunakan untuk mengembalikan result tanpa perlu mengirim parameter.
 
-Berikut contoh class anonymous `Suplier`:
+Berikut contoh class anonymous `Supplier`:
 
 ```java
 Supplier<String> supplier = new Supplier<String>() {		
