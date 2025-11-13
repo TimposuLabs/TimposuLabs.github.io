@@ -3,7 +3,14 @@ sidebar_position: 1
 title: 'Apa itu Java Stream?'
 ---
 
-__Java Stream__ diperkenalkan pertama kali di Java versi 8 atau 1.8. Java Stream adalah alur elemen yang mendukung operasi fungsional seperti filtering, mapping, dan looping. Java Stream bukan struktur data — tidak menyimpan apa pun — tetapi beroperasi pada data dari collection, array, atau input I/O.
+__Java Stream__ diperkenalkan pertama kali di Java versi 8 atau 1.8. Java Stream adalah alur elemen yang mendukung operasi fungsional seperti filtering, mapping, dan looping.
+
+## :thinking: Fitur Java Stream
+
+* `Stream` bukan struktur data — tidak menyimpan apa pun — tetapi beroperasi pada data dari collection, array, atau input I/O.
+* `Stream` bersifat fungsional. Operasi yang dilakukan pada `Stream` tidak mengubah data sumbernya. Misalnya, melakukan filter pada `Stream` yang diperoleh dari suatu `Collection` akan menghasilkan `Stream` baru tanpa elemen yang difilter, tanpa menghapus elemen dari sumber `Collection`.
+* `Stream` bersifat lazy dan akan memproses kode program hanya ketika ketika diperlukan.
+* Elemen-elemen pada `Stream` hanya dijalankan satu kali selama `Stream` tersebut berlangsung. Seperti pada `Iterator`, `Stream` baru harus dihasilkan untuk mmenjalankan kembali elemen-elemen yang sama dari sumbernya.
 
 ![java stream](/img/java/java-stream.jpg)
 
@@ -13,8 +20,8 @@ __Java Stream__ diperkenalkan pertama kali di Java versi 8 atau 1.8. Java Stream
 
 Konsep Stream Pipeline adalah penghubung antar operasi/operation. Operasi pada Stream pipeline terbagi menjadi dua kategori: 
 
-__1. Intermediate Operations__
-__2. Terminal Operations__
+1. __Intermediate Operations__
+2. __Terminal Operations__
 
 Setiap Intermediate Operations akan mengembalikan nilai Stream lagi. Akibatnya, kita dapat membuat pipeline pemrosesan dengan jumlah Intermediate Operations secara bebas untuk memproses data.
 
@@ -70,6 +77,9 @@ Terminal Operations adalah **final step** dalam stream pipeline, yang bersifat:
 | `findFirst()` | Mengembalikan elemen pertama (jika ada) | `Optional<T>` |
 | `findAny()` | Mengembalikan elemen apapun | `Optional<T>` |
 
+Di bawah ini merupakan properties class `Stream` pada paket `java.util.stream` di Java 21. Method kemungkinan akan bertambah di kemudian hari, seiring peningkatan versi Java.
+
+![java stream](/img/java/java-stream.png)
 
 ## Sifat Java Stream
 

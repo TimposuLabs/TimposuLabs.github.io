@@ -68,3 +68,24 @@ public class DemoLambdaParameter {
     }
 }
 ```
+
+Contoh Lain:
+
+```java
+@FunctionalInterface
+interface Kotak {
+    int hitung(int x);
+}
+
+public class DemoLambda {
+    public static void main(String[] args) {
+        int nilai = 10;
+
+        // membuat lambda expression sesuai dengan yang difeinisikan pada method hitung 
+        Kotak kotak = (int x) -> x * x;
+
+        var hitung = kotak.hitung(nilai);
+        System.out.println(hitung);
+    }
+}
+```
