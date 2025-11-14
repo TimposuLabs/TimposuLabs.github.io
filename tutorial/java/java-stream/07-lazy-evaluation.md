@@ -11,6 +11,27 @@ Secara garis besar, ada 2 jenis Stream Operation, yaitu Intermediate dan Termina
 
 ### Intermediate Operations
 
+Intermediate operations bersifat lazy operations yang berfungsi:
+
+1. Mengubah atau memfilter elemen dalam aliran
+2. Tidak dapat menghasilkan hasil akhir sampai Terminal Operation dipanggil
+3. Dapat dirantai untuk membangun alur stream pipeline
+
+#### Method Intermediate Operation yang sering digunakan
+
+* `filter()`
+* `map()`
+* `flatMap()`
+* `distinct()`
+* `sorted()`
+* `peek()`
+* `limit()`
+* `skip()`
+* `takeWhile()` (Java 9+)
+* `dropWhile()` (Java 9+)
+
+Contoh:
+
 ```java
 List<String> animals = List.of("Kucing", "Anjing", "Ayam", "Kambing", "Sapi");
 
@@ -23,6 +44,31 @@ List<String> animals = List.of("Kucing", "Anjing", "Ayam", "Kambing", "Sapi");
 ```
 
 ### Terminal Operations
+
+Terminal Operations adalah **final step** dalam stream pipeline, yang bersifat:
+
+* Menghasilkan **result** (collection, number, boolean, dll.)
+* Akan melakukan **Trigger** stream execution
+* Akan melakukan **Consume** terhadap stream (stream tidak dapat digunakan kembali)
+
+#### Method Terminal Operation yang sering digunakan
+
+| Operations | Description | Return Type |
+| --- | --- | --- |
+| `forEach()` | Menerapkan tindakan pada setiap item | void |
+| `toArray()` | Konversi elemen stream ke array | `T[]` |
+| `collect()` | Menerapkan elemen ke Collection/map/string | `R(varies)` |
+| `reduce()` | Melakukan reduksi pada elemen menggunakan operator biner | `Optional<T>` or `<T>` |
+| `min()` | Nilai minimum dari comparator | `Optional<T>` |
+| `max()` | Nilai maximal dari comparator | `Optional<T>` |
+| `count()` | Jumlah element | long |
+| `anyMatch()` | Mengembalikan true jika ada elemen cocok dengan predicate yang diberikan | boolean |
+| `allMatch()` | Mengembalikan true jika semua elemen cocok dengan predicate yang diberikan | boolean |
+| `noneMatch()` | Mengembalikan true jika tidak ada elemen cocok dengan predicate yang diberikan | boolean |
+| `findFirst()` | Mengembalikan elemen pertama (jika ada) | `Optional<T>` |
+| `findAny()` | Mengembalikan elemen apapun | `Optional<T>` |
+
+Contoh:
 
 ```java
 List<String> animals = List.of("Kucing", "Anjing", "Ayam", "Kambing", "Sapi");
