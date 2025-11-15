@@ -71,5 +71,5 @@ Anda tidak lulus
 Dari kode di atas parameter yang digunakan adalah `Suplier` yang akan akan mengembalikan result tanpa perlu mengirim parameter. Dengan menggunakan lambda maka parameter method akan bersifat Lazy yang akan mengeksekusi `getName` jika kondisi dalam method `testScoreLazy` terpenuhi saja.
 
 :::info
-📖 Baca Juga: [Functional Interface Suplier](/java/java-lambda/functional-interface#suplier)
+📖 Baca Juga: [Functional Interface](/java/java-lambda/functional-interface)
 :::

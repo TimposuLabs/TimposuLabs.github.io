@@ -11,7 +11,12 @@ const config = {
   url: 'https://timposulabs.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  markdown: {
+    // @ts-ignore
+    hooks: {
+      onBrokenMarkdownLinks: 'warn', // or 'throw', 'ignore', or a custom function
+    },
+  },
   favicon: 'img/timposulabs.png',
   organizationName: 'TimposuLabs', // Usually your GitHub org/user name.
   projectName: 'TimposuLabs.github.io', // Usually your repo name.
