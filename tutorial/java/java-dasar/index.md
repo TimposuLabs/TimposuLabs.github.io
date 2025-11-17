@@ -16,7 +16,7 @@ Di materi Java Dasar, kita akan belajar tentang konsep dasar Pemrograman. Adapun
 
 ## Diskusi
 
-Jika ada yang ingin ditanyakan, teman-teman bisa bertanya dan berdiskusi bersama teman-teman yang lain di [https://github.com/TimposuLabs/forum/discussions/categories/tanya-jawab.](https://github.com/TimposuLabs/forum/discussions/categories/tanya-jawab).
+Jika ada yang ingin ditanyakan, teman-teman bisa bertanya dan berdiskusi bersama teman-teman yang lain di [https://github.com/TimposuLabs/forum/discussions/categories/tanya-jawab](https://github.com/TimposuLabs/forum/discussions/categories/tanya-jawab).
 
 ## Source Kode
 
