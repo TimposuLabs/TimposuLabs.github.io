@@ -137,18 +137,17 @@ const config = {
             href: 'https://saweria.co/TimposuLabs',
             label: 'Donasi',
             position: 'right',
+          },               
+          {
+            href: 'https://www.youtube.com/@TimposuLabs',
+            label: 'Youtube',
+            position: 'right',
           },
           {
-            href: 'https://github.com/TimposuLabs/forum/discussions/categories/tanya-jawab',
-            label: 'Diskusi',
-            position: 'right',
-          }, 
-          
-          {
             href: 'https://github.com/TimposuLabs',
-            label: 'GitHub',
+            label: 'Github',
             position: 'right',
-          },          
+          },     
         ],
       },
       footer: {
@@ -182,10 +181,10 @@ const config = {
           {
             title: 'Social Media',
             items: [
-              // {
-              //   label: 'Youtube',
-              //   href: '#',
-              // },
+              {
+                label: 'Youtube',
+                href: 'https://www.youtube.com/@TimposuLabs',
+              },    
               {
                 label: 'Facebook',
                 href: 'https://www.facebook.com/TimposuLabs',
@@ -193,7 +192,7 @@ const config = {
               {
                 label: 'Instagram',
                 href: 'https://www.instagram.com/timposulabs',
-              },              
+              },             
             ],
           },
           {
