@@ -132,7 +132,7 @@ Untuk menghapus peringatan tersebut, kita hanya perlu menambahkan anotasi beriku
 @EnableSpringDataWebSupport(
         pageSerializationMode = EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO
 )
-public class JacsonConfig {
+public class JacksonConfig {
 }
 ```
 
@@ -235,3 +235,7 @@ Untuk pindah halaman page cukup mengganti value path variable, contoh berpindah 
 ## 🌐 Baca Juga
 
 * https://bootify.io/spring-boot/pagination-in-spring-boot-rest-api.html
+
+## 🔗 Link Github
+
+* https://github.com/TimposuLabs/tutorial-spring-from-blog/tree/main/springboot-pagination-dto
