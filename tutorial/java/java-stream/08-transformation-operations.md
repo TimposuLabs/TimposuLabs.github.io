@@ -15,7 +15,7 @@ Secara garis besar perbedaannya
 * `map` -> merubah data ke data yang lain
 * `flatMap` -> merubah data ke stream yang lain
 
-Contoh `map`:
+### Contoh `map`:
 
 ```java
 Stream.of("Kucing", "Badak", "Gajah", "Jerapah")
@@ -33,7 +33,7 @@ Output
 7
 ```
 
-Contoh `flatMap`:
+### Contoh `flatMap`:
 
 ```java
 Stream.of("Kucing", "Badak", "Gajah", "Jerapah")

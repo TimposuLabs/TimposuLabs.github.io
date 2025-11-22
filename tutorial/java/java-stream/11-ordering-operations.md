@@ -16,8 +16,41 @@ Java Stream juga mendukung operasi untuk melakukan pengurutan data dalam Stream.
 * [Java Comparator](/blog/java-comparator-interface)
 :::
 
+### `sorted()`
+
 ```java
 List.of("sapi", "domba", "hiu", "rusa", "anoa").stream()
                 .sorted()
                 .forEach(System.out::println);
+```
+
+Output:
+
+```
+anoa
+domba
+hiu
+rusa
+sapi
+```
+
+### `sorted(Comparator)`
+
+```java
+// menggunakan comparator bawaan Java Comparator.reserveOrder
+Comparator<String> reverseComparator = Comparator.reverseOrder();
+
+List.of("sapi", "domba", "hiu", "rusa", "anoa").stream()
+        .sorted(reverseComparator)
+        .forEach(System.out::println);
+```
+
+Output:
+
+```
+sapi
+rusa
+hiu
+domba
+anoa
 ```

@@ -43,6 +43,8 @@ Final name JOKO
 
 ###  `peek`
 
+`peek` digunakan untuk "mengintip" saat stream masih mengalir, dan akan mengembalikan stream asalnya. Sering digunakan terutama untuk debugging (pemecahan masalah) atau logging (mencatat) elemen-elemen stream saat mereka diproses oleh operasi lain.
+
 ```java
 Stream.of("Ucup", "Budi", "Joko")
                 .peek(name -> System.out.println("Before change name to upper: " + name)) // melakukan peek data (mengintip), dengan melakukan iterasi elemen stream, dan mengembalikan stream asalnya
