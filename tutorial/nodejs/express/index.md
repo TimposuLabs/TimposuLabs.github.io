@@ -10,7 +10,7 @@ Express.js adalah framework aplikasi web minimalis dan fleksibel yang menjadi st
 * __Middleware__: Melakukan fungsi-fungsi penting seperti otentikasi, logging, dan validasi data.
 * __Templating__: Membuat halaman web dinamis.
 
-Express.js adalah _backbone_ dari tumpukan teknologi populer seperti __MERN__ dan __MEAN__, menjadikannya keterampilan yang sangat dicari di industri saat ini.
+Express.js adalah _backbone_ dari tumpukan teknologi populer seperti __MERN__ dan __MEAN__, menjadikannya sebagai salah satu framework populer di Node.js.
 
 ## 🎯 Apa yang Akan Kita Pelajari?
 

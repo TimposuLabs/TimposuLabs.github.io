@@ -23,7 +23,7 @@ Dalam Express.js, routing mengacu pada bagaimana aplikasi menentukan fungsi hand
 | `app.all(path, callback)` | Semua HTTP Method |
 
 
-Contoh untuk menampilkan view dengan tulisan "Hello World"  untuk endpoint `/hello`:
+Contoh untuk menampilkan view dengan tulisan "Hello World" menggunakan method `GET` untuk endpoint `/hello`:
 
 ```js
 import express from 'express';

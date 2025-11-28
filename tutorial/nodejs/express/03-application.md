@@ -14,6 +14,7 @@ Baca Juga: https://expressjs.com/en/5x/api.html
 1. Buat file javascript contoh `hello.js` di dalam direktori `src`.
 
 ```bash
+mkdir src
 touch src/hello.js
 ```
 
