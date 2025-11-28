@@ -102,7 +102,7 @@ const config = {
           // },
           {
             position: 'left',
-            label: 'Tutorial',
+            label: 'Pemrograman',
             items: [
               {
                 to: '/java/',
@@ -111,6 +111,10 @@ const config = {
               {
                 to: '/kotlin/',
                 label: 'Kotlin',
+              },
+              {
+                to: '/nodejs/',
+                label: 'Node.js',
               },
               // {
               //   to: '#',
@@ -239,6 +243,16 @@ const config = {
           id: 'kotlin',
           path: 'tutorial/kotlin/',
           routeBasePath: 'kotlin',
+          sidebarPath: require.resolve('./sidebars.js'),
+          // editUrl: 'https://github.com/TimposuLabs/TimposuLabs.github.io/tree/main/',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+          id: 'nodejs',
+          path: 'tutorial/nodejs/',
+          routeBasePath: 'nodejs',
           sidebarPath: require.resolve('./sidebars.js'),
           // editUrl: 'https://github.com/TimposuLabs/TimposuLabs.github.io/tree/main/',
       },
