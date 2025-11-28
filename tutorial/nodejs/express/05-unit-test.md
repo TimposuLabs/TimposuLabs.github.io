@@ -35,7 +35,7 @@ Pastikan pada file `package.json` bagian `devDependencies` sudah terdapat depend
 Dan update `type` dan `script`:
 
 ```json
-"type": "module",
+"type": "commonjs",
   "scripts": {
     "test": "jest"
   },
@@ -49,7 +49,7 @@ Sehingga `package.json` menjadi seperti ini:
   "version": "1.0.0",
   "description": "Belajar Express JS",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "test": "jest"
   },
