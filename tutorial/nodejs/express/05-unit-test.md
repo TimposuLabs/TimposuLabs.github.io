@@ -67,7 +67,7 @@ Sehingga `package.json` menjadi seperti ini:
 
 ### 2. 💻 Buat file test
 
-Buat file test contoh direktori `test`:
+Buat file test contoh direktori `test`, semua file test akan disimpan dalam direktori ini:
 
 ```
 mkdir test
@@ -96,11 +96,13 @@ test('Test Express /hello endpoint', async () => {
 
 ### 3. 🚀 Jalankan Test
 
+Untuk melakukan testing semua file test menggunakan perintah:
+
 ```
 npm test
 ```
 
-Output jika sukses
+Output jika sukses:
 
 ```bash
 npm test
@@ -116,4 +118,10 @@ Tests:       1 passed, 1 total
 Snapshots:   0 total
 Time:        1.036 s, estimated 2 s
 Ran all test suites.
+```
+
+Untuk testing file tertentu saja:
+
+```
+npm test test/request.test.js
 ```
