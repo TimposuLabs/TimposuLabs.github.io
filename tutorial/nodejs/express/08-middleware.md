@@ -3,7 +3,7 @@ sidebar_position: 8
 title: 'Middleware'
 ---
 
-Middleware adalah function yang bisa digunakan untuk mengakses `request object`, `response object` dan `next function` dalam siklus aplikasi Express.js. Jika Middleware memanggil `next` function, artinya akan dilankutkan ke function Middleware selanjutnya atau Router akan dieksekusi.
+Middleware adalah function yang bisa digunakan untuk mengakses `request object`, `response object` dan `next function` dalam siklus aplikasi Express.js. Jika Middleware memanggil `next` function, artinya akan dilanjutkan ke function Middleware selanjutnya atau Router akan dieksekusi.
 
 ## 📚 Middleware Stack
 
