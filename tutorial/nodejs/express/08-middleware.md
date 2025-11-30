@@ -24,7 +24,7 @@ Middleware sering digunakan untuk:
 
 1. **Logging** (Pencatatan): Mencatat setiap permintaan yang masuk.
 2. **Otentikasi/Otorisasi**: Memeriksa apakah pengguna sudah login atau memiliki izin yang tepat sebelum mengizinkan akses ke rute.
-3. **Validasi Data**: Memastikan data dalam `req.body` valid sebelum data diproses oleh handler rute.
+3. **Validasi Data**: Memastikan data dalam `req.body` valid sebelum data diproses oleh router.
 4. **Kompresi**: Mengompres response sebelum dikirim ke klien (menggunakan library seperti compression).
 
 
