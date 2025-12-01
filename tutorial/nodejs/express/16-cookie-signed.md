@@ -33,6 +33,10 @@ Username=s%3AUcup.9HsB3mkjxHhOsL7tIBNSbu%2BNdXH0CYUmnXw0zR%2Fu0xo
 
 Jika kita membuat Cookie dalam bentuk Signed Cookie, maka untuk mengaksesnya, jangan memakai `req.cookies()` ❌, tetapi harus menggunakan `req.signedCookies()` ✅.
 
+:::tip
+* https://expressjs.com/en/5x/api.html#req.signedCookies
+:::
+
 ```js
 const express = require('express');
 const cookieParser = require('cookie-parser');
