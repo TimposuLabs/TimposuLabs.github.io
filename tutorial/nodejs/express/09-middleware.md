@@ -78,9 +78,14 @@ Semua fungsi middleware di Express.js memiliki format dasar:
 
 Middleware dapat digunakan dalam berbagai cara:
 
-### 1. Middleware Tingkat Aplikasi (Application-level)
+### 1️⃣ Middleware Tingkat Aplikasi (Application-level Middleware)
 
-Diterapkan ke seluruh aplikasi menggunakan `app.use()` atau `app.METHOD()`.
+Diterapkan ke seluruh aplikasi menggunakan `app.use(middleware)` atau `app.METHOD()`. Saat kita menerapkan Middleware pada tingkat aplikasi, secara otomatis Middleware itu akan aktif di seluruh route. Apabila kita ingin memakai Middleware hanya untuk route tertentu, kita dapat menambahkan pola route saat mengimplementasikan `app.use()`, contohnya `app.use("/student", middleware)`.
+
+:::tip
+* https://expressjs.com/en/5x/api.html#app.use
+* https://expressjs.com/en/5x/api.html#router.METHOD
+:::
 
 ```js
 const express = require('express');
@@ -97,9 +102,13 @@ app.get('/', (req, res) => {
 });
 ```
 
-### 2. Middleware Tingkat Router (Router-level)
+### 2️⃣ Middleware Tingkat Router (Router-level Middleware)
 
-Diterapkan ke instance `express.Router()`, membatasi fungsinya pada sekumpulan rute tertentu.
+Diterapkan ke instance `express.Router()`, membatasi fungsinya pada sekumpulan route tertentu. Middleware ini ditambahkan pada object Router yang kita buat dengan `express.Router()`. Middleware ini akan secara otomatis diaktifkan saat request diterima oleh router ini. Mirip dengan Middleware Tingkat Aplikasi, apabila kita ingin program antara tersebut hanya aktif untuk route tertentu, kita juga bisa menambahkan route path saat menerapkan Middleware ini dengan menggunakan `router.use(path, middleware)`.
+
+:::tip
+* https://expressjs.com/en/5x/api.html#router.use
+:::
 
 ```js
 const router = express.Router();
@@ -115,9 +124,9 @@ router.get('/users', (req, res) => {
 });
 ```
 
-### 3. Middleware untuk Penanganan Error (Error-handling)
+### 3️⃣ Middleware untuk Penanganan Error (Error-handling Middleware)
 
-Fungsi khusus yang memiliki empat argumen (`err`, `req`, `res`, `next`)`. Digunakan untuk menangani kesalahan yang terjadi di middleware sebelumnya atau handler rute.
+Digunakan untuk menangani kesalahan / error yang terjadi di aplikasi kita. Cara penggunaannya serupa dengan Middleware Tingkat Aplikasi, tetapi yang membedakan adalah function callback-nya memiliki empat argumen (`err`, `req`, `res`, `next`)`. Object error akan secara otomatis terisi dengan informasi mengenai kesalahan yang terjadi dalam aplikasi kita. Middleware ini sangat ideal saat kita ingin menampilkan informasi atau response yang berbeda ketika kesalahan terjadi dalam aplikasi kita.
 
 ```js
 app.use((err, req, res, next) => {
@@ -125,6 +134,38 @@ app.use((err, req, res, next) => {
     res.status(500).send('Ada yang salah!');
 });
 ```
+
+### 4️⃣ Built-in Middleware
+
+Express.js sangat bergantung pada Middleware untuk menangani pemrosesan request dan response, termasuk di dalamnya adalah _Built-in Middleware_, yaitu middleware yang sudah ada secara default (bawaan) di ExpressJS.
+
+Beberapa Built-in Middleware yang sering digunakan:
+
+| Function | Keterangan |
+| --- | --- |
+| `express.json()` | yaitu middleware yang melakukan parsing request body menjadi JavaScript object |
+| `express.text()` | yaitu middleware yang melakukan parsing request body menjadi string |
+| `express.raw()` | yaitu middleware yang melakukan parsing request body menjadi Buffer |
+| `express.urlencoded()` | yaitu middleware yang melakukan parsing request body form menjadi object |
+| `express.static()` | yaitu middleware yang digunakan untuk melayani file static |
+
+```js
+const express = require('express');
+const app = express();
+const path = require('path'); // Modul path bawaan Node.js
+
+// Menggunakan express.static() untuk mengakses file dari folder 'public'
+// Klien dapat mengakses file di folder ini tanpa menentukan jalur folder 'public' di URL
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.listen(3000, () => {
+  console.log('Server berjalan di http://localhost:3000');
+});
+```
+
+### 5️⃣ Third-party Middleware
+
+Yaitu middleware yang dibuat oleh pihak lain/pihak ketiga. Untuk menggunakannya, kita harus terlebih dahulu menambah dependency middleware-nya ke dalam project kita.
 
 ## 💡 Contoh Penggunaan
 
