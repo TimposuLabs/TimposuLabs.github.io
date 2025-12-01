@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-title: 'Routing'
+title: 'Basic Routing'
 ---
 
 Saat kita membuat web, biasanya kita akan membuat banyak sekali URL Path. Routing merupakan teknik yang digunakan untuk meneruskan request dari URL Path ke callback yang kita tuju. Routing di ExpressJS bisa menggunakan object Application, dan menggunakan method sesuai dengan nama HTTP Method nya.
