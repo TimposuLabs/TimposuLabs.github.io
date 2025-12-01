@@ -30,6 +30,7 @@ app.get('/', (req, res) => {
     res.redirect('/next-page');
 });
 
+// Unit test
 test('Test Response Redirect / endpoint', async () => {
     const response = await request(app).get('/');
     expect(response.status).toBe(302);

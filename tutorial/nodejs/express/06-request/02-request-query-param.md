@@ -17,6 +17,7 @@ app.get('/person', (req, res) => {
     res.send(`Hello, ${req.query.firstName} ${req.query.lastName}!`);
 });
 
+// Unit test
 test('GET /person with query parameters', async () => {
     const response = await request(app)
         .get('/person')

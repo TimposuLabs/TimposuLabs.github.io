@@ -51,3 +51,7 @@ Server is running on port 3000
 ```
 
 Dan url dengan page view kosong dapat diakses melalui browser dengan url `http://localhost:3000/`.
+
+:::info
+`import express from 'express'` adalah sintaks modern untuk mengimpor modul ES6, sementara `const express = require('express')` adalah sintaks tradisional __CommonJS__. Kedua sintaks ini berfungsi untuk mengimpor framework Express.js ke dalam kode JavaScript di Node.js, tetapi `import` hanya bisa digunakan jika project diatur sebagai modul ES, sedangkan `require` adalah standar untuk modul __CommonJS__. 
+:::

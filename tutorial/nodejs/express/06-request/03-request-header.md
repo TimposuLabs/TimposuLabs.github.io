@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
     res.send(`Hello ${type}`);
 });
 
+// Unit test
 test('Test Header / endpoint', async () => {
     const response = await request(app).get('/')
         .set('Accept', 'text/plain');

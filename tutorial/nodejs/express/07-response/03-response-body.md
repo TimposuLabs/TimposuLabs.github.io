@@ -24,6 +24,7 @@ app.get('/hello', (req, res) => {
         </html>`);
 });
 
+// Unit test
 test('Test Response Body /hello endpoint', async () => {
     const response = await request(app).get('/hello');
     expect(response.get('Content-Type')).toContain('text/html'); // jika menggunakan toBe('text/html'), bisa gagal karena otomatis menambahkan charset juga

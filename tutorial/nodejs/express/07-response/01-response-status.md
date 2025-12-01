@@ -23,6 +23,7 @@ app.get('/hello', (req, res) => {
     }
 });
 
+// Unit test
 test('Test Response Status /hello endpoint', async () => {
     let response = await request(app).get('/hello').query({ name: 'Ucup' });
     expect(response.status).toBe(200); // expected status 200

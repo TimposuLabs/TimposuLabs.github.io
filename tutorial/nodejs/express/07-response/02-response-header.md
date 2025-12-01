@@ -19,6 +19,7 @@ app.get('/hello', (req, res) => {
     res.send('Hello Response!');
     });    
 
+// Unit test
 test('Test Response Header /hello endpoint', async () => {
     const response = await request(app).get('/hello');
     expect(response.status).toBe(200);

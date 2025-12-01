@@ -37,6 +37,7 @@ app.get('/hello', (req, res) => {
     res.send(`Hello ${req.query.name}`);
 });
 
+// Unit test
 test('Test Query Parameter /hello endpoint', async () => {
     const response = await request(app).get('/hello').query({ name: 'Ucup' });
     expect(response.status).toBe(200);

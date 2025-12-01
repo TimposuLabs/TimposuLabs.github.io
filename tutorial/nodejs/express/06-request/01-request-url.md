@@ -32,6 +32,7 @@ app.get('/hello/world', (req, res) => {
     });
 });
 
+// Unit test
 test('Test Request URL /hello/world endpoint', async () => {
     const response = await request(app).get('/hello/world').query({ name: 'Ucup' });
     expect(response.status).toBe(200);
