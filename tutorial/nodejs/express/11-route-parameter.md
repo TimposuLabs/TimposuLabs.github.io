@@ -3,7 +3,7 @@ sidebar_position: 11
 title: 'Route Parameter'
 ---
 
-Saat kita membuat aplikasi Web API atau RESTful API, kadang kita sering menyimpan parameter dalam URL Path, misal `/student/{id}`, atau `/categories/{idCategory}`, dan lain-lain. Express.js mendukung penambahan parameter dalam route path, dengan menggunakan prefix `:` (titik dua). Semua data parameter itu bisa kita tambahkan __regex__ jika kita mau, misal `/student/:id`, artinya kita menambah parameter `id`. Data route parameter secara otomatis bisa kita ambil sebagai attribute di `req.params`..
+Saat kita membuat aplikasi Web API atau RESTful API, kadang kita sering menyimpan parameter dalam URL Path, misal `/student/{id}`, atau `/categories/{idCategory}`, dan lain-lain. Express.js mendukung penambahan parameter dalam route path, dengan menggunakan prefix `:` (titik dua). Semua data parameter itu bisa kita tambahkan __regex__ jika kita mau, misal `/student/:id`, artinya kita menambah parameter `id`. Data route parameter secara otomatis bisa kita ambil sebagai attribute di `req.params`.
 
 Pada parametenya kita juga bisa langsung memasukan regex pattern, contohnya memasukan data hanya berupa angka kedalam parameter endpoint `/class/` yaitu dengan pattern `/^\/class\/(\d+)$/`. Dengan demikian parameter yang dimasukan ke endpoint tersebut hanya berupa angka dan kemudian bisa diambil melalui ` req.params[0];`, karena mengakses parameter dari regex dari group pertama.
 
