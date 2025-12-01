@@ -88,7 +88,7 @@ test('Test Membaca(Read) Cookie / endpoint', async () => {
 test('Test Membuat(Write) Cookie /login endpoint', async () => {
     const response = await request(app).post('/login')
     .send({username: 'Ucup'});
-    console.info(response.get('set-cookie')); // log untuk melihat nilai cookie yang dihasilkan
+    console.info(response.get('set-cookie')); // log untuk melihat nilai cookie yang dihasilkan OUTPUT: 'Username=s%3AUcup.9HsB3mkjxHhOsL7tIBNSbu%2BNdXH0CYUmnXw0zR%2Fu0xo; Path=/']
 
     expect(response.status).toBe(200);
     expect(response.get('set-cookie').toString()).toContain('Ucup'); // memastikan cookie terkirim dengan benar, menggunakan toContain() karena cookie signed akan memiliki nilai yang berbeda setiap kali dibuat
