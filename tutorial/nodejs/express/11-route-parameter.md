@@ -10,6 +10,28 @@ Pada parametenya kita juga bisa langsung memasukan regex pattern, contohnya mema
 Contoh:
 
 ```js
+app.get('/student/:id', (req, res) => {
+    const idStudent = req.params.id;
+    res.send("Student ID: " + idStudent);
+});
+
+// Menggunakan regex untuk pattern /class/(number)
+app.get(/^\/class\/(\d+)$/, (req, res) => {
+    const idClass = req.params[0]; // Mengakses parameter dari regex capture group, dan regex dari group pertama
+    res.send("Class ID: " + idClass);
+});
+
+// Menggunakan parameter lebih dari satu
+app.get('/class/:id/students/:studentId', (req, res) => {
+    const idClass = req.params.id;
+    const idStudent = req.params.studentId;
+    res.send(`Class ID: ${idClass}, Student ID: ${idStudent}`);
+});
+```
+
+Contoh Full Code dengan Unit Test:
+
+```js
 const request = require('supertest');
 const express = require('express');
 
@@ -24,6 +46,13 @@ app.get('/student/:id', (req, res) => {
 app.get(/^\/class\/(\d+)$/, (req, res) => {
     const idClass = req.params[0]; // Mengakses parameter dari regex capture group, dan regex dari group pertama
     res.send("Class ID: " + idClass);
+});
+
+// Menggunakan parameter lebih dari satu
+app.get('/class/:id/students/:studentId', (req, res) => {
+    const idClass = req.params.id;
+    const idStudent = req.params.studentId;
+    res.send(`Class ID: ${idClass}, Student ID: ${idStudent}`);
 });
 
 // Unit test
@@ -48,5 +77,11 @@ test('Test Response Route Path /class/:id endpoint', async () => {
 test('Test Response Route Path /class/:id endpoint', async () => {
     const response = await request(app).get('/class/tigabelas');
     expect(response.status).toBe(404);
+});
+
+test('Test Response Route Path /class/:id/students/:studentId endpoint', async () => {
+    const response = await request(app).get('/class/12/students/34');
+    expect(response.status).toBe(200);
+    expect(response.text).toBe('Class ID: 12, Student ID: 34');
 });
 ```
