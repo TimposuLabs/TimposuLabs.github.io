@@ -58,3 +58,36 @@ app.post('/file-upload', async (req, res) => {
     res.send(`Hello ${req.body.name} File ${textFile.name} uploaded!`);
 });
 ```
+
+### 🔥 Fullcode dengan Unit Test
+
+Berikut contoh kode di atas dengan unit test:
+
+```js
+const request = require('supertest');
+const express = require('express');
+const fileUpload = require('express-fileupload');
+
+const app = express();
+app.use(express.json()); // menambahkan middleware untuk parsing JSON
+app.use(express.urlencoded({ extended: false })); // menambahkan middleware untuk parsing form data dengan extended: false, yang berarti hanya mendukung tipe data sederhana
+app.use(fileUpload()); // menambahkan middleware untuk handling file upload 
+
+app.post('/file-upload', async (req, res) => {
+    const textFile = req.files.textFile;
+    await textFile.mv(__dirname + "/upload/" + textFile.name);
+
+    res.send(`Hello ${req.body.name} File ${textFile.name} uploaded!`);
+});
+
+// Unit Test
+test('Test Request File Upload /file-upload endpoint', async () => {
+    const response = await request(app)
+        .post('/file-upload')
+        .set('Content-Type', 'multipart/form-data')
+        .field('name', 'Ucup')
+        .attach('textFile', __dirname + '/hello.txt');
+
+    expect(response.text).toBe('Hello Ucup File hello.txt uploaded!');
+});
+```
