@@ -260,6 +260,15 @@ const config = {
     [
       '@docusaurus/plugin-content-docs',
       {
+          id: 'htmx',
+          path: 'tutorial/htmx/',
+          routeBasePath: 'htmx',
+          sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],    
+    [
+      '@docusaurus/plugin-content-docs',
+      {
           id: 'python',
           path: 'tutorial/python',
           routeBasePath: 'python',
