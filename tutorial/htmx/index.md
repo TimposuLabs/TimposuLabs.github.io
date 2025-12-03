@@ -35,3 +35,9 @@ Dengan `htmx`, prosesnya jauh lebih langsung:
 ## Kesimpulan
 
 `htmx` bukanlah framework frontend pengganti React atau Vue. Sebaliknya, `htmx` adalah pelengkap yang memungkinkan kita membuat banyak interaktivitas di web tanpa perlu meninggalkan paradigma web berbasis server tradisional. Ini mengembalikan kesederhanaan dalam membangun web dengan menempatkan kembali HTML sebagai pusat dari pengalaman interaktif.
+
+:::info
+**Dokumentasi HTMX**: 
+* https://htmx.org/docs/
+* https://htmx.org/reference/
+:::

@@ -5,6 +5,10 @@ title: 'HTMX GET Request'
 
 `hx-get` adalah salah satu atribut inti dan paling sering digunakan dalam library HTMX. Atribut ini memungkinkan Anda melakukan permintaan HTTP GET asinkron (AJAX) ke server dan memasukkan response yang diterima kembali ke dalam DOM halaman web Anda, semuanya tanpa menulis satu baris JavaScript pun. Dengan kata lain, `hx-get` mengambil konten baru dari URL tertentu saat terjadi  interaksi pengguna (misalnya, klik pada tombol atau perubahan pada dropdown).
 
+:::tip
+* https://htmx.org/attributes/hx-get/
+:::
+
 ## 🧑‍💻 Cara Kerja Dasar
 
 Ketika Anda menambahkan atribut hx-get ke elemen HTML (seperti `<button>`, `<a>`, atau `<div>`), HTMX akan:
