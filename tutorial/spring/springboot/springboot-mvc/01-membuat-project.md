@@ -1,13 +1,11 @@
 ---
 sidebar_position: 2
-title: 'Membuat Project Spring Boot MVC'
+title: 'Membuat Project'
 ---
 
 Untuk membuat proyek Spring Boot MVC, cara termudah adalah menggunakan Spring Initializr https://start.spring.io/ secara online atau melalui IDE (seperti IntelliJ/Eclipse) untuk menghasilkan struktur dasar dengan dependensi Spring Web.
 
-## Langkah-langkah Membuat Proyek Spring Boot MVC
-
-### 1️⃣ Inisialisasi Proyek (Melalui Spring Initializr)
+## 1️⃣ Inisialisasi Proyek (Melalui Spring Initializr)
 
 * Kunjungi https://start.spring.io/.
 * Pilih:
@@ -17,11 +15,11 @@ Untuk membuat proyek Spring Boot MVC, cara termudah adalah menggunakan Spring In
     * Dependencies: Pilih Spring Web (ini sudah mencakup Spring MVC) dan Template Engine yang sering digunakan Thymeleaf.
 * Klik: Tombol Generate untuk mengunduh file ZIP proyek. 
 
-### 2️⃣ Import Project ke IDE
+## 2️⃣ Import Project ke IDE
 
 Import project ke **IntelliJ IDEA / Eclipse / NetBeans / VS Code**: Buka IDE Anda, lalu impor proyek yang baru diunduh sebagai proyek Maven atau Gradle yang sudah ada.
 
-### 3️⃣ Tambahkan Dependency (Jika Belum Terpilih di Initializr)
+## 3️⃣ Tambahkan Dependency (Jika Belum Terpilih di Initializr)
 
 * Jika Anda belum memilih Spring Web, tambahkan dependency ini di file `pom.xml` (untuk Maven):
 
@@ -41,41 +39,40 @@ Import project ke **IntelliJ IDEA / Eclipse / NetBeans / VS Code**: Buka IDE And
 </dependency>
 ```
 
-### 4️⃣ Buat Controller
+## 4️⃣ Buat Controller
 
-* Buat class Java contoh `HelloController` di `src/main/java/...`
+* Buat class Java contoh `HomeController` di `src/main/java/...`
 * Gunakan anotasi `@Controller` dan `@GetMapping` untuk memetakan URL ke method:
 
 ```java
-import java.time.LocalDateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HelloController {
-
-	@GetMapping("/hello")
-	public String sayHello(Model model) {
-		model.addAttribute("theDate", LocalDateTime.now());
-		return "hello";
-	}
+public class HomeController {
+    @GetMapping("/") // Handle request ke root URL
+    public String home(Model model) {
+        model.addAttribute("message", "Halo dari Spring Boot MVC!");
+        return "home"; // Akan mencari file home.html (atau home.jsp)
+    }
 }
+
 ```
 
 ## 5️⃣ Buat View (Contoh: Thymeleaf)
 
-Buat file `hello.html` di `src/main/resources/templates/` (untuk Thymeleaf):
+Buat file `home.html` di `src/main/resources/templates/` (untuk Thymeleaf):
 
 ```html
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title>Demo Spring MVC</title>
-	</head>
-	<body>
-		<p th:text="'Time is: ' + ${theDate}"/>
-	</body>
+<head>
+    <title>Spring Boot MVC</title>
+</head>
+<body>
+    <h1 th:text="${message}"></h1>
+</body>
 </html>
 ```
 
@@ -83,8 +80,6 @@ Buat file `hello.html` di `src/main/resources/templates/` (untuk Thymeleaf):
 
 * Buka terminal di root project.
 * Jalankan dengan perintah Maven: `mvn spring-boot:run`.
-* Buka browser dan akses http://localhost:8080/hello. 
-
-![Spring Boot MVC](/img/spring/springboot-mvc1.png)
+* Buka browser dan akses http://localhost:8080/. 
 
 Dengan langkah-langkah ini, kita sudah memiliki project Spring Boot MVC yang berfungsi untuk menampilkan halaman web sederhana.
