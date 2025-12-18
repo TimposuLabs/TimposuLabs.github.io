@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: 'Spring Boot MVC & Thymeleaf'
+title: 'Template Engine Thymeleaf'
 ---
 
 Spring Boot MVC mendukung Thymeleaf sebagai template engine yang populer digunakan untuk menyajikan tampilan (User Interface) pada halaman web Spring MVC. Selain itu Spring Boot mendukung beberapa template engine di antaranya:

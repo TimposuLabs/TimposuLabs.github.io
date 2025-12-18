@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-title: 'Thymeleaf Static Path'
+title: 'Static Path'
 ---
 
 Secara default Spring Boot akan mencari resources statis di direktori `src/main/resources/static`. Misalnya kita dapat menambahkan file CSS pada halaman web kita sebelumnya.
