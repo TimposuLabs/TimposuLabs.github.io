@@ -29,6 +29,7 @@ Berikut beberapa implementasi Interface `Set`:
  | `HashSet` | menampung datanya secara acak berdasarkan Hash |
  | `LinkedHashSet` | menampung datanya secara berurut menurut waktu pemasukan data (data  baru ditambah di bawah) |
  | `EnumSet` | implementasi `Set` yang datanya harus Enum |
+ | `TreeSet` | menyimpan elemen-elemen unik dalam urutan yang terurut (secara otomatis atau melalui comparator kustom) |
 
  ### HashSet
 
@@ -133,4 +134,45 @@ Set<Color> colors = EnumSet.of(Color.BLUE, Color.YELLOW);
 for(var c : colors) {
 	System.out.println(c);
 }
+```
+
+## TreeSet
+
+Beberapa poin penting `TreeSet`:
+
+* __Terurut secara Otomatis__: Elemen dalam `TreeSet` akan selalu tersusun secara urut (ascendending) secara default.
+* __Elemen Unik__: Tidak mengizinkan adanya duplikasi data. Jika Anda memasukkan elemen yang sudah ada, elemen tersebut akan diabaikan.
+* __Struktur Data__: Di balik layar, `TreeSet` menggunakan struktur data *Red-Black Tree* (pohon pencarian biner yang seimbang).
+* __Performa__: Waktu akses untuk operasi dasar seperti `add`, `remove`, dan `contains` lebih lambat dibandingkan `HashSet`, tetapi memberikan keuntungan berupa data yang selalu terurut.
+* __Tidak Mengizinkan Nilai Null__: `TreeSet` tidak memperbolehkan penyimpanan nilai null karena akan menimbulkan NullPointerException saat mencoba membandingkan elemen.
+* __Tidak Thread-Safe__: Secara default, TreeSet tidak sinkron. Jika digunakan dalam lingkungan multi-thread, harus dikelola secara eksternal.
+
+Contoh:
+
+```java
+import java.util.Set;
+import java.util.TreeSet;
+
+public class DemoTreeSet {
+
+	public static void main(String[] args) {
+		Set<Integer> number = new TreeSet<Integer>();
+		number.add(5);
+		number.add(34);
+		number.add(0);
+		
+		for (int n : number) {
+			System.out.println(n);
+		}
+	}
+
+}
+```
+
+Output:
+
+```
+0
+5
+34
 ```
