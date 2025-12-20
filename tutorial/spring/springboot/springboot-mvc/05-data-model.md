@@ -96,3 +96,7 @@ public class HelloWorldController {
 * Halaman response.
 
 ![Spring Boot MVC](/img/spring/springboot-mvc5.png)
+
+:::info
+Source Code: https://github.com/TimposuLabs/belajar-springboot-mvc/tree/main/04-belajar-spring-mvc-data
+:::

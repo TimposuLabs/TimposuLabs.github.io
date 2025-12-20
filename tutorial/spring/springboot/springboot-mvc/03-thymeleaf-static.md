@@ -38,3 +38,7 @@ Update file `hello.html` di `src/main/resources/templates/`:
 * Buka terminal di root project.
 * Jalankan dengan perintah Maven: `mvn spring-boot:run`.
 * Buka browser dan akses http://localhost:8080/hello. 
+
+:::info
+Source Code: https://github.com/TimposuLabs/belajar-springboot-mvc/tree/main/02-belajar-spring-mvc-css
+:::

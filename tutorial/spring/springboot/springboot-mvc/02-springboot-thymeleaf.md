@@ -68,3 +68,7 @@ Buat file `hello.html` di `src/main/resources/templates/`:
 ![Spring Boot MVC](/img/spring/springboot-mvc1.png)
 
 Dengan langkah-langkah ini, kita sudah memiliki project Spring Boot MVC dengan template engine Thymeleaf.
+
+:::info
+Source Code: https://github.com/TimposuLabs/belajar-springboot-mvc/tree/main/01-belajar-spring-mvc
+:::
