@@ -116,6 +116,10 @@ const config = {
                 to: '/nodejs/',
                 label: 'Node.js',
               },
+              {
+                to: '/spring/',
+                label: 'Spring',
+              },
               // {
               //   to: '#',
               //   label: 'Python',
@@ -265,7 +269,16 @@ const config = {
           routeBasePath: 'htmx',
           sidebarPath: require.resolve('./sidebars.js'),
       },
-    ],    
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+          id: 'spring',
+          path: 'tutorial/spring/',
+          routeBasePath: 'spring',
+          sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],   
     [
       '@docusaurus/plugin-content-docs',
       {
