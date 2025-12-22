@@ -7,7 +7,7 @@ Untuk membuat proyek Spring Boot MVC CRUD, cara termudah adalah menggunakan Spri
 
 ## 💻 Prasyarat
 
-Tutorial menggunakan teknologi:
+Tutorial ini menggunakan teknologi:
 
 * JDK 17 atau yang lebih baru.
 * Maven 3.
@@ -107,10 +107,10 @@ Berikut dependency dalam `pom.xml`:
 
 ## 4️⃣ Buat Database
 
-Membuat database dengan nama `spring_boot_app` di MySQL:
+Membuat database dengan nama `belajar_spring` di MySQL:
 
 ```sql
-CREATE DATABASE spring_boot_app;
+CREATE DATABASE belajar_spring;
 ```
 
 ## 5️⃣ Konfigurasi `application.properties`
@@ -118,7 +118,7 @@ CREATE DATABASE spring_boot_app;
 Pada file `src/main/resources/application.properties` kita perlu melakukan konfigurasi agar Spring Boot terhubung ke database MySQL:
 
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/spring_boot_app
+spring.datasource.url=jdbc:mysql://localhost:3306/belajar_spring
 spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
 spring.datasource.username=root
 spring.datasource.password=rahasia
