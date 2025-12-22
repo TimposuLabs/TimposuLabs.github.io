@@ -12,7 +12,7 @@ Proses pembaruan data melibatkan dua tahap utama:
 
 Untuk contoh kasus pada tutorial ini kita akan menggunakan data `Product` yang nantinya akan di mapping menjadi table ke database MySQL.
 
-![spring boot mvc crud](http://localhost:3000/img/general/Spring-boot-diagram1.svg)
+<img src="/img/general/Spring-boot-diagram1.svg"/>
 
 ## 1️⃣ Entity
 
