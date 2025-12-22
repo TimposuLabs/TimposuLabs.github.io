@@ -13,7 +13,7 @@ Untuk mengatasi hal ini kita perlu melakukan beberapa langkah.
 
 Jika kita menggunakan tipe data primitif `int`, kita tidak dapat memastikan field angka wajib diisi, menggunakan annotation `@NotNull` karena tipe primitif bukan Object. Selain itu Java akan memberikan nilai default 0 jika form dikosongkan. Akibatnya, validasi "Wajib Isi" tidak akan pernah terdeteksi karena sistem menganggap pengguna memasukkan angka 0. Untuk itu kita perlu mengubahnya menjadi objek `Integer`.
 
-::tip
+:::tip
 Selalu gunakan tipe data objek `Integer` (dengan huruf kapital I) karena tipe ini bisa bernilai `null` jika tidak diisi.
 :::
 
