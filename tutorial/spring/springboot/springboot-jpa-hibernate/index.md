@@ -9,6 +9,7 @@ sidebar_position: 4
 Dalam pengembangan aplikasi Java modern, **Spring Boot JPA** adalah standar industri untuk mengelola data antara aplikasi dan database relasional. Teknologi ini terdiri dari tiga komponen utama yang bekerja bersama:
 
 * **JPA (Jakarta Persistence API)**: Sebuah spesifikasi atau "aturan main" standar di Java untuk mengelola data relasional. JPA menentukan bagaimana kita memetakan objek Java menjadi tabel database (ORM).
+* **Implementasi JPA** adalah framework atau library konkret yang menjalankan aturan-aturan yang ditetapkan oleh spesifikasi Jakarta Persistence API (JPA). Beberapa contoh implementasi dari JPA adalah [Hibernate](https://hibernate.org/), [EclipseLink](https://eclipse.dev/eclipselink/) dan [Apache OpenJPA](https://openjpa.apache.org/).
 * **Hibernate**: Implementasi paling populer dari spesifikasi JPA. Hibernate adalah mesin yang bekerja di balik layar untuk menghasilkan kueri SQL secara otomatis sehingga Anda tidak perlu menulis SQL manual untuk operasi dasar.
 * **Spring Data JPA**: Bagian dari ekosistem Spring Boot yang memberikan abstraksi tambahan di atas Hibernate. Ini memungkinkan Anda melakukan operasi database hanya dengan mendefinisikan interface (Repository), tanpa harus menulis implementasi kuerinya.
 

@@ -3,7 +3,7 @@ sidebar_position: 5
 title: 'JPQL'
 ---
 
-**JPQL (Java Persistence Query Language)** adalah bahasa queri berorientasi objek yang digunakan untuk melakukan operasi pada database dalam ekosistem Java Persistence API (JPA) dan Hibernate.
+**JPQL (Java Persistence Query Language)** adalah bahasa query berorientasi objek yang digunakan untuk melakukan operasi pada database dalam ekosistem Java Persistence API (JPA) dan Hibernate.
 
 Meskipun terlihat sangat mirip dengan SQL (Structured Query Language), JPQL memiliki perbedaan mendasar dalam cara kerjanya. Berikut adalah poin-poin penting untuk memahaminya:
 

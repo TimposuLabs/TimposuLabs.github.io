@@ -3,7 +3,7 @@ sidebar_position: 6
 title: 'Update Data'
 ---
 
-Dalam Hibernate, melakukan pembaruan (update) data sedikit berbeda dengan SQL biasa. Hibernate menggunakan konsep D**irty Checking**, di mana ia secara otomatis mendeteksi perubahan pada objek yang sedang "dikelola" (managed) dan menyimpannya ke database saat transaksi selesai.
+Dalam Hibernate, melakukan pembaruan (update) data sedikit berbeda dengan SQL biasa. Hibernate menggunakan konsep **Dirty Checking**, di mana ia secara otomatis mendeteksi perubahan pada objek yang sedang "dikelola" (managed) dan menyimpannya ke database saat transaksi selesai.
 
 #### 1. Mekanisme Update: Cara "Managed Entity"
 
@@ -12,7 +12,6 @@ Langkah-langkah:
 1. Ambil data dari database (objek menjadi status *managed*).
 2. Ubah nilai pada objek menggunakan `setter`.
 3. Selesaikan transaksi (Hibernate otomatis menjalankan SQL `UPDATE`)
-
 
 #### 2. Update dengan EntityManager (Pendekatan DAO)
 
@@ -126,7 +125,7 @@ public class StudentDAOImpl implements StudentDAO {
 
 ### 2️⃣ Main Class
 
-* Selanjutnya pada main class kita akan menjalankan proses read data:
+* Selanjutnya pada main class kita akan menjalankan proses update data:
 
 ```java
 @SpringBootApplication
