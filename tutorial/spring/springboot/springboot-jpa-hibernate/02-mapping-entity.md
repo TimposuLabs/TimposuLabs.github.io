@@ -114,7 +114,7 @@ Selain `GenerationType.IDENTITY` terdapat beberapa `GenerationType` jenis lain. 
 | `SEQUENCE` |	Menggunakan objek *sequence* database untuk mengambil nilai ID sebelum data dimasukkan.	| PostgreSQL, Oracle, SQL Server. |	Sangat cepat untuk operasi *batch* (memasukkan banyak data sekaligus).	| Membutuhkan objek tambahan (*sequence*) di dalam database. |
 | `TABLE`	| Menggunakan tabel database khusus untuk menyimpan dan mensimulasikan nilai ID.	| Semua Database (Universal). |	Bisa digunakan di database mana pun yang tidak punya fitur ID otomatis. |	Performa paling lambat karena ada operasi baca-tulis tambahan pada tabel ID. |
 | `AUTO` |	Hibernate memilihkan strategi terbaik secara otomatis berdasarkan dialek database. |	Semua Database.  |	Praktis karena Hibernate yang menentukan pilihan terbaik. |	Perilakunya bisa berubah-ubah jika Anda mengganti jenis database. |
-| `UUID`	| Membuat kode unik 128-bit secara otomatis di level aplikasi atau database. |	| **Microservices**, Sistem Terdistribusi.	| ID sangat unik secara global dan tidak bisa ditebak (aman untuk URL).	| Ukuran data lebih besar (String/UUID) dibanding angka (Long/BigInt). |
+| `UUID`	| Membuat kode unik 128-bit secara otomatis di level aplikasi atau database. |	**Microservices**, Sistem Terdistribusi.	| ID sangat unik secara global dan tidak bisa ditebak (aman untuk URL).	| Ukuran data lebih besar (String/UUID) dibanding angka (Long/BigInt). |
 
 *Catatan: `GenerationType.UUID` adalah standar yang semakin sering digunakan untuk aplikasi skala besar.*
 :::
