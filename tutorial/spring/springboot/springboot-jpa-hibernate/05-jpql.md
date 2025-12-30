@@ -178,3 +178,7 @@ Hibernate: select s1_0.id,s1_0.email,s1_0.first_name,s1_0.last_name from student
 Menampilkan semua data student dengan by Lastname:
 Student [id=1, firstName=Ucup, lastName=Topekox, email=ucup@gmail.com]
 ```
+
+:::tip
+**Baca Juga**: https://docs.oracle.com/cd/E17904_01/apirefs.1111/e13946/ejb3_langref.html
+:::
