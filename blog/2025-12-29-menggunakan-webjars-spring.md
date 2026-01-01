@@ -42,7 +42,7 @@ Spring Boot menyediakan dukungan kelas satu (*first-class support*) untuk WebJar
 
 ### A. Konfigurasi Dependensi
 
-Spring Boot secara otomatis mengidentifikasi dan melayani aset yang ditemukan dalam path `/META-INF/resources/webjars/**`.
+Spring Boot secara otomatis mengidentifikasi dan mengatur aset di dalam path `/META-INF/resources/webjars/**`.
 
 Untuk menambahkan WebJars, tambahkan dependensi di Maven (`pom.xml`):
 
@@ -67,12 +67,12 @@ Untuk menambahkan WebJars, tambahkan dependensi di Maven (`pom.xml`):
 ```
 
 :::tip
-Anda dapat mencari daftar dependecy terbaru di https://mvnrepository.com/
+Anda dapat mencari daftar dependency terbaru di https://mvnrepository.com/
 :::
 
 ### B. Penggunaan di HTML/Thymeleaf
 
-Saat menggunakan Spring Boot dengan template engine seperti Thymeleaf, Anda dapat mereferensikan aset menggunakan path `/webjars/`:
+Saat menggunakan Spring Boot dengan template engine seperti Thymeleaf, kita dapat mereferensikan aset menggunakan path `/webjars/`:
 
 ```html
 <!DOCTYPE html>
@@ -108,4 +108,4 @@ Beberapa poin kunci yang dapat disimpulkan adalah:
 * **Keamanan & Keandalan**: Karena aset dibundel di dalam aplikasi, ketergantungan pada pihak ketiga (seperti CDN) hilang, sehingga aplikasi lebih stabil dan dapat dijalankan di mana saja (termasuk server internal tanpa internet).
 * **Integrasi Sempurna**: Spring Boot dirancang untuk bekerja secara harmonis dengan WebJars, memberikan kemudahan konfigurasi yang minimal namun berdampak besar pada kerapian struktur project.
 
-Secara keseluruhan, WebJars adalah solusi yang **modern, bersih, dan sangat direkomendasikan** bagi programmer Java yang ingin mengelola siklus hidup library frontend dengan cara yang sama profesionalnya dengan mengelola library backend.
+Secara keseluruhan, WebJars adalah solusi yang **modern, bersih, dan sangat direkomendasikan** bagi programmer Java yang ingin mengelola siklus hidup library frontend dengan cara yang sama dengan mengelola library backend.
