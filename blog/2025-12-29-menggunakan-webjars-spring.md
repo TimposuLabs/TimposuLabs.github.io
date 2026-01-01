@@ -68,7 +68,7 @@ Untuk menambahkan WebJars, tambahkan dependensi di Maven (`pom.xml`):
 Anda dapat mencari daftar dependency terbaru di https://mvnrepository.com/
 :::
 
-Spring Boot secara otomatis mengidentifikasi dan akan menyajikan aset yang ada dalam path `/META-INF/resources/webjars/**`.
+Spring Boot secara otomatis mengidentifikasi dan menyajikan aset yang ada dalam path `/META-INF/resources/webjars/**`.
 
 ### B. Penggunaan di HTML/Thymeleaf
 
