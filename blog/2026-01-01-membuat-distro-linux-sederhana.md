@@ -11,7 +11,7 @@ Kali ini kita akan membangun OS Linux sendiri dari 0 atau bahasa kerennya *from 
 
 Pada praktek kali ini saya menggunakan:
 
-* Distro Linux Ubuntu 24 sebagai OS Development. Saya menyarankan menggunakan Virtualization saja baik itu Docker ata Mesin Virtual seperti Virtual Box.
+* Distro Linux Ubuntu 24 sebagai OS Development. Saya menyarankan menggunakan Virtualization saja baik itu Docker, Mesin Virtual (seperti Virtual Box / VMWare) atau WSL jika anda menggunakan Windows, agar jika terjadi error yang tidak diinginkan, tidak mempengaruhi OS utama anda.
 * Koneksi Internet. Dibutuhkan untuk mendownload dependency.
 
 <!--truncate-->
