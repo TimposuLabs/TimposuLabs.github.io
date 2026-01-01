@@ -12,8 +12,8 @@ Pengelolaan library frontend (seperti CSS frameworks, JavaScript libraries, atau
 ## 1️⃣ Permasalahan
 
 * **Manajemen Manual**: Pengembang harus mengunduh file `.css` dan `.js` secara manual dari situs web resmi library (misalnya, [jQuery.com](https://jquery.com/) atau [GetBootstrap.com](https://getbootstrap.com/)) dan menyimpannya di dalam folder `src/main/resources/static` atau `public`.
-* **Permasalahan Versioning**: Sulit untuk melacak versi library yang digunakan, dan pembaruan versi memerlukan penggantian file manual secara hati-hati di setiap project. Hal ini rentan terhadap kesalahan manusia (human error).
-* **Repositori Git yang Berat**: File biner atau file teks yang besar dari library pihak ketiga disimpan langsung di repositori Git, yang memperlambat operasi *clone* dan *fetch* serta mengotori riwayat *commit*.
+* **Permasalahan Versioning**: Sulit untuk melacak versi library yang digunakan, dan pembaruan versi memerlukan penggantian file manual secara hati-hati di setiap project. Hal ini rentan terhadap kesalahan manusia (*human error*).
+* **Repositori Git yang Berat**: File binary atau file teks yang besar dari library pihak ketiga disimpan langsung di repositori Git, yang memperlambat operasi *clone* dan *fetch* serta mengotori riwayat *commit*.
 * **Ketergantungan CDN dan Akses Offline**: Bergantung pada CDN eksternal dapat menyebabkan kegagalan aplikasi jika koneksi internet terputus atau server CDN *down*, membuat aplikasi tidak dapat berjalan di lingkungan terisolasi (*intranet*).
 * **Inkonsistensi Build**: Proses build project Java tidak secara otomatis memvalidasi atau mengelola dependensi frontend, yang menyebabkan inkonsistensi antara lingkungan pengembangan lokal dan lingkungan produksi.
 
@@ -25,7 +25,7 @@ Pengelolaan library frontend (seperti CSS frameworks, JavaScript libraries, atau
 * File JAR ini kemudian diterbitkan ke repositori standar **Maven Central**.
 * Dengan demikian, library frontend dapat dikelola layaknya dependensi Java biasa menggunakan alat manajemen dependensi seperti Maven (`pom.xml`) atau Gradle (`build.gradle`).
 
-Setiap WebJar mengikuti struktur folder spesifik di dalam JAR: `META-INF/resources/webjars/artifact-id/version/file-path`.
+Setiap WebJars mengikuti struktur folder spesifik di dalam JAR: `META-INF/resources/webjars/artifact-id/version/file-path`.
 
 ## 3️⃣ Kenapa Harus Menggunakan WebJars
 
@@ -41,8 +41,6 @@ Alasan utama menggunakan WebJars adalah untuk mengadopsi praktik terbaik (**best
 Spring Boot menyediakan dukungan kelas satu (*first-class support*) untuk WebJars, membuatnya sangat mudah diintegrasikan.
 
 ### A. Konfigurasi Dependensi
-
-Spring Boot secara otomatis mengidentifikasi dan mengatur aset di dalam path `/META-INF/resources/webjars/**`.
 
 Untuk menambahkan WebJars, tambahkan dependensi di Maven (`pom.xml`):
 
@@ -69,6 +67,8 @@ Untuk menambahkan WebJars, tambahkan dependensi di Maven (`pom.xml`):
 :::tip
 Anda dapat mencari daftar dependency terbaru di https://mvnrepository.com/
 :::
+
+Spring Boot secara otomatis mengidentifikasi dan akan menyajikan aset yang ada dalam path `/META-INF/resources/webjars/**`.
 
 ### B. Penggunaan di HTML/Thymeleaf
 
