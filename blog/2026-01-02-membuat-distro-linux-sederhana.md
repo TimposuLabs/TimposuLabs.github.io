@@ -11,12 +11,12 @@ Kali ini kita akan membangun OS Linux sendiri dari 0 atau bahasa kerennya *from 
 
 Pada praktek kali ini saya menggunakan:
 
-* Distro Linux Ubuntu 24 sebagai OS Development. Saya menyarankan menggunakan Virtualization saja baik itu Docker, Mesin Virtual (seperti Virtual Box / VMWare) atau WSL jika anda menggunakan Windows, agar jika terjadi error yang tidak diinginkan, tidak mempengaruhi OS utama anda.
-* Koneksi Internet. Dibutuhkan untuk mendownload dependency.
+* **Distro Linux Ubuntu 24 sebagai OS Host untuk Development**. Saya menyarankan menggunakan Virtualization saja baik itu Docker, Mesin Virtual (seperti Virtual Box / VMWare) atau WSL jika anda menggunakan Windows, agar jika terjadi error yang tidak diinginkan, tidak mempengaruhi OS utama anda.
+* **Koneksi Internet**. Dibutuhkan untuk mendownload dependency.
 
 <!--truncate-->
 
-![Linux](https://images.unsplash.com/photo-1462888210965-cdf193fb74de?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+<img src="/img/general/linux.webp"/>
 
 ## 1️⃣ Install Dependency
 
@@ -38,6 +38,8 @@ git clone --depth 1 https://github.com/torvalds/linux.git
 cd linux
 make menuconfig
 ```
+
+![linux](/img/general/linux1.png)
 
 * Pilih *64-bit kernel* *-> exit*
 * Compile, dengan membagi job menjadi 8, sesuaikan dengan core prosesor computer kita.
@@ -315,7 +317,7 @@ qemu-system-x86_64 boot
 
 ![linux](/img/general/linux4.png)
 
-Selamat Distro Linux Sederhana anda sudah berjalan, tentunya ini hanya sebagai media pembelajaran atau sekedar hobi saja. Dan pasti masih banyak yang perlu diperbaiki, teman-teman bisa oprek lebih luas lagi untuk pengembangannya.
+**Selamat** Distro Linux Sederhana anda sudah berjalan, tentunya ini hanya sebagai media untuk belajar (*educational purpose*) atau sekedar hobi saja bukan untuk *production*. Dan pasti masih banyak yang perlu diperbaiki, teman-teman bisa oprek lebih luas lagi untuk pengembangannya.
 
 ## 👩‍💻 Referensi
 
