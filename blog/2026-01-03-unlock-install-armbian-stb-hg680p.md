@@ -41,7 +41,7 @@ Setelah diinstal **Armbian**, **HG680-P** tidak lagi hanya berfungsi untuk nonto
 
 * **STB HG680-P**: Pastikan perangkat sudah dalam kondisi rooted #️⃣, **jika belum diroot** ikuti langkah no 2️.
 * **Media Penyimpanan**: MicroSD Card minimal 8GB (atau bisa juga mengguanakan Flashdisk berkualitas tinggi). Sediakan juga *Card Reader* untuk menghubungkan SD Card ke Laptop/PC.
-* **Software Flashing**: [Rufus](https://rufus.ie/en/) atau [balenaEtcher](balena.io/etcher).
+* **Software Flashing**: [Rufus](https://rufus.ie/en/) atau [balenaEtcher](https://etcher.balena.io/).
 * **Image Armbian**: Download image terbaru (misalnya basis Ubuntu Noble/25.11) dari repositori terpercaya seperti [Ophub GitHub](https://github.com/ophub) atau sumber lain yang terpercaya. 
 * Kabel LAN untuk koneksi STB HG680-P ke modemn.
 
