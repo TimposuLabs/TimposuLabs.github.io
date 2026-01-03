@@ -72,7 +72,7 @@ Jika digabung dengan nomor 1, file yang telah disiapkan sebagai berikut:
 
 Sampai tahap ini STB HG680-P sudah dalam kondisi unlocked/rooted. Selanjutnya masuk ketahap install Armbian.
 
-## 📲 Install Armbian di STB HG680-P
+## 🤖📲 Install Armbian di STB HG680-P
 
 Menginstal Armbian pada STB HG680-P sebenarnya caranya mudah. Berikut adalah langkah-langkah step-by-step untuk instalasinya: 
 

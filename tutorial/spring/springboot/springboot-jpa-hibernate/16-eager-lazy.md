@@ -47,7 +47,7 @@ private Classes classes;
 | Tipe Relasi	| Default Fetch Type	| Penjelasan |
 | --- | --- | --- |
 | `@ManyToOne`	| **EAGER** |	Saat mengambil data anak/child (contoh: `Student`), data induk (contoh: `Classes`) otomatis ikut diambil. |
-| `@OneToOne`	| **EAGER** |	Saat mengambil entitas utama, entitas yang berelasi 1-ke-1 langsung ikut dimuat. |
+| `@OneToOne`	| **EAGER** |	Saat mengambil entity utama, entity yang berelasi 1-ke-1 langsung ikut dimuat. |
 | `@OneToMany` |	**LAZY** |	Koleksi data anak/child tidak akan dimuat sampai Anda memanggil metode `.getStudents()`. |
 | `@ManyToMany` |	**LAZY** |	Karena potensi data yang sangat besar, Hibernate tidak akan memuat relasi ini secara otomatis. |
 
@@ -64,7 +64,7 @@ private Classes classes;
 :::
 
 :::info
-Dalam Hibernate/JPA, **Join Fetch** adalah teknik kueri yang digunakan untuk mengambil entitas utama beserta entitas relasinya (anak-anaknya) dalam **satu kali perintah SQL SELECT**.
+Dalam Hibernate/JPA, **Join Fetch** adalah teknik query yang digunakan untuk mengambil entity utama beserta entity relasinya (anak-anaknya) dalam **satu kali perintah SQL SELECT**.
 
 Tujuan utamanya adalah untuk mengatasi masalah performa yang dikenal sebagai **N+1 Select Problem**.
 
@@ -74,16 +74,16 @@ Berikut penjelasan mendalamnya:
 
 Secara default, relasi seperti `@OneToMany` bersifat **LAZY**.
 
-* **Query 1**: Anda mengambil data Kelas (`SELECT * FROM classes`).
-* **Query N**: Saat Anda melakukan loop untuk melihat siswa di setiap kelas, Hibernate akan menjalankan kueri baru untuk **setiap** kelas (`SELECT * FROM student WHERE class_id = ?`).
-* **Hasilnya**: Jika ada 100 kelas, Anda menjalankan 1 + 100 kueri. Ini sangat lambat.
+* **Query 1**: Mengambil data Kelas (`SELECT * FROM classes`).
+* **Query N**: Saat melakukan loop untuk melihat siswa di setiap kelas, Hibernate akan menjalankan query baru untuk **setiap** kelas (`SELECT * FROM student WHERE class_id = ?`).
+* **Hasilnya**: Jika ada 100 kelas, maka akan menjalankan 1 + 100 query. Ini sangat lambat.
 
 **2. Solusi: Join Fetch**
 
-Dengan menggunakan `JOIN FETCH` dalam HQL (*Hibernate Query Language*), Hibernate akan melakukan **SQL JOIN** dan langsung mengisi semua data ke dalam objek Java dalam satu kali jalan.
+Dengan menggunakan `JOIN FETCH` dalam HQL (*Hibernate Query Language*), Hibernate akan melakukan **SQL JOIN** dan langsung mengisi semua data ke dalam objek Java dalam satu kali jalan (1 query).
 
 ```java
-// Mengambil Kelas DAN Siswanya sekaligus dalam 1 kueri
+// Mengambil Kelas DAN Siswanya sekaligus dalam 1 query
 String hql = "SELECT c FROM Classes c JOIN FETCH c.students WHERE c.id = :id";
 Classes tempClass = session.createQuery(hql, Classes.class)
                            .setParameter("id", 1)

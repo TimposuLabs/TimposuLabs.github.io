@@ -7,7 +7,7 @@ Menghapus (DELETE) data dalam JPA/Hibernate berarti menghapus sebuah entitas/ent
 
 Untuk menghapus data, ada beberapa cara utama untuk melakukannya:
 
-#### 1. Menghapus Menggunakan `entityManager.remove()`
+### A. Menghapus Menggunakan `entityManager.remove()`
 
 Ini adalah cara yang paling umum jika kita sudah memiliki objek entity di tangan (status `Managed`).
 
@@ -30,7 +30,7 @@ public void deleteStudentById(Long id) {
 }
 ```
 
-#### 2. Menghapus Menggunakan JPQL (Bulk Delete)
+### B. Menghapus Menggunakan JPQL (Bulk Delete)
 
 Gunakan cara ini jika Anda ingin menghapus data berdasarkan kriteria tertentu (misal: hapus semua mahasiswa yang emailnya mengandung "@spam.com") atau ingin menghapus data dengan cepat tanpa perlu melakukan `SELECT` terlebih dahulu.
 
@@ -48,23 +48,22 @@ public int deleteByEmailDomain(String domain) {
 }
 ```
 
-#### ✍️ Konsep Penting dalam Penghapusan Data
+### ✍️ Konsep Penting dalam Penghapusan Data
 
-**A. Soft Delete vs Hard Delete**
+#### A. Soft Delete vs Hard Delete
 
 * **Hard Delete (Materi di atas)**: Data benar-benar hilang dari tabel database.
 * **Soft Delete** : Data tidak dihapus, melainkan ditandai dengan kolom dalam tabel, misalnya `is_deleted = true`. Cara ini lebih aman untuk audit data. Anda bisa menggunakan anotasi `@SQLDelete` milik Hibernate untuk mengubah perintah `DELETE` menjadi `UPDATE`.
 
-**B. Cascade Delete**
+#### B. Cascade Delete
 
 Jika entitas `Student` memiliki relasi dengan entitas `Course`, Anda bisa mengatur agar saat `Student` dihapus, data course-nya juga ikut terhapus secara otomatis dengan menambahkan `cascade = CascadeType.REMOVE` pada anotasi relasi.
 
-**C. Pentingnya `@Transactional`**
+#### C. Pentingnya `@Transactional`
 
 Operasi penghapusan wajib menggunakan `@Transactional`. Tanpa transaksi yang aktif, Hibernate akan melempar error `TransactionRequiredException` karena database tidak mengizinkan penghapusan data tanpa pengawasan transaksi.
 
-
-#### 🔥 Ringkasan
+### 🔥 Ringkasan
 
 | Method	| Kapan Digunakan?	| Performa |
 | --- | --- | --- |
@@ -75,7 +74,7 @@ Operasi penghapusan wajib menggunakan `@Transactional`. Tanpa transaksi yang akt
 
 Berikut kita akan implementasikan delete data dari project tutorial sebelumnya.
 
-### 1️⃣ Repository / DAO
+## 1️⃣ Repository / DAO
 
 * Menambahkan method baru pada interface DAO dengan menambahkan method `delete`:
 
@@ -150,7 +149,7 @@ public class StudentDAOImpl implements StudentDAO {
 }
 ```
 
-### 2️⃣ Main Class
+## 2️⃣ Main Class
 
 * Selanjutnya pada main class kita akan menjalankan proses delete data:
 

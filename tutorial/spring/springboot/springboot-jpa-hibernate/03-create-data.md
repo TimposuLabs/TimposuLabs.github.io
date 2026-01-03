@@ -5,7 +5,7 @@ title: 'Create Data'
 
 Menyimpan data ke database (CREATE) menggunakan Hibernate melibatkan pengubahan objek Java (Entity) menjadi baris baru dalam tabel database.
 
-### 1️⃣ Entity
+## 1️⃣ Entity
 
 Kita akan menggunakan entity `Student` yang telah kita bahas sebelumnya.
 
@@ -82,7 +82,7 @@ public class Student {
 }
 ```
 
-### 2️⃣ Repository / DAO
+## 2️⃣ Repository / DAO
 
 Kita akan membuat Layer `Repository` atau DAO (Data Access Object) yang nantinya akan berinteraksi ke database.
 
@@ -125,7 +125,7 @@ public class StudentDAOImpl implements StudentDAO {
 }
 ```
 
-#### ✍️ Penjelasan
+### ✍️ Penjelasan
 
 Berikut adalah penjelasan detail mengenai kode `StudentDAOImpl` yang menggunakan pendekatan manual (Low-Level) dengan `EntityManager`, yang merupakan inti dari cara kerja Hibernate di balik layar.
 
@@ -151,7 +151,7 @@ Berikut adalah penjelasan detail mengenai kode `StudentDAOImpl` yang menggunakan
         * Mengubah status objek `student` dari *Transient* (hanya ada di memori Java) menjadi *Managed/Persistent* (dikelola oleh Hibernate).
         * Hibernate kemudian akan menyusun perintah SQL `INSERT INTO student ...` untuk dijalankan di database.
 
-### 3️⃣ Main Class
+## 3️⃣ Main Class
 
 * Selanjutnya pada main class kita akan menjalankan proses penyimpanan data:
 

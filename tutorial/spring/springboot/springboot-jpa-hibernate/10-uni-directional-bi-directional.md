@@ -19,7 +19,7 @@ Dalam relasi **Uni-directional** (Satu Arah), hanya satu entitas yang mengetahui
 
 ![Hibernate](/img/hibernate/hibernate-bi-directional.png)
 
-### Perbandingan Relasi
+## 3️⃣ Perbandingan Relasi
 
 | Fitur |	Uni-directional (Satu Arah) |	Bi-directional (Dua Arah) |
 | --- | --- | --- |
@@ -33,9 +33,9 @@ Sebagai contoh, jika Anda memiliki tabel `Teacher` (Guru) dan `Classes` (Kelas):
 * **Uni-directional** (Satu Arah): Hanya `Classes` yang tahu siapa `Teacher`-nya (lewat *Foreign Key*), tapi objek `Teacher` tidak punya daftar kelas yang ia ajar.
 * **Bi-directional** (Dua Arah): `Classes` tahu siapa `Teacher`-nya, **DAN** `Teacher` juga punya daftar (`List`) kelas-kelas yang ia miliki.
 
-### Perbedaan Visual
+## 👀 Perbedaan Visual
 
-**1. Uni-directional (Hanya satu sisi yang punya referensi)**
+### 1. Uni-directional (Hanya satu sisi yang punya referensi)
 
 Di dalam kode Java, kita hanya bisa melakukan ini:
 
@@ -45,7 +45,7 @@ Tapi kita tidak bisa melakukan ini:
 
 * `myTeacher.getClasses();` ❌ (Karena objek Teacher tidak menyimpan data kelas).
 
-**2. Bi-directional (Kedua sisi punya referensi)**
+### 2. Bi-directional (Kedua sisi punya referensi)
 
 Kita bisa melakukan keduanya:
 
@@ -53,13 +53,13 @@ Kita bisa melakukan keduanya:
 
 * `myTeacher.getClasses();` ✅ (Objek `Teacher` memiliki `Collections` / `List` kelas).
 
-### Implementasi Bi-Directional (Hibernate)
+## 🏃 Implementasi Bi-Directional (Hibernate)
 
 Untuk membuat relasi dua arah di Hibernate, kita harus menggunakan atribut `mappedBy`.
 
 Dalam skenario ini, satu Guru (`Teacher`) hanya bisa menjadi wali kelas di satu Kelas (`Classes`), dan satu Kelas hanya memiliki satu Guru sebagai wali kelasnya.
 
-**A. Sisi Owner (Classes)**
+### A. Sisi Owner (Classes)
 
 Sisi ini yang memiliki kendali atas tabel database (memegang *Foreign Key*).
 
@@ -83,7 +83,7 @@ public class Classes {
 }
 ```
 
-**B. Sisi Non-Owning (Teacher)**
+### B. Sisi Non-Owning (Teacher)
 
 Sisi ini tidak membuat kolom baru di database, tetapi bisa memanggil data kelas melalui atribut `mappedBy`.
 
@@ -110,7 +110,7 @@ public class Teacher {
 }
 ```
 
-**C. Cara Penggunaan dalam Kode**
+### C. Cara Penggunaan dalam Kode
 
 Untuk menjaga sinkronisasi data di kedua sisi (**Bi-directional**), sangat disarankan membuat **Helper Method**:
 
@@ -125,7 +125,7 @@ public void setClasses(Classes classes) {
 }
 ```
 
-**Contoh Eksekusi:**
+### Contoh Eksekusi:
 
 ```java
 Teacher guruBaru = new Teacher();
@@ -141,7 +141,7 @@ session.persist(guruBaru);
 session.persist(kelas10A);
 ```
 
-### ❌ Masalah Umum: Infinite Recursion (Looping)
+## ❌ Masalah Umum: Infinite Recursion (Looping)
 
 Saat menggunakan relasi dua arah, metode `toString()` atau serialisasi JSON (Jackson) bisa menyebabkan error *StackOverflow* karena `Teacher` memanggil `Classes`, dan `Classes` memanggil `Teacher` kembali tanpa henti.
 
@@ -150,6 +150,6 @@ Saat menggunakan relasi dua arah, metode `toString()` atau serialisasi JSON (Jac
 * Jangan sertakan field relasi di dalam method `toString()`.
 * Gunakan anotasi `@JsonIgnore` atau `@JsonManagedReference` jika Anda membangun REST API.
 
-### 🫰 Kesimpulan
+## 🫰 Kesimpulan
 
 Gunakan relasi **Bi-directional** jika aplikasi Anda membutuhkan navigasi data yang intens dari kedua sisi entity. Jika hubungan hanya dibutuhkan satu arah (misal: Log Transaksi hanya butuh User, tapi User tidak perlu daftar semua lognya), lebih baik gunakan **Uni-directional** untuk menjaga kesederhanaan kode.

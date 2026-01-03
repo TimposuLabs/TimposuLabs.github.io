@@ -7,7 +7,7 @@ title: 'One-to-Many Eager Fetch'
 
 **Eager Fetching** adalah strategi pengambilan data di mana Hibernate secara otomatis mengambil entitas utama beserta seluruh entitas relasinya dalam satu waktu.
 
-Jika pada **Lazy Loading** data anak (`Students`) baru diambil saat dipanggil (`getStudents()`), pada *Eager Fetching*, saat kita memanggil `Classes`, semua data `Students` sudah langsung tersedia di memori (RAM).
+Jika pada **Lazy Fetching** data anak (`Students`) baru diambil saat kita memanggil method `getStudents()`, sedangkan pada **Eager Fetching**, saat kita memanggil `Classes`, semua data `Students` sudah langsung tersedia di memori (RAM).
 
 ## 1️⃣ Entity Induk: `Classes.java`
 

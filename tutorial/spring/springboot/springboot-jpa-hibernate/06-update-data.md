@@ -5,7 +5,7 @@ title: 'Update Data'
 
 Dalam Hibernate, melakukan pembaruan (update) data sedikit berbeda dengan SQL biasa. Hibernate menggunakan konsep **Dirty Checking**, di mana ia secara otomatis mendeteksi perubahan pada objek yang sedang "dikelola" (managed) dan menyimpannya ke database saat transaksi selesai.
 
-#### 1. Mekanisme Update: Cara "Managed Entity"
+### A. Mekanisme Update: Cara "Managed Entity"
 
 Langkah-langkah:
 
@@ -13,7 +13,7 @@ Langkah-langkah:
 2. Ubah nilai pada objek menggunakan `setter`.
 3. Selesaikan transaksi (Hibernate otomatis menjalankan SQL `UPDATE`)
 
-#### 2. Update dengan EntityManager (Pendekatan DAO)
+### B. Update dengan EntityManager (Pendekatan DAO)
 
 Jika menggunakan EntityManager secara manual (seperti contoh DAO sebelumnya), kita menggunakan method `merge()`.
 
@@ -26,7 +26,7 @@ public void update(Student student) {
 }
 ```
 
-#### 3. Update Manual dengan JPQL
+### C. Update Manual dengan JPQL
 
 Gunakan cara ini jika Anda ingin mengubah data tanpa harus mengambilnya ke memori Java terlebih dahulu (lebih efisien untuk update banyak data sekaligus / rekomendasi jika ingin **Bulk Update**).
 
@@ -57,7 +57,7 @@ public int updateEmailById(Long id, String newEmail) {
 
 Berikut kita akan implementasikan update data dari project tutorial sebelumnya.
 
-### 1️⃣ Repository / DAO
+## 1️⃣ Repository / DAO
 
 * Menambahkan method baru pada interface DAO dengan menambahkan method `update`:
 
@@ -123,7 +123,7 @@ public class StudentDAOImpl implements StudentDAO {
 }
 ```
 
-### 2️⃣ Main Class
+## 2️⃣ Main Class
 
 * Selanjutnya pada main class kita akan menjalankan proses update data:
 
