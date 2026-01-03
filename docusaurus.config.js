@@ -102,7 +102,7 @@ const config = {
           // },
           {
             position: 'left',
-            label: 'Pemrograman',
+            label: 'Tutorial',
             items: [
               {
                 to: '/java/',

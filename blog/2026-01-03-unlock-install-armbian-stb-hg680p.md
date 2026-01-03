@@ -1,6 +1,6 @@
 ---
 slug: unlock-install-armbian-stb-hg680p
-title:  Install Armbian di STB HG680-P
+title:  Install Armbian Linux di STB HG680-P
 authors: topekox
 tags: [linux, ubuntu, debian, armbian, hg680p, stb, server, linux-server]
 ---

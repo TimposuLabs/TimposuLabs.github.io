@@ -5,7 +5,7 @@ title: 'One-to-Many Create'
 
 ![Hibernate](/img/hibernate/one-to-many2.png)
 
-Pada meteri sebelumnya kita sudah memiliki Entity:
+Pada materi sebelumnya kita sudah memiliki Entity:
 
 ## 1️⃣ Entity Student (Sisi "Many" / Owner)
 
