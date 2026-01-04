@@ -10,11 +10,11 @@ Relasi **One-to-Many** berarti satu baris di tabel utama berhubungan dengan bany
 * **Contoh:** Satu **Kelas** (`Classes`) memiliki banyak **Siswa** (`Student`).
 * **Foreign Key (FK) 🔑**: Secara fisik di database, kolom FK (`class_id`) selalu diletakkan di sisi "Banyak/Many" yaitu tabel **student**.
 
-![Hibernate](/img/hibernate/one-to-many.png)
-
-## 2️⃣ Implementasi Entity (Bi-directional)
+## 2️⃣ Implementasi Entity (Bi-Directional)
 
 Dalam relasi dua arah, kedua class saling mengenal. Kita menggunakan atribut `mappedBy` di sisi "One" agar Hibernate tahu bahwa relasi diatur oleh field di sisi "Many".
+
+![Hibernate](/img/hibernate/one-to-many.png)
 
 ### A. Entity Student (Sisi "Many" / Owner)
 
