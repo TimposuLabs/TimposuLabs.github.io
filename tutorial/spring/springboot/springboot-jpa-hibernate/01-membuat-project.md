@@ -7,7 +7,7 @@ title: 'Membuat Project'
 Materi ini dibuat pada tahun 2025, jika dikemudian hari ada perubahan/update silahkan menyesuaikan.
 :::
 
-### 1️⃣ Inisialisasi Proyek
+## 1️⃣ Inisialisasi Proyek
 
 Gunakan [Spring Initializr](https://start.spring.io/) untuk membuat struktur proyek dengan cepat. Pilih pengaturan berikut:
 
@@ -18,7 +18,7 @@ Gunakan [Spring Initializr](https://start.spring.io/) untuk membuat struktur pro
     * **Spring Data JPA**: Untuk akses database melalui Hibernate.
     * **MySQL Driver**: Driver JDBC untuk koneksi ke MySQL.
 
-### 2️⃣ Konfigurasi Database
+## 2️⃣ Konfigurasi Database
 
 Setelah proyek diunduh dan dibuka di IDE (seperti IntelliJ IDEA, Eclipse, VSCode atau Netbeans), buka file `src/main/resources/application.properties` dan tambahkan konfigurasi berikut:
 
@@ -37,7 +37,7 @@ spring.main.banner-mode=off
 logging.level.root=warn
 ```
 
-### 3️⃣ Membuat Model / Entity
+## 3️⃣ Membuat Model / Entity
 
 Buat kelas Java dan tandai dengan anotasi `@Entity` agar Hibernate memetakannya ke tabel database.
 
@@ -116,7 +116,7 @@ public class Student {
 }
 ```
 
-### 4️⃣ Membuat Main App
+## 4️⃣ Membuat Main App
 
 Disini kita akan membuat main application yang nantinya akan kita jalankan di Command Line. Update Main Application Spring Boot seperti
 
@@ -143,7 +143,7 @@ public class Application {
 }
 ```
 
-### 5️⃣ Verifikasi Koneksi
+## 5️⃣ Verifikasi Koneksi
 
 Jalankan aplikasi melalui kelas utama (Main Class). Jika konfigurasi benar, Hibernate akan mencetak log pembuatan tabel di konsol, dan aplikasi akan terhubung ke MySQL.
 

@@ -7,7 +7,7 @@ title: 'JPQL'
 
 Meskipun terlihat sangat mirip dengan SQL (Structured Query Language), JPQL memiliki perbedaan mendasar dalam cara kerjanya. Berikut adalah poin-poin penting untuk memahaminya:
 
-#### 1. Berorientasi Objek, Bukan Tabel
+## 1️⃣ Berorientasi Objek, Bukan Tabel
 
 Perbedaan utama JPQL dengan SQL adalah apa yang "diajak bicara":
 
@@ -20,13 +20,14 @@ Contoh Perbandingan:
 * **JPQL**: `SELECT s FROM Student s WHERE s.firstName = 'Budi'`;
 *(Perhatikan bahwa `Student` merujuk pada nama Class Java, dan `firstName` merujuk pada variabel di kelas tersebut).*
 
-#### 2. Fitur Utama JPQL
+## 2️⃣ Fitur Utama JPQL
 
 * **Database Independent**: Anda menulis satu kueri JPQL, dan Hibernate akan otomatis menerjemahkannya ke dialek database apa pun yang Anda gunakan (MySQL, PostgreSQL, Oracle, dll).
 * **Case Sensitive** (untuk Nama Kelas): JPQL tidak peduli jika kata kunci seperti `SELECT atau FROM` ditulis huruf kecil, tetapi **sangat peduli** pada nama kelas dan atribut. `Student` tidak sama dengan `student`.
 * **Mendukung Relasi Objek**: JPQL sangat kuat dalam menangani hubungan antar objek (seperti `JOIN`) karena dapat memahami mapping `@OneToMany` atau `@ManyToOne`.
 
-#### 3. Cara Kerja di Belakang Layar
+## 3️⃣ Cara Kerja di Belakang Layar
+
 Saat Anda menjalankan kueri JPQL, prosesnya adalah:
 
 1. **Aplikasi** mengirim queri JPQL ke **EntityManager**.
@@ -34,7 +35,7 @@ Saat Anda menjalankan kueri JPQL, prosesnya adalah:
 3. **Database** mengeksekusi SQL tersebut dan mengembalikan hasilnya.
 4. **Hibernate** mengubah hasil (baris database) kembali menjadi **Object Java (Entity)**.
 
-#### 4. Contoh Penulisan JPQL Modern
+## 4️⃣ Contoh Penulisan JPQL Modern
 
 Penulisan JPQL sering kali disingkat untuk kemudahan:
 
@@ -53,7 +54,7 @@ JPQL adalah "bahasa jembatan" yang memungkinkan Anda tetap berpikir sebagai prog
 
 Pada [tutorial sebelumnya](/spring/springboot/springboot-jpa-hibernate/read-data) kita akan menggunakan `EntityManager` untuk mengambil satu baris data jika Anda sudah tahu ID-nya. Jika ingin mengambil semua data atau data dengan kriteria tertentu, kita bisa menggunakan **JPQL (Java Persistence Query Language)**. JPQL mirip SQL, tetapi ia mereferensikan **Nama Class/Entity**, bukan nama tabel database
 
-### 1️⃣ Repository / DAO
+## 🛢️ Repository / DAO
 
 * Menambahkan method baru pada interface DAO dengan menambahkan method `findAll` dan `findByLastName`:
 
@@ -121,7 +122,7 @@ public class StudentDAOImpl implements StudentDAO {
 }
 ```
 
-### 2️⃣ Main Class
+## ▶️ Main Class
 
 * Selanjutnya pada main class kita akan menjalankan proses read data:
 

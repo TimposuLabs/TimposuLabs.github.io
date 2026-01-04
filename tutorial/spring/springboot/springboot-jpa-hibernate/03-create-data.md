@@ -125,26 +125,26 @@ public class StudentDAOImpl implements StudentDAO {
 }
 ```
 
-### ✍️ Penjelasan
+## ✍️ Penjelasan
 
 Berikut adalah penjelasan detail mengenai kode `StudentDAOImpl` yang menggunakan pendekatan manual (Low-Level) dengan `EntityManager`, yang merupakan inti dari cara kerja Hibernate di balik layar.
 
-**1. `@Repository`**
+### 1. `@Repository`
 
     * **Fungsi**: Menandai kelas ini sebagai komponen pendukung akses data (DAO/Data Access Object).
     * **Peran**: Memberitahu Spring untuk mengelola kelas ini sebagai *Bean*. Selain itu, Spring akan secara otomatis menerjemahkan pengecualian (exception) database yang kompleks menjadi pengecualian yang lebih mudah dipahami oleh pengembang Java.
 
-**2. `@Transactional`**
+### 2. `@Transactional`
 
     * **Fungsi**: Mengelola transaksi database secara otomatis.
     * **Peran**: Setiap kali metode `save` dipanggil, Spring akan memulai transaksi baru. Jika proses berhasil, transaksi akan di-**commit** (disimpan permanen). Jika terjadi error, transaksi akan di-**rollback** (dibatalkan), sehingga integritas data terjaga dan tidak ada data "setengah jadi" di database.
 
-**3. `EntityManager`**
+### 3. `EntityManager`
 
     * **Fungsi**: Ini adalah Interface utama di JPA/Hibernate untuk berinteraksi dengan database.
     * **Peran**: `EntityManager` bertanggung jawab untuk mengelola siklus hidup entitas (seperti menyimpan, mencari, atau menghapus objek). Di sini, Spring secara otomatis menyuntikkan (inject) `EntityManager` yang sudah dikonfigurasi melalui **Constructor Injection**.
 
-**4. `entityManager.persist(student)`**
+### 4. `entityManager.persist(student)`
 
     * **Fungsi**: Metode utama untuk melakukan operasi **Create**.
     * **Cara Kerja**:

@@ -7,9 +7,9 @@ title: 'One-to-Many Eager Fetch'
 
 **Eager Fetching** adalah strategi pengambilan data di mana Hibernate secara otomatis mengambil entitas utama beserta seluruh entitas relasinya dalam satu waktu.
 
-Jika pada **Lazy Fetching** data anak (`Students`) baru diambil saat kita memanggil method `getStudents()`, sedangkan pada **Eager Fetching**, saat kita memanggil `Classes`, semua data `Students` sudah langsung tersedia di memori (RAM).
+Jika pada **Lazy Fetching** data child (`Students`) baru diambil saat kita memanggil method `getStudents()`, sedangkan pada **Eager Fetching**, saat kita memanggil `Classes`, semua data `Students` sudah langsung tersedia di memori (RAM).
 
-## 1️⃣ Entity Induk: `Classes.java`
+## 1️⃣ Entity Parrent: `Classes.java`
 
 ```java
 @Entity
@@ -93,7 +93,7 @@ public class Classes {
 }
 ```
 
-## 2️⃣ Entity Anak: `Student.java`
+## 2️⃣ Entity Child: `Student.java`
 
 Sisi `@ManyToOne` secara default sudah bersifat **EAGER**, jadi kita tidak perlu mengubahnya kecuali ingin menjadikannya **LAZY**.
 
@@ -165,7 +165,7 @@ public class Student {
 
 ## 3️⃣ Main Class
 
-* Pada main class application kita akan menampilkan data `Classes` dengan berisi data `Student`:
+* Pada main class application kita akan menampilkan data `Classes` dengan berisi data `Student`. Dalam contoh di bawah ini kita akan menampilkan data `Classes` dengan id 3:
 
 ```java
 @SpringBootApplication
@@ -186,7 +186,7 @@ public class Application {
 	}
 
 	private void findClassWithStudent(SchoolDAO dao) {
-		int id = 1;
+		int id = 3;
 		Classes classes = dao.findClassById(id);
 		
 		System.out.println("Kelas: " + classes);
@@ -206,7 +206,6 @@ mysql> select * from classes;
 +----+------------+------------+
 |  3 | Kelas 10   |          2 |
 +----+------------+------------+
-3 rows in set (0.00 sec)
 
 mysql> select * from student;
 +----+------------+-----------+----------+
@@ -216,10 +215,9 @@ mysql> select * from student;
 |  8 | Uciha      | Sazuke    |        3 |
 |  9 | Haruno     | Sakura    |        3 |
 +----+------------+-----------+----------+
-8 rows in set (0.00 sec)
 ```
 
-Output HSQL:
+Output JPQL:
 
 ```sql
 Hibernate: select c1_0.id,c1_0.class_name,t1_0.id,t1_0.first_name,t1_0.last_name,s1_0.class_id,s1_0.id,s1_0.first_name,s1_0.last_name from classes c1_0 left join teacher t1_0 on t1_0.id=c1_0.teacher_id left join student s1_0 on c1_0.id=s1_0.class_id where c1_0.id=?

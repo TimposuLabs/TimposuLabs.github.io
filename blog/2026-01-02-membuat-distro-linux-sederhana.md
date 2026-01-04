@@ -1,6 +1,6 @@
 ---
 slug: membuat-distro-linux-dari-0
-title:  Membuat Distro Linux sederhana dari 0
+title:  Membuat Distro Linux Minimalis dari 0
 authors: topekox
 tags: [linux, ubuntu, linuxfromscratch]
 ---

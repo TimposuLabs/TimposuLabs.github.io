@@ -84,7 +84,7 @@ public class Student {
 }
 ```
 
-### 1️⃣ Annotation/Anotasi Tingkat Kelas (Class Level)
+## 1️⃣ Annotation/Anotasi Tingkat Kelas (Class Level)
 
 * `@Entity`
     * **Fungsi**: Memberitahu JPA bahwa kelas ini adalah sebuah Entity yang harus dipetakan ke tabel database.
@@ -93,7 +93,7 @@ public class Student {
     * **Fungsi**: Menentukan nama tabel spesifik di database.
     * **Penjelasan**: Jika Anda tidak menuliskan `@Table`, Hibernate secara default akan membuat tabel dengan nama yang sama dengan kelas (`Student`). Dengan menambahkan `name = "student"`, kita memastikan tabel di database bernama huruf kecil "`student`".
 
-### 2️⃣ Annotation/Anotasi Tingkat Properti (Field Level)
+## 2️⃣ Annotation/Anotasi Tingkat Properti (Field Level)
 
 * `@Id`
     * **Fungsi**: Menandai field tersebut sebagai **Primary Key** (Kunci Utama) tabel.
@@ -119,13 +119,13 @@ Selain `GenerationType.IDENTITY` terdapat beberapa `GenerationType` jenis lain. 
 *Catatan: `GenerationType.UUID` adalah standar yang semakin sering digunakan untuk aplikasi skala besar.*
 :::
 
-### 3️⃣ Pentingnya Constructor dan Getter/Setter
+## 3️⃣ Pentingnya Constructor dan Getter/Setter
 
 * **No-Argument Constructor** (`public Student() {}`): Hibernate membutuhkan constructor kosong untuk membuat instance objek melalui teknik *reflection* sebelum mengisi datanya dari database. **Wajib ada**.
 * **Parameterized Constructor**: Digunakan oleh developer untuk mempermudah pembuatan objek baru tanpa harus memanggil setter satu per satu (misal: `new Student("Budi", "Sanjaya", "budi@mail.com")`).
 * **Getter & Setter**: Digunakan oleh JPA untuk membaca dan menulis nilai ke dalam variabel private kelas tersebut.
 
-### 👁️ Visualisasi Hasil Pemetaan
+## 👁️ Visualisasi Hasil Pemetaan
 
 Jika aplikasi dijalankan (dengan konfigurasi `spring.jpa.hibernate.ddl-auto=update`), Hibernate akan secara otomatis menjalankan perintah SQL berikut ke database Anda:
 

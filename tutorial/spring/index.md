@@ -16,13 +16,13 @@ sidebar_position: 1
 * **Spring Data**: Menyederhanakan akses dan manipulasi data ke berbagai jenis database.
 * **Modularitas**: Ekosistemnya terdiri dari banyak modul, jadi pengembang hanya perlu menggunakan yang dibutuhkan. 
 
-### Keunggulan Project Spring
+## Keunggulan Project Spring
 
-* Produktivitas Tinggi: Mengurangi kode boilerplate dan konfigurasi manual.
-* Modular dan Fleksibel: Mudah disesuaikan dan diintegrasikan dengan teknologi lain.
-* Skalabilitas: Cocok untuk aplikasi skala besar (enterprise) dan layanan mikro.
-* Portabilitas: Aplikasi bisa berjalan di JVM mana pun. 
+* **Produktivitas Tinggi**: Mengurangi kode boilerplate dan konfigurasi manual.
+* **Modular dan Fleksibel**: Mudah disesuaikan dan diintegrasikan dengan teknologi lain.
+* **Skalabilitas**: Cocok untuk aplikasi skala besar (enterprise) dan microservices.
+* **Portabilitas**: Aplikasi bisa berjalan di JVM mana pun. 
 
 ## Kesimpulan
 
-Secara keseluruhan, Spring adalah "superhero" di dunia Java yang membuat pengembangan aplikasi menjadi lebih mudah, cepat, dan terstruktur, dengan Spring Boot sebagai pintu masuk termudah. 
+Secara keseluruhan, Spring adalah "andalan" di dunia Java saat ini, yang membuat development aplikasi menjadi lebih mudah, cepat, dan terstruktur, dengan Spring Boot pilihan yang lebih cepat, lebih mudah, dan lebih praktis. 

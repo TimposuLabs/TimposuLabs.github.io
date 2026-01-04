@@ -5,7 +5,7 @@ title: 'Read Data'
 
 Membaca data (Read) menggunakan JPA/Hibernate dapat dilakukan dengan beberapa cara, mulai dari yang paling otomatis hingga yang paling fleksibel (manual). Pada tutorial ini kita akan menggunakan `EntityManager` (Cara Manual/DAO).
 
-### 1️⃣ Repository / DAO
+## 1️⃣ Repository / DAO
 
 * Menambahkan method baru untuk menampilkan data berdasarkan ID:
 
@@ -51,7 +51,7 @@ Anotasi `@Transactional(readOnly = true)` adalah instruksi kepada Spring dan Hib
 Ini adalah **best practice**, karena berdampak besar pada kecepatan aplikasi saat menangani banyak request sekaligus.
 :::
 
-### 2️⃣ Main Class
+## 2️⃣ Main Class
 
 * Selanjutnya pada main class kita akan menjalankan proses read data:
 
