@@ -11,8 +11,8 @@ Berbeda dengan Java Collection, di Java Stream hal yang sangat menarik adalah fi
 
 Konsep Stream Pipeline adalah penghubung antar operasi/operation. Operasi pada Stream pipeline terbagi menjadi dua kategori: 
 
-__1. Intermediate Operations__
-__2. Terminal Operations__
+1. __Intermediate Operations__
+2. __Terminal Operations__
 
 ## 1️⃣ Java Stream Intermediate Operations
 

@@ -27,6 +27,8 @@ Secara fisik di database, Hibernate akan menempatkan *Foreign Key* pada tabel `g
 
 ### 1️⃣ Entity Child: `Grade.java`
 
+Sisi ini bersifat independen dan tidak memiliki referensi ke `Student`.
+
 ```java
 @Entity
 @Table(name = "grade")
@@ -42,10 +44,6 @@ public class Grade {
 	@Column(name = "score")
 	private Double score;
 	
-	@ManyToOne
-	@JoinColumn(name = "student_id")
-	private Student student;
-
 	public Grade() { }
 	
 	public Grade(String subjectName, Double score) {
@@ -75,14 +73,6 @@ public class Grade {
 
 	public void setScore(Double score) {
 		this.score = score;
-	}
-
-	public Student getStudent() {
-		return student;
-	}
-
-	public void setStudent(Student student) {
-		this.student = student;
 	}
 
 	@Override
@@ -115,10 +105,11 @@ public class Student {
 	@JoinColumn(name = "class_id")
 	private Classes classes;
 	
+	// Relasi Satu Arah (Uni-directional)
 	@OneToMany(
 		fetch = FetchType.LAZY,
-		mappedBy = "student",
 		cascade = CascadeType.ALL)
+	@JoinColumn(name = "student_id") // FK yang akan dibuat di tabel 'grade'
 	private List<Grade> grades = new ArrayList<>();
 	
 	public Student() {		
@@ -169,16 +160,13 @@ public class Student {
 		this.grades = grades;
 	}
 
+	// Helper method untuk menambah data Grade
 	public void addGrade(Grade grade) {
 		if (grades == null) {
 			grades = new ArrayList<>();
 		}
 		
 		grades.add(grade);
-		
-		if (grade != null) {
-			grade.setStudent(this);
-		}
 	}
 	
 	@Override
@@ -188,14 +176,33 @@ public class Student {
 }
 ```
 
+:::info
+Dalam relasi **One-to-Many**, aturan utamanya adalah: `@JoinColumn` selalu diletakkan di sisi "**Many**" (tabel yang memiliki kolom Foreign Key di database), tapi dalam kasus relasi satu arah(**Uni-Directional**), karena dalam table `Grade` bersifat independen maka `@JoinColum` digunakan pada `Student` (yang mengelola relasi).
+:::
+
+:::tip
+**Tambahkan Orphan Removal**: Fitur `orphanRemoval = true` sangat direkomendasikan. Jika seorang siswa(`Student`) dikeluarkan dari daftar nilai(`Grade`), baris nilainya di database akan langsung terhapus secara otomatis.
+
+```java
+ @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+```
+:::
+
 ### 3️⃣ Implementasi DAO CRUD
 
-* Pada contoh kasus ini kita akan menyimpan data `Student` sekaligus dengan `Grade`-nya dengan menambahkan method `saveStudentWithGrade`:
+* Pada contoh kasus ini kita akan membuat DAO umtuk operasi CRUD:
+	* 💾 Create **Student** sekaligus dengan **Grade**-nya.
+	* 🔎 Find data **Student** sekaligus dengan data **Grade** terkait.
+	* ❌ Menghapus data **Student** sekaligus dengan data **Grade** terkait.
 
 ```java
 public interface SchoolDAO {
 
 	void saveStudentWithGrade(Student student);
+
+	Student findStudentAndGradeByStudentId(Integer id);
+
+	void deleteStudentById(Integer id);
 
 }
 ```
@@ -218,7 +225,24 @@ public class SchoolDAOImpl implements SchoolDAO {
 		entityManager.persist(student);
 	}
 
-	// Implementasi method lainnnya...
+	@Override
+	@Transactional(readOnly = true)
+	public Student findStudentAndGradeByStudentId(Integer id) {
+		TypedQuery<Student> query = entityManager.createQuery(
+				"SELECT s FROM Student s "
+				+ "JOIN FETCH s.grades "
+				+ "WHERE s.id = :data", Student.class);
+		query.setParameter("data", id);
+		
+		Student student = query.getSingleResult();
+		return student;
+	}
+
+	@Override
+	@Transactional
+	public void deleteStudentById(Integer id) {
+		entityManager.remove(entityManager.find(Student.class, id));	
+	}
 
 }
 ```
@@ -243,6 +267,10 @@ public class Application {
 		return runner -> {
 			
 			createStudentWithGrade(dao);
+
+			findStudentAndGrade(dao);
+			
+			deleteStudentAndGrade(dao);
 			
 		};
 	}
@@ -260,42 +288,21 @@ public class Application {
 		System.out.println("Student: " + student);
 		System.out.println("Grade: " + student.getGrades());
 	}
+
+	private void findStudentAndGrade(SchoolDAO dao) {
+		int id = 4;
+		Student student = dao.findStudentAndGradeByStudentId(id);
+		
+		System.out.println("Get Student= " + student);
+		System.out.println("Get Grade Student= " + student.getGrades());
+	}
+
+	private void deleteStudentAndGrade(SchoolDAO dao) {
+		int id = 4;
+		
+		dao.deleteStudentById(id);
+		System.out.println("Delete Student by id = " + id);
+	}
+
 }
-```
-
-* Output pada Hibernate SQL:
-
-```sql
-Hibernate: create table grade (id integer not null auto_increment, score float(53), subject_name varchar(255), student_id integer, primary key (id)) engine=InnoDB
-Hibernate: alter table grade add constraint FK5secqnjjwgh9wxk4h1xwgj1n0 foreign key (student_id) references student (id)
-Hibernate: insert into student (class_id,first_name,last_name) values (?,?,?)
-Hibernate: insert into grade (score,student_id,subject_name) values (?,?,?)
-Hibernate: insert into grade (score,student_id,subject_name) values (?,?,?)
-Hibernate: insert into grade (score,student_id,subject_name) values (?,?,?)
-Saved Student
-Student: Student [id=4, firstName=Shino, lastName=Aburame]
-Grade: [Grade [id=1, subjectName=Matematika, score=80.5], Grade [id=2, subjectName=Pendidikan Jasmani, score=87.5], Grade [id=3, subjectName=Biologi, score=90.2]]
-```
-
-* Cek perubahan dalam database.
-
-```
-mysql> select *  from student;
-+----+------------+-----------+----------+
-| id | first_name | last_name | class_id |
-+----+------------+-----------+----------+
-|  1 | Uzumaki    | Naruto    |        1 |
-|  2 | Uciha      | Sazuke    |        1 |
-|  3 | Haruno     | Sakura    |        1 |
-|  4 | Shino      | Aburame   |     NULL |
-+----+------------+-----------+----------+
-
-mysql> select *  from grade;
-+----+-------+--------------------+------------+
-| id | score | subject_name       | student_id |
-+----+-------+--------------------+------------+
-|  1 |  80.5 | Matematika         |          4 |
-|  2 |  87.5 | Pendidikan Jasmani |          4 |
-|  3 |  90.2 | Biologi            |          4 |
-+----+-------+--------------------+------------+
 ```
