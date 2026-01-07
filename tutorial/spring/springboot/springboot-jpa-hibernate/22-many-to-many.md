@@ -5,6 +5,8 @@ title: 'Many-to-Many Mapping'
 
 Relasi **Many-to-Many** terjadi ketika banyak baris di Tabel A dapat berhubungan dengan banyak baris di Tabel B. 
 
+![Hibernate](/img/hibernate/many-to-many2.png)
+
 * **Studi Kasus**: Seorang Siswa(`Student`) dapat mengambil banyak Mata Pelajaran(`Course`), dan satu Mata Pelajaran(`Course`) dapat diikuti oleh banyak Siswa(`Student`).
 * **Junction Table**: Dalam database relasional, relasi ini wajib menggunakan **tabel perantara** (misal: `course_student`) yang menyimpan pasangan ID dari kedua tabel utama.
 
