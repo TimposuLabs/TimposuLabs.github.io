@@ -1,11 +1,23 @@
 ---
-sidebar_position: 23
-title: 'Many-to-Many Create'
+sidebar_position: 24
+title: 'Many-to-Many Read'
 ---
 
-Proses **Create Data** atau menyimpan data pada **Many-to-Many** sesuai dengan contoh kasus sebelumnya, di mana banyak Siswa (`Student`) bisa mengambil banyak Mata Pelajaran (`Course`) sekaligus. Karena database tidak bisa menghubungkan mereka langsung, Hibernate akan membuat **tabel tengah/tabel bantuan** (`course_student`) secara otomatis.
-
 ![Hibernate](/img/hibernate/many-to-many.png)
+
+## 💪 Tantangan Utama: Lazy Loading
+
+Secara default, relasi `@ManyToMany` di Hibernate bersifat **LAZY**. Artinya, saat kita mengambil data `Student`, Hibernate tidak akan mengambil data `Course` sampai kita memanggilnya (`student.getCourses()`).
+
+**Permasalahannya**: Jika Session sudah ditutup sebelum kita memanggil daftar kursus (`Course`), maka akan muncul error `LazyInitializationException`.
+
+## ✅ Solusi: Menggunakan HQL dengan JOIN FETCH (Sangat Direkomendasikan)
+
+Teknik ini memaksa Hibernate untuk mengambil data Siswa dan Kursus dalam **satu query SQL** saja. Ini adalah cara paling efisien untuk menghindari masalah **N+1**.
+
+:::tip
+Baca: [**Eager vs Lazy**](/spring/springboot/springboot-jpa-hibernate/eager-lazy)
+:::
 
 ## 🚀 Implementasi Entity
 
@@ -210,7 +222,9 @@ public class Course {
 ```java
 public interface SchoolDAO {
 	
-	void saveStudent(Student student);
+	Student findStudentAndCourseByStudentId(Integer id);
+	
+	Course findCourseAndStudentByCourseId(Integer id);
 	
 }
 ```
@@ -228,26 +242,39 @@ public class SchoolDAOImpl implements SchoolDAO {
 	}
 
 	@Override
-	@Transactional
-	public void saveStudent(Student student) {
-		entityManager.merge(student); // Menggunakan merge lebih aman untuk relasi Many to Many
+	@Transactional(readOnly = true)
+	public Student findStudentAndCourseByStudentId(Integer id) {
+		TypedQuery<Student> query = entityManager.createQuery(
+				"SELECT s FROM Student s "
+				+ "JOIN FETCH s.courses "
+				+ "WHERE s.id = :id", Student.class);
+		query.setParameter("id", id);
+		
+		Student student = query.getSingleResult();
+		
+		return student;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Course findCourseAndStudentByCourseId(Integer id) {
+		TypedQuery<Course> query = entityManager.createQuery(
+				"SELECT c FROM Course c "
+				+ "JOIN FETCH c.students "
+				+ "WHERE c.id = :id", Course.class);
+		query.setParameter("id", id);
+		
+		Course course = query.getSingleResult();
+		
+		return course;
 	}
 	
 }
 ```
 
-:::info
-Berikut adalah alasan mengapa `session.merge()` dianggap lebih "aman" dan fleksibel, terutama dalam kasus relasi kompleks seperti **Many-to-Many**:
-
-* **`persist()`**: Hanya bisa menerima objek yang benar-benar baru (Transient). Jika Anda mencoba melakukan `persist()` pada objek yang sudah punya ID (misalnya mengambil data dari Session lama atau menerima kiriman data dari Frontend), Hibernate akan melempar error `PersistentObjectException` atau `Detached entity passed to persist`.
-* **`merge()`**: Sangat cerdas. Ia mengecek ID objek:
-	* Jika ID **tidak ada**, ia melakukan `INSERT` (seperti `persist`).
-	* Jika ID **sudah ada**, ia akan mencari data di database, lalu melakukan `UPDATE` jika ada perubahan.
-:::
-
 ## ▶️ Main Class
 
-* Kita akan membuat data `Student` beserta `Course`-nya.
+* Kita akan membuat read data `Student` beserta `Course`-nya. Contoh kasus menampilkan data `Course` beserta data `Student` terkait berdasarkan `Course` dengan id 4 (`findCourseAndStudent`) dan menampilkan data `Student` beserta `Course` terkait berdasarkan `Student` dengan id 6 (`findStudentAndCourse`).
 
 ```java
 @SpringBootApplication
@@ -262,67 +289,37 @@ public class Application {
 	public CommandLineRunner commandLineRunner(SchoolDAO dao) {
 		return runner -> {
 
-			createStudentAndCourse(dao);
+			findStudentAndCourse(dao);
 			
+			findCourseAndStudent(dao);
 		};
 	}
 
-	private void createStudentAndCourse(SchoolDAO dao) {
-		Student student1 = new Student("Abu", "Nawas");
+	private void findCourseAndStudent(SchoolDAO dao) {
+		int id = 4;
+		Course course = dao.findCourseAndStudentByCourseId(id);
 		
-		Course course1 = new Course("Bahasa Arab");
-		Course course2 = new Course("Sejarah");
+		System.out.println("Load course: " + course);
+		System.out.println("student of course: : " + course.getStudents());
+	}
+
+	private void findStudentAndCourse(SchoolDAO dao) {
+		int id = 6;
+		Student student = dao.findStudentAndCourseByStudentId(id);
 		
-		student1.addCourse(course1);
-		student1.addCourse(course2);
-		
-		dao.saveStudent(student1);
-		
-		System.out.println("Save Student 1  = " + student1);
-		System.out.println("Student 1 Course= " + student1.getCourses());
+		System.out.println("Load student: " + student);
+		System.out.println("student course: " + student.getCourses());
 	}
 }
 ```
 
-* Output pada hibernate console:
+* Contoh output Hibernate:
 
 ```
-Hibernate: create table course (id integer not null auto_increment, course_name varchar(255), primary key (id)) engine=InnoDB
-Hibernate: create table course_student (student_id integer not null, course_id integer not null, primary key (student_id, course_id)) engine=InnoDB
-Hibernate: alter table course_student add constraint FKlmj50qx9k98b7li5li74nnylb foreign key (course_id) references course (id)
-Hibernate: alter table course_student add constraint FK4xxxkt1m6afc9vxp3ryb0xfhi foreign key (student_id) references student (id)
-Hibernate: insert into student (class_id,first_name,last_name) values (?,?,?)
-Hibernate: insert into course (course_name) values (?)
-Hibernate: insert into course (course_name) values (?)
-Hibernate: insert into course_student (student_id,course_id) values (?,?)
-Hibernate: insert into course_student (student_id,course_id) values (?,?)
-Save Student 1  = Student [id=6, firstName=Abu, lastName=Nawas]
-Student 1 Course= [Course [id=1, courseName=Bahasa Arab], Course [id=2, courseName=Sejarah]]
-```
-
-* Cek data dalam database:
-
-```
-mysql> select * from student;
-+----+------------+-----------+----------+
-| id | first_name | last_name | class_id |
-+----+------------+-----------+----------+
-|  6 | Abu        | Nawas     |     NULL |
-+----+------------+-----------+----------+
-
-mysql> select * from course;
-+----+-------------+
-| id | course_name |
-+----+-------------+
-|  1 | Bahasa Arab |
-|  2 | Sejarah     |
-+----+-------------+
-
-mysql> select * from course_student;
-+------------+-----------+
-| student_id | course_id |
-+------------+-----------+
-|          6 |         1 |
-|          6 |         2 |
-+------------+-----------+
+Hibernate: select s1_0.id,s1_0.class_id,c1_0.student_id,c1_1.id,c1_1.course_name,s1_0.first_name,s1_0.last_name from student s1_0 join course_student c1_0 on s1_0.id=c1_0.student_id join course c1_1 on c1_1.id=c1_0.course_id where s1_0.id=?
+Load student: Student [id=6, firstName=Abu, lastName=Nawas]
+student course: [Course [id=1, courseName=Bahasa Arab], Course [id=2, courseName=Sejarah]]
+Hibernate: select c1_0.id,c1_0.course_name,s1_0.course_id,s1_1.id,s1_1.class_id,s1_1.first_name,s1_1.last_name from course c1_0 join course_student s1_0 on c1_0.id=s1_0.course_id join student s1_1 on s1_1.id=s1_0.student_id where c1_0.id=?
+Load course: Course [id=4, courseName=Bahasa Arab]
+student of course: : [Student [id=7, firstName=Abu, lastName=Jahal]]
 ```
