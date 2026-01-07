@@ -16,6 +16,10 @@ Dalam relasi **Uni-directional** (Satu Arah), hanya satu entity yang memiliki re
 
 ![Hibernate](/img/hibernate/one-to-many-uni-directional2.png)
 
+:::tip
+Baca materi: [**Uni-Directional vs Bi-Directional**](/spring/springboot/springboot-jpa-hibernate/uni-directional-bi-directional)
+:::
+
 ## 📅 Struktur Tabel (Database)
 
 Secara fisik di database, Hibernate akan menempatkan *Foreign Key* pada tabel `grade`.
