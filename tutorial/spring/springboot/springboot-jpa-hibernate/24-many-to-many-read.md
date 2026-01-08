@@ -323,3 +323,7 @@ Hibernate: select c1_0.id,c1_0.course_name,s1_0.course_id,s1_1.id,s1_1.class_id,
 Load course: Course [id=4, courseName=Bahasa Arab]
 student of course: : [Student [id=7, firstName=Abu, lastName=Jahal]]
 ```
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-advance/tree/main/14-hibernate-many-to-many-get-data
+:::

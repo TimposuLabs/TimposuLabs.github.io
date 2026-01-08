@@ -326,3 +326,7 @@ mysql> select * from course_student;
 |          6 |         2 |
 +------------+-----------+
 ```
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-advance/tree/main/13-hibernate-many-to-many
+:::

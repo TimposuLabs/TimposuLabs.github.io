@@ -294,3 +294,7 @@ mysql> select * from student;
 |  9 | Rock       | Lee       |        3 |
 +----+------------+-----------+----------+
 ```
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-advance/tree/main/08-hibernate-one-to-many-update
+:::

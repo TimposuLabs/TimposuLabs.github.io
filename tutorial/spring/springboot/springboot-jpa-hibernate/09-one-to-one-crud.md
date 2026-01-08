@@ -243,3 +243,7 @@ Classes deleted with id 1
 ```
 
 Mengingat di kode sebelumnya Anda menggunakan `cascade = CascadeType.ALL` pada relasi `teacher`, baris ini memiliki efek yang sangat penting. Jika kita menghapus `Classes` dengan ID 1, maka `Teacher` (Guru) yang terhubung dengan `Classes` (kelas) tersebut juga akan ikut terhapus secara otomatis dari database.
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-advance/tree/main/01-hibernate-one-to-one
+:::

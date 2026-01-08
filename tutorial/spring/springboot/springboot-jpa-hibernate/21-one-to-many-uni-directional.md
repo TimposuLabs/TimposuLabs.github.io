@@ -310,3 +310,7 @@ public class Application {
 
 }
 ```
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-advance/tree/main/12-hibernate-one-to-many-uni-directional-delete
+:::

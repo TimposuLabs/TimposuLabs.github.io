@@ -183,3 +183,7 @@ Student [id=1, firstName=Ucup, lastName=Topekox, email=ucup@gmail.com]
 :::tip
 **Baca Juga**: https://docs.oracle.com/cd/E17904_01/apirefs.1111/e13946/ejb3_langref.html
 :::
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-basic/tree/main/04-belajar-hibernate-query-jpql
+:::

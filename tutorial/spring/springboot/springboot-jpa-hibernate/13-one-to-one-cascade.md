@@ -273,3 +273,6 @@ mysql> select * from classes;
 2. **Jangan Gunakan Cascading REMOVE** jika data Child masih dibutuhkan oleh entitas lain atau merupakan data master.
 	* Contoh: Jangan hapus Guru (`Teacher`) hanya karena kelasnya (`Classes`) dibubarkan, karena Guru (`Teacher`) tersebut mungkin mengajar di kelas (`Classes`) lain.	
 
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-advance/tree/main/03-hibernate-one-to-one-bi-directional-delete-cascade
+:::

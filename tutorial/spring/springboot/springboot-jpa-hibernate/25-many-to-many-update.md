@@ -400,3 +400,7 @@ mysql> select * from course_student;
 |          7 |         4 |
 +------------+-----------+
 ```
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-advance/tree/main/15-hibernate-many-to-many-add-more-data
+:::

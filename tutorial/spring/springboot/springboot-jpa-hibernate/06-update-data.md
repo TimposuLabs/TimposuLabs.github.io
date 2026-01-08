@@ -181,3 +181,7 @@ mysql> select * from student where id=6;
 +----+---------------+------------+-----------+
 1 row in set (0.00 sec)
 ```
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-basic/tree/main/05-belajar-hibernate-update-data
+:::

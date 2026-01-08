@@ -309,3 +309,7 @@ public class Application {
 Hibernate: select s1_0.id,c1_0.id,c1_0.class_name,t1_0.id,t1_0.first_name,t1_0.last_name,s1_0.first_name,s1_0.last_name from student s1_0 left join classes c1_0 on c1_0.id=s1_0.class_id left join teacher t1_0 on t1_0.id=c1_0.teacher_id where s1_0.id=?
 Hibernate: delete from student where id=?
 ```
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-advance/tree/main/09-hibernate-one-to-many-delete
+:::

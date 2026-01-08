@@ -209,6 +209,10 @@ Menampilkan siswa berdasarkan id Kelas: 3, :[Student [id=7, firstName=Uzumaki, l
 Dari output JPQL di atas terjadi **Query N+1**: Dimana query melakukan perulangan (loop) untuk banyak class, yang bisa memperlambat performa.
 :::
 
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-advance/tree/main/06-hibernate-one-to-many-lazy
+:::
+
 ---
 
 ## 🏃 Menggunakan JOIN FETCH
@@ -352,3 +356,7 @@ Daftar siswa: [Student [id=7, firstName=Uzumaki, lastName=Naruto], Student [id=8
 ```
 
 Terlihat dari output di atas Hibernate hanya melakukan query 1 kali saja.
+
+:::info
+**Source Code**:  https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-advance/tree/main/07-hibernate-one-to-many-lazy-join-fetch
+:::

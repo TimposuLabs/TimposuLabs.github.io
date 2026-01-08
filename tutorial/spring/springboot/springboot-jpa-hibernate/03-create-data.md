@@ -256,3 +256,7 @@ mysql> select * from student;
 +----+-------------------+------------+-----------+
 5 rows in set (0.00 sec)
 ```
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-basic/tree/main/02-belajar-hibernate-save-data
+:::

@@ -154,3 +154,7 @@ mysql> select * from student;
 +----+------------+-----------+----------+
 3 rows in set (0.01 sec)
 ```
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-advance/tree/main/04-hibernate-one-to-many
+:::

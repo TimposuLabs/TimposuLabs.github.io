@@ -180,3 +180,7 @@ Hibernate: select t1_0.id,c1_0.id,c1_0.class_name,t1_0.first_name,t1_0.last_name
 Teacher found = Guru [id=1, firstName=Andi, lastName=Fahrum]
 Teacher Class detail = Class [id=1, className=Kelas 9, teacher=Guru [id=1, firstName=Andi, lastName=Fahrum]]
 ```
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-advance/tree/main/02-hibernate-one-to-one-bi-directional
+:::

@@ -224,3 +224,7 @@ Hibernate: select c1_0.id,c1_0.class_name,t1_0.id,t1_0.first_name,t1_0.last_name
 Kelas: Class [id=3, className=Kelas 10, teacher=Guru [id=2, firstName=Hatake, lastName=Kakashi]]
 Daftar siswa: [Student [id=7, firstName=Uzumaki, lastName=Naruto], Student [id=8, firstName=Uciha, lastName=Sazuke], Student [id=9, firstName=Haruno, lastName=Sakura]]
 ```
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-advance/tree/main/05-hibernate-one-to-many-eager
+:::

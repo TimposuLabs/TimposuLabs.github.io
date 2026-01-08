@@ -107,3 +107,7 @@ Search student form database with id: 6
 Hibernate: select s1_0.id,s1_0.email,s1_0.first_name,s1_0.last_name from student s1_0 where s1_0.id=?
 Found student: Student [id=6, firstName=Inaya, lastName=Rusli, email=inay@gmail.com]
 ```
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-basic/tree/main/03-belajar-hibernate-read-data
+:::

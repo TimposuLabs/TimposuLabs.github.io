@@ -367,3 +367,7 @@ Hibernate: delete from course_student where student_id=?
 Hibernate: delete from course_student where student_id=?
 Hibernate: delete from course where id=?
 ```
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-advance/tree/main/16-hibernate-many-to-many-delete
+:::

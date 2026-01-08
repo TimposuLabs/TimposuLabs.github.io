@@ -142,3 +142,7 @@ CREATE TABLE student (
 :::tip
 Banyak programmer Java mulai menggunakan **[Lombok](https://projectlombok.org/)** untuk menggantikan penulisan manual `Getter`, `Setter`, dan `Constructor` agar kode lebih bersih (clean code). **Namun**, memahami struktur manual seperti di atas adalah dasar yang wajib dikuasai sebelum menggunakan library bantuan.
 :::
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-jpa-hibernate-basic/tree/main/01-belajar-hibernate
+:::
