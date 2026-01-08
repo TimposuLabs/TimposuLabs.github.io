@@ -167,3 +167,7 @@ public InMemoryUserDetailsManager userDetailsManager(PasswordEncoder encoder) {
     return new InMemoryUserDetailsManager(ucup);
 }
 ```
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-mvc-security/tree/main/02-belajar-springboot-security-basic-configuration
+:::
