@@ -115,11 +115,18 @@ Gunakan Thymeleaf untuk membuat form. Spring Security secara otomatis mencari pa
 </html>
 ```
 
-* Halaman Login.
+### 📌 Poin Penting dalam Form Login
+
+* **`method="POST"`**: Wajib menggunakan POST.
+* **`name="username"` & `name="password"`**: Spring Security mencari nama input ini secara default.
+* **CSRF Token**: Jika Anda menggunakan Thymeleaf `th:action`, Spring Boot akan otomatis menyisipkan token CSRF tersembunyi untuk keamanan. Ini adalah fitur wajib untuk mencegah serangan *Cross-Site Request Forgery*.
+* **Handling Error**: Spring Security akan mengarahkan kembali ke `/loginPage?error` jika login gagal. Kita menangkapnya dengan `th:if="${param.error}"`.
+
+1. Halaman Login.
 
 ![Spring Security](/img/spring/spring-security4.png)
 
-* Halaman Login jika autentikasi gagal.
+2. Halaman Login jika autentikasi gagal.
 
 ![Spring Security](/img/spring/spring-security5.png)
 
@@ -180,7 +187,7 @@ Untuk mempercantik tampilan, kita bisa mengintegrasikan framework CSS seperti [B
 						</div>
 					</div>
 
-					<!-- Input Email -->
+					<!-- Input Username -->
 					<div class="form-floating mb-3">
 						<input type="text" class="form-control" id="floatingInput" name="username" placeholder="Username"
 							required>

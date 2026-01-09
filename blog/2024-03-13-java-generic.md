@@ -100,12 +100,12 @@ Dengan menggunakan generic, maka kita dapat menggonta-ganti type data yang akan 
 Pada contoh di atas kita menggunakan parameter `T`, sebenarnya tidak ada aturan baku dalam menggunakan parameter, cuma dalam prakteknya penamaan parameter biasanya satu huruf besar.
 
 Jenis nama tipe parameter yang sering digunakan :
-* T  Type
-* E  Element (biasanya digunakan untuk Collection)
-* K  Key
-* N  Number
-* V  Value
-* S,U,V dst. 2nd, 3rd, 4th types.
+* `T` = Type
+* `E` = Element (biasanya digunakan untuk Collection)
+* `K` = Key
+* `N` = Number
+* `V` = Value
+* `S`,`U`,`V` dst. 2nd, 3rd, 4th types.
 
 Selain itu kita juga bisa menggunakan multiple parameter contohnya `public class DemoClassGeneric<T, U>`.
 
