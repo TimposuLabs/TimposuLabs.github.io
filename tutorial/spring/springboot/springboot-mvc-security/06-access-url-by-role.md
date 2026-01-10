@@ -44,8 +44,8 @@ public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Excepti
     httpSecurity.authorizeHttpRequests(configurer -> 
                 configurer
                     .requestMatchers("/").hasRole("GUEST") // 1. URL '/' bisa diakses oleh siapa saja yang punya role GUEST
-                    .requestMatchers("/user/**").hasAnyRole("USERS", "ADMIN") // 2. URL yang berawalan '/leaders/' wajib punya role USERS
-                    .requestMatchers("/admin/**").hasRole("ADMIN") // 3. URL yang berawalan '/systems/' wajib punya role ADMIN
+                    .requestMatchers("/user/**").hasAnyRole("USERS", "ADMIN") // 2. URL yang berawalan '/user/' wajib punya role USERS dan ADMIN
+                    .requestMatchers("/admin/**").hasRole("ADMIN") // 3. URL yang berawalan '/admin/' wajib punya role ADMIN
                     .anyRequest().authenticated() // 4. Semua request lainnya wajib autentikasi (login)
             ).formLogin(form ->
                 form
@@ -204,29 +204,29 @@ Buat file `home.html`, `login-page.html`, `admin.html`, `user.html` dan `access-
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Belajar Spring CRUD Security</title>
+		<title>Belajar Spring CRUD Security</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
-        <h2>TimposuLabs Company</h2>
+		<h2>TimposuLabs Company</h2>
 		<hr />
 		Welcome to our company homepage.
 		<hr />
-			<p>
-                Logged in as: <span sec:authentication="principal.username"></span>
-				<br>
-				Roles: <span sec:authentication="principal.authorities"></span>
-			</p>
+		<p>
+			Logged in as: <span sec:authentication="principal.username"></span>
+			<br>
+			Roles: <span sec:authentication="principal.authorities"></span>
+		</p>
 		<hr />
-			<p>
-                <a th:href="@{/user}" sec:authorize="hasAnyRole('USERS', 'ADMIN')">User Page</a>
-				<br>
-				<a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">Admin Page</a>			
-			</p>
+		<p>
+			<a th:href="@{/user}">User Page</a>
+			<br>
+			<a th:href="@{/admin}">Admin Page</a>			
+		</p>
 		<hr>	
 		<form th:action="@{/logout}" method="post">
-            <button type="submit">Logout</button>	
+			<button type="submit">Logout</button>	
 		</form>
 	</body>
 </html>
@@ -315,6 +315,10 @@ Buat file `home.html`, `login-page.html`, `admin.html`, `user.html` dan `access-
 
 ![Spring Security](/img/spring/spring-security16.png)
 
-* User "ucup" ketika mengakses page `/admin` dan `/user`:
+* User "aco" ketika mengakses page `/admin` dan `/user`:
 
 ![Spring Security](/img/spring/spring-security15.png)
+
+:::info
+**Source Code**: https://github.com/TimposuLabs/belajar-springboot-mvc-security/tree/main/07-belajar-springboot-security-restrict-url-by-roles
+:::
