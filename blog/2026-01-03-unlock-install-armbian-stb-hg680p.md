@@ -147,7 +147,7 @@ reboot update
 
 ![Armbian Shell](/img/general/armbian-shell.png)
 
-Instalasi Armbian Berhasil! STB kita sekarang memiliki fungsi penuh sebagai mini PC Linux. Langkah selanjutnya adalah eksplorasi lebih luas lagi. Terima kasih telah menyimak tutorial ini, dan selamat berkreasi dengan proyek *self-hosting* anda!.
+Instalasi Armbian Berhasil! STB kita sekarang memiliki fungsi penuh sebagai mini PC Linux. Langkah selanjutnya kita tinggal eksplorasi lebih dalam lagi. Kita bisa membuat *self-hosting*, home server, file server dll.
 
 :::tip
 * **Akses Terminal**: Setelah berhasil masuk Armbian, gunakan aplikasi PuTTY atau Terminal Shell seperti PowerSheel di PC untuk remote via SSH agar lebih nyaman melakukan konfigurasi.
