@@ -162,7 +162,78 @@ public class Person {
 }
 ```
 
-### C. Membuat Repository
+### C. Membuat DAO (Data Access Object)
+
+Kita akan membuat DAO pada data `Person` untuk memisahkan logika bisnis dari logika akses data:
+
+```java
+public class PersonDTO {
+
+    private Long id;
+
+    @NotBlank
+    @Size(min = 3, max = 30)
+    private String firstName;
+    
+    @NotBlank
+    @Size(min = 3, max = 30)
+    private String lastName;
+
+    @NotBlank
+    @Email
+    private String email;
+
+    public PersonDTO() {
+    }
+
+    public PersonDTO(Long id, @NotBlank @Size(min = 3, max = 30) String firstName,
+            @NotBlank @Size(min = 3, max = 30) String lastName, @NotBlank @Email String email) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }    
+
+    @Override
+    public String toString() {
+        return "Id: " + getId() + ", firstName: " + getFirstName() + ", lastName: " + getLastName() + ", email: " + getEmail(); 
+    }
+}
+```
+
+### D. Membuat Repository
 
 ```java
 @Repository
@@ -178,7 +249,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 }
 ```
 
-### C. Membuat Service
+### E. Membuat Service
 
 * Interface `PersonService` :
 
@@ -287,7 +358,7 @@ public class PersonServiceImpl implements PersonService {
 }
 ```
 
-### D. Membuat Controller
+### F. Membuat Controller
 
 ```java
 @Controller
@@ -365,7 +436,7 @@ public class PersonController {
 }
 ```
 
-### E. Membuat View (Thymeleaf)
+### G. Membuat View (Thymeleaf)
 
 Buat file HTML di dalam folder `src/main/resources/templates`. Disini kita akan menggunakan Bootstrap untuk mempercantik tampilan.
 
@@ -551,6 +622,13 @@ Buat file HTML di dalam folder `src/main/resources/templates`. Disini kita akan 
 
 ![Spring MVC CRUD](/img/spring/springboot-mvc40.png)
 
+:::tip
+## 📖 Referensi
+
+* [Tutorial Spring Boot MVC](/spring/springboot/springboot-mvc)
+* [Tutorial Spring Boot MVC CRUD](/spring/springboot/springboot-mvc-crud)
+:::
+
 :::info
-Source Code: https://github.com/TimposuLabs/tutorial-spring-from-blog/tree/main/springboot-mvc-crud
+**Source Code**: https://github.com/TimposuLabs/tutorial-spring-from-blog/tree/main/springboot-mvc-crud
 :::
