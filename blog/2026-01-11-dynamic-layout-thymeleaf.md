@@ -5,15 +5,9 @@ authors: topekox
 tags: [spring, springboot, springmvc]
 ---
 
-Pada tutorial ini akan membuat **Dynamic Layout** menggunakan Spring Boot MVC dan Thymeleaf. Teknik ini memungkinkan kita memiliki satu kerangka (layout) utama (seperti Header, Footer, Sidebar dll.) dan hanya mengganti bagian kontennya saja untuk setiap halaman berbeda.
+Pada tutorial ini, kita akan membuat **Dynamic Layout** menggunakan Spring Boot MVC dan Thymeleaf. Teknik ini memungkinkan kita memiliki satu kerangka (layout) utama (seperti Header, Footer, Sidebar dll.) dan hanya mengganti bagian kontennya saja untuk setiap halaman berbeda.
 
 <!--truncate-->
-
-## 🤑 Keuntungan Metode Ini
-
-1. **DRY (Don't Repeat Yourself)**: Kita tidak perlu menulis ulang kode Navbar atau Footer di setiap file HTML.
-2. **Pemeliharaan Mudah:** Jika ingin mengubah desain menu, kita cukup mengedit satu file fragments.html.
-3. **Clean Code**: File HTML kita tetap rapi karena dipisah berdasarkan fungsinya
 
 Contohnya kita memiliki struktur elemen HTML, terdiri dari:
 
@@ -253,6 +247,13 @@ public String contact(Model model) {
 ![Dynamic Layout](/img/spring/springboot-mvc37.png)
 
 ![Dynamic Layout](/img/spring/springboot-mvc36.png)
+
+
+## 🤑 Keuntungan Metode Ini
+
+1. **DRY (Don't Repeat Yourself)**: Kita tidak perlu menulis ulang kode Navbar atau Footer di setiap file HTML.
+2. **Pemeliharaan Mudah:** Jika ingin mengubah desain menu, kita cukup mengedit satu file `fragments.html`.
+3. **Clean Code**: File HTML kita tetap rapi karena dipisah berdasarkan fungsinya
 
 :::info
 **Source Code**: https://github.com/TimposuLabs/tutorial-spring-from-blog/tree/main/springboot-mvc-dynamic-layout
