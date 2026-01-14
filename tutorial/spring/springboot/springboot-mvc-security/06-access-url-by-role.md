@@ -13,6 +13,8 @@ Berdasarkan user yang kita buat sebelumnya (Aco, Ade, Ucup), kita akan membagi h
 * **User Area (`/user/**`)**: Hanya untuk Role **USERS** ke atas (Ade dan Ucup).
 * **Admin Area (`/admin/**`)**: Eksklusif hanya untuk Role **ADMIN** (Ucup saja).
 
+![Spring Security](/img/spring/spring-security18.png)
+
 ## 👨🏻‍💻 Contoh Kasus
 
 Mari kita hubungkan dengan user **Aco**, **Ade**, dan **Ucup** yang kita buat pada materi [Basic Configuration](/spring/springboot/springboot-mvc-security/basic-configuration) (*In-Memory Authentication*):

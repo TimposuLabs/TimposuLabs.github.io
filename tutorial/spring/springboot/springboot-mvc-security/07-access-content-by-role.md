@@ -16,6 +16,8 @@ Dengan membatasi akses konten, nantinya pengguna/user hanya dapat melihat dan me
 Materi ini masih berhubungan dengan [materi sebelumnya](/spring/springboot/springboot-mvc-security/access-url-by-role).
 :::
 
+![Spring Security](/img/spring/spring-security18.png)
+
 ## 1️⃣ Konfigurasi pada Sisi Server (`SecurityFilterChain`)
 
 * Langkah pertama dan paling penting adalah mengunci pintu di sisi server. Walaupun tombol/link di HTML disembunyikan, pengguna yang pintar tetap bisa mengetikkan URL secara manual. Kita harus mengamankannya di class `SecurityConfig`.
