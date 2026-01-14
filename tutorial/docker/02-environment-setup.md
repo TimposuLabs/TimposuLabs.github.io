@@ -65,3 +65,65 @@ Pada seri tutorial ini, kami menggunakan Docker Engine dibanding Docker Desktop 
 * **Install Docker Engine di Windows dengan WSL**: Untuk menginstall Docker Engine di Windows kita perlu menginstall Windows Subsystem Linux (WSL) terlebih dahulu kemudian menjalankan Docker Engine di atasnya, cara ini lebih ringan dibanding menggunakan Virtual Machine. Untuk cara instalasinya bisa melihat video di bawah ini:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eT2qxoPfMBA?si=nqCe2GgyaFY9qgwf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+### 🔥 Install Docker pada Ubuntu
+
+Sebagai contoh install docker di Ubuntu Linux.
+
+* Sebelum menginstal Docker Engine untuk pertama kalinya pada mesin host baru, kita perlu menyiapkan repositori `apt` Docker. Setelah itu, kita dapat menginstal dan memperbarui Docker dari repositori tersebut.
+
+```
+# Add Docker's official GPG key:
+sudo apt update
+sudo apt install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+
+sudo apt update
+```
+
+* Install Docker Package:
+
+```
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+:::info
+Service Docker dimulai secara otomatis setelah instalasi. Untuk memverifikasi bahwa Docker sedang berjalan, gunakan:
+
+```
+sudo systemctl status docker
+```
+
+Beberapa sistem mungkin harus dijalankan secara manual:
+
+```
+sudo systemctl start docker
+```
+:::
+
+* Untuk melakukan verifikasi bahwa Docker berhasil diinstall dengan baik, kita dapat menjalankan image `hello-world`:
+
+```
+sudo docker run hello-world
+```
+
+Perintah ini melakukan pull image untuk uji coba dan menjalankannya dalam container. Ketika container berjalan, akan mencetak pesan konfirmasi dan keluar.
+
+:::tip
+Agar user biasa dapat menjalankan perintah Docker tanpa perlu mengetik `sudo` setiap menjalankan perintah Docker:
+
+```
+sudo usermod -aG docker $USER
+```
+:::
