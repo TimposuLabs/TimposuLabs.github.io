@@ -204,7 +204,7 @@ Contoh:
 
 Pada Spring Boot 3 ke atas ⬆️, kita harus mengirimkan nama halaman aktif dari **Controller**.
 
-* Di **Controller**:
+* **Di Controller**:
 
 ```java
 @GetMapping("/")

@@ -120,6 +120,10 @@ const config = {
                 to: '/spring/',
                 label: 'Spring',
               },
+              {
+                to: '/docker/',
+                label: 'Docker',
+              },
               // {
               //   to: '#',
               //   label: 'Python',
@@ -276,6 +280,15 @@ const config = {
           id: 'spring',
           path: 'tutorial/spring/',
           routeBasePath: 'spring',
+          sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],   
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+          id: 'docker',
+          path: 'tutorial/docker/',
+          routeBasePath: 'docker',
           sidebarPath: require.resolve('./sidebars.js'),
       },
     ],   
