@@ -15,6 +15,8 @@ Secara teknis, Docker Image adalah file *read-only* (hanya-baca) yang berisi sem
 * Variabel lingkungan (Environment Variables).
 * Konfigurasi file sistem.
 
+![Image & Container](/img/docker/docker2.png)
+
 ## 2️⃣ Karakteristik Utama Image
 
 * **Immutable (Tidak Berubah)**: Sekali image dibuat, isinya tidak bisa diubah. Jika ada perubahan kode, maka harus membuat image baru.

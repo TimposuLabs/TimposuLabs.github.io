@@ -39,4 +39,16 @@ Untuk belajar Docker, Anda harus paham tiga istilah ini:
 
 * **Docker Image**: *Blueprint* atau cetakan biru aplikasi (bisa dianalogikan sebagai "resep"). Ini adalah file statis yang berisi kode, library, dan konfigurasi. (Contoh: Image Nginx, Image Alpine).
 * **Docker Container**: Unit yang berjalan (*instance* dari Image). Jika Image adalah resep kue, maka Container adalah kue yang sudah jadi dan bisa dimakan.
-* **Docker Registry**: Tempat menyimpan Image agar bisa diunduh orang lain. Yang paling populer adalah [Docker Hub](https://hub.docker.com/).
+* **Docker Registry**: Tempat menyimpan Image agar bisa diunduh orang lain. Yang paling populer adalah [**Docker Hub**](https://hub.docker.com/).
+
+### ☁️ Ilustrasi Penggunaan Docker
+
+Berikut adalah contoh Deployment Workflow menggunakan Docker:
+
+1. **Build**: Ucup selesai menulis kode di laptopnya (development). Ia membungkus aplikasi tersebut ke dalam sebuah Docker Image dengan label versi: `ucupdev/java-api:1.0.2`.
+2. **Push**: Agar bisa diakses orang lain, Ucup mengunggah (Push) image tersebut ke **Docker Hub**. Sekarang, aplikasinya sudah tersimpan aman di cloud global.
+3. **Pemeriksaan (Scan)**: Di Docker Hub, image Ucup otomatis dipindai oleh sistem keamanan untuk memastikan tidak ada library yang berbahaya sebelum digunakan di server.
+4. **Pull**: Budi, tim Ops di server Jakarta, cukup mengetik satu perintah untuk menarik (*Pull*) image identik yang dibuat Ucup **tanpa perlu instal Java atau database secara manual**.
+5. **Run**: Budi menjalankan kontainer tersebut. Dalam hitungan detik, aplikasi Ucup sudah aktif di server produksi dengan perilaku yang **100%** sama seperti di laptop Ucup.
+
+![docker](/img/docker/docker3.png)

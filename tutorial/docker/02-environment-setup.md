@@ -17,7 +17,7 @@ title: 'Environment Setup'
 * **Cara Kerja**: Docker Engine berkomunikasi langsung dengan **Kernel Linux** menggunakan fitur seperti *Namespaces* dan *Control Groups (cgroups)*.
 * **Penggunaan**: Biasanya diinstal di server produksi (Ubuntu Server, CentOS, dll) atau komputer pengembangan/development yang menggunakan Linux asli.
 
-## 🐋 Docker Desktop (Paket Lengkap)
+### 🐋 Docker Desktop (Paket Lengkap)
 
 **Docker Desktop** adalah aplikasi antarmuka grafis (GUI) yang dirancang untuk pengguna **Windows** dan **macOS** agar bisa menjalankan Docker dengan mudah.
 
@@ -50,7 +50,7 @@ title: 'Environment Setup'
 
 ## 🖥️ Install Docker Desktop
 
-Untuk instalasi Docker Desktop di OS Windows, MacOS dan Linux, dapat merujuk ke link https://docs.docker.com/get-started/get-docker/.
+Untuk instalasi Docker Desktop di OS Windows, MacOS dan Linux, dapat merujuk ke link **https://docs.docker.com/get-started/get-docker/**.
 
 :::warning
 **Penggunaan komersial Docker Desktop** di perusahaan besar (lebih dari 250 karyawan ATAU lebih dari $10 juta USD dalam pendapatan tahunan) memerlukan langganan berbayar.
@@ -60,7 +60,7 @@ Untuk instalasi Docker Desktop di OS Windows, MacOS dan Linux, dapat merujuk ke 
 
 Pada seri tutorial ini, kami menggunakan Docker Engine dibanding Docker Desktop karena alasan **lisensi, performa, kontrol, dan efisiensi**. Sebagai software engineer yang menyukai detail sistem, anda akan melihat bahwa Docker Engine menawarkan keunggulan teknis yang signifikan. Selain itu Docker Engine bersifat ***open-source*** yang menggunakan Lisensi Apache 2.0, yang dapat diperggunakan secara gratis untuk siapa saja, termasuk individu, hingga perusahaan besar berskala internasional.
 
-* **Install Docker Engine di Linux**: Untuk melakukan instalasi Docker Engine di Linux dapat merujuk ke [Dokumentasi Resmi Docker](https://docs.docker.com/engine/install/).
+* **Install Docker Engine di Linux**: Untuk melakukan instalasi Docker Engine di Linux dapat merujuk ke [**Dokumentasi Resmi Docker**](https://docs.docker.com/engine/install/).
 * **Install Docker Engine di Virtual Machine**: Cara ini mungkin agak sedikit berat karena kita perlu menginstall Virtual Machine seperti Virtual Box atau VMWare terlebih dahulu kemudian menginstall Linux dan menginstall Docker Engine di atasnya.
 * **Install Docker Engine di Windows dengan WSL**: Untuk menginstall Docker Engine di Windows kita perlu menginstall Windows Subsystem Linux (WSL) terlebih dahulu kemudian menjalankan Docker Engine di atasnya, cara ini lebih ringan dibanding menggunakan Virtual Machine. Untuk cara instalasinya bisa melihat video di bawah ini:
 
@@ -119,6 +119,12 @@ sudo docker run hello-world
 ```
 
 Perintah ini melakukan pull image untuk uji coba dan menjalankannya dalam container. Ketika container berjalan, akan mencetak pesan konfirmasi dan keluar.
+
+* Cek versi docker:
+
+```
+sudo docker version
+```
 
 :::tip
 Agar user biasa dapat menjalankan perintah Docker tanpa perlu mengetik `sudo` setiap menjalankan perintah Docker:
