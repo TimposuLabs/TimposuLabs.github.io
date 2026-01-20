@@ -1,6 +1,6 @@
 ---
 sidebar_position: 4
-title: 'Instruksi Dockerfile CMD'
+title: 'Dockerfile CMD'
 ---
 
 ## 1️⃣ Apa itu CMD?

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: 'Instruksi Dockerfile ARG & ENV'
+title: 'Dockerfile ARG & ENV'
 ---
 
 ## 1️⃣ Instruksi `ARG`

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: 'Instruksi Dockerfile FROM & LABEL'
+title: 'Dockerfile FROM & LABEL'
 ---
 
 ## 1️⃣ Instuksi `FROM`

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-title: 'Instruksi Dockerfile RUN'
+title: 'Dockerfile RUN'
 ---
 
 ## 1️⃣ Apa itu Dockerfile `RUN`?
