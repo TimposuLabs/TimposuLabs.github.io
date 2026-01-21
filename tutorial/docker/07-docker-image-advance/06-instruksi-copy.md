@@ -3,6 +3,8 @@ sidebar_position: 6
 title: 'Dockerfile COPY'
 ---
 
+## 🤔 Apa itu Instruksi Dockerfile `COPY`?
+
 Instruksi `COPY` digunakan untuk menyalin file atau direktori dari mesin lokal (host) ke dalam image Docker selama proses pembuatan (build).
 
 ## 1️⃣ Sintaks Dasar
@@ -16,11 +18,24 @@ COPY [sumber] [tujuan]
 * **`<sumber>`**: Lokasi file/direktori di mesin lokal (relatif terhadap lokasi Dockerfile).
 * **`<tujuan>`**: Path di dalam image tempat file akan disalin.
 
-* **Contoh**:
+**Contoh 1**:
 
 ```
 COPY app.jar /app/app.jar
 COPY config/ /etc/config/
+```
+
+**Contoh 2**:
+
+```
+ARG ubuntu_version=24.04
+FROM ubuntu:${ubuntu_version}
+LABEL version="1.0"
+LABEL maintainer="Ucup Topekox" email="ucup@gmail.com" environtment="development"
+ENV DATABASE_NAME=book_store
+RUN apt-get update && apt-get install openjdk-21-jre-headless -y
+COPY Hello.class Hello.class
+CMD ["/usr/bin/java", "Hello"]
 ```
 
 ## 2️⃣ Fitur Utama 
