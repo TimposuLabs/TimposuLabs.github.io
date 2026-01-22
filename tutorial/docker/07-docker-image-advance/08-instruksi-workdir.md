@@ -3,7 +3,7 @@ sidebar_position: 8
 title: 'Dockerfile WORKDIR'
 ---
 
-## 🤔 Instruksi Dockerfile `WORKDIR`
+## 🤔 Apa itu Instruksi Dockerfile `WORKDIR`
 
 `WORKDIR` berfungsi untuk menetapkan **direktori kerja** (folder aktif) untuk instruksi selanjutnya seperti `RUN`, `CMD`, `ENTRYPOINT`, `COPY` dan `ADD` di dalam Dockerfile. 
 

@@ -3,7 +3,7 @@ sidebar_position: 10
 title: 'Dockerfile USER'
 ---
 
-## 🤔 Apa itu Instruksi `USER`?
+## 🤔 Apa itu Instruksi Dockerfile `USER`?
 
 Secara default, Docker menjalankan semua proses di dalam kontainer sebagai **root** (administrator). Instruksi `USER` digunakan untuk mengubah identitas pengguna (UID) atau grup (GID) yang menjalankan aplikasi.
 

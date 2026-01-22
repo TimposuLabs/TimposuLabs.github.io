@@ -11,7 +11,7 @@ Instruksi `ENTRYPOINT` mirip dengan instruksi `CMD`. `ENTRYPOINT` adalah instruk
 Secara teknis, hanya satu `ENTRYPOINT` yang berlaku pada satu Dockerfile. Jika butuh lebih dari satu aksi, bungkuslah aksi-aksi tersebut ke dalam sebuah skrip *shell* dan jadikan skrip tersebut sebagai satu-satunya `ENTRYPOINT`.
 :::
 
-## 1️⃣ Perbedaan Kritis: `ENTRYPOINT` vs `CMD`
+## 1️⃣ Perbedaan: `ENTRYPOINT` vs `CMD`
 
 | Fitur	| CMD	| ENTRYPOINT |
 | --- | --- | --- |
