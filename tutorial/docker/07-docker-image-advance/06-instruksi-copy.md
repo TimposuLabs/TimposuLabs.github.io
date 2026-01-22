@@ -11,7 +11,7 @@ Instruksi `COPY` digunakan untuk menyalin file atau direktori dari mesin lokal (
 
 Sintaks umum instruksi COPY adalah:
 
-```
+```dockerfile
 COPY [sumber] [tujuan]
 ```
 
@@ -20,14 +20,14 @@ COPY [sumber] [tujuan]
 
 **Contoh 1**:
 
-```
+```dockerfile
 COPY app.jar /app/app.jar
 COPY config/ /etc/config/
 ```
 
 **Contoh 2**:
 
-```
+```dockerfile
 ARG ubuntu_version=24.04
 FROM ubuntu:${ubuntu_version}
 LABEL version="1.0"
@@ -44,7 +44,7 @@ CMD ["/usr/bin/java", "Hello"]
 
 Sangat disarankan menjalankan aplikasi sebagai user non-root. Anda bisa langsung mengatur pemilik file saat menyalinnya agar aplikasi memiliki izin akses yang tepat.
 
-```
+```dockerfile
 # Menyalin file dan menjadikannya milik user 'ucup'
 COPY --chown=ucup:ucup target/*.jar app.jar
 ```
@@ -53,7 +53,7 @@ COPY --chown=ucup:ucup target/*.jar app.jar
 
 Ini adalah kunci dari **Multi-stage Build**. Kita bisa menyalin hasil kompilasi dari stage sebelumnya tanpa membawa sampah build tools.
 
-```
+```dockerfile
 # Menyalin file dari stage bernama 'builder'
 COPY --from=builder /app/target/app.jar .
 ```
@@ -62,7 +62,7 @@ COPY --from=builder /app/target/app.jar .
 
 Kita bisa menggunakan pola karakter untuk menyalin banyak file yang serupa sekaligus.
 
-```
+```dockerfile
 # Menyalin semua file yang berakhiran .sh
 COPY *.sh /usr/local/bin/
 ```

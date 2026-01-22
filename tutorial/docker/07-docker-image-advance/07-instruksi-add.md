@@ -27,13 +27,13 @@ Jika file sumber adalah arsip terkompresi yang dikenal (seperti `.tar`, `.tar.gz
 
 ## 2️⃣ Sintaks Dasar
 
-```
+```dockerfile
 ADD [sumber_host_atau_url] [tujuan_kontainer]
 ```
 
 Contoh:
 
-```
+```dockerfile
 ARG ubuntu_version=22.04
 FROM ubuntu:${ubuntu_version}
 LABEL version="1.0"
@@ -46,7 +46,7 @@ CMD ["/usr/bin/java", "Hello"]
 
 Sama seperti `COPY`, kita juga bisa menggunakan flag `--chown` untuk mengatur izin akses:
 
-```
+```dockerfile
 ADD --chown=ucup:ucup source.tar.gz /work/
 ```
 
@@ -67,7 +67,7 @@ wget https://dl-cdn.alpinelinux.org/alpine/v3.21/releases/x86_64/alpine-miniroot
 
 * Buat Dockerfile untuk membuat image from `scratch`, dan melakukan instruksi `ADD` dengan menambahkan file archive Alpine Linux yang sudah di download.
 
-```
+```dockerfile
 FROM scratch
 ADD *.tar.gz /
 CMD ["/bin/echo", "Hello Alpine Linux"]
@@ -77,7 +77,7 @@ CMD ["/bin/echo", "Hello Alpine Linux"]
 
 Dalam beberapa kasus, dibandingkan menggunakan `ADD` untuk mengunduh file dari URL (karena masalah ukuran Image/size), lebih baik gunakan `RUN`. Contoh dalam image Alpine:
 
-```
+```dockerfile
 RUN apk add --no-cache curl && \
     curl -o /app.jar https://example.com/app.jar && \
     apk del curl
@@ -101,6 +101,6 @@ Mengapa? Karena dengan perintah `RUN`, kita bisa menghapus installer atau paket 
 | Ambil file dari URL	| Ya	| Tidak |
 | Rekomendasi Utama	Khusus | untuk Tarball |	Default untuk semua kasus |
 
-## 5️⃣ Kesimpulan
+## 🔥 Kesimpulan
 
 Gunakan `ADD` jika ingin melakukan ekstraksi otomatis, namun untuk kebutuhan menyalin kode sumber sehari-hari, tetaplah gunakan `COPY` demi keamanan dan efisiensi layer.

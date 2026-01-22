@@ -18,17 +18,17 @@ Terdapat dua cara menulis `CMD`, namun para profesional hampir selalu menggunaka
 
 Formatnya menggunakan kurung siku `[]` dan tanda kutip ganda `"`.
 
-```
+```dockerfile
 CMD ["executable", "parameter1", "parameter2"]
 ```
 
 Contoh:
 
-```
+```dockerfile
 CMD ["/usr/bin/echo", "Halo Bro"]
 ```
 
-```
+```dockerfile
 CMD ["java", "-jar", "app.jar"]
 ```
 
@@ -38,7 +38,7 @@ CMD ["java", "-jar", "app.jar"]
 
 Formatnya seperti mengetik di terminal biasa.
 
-```
+```dockerfile
 CMD java -jar app.jar
 ```
 

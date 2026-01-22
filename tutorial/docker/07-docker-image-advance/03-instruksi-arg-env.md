@@ -10,7 +10,7 @@ title: 'Dockerfile ARG & ENV'
 * **Kegunaan**: Menentukan versi library, nama file installer, atau konfigurasi yang hanya diperlukan saat kompilasi.
 * **Keamanan**: Lebih aman untuk data sensitif saat build karena tidak tersimpan di metadata kontainer akhir (namun tetap bisa dilihat di history image).
 
-```
+```dockerfile
 ARG JAVA_VERSION=21
 FROM eclipse-temurin:${JAVA_VERSION}-jdk
 ```
@@ -29,7 +29,7 @@ docker build --build-arg JAVA_VERSION=25 -t my-app .
 * **Kegunaan**: Menyimpan konfigurasi aplikasi seperti nama database (`DATABASE_NAME`), port aplikasi, atau zona waktu.
 * **Fleksibilitas**: Nilainya bisa ditimpa (*override*) saat menjalankan kontainer menggunakan flag `-e`.
 
-```
+```dockerfile
 ARG ubuntu_version=24.04
 FROM ubuntu:${ubuntu_version}
 LABEL version="1.0"
@@ -39,7 +39,7 @@ ENV DATABASE_NAME=book_store
 
 :::tip
 Kita bisa mengubahnya saat run:
-```
+```bash
 docker run -e DATABASE_NAME=book_shop my-app
 ```
 :::
@@ -51,8 +51,9 @@ docker run -e DATABASE_NAME=book_shop my-app
     * Contoh: `ARG APP_VERSION=1.0.0`
 * **Gunakan Kurung Kurawal**: Selalu gunakan format `${NAMA}` di dalam instruksi agar lebih jelas dan mencegah kesalahan pembacaan karakter oleh Docker.
 * **Kombinasi ARG & ENV**: Terkadang kita menggunakan `ARG` untuk menerima input saat build, lalu memasukkannya ke `ENV` agar tersedia saat aplikasi jalan.
-    ```
-    ARG VERSION
-    ENV APP_VERSION=${VERSION}
-    ```
+
+```dockerfile
+ARG VERSION
+ENV APP_VERSION=${VERSION}
+```
 

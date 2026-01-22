@@ -35,7 +35,7 @@ Instruksi `LABEL` digunakan untuk menambahkan metadata (informasi tambahan) ke d
 
 Contoh:
 
-```
+```dockerfile
 LABEL maintainer="ucup@gmail.com"
 LABEL version="1.0"
 LABEL description="Aplikasi Java Spring Boot untuk Inventaris"
@@ -44,13 +44,13 @@ LABEL build_date="2026-01-18"
 
 Atau bisa dibuat satu baris:
 
-```
+```dockerfile
 LABEL maintainer="Ucup Topekox" email="ucup@gmail.com" environtment="development"
 ```
 
 ## 3️⃣ Contoh Implementasi Gabungan
 
-```
+```dockerfile
 # Menggunakan base image spesifik (Best Practice)
 FROM alpine:3.21.3
 

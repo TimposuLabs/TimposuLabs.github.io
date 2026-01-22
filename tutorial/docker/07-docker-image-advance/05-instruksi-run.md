@@ -24,19 +24,19 @@ Ditulis seperti mengetik perintah di terminal Linux biasa.
 
 * Contoh 1:
 
-```
+```dockerfile
 RUN apt-get update && apt-get install openjdk-21-jre-headless -y
 ```
 
 * Contoh 2:
 
-```
+```dockerfile
 RUN apk add --no-cache curl
 ```
 
 * Contoh 3:
 
-```
+```dockerfile
 ARG ubuntu_version=22.04
 FROM ubuntu:${ubuntu_version}
 LABEL version="1.0"
@@ -53,7 +53,7 @@ CMD ["/usr/bin/java", "--version"]
 
 Menggunakan format JSON (kurung siku).
 
-```
+```dockerfile
 RUN ["apk", "add", "--no-cache", "curl"]
 ```
 
@@ -69,14 +69,14 @@ Jangan membuat banyak layer untuk hal yang berkaitan. Gunakan `&&` dan `\` (back
 
 * **Buruk ❌ (Menciptakan 3 Layer)**:
 
-    ```
+    ```dockerfile
     RUN apk update
     RUN apk add curl
     RUN apk add git
     ```
 * **Baik ✅ (Menciptakan 1 Layer)**:
     
-    ```
+    ```dockerfile
     RUN apk update && apk add --no-cache \
     curl \
     git
@@ -86,7 +86,7 @@ Jangan membuat banyak layer untuk hal yang berkaitan. Gunakan `&&` dan `\` (back
 
 Disarankan untuk menghapus cache atau file sementara dalam satu perintah `RUN` yang sama agar ukuran image tetap kecil.
 
-```
+```dockerfile
 RUN apk add --no-cache build-base && \
     make /app && \
     apk del build-base

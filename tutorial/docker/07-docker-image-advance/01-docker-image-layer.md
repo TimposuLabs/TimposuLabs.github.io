@@ -63,7 +63,7 @@ Kalau kita perhatikan docker mendownload beberapa layer kemudian membuat image.
 
 ### Contoh pada Dockerfile
 
-```
+```dockerfile
 FROM alpine:3.21                    # Layer 1: OS Dasar (~5MB)
 RUN apk add --no-cache python3      # Layer 2: Instalasi Python (+~40MB)
 COPY app.py /app/                   # Layer 3: Kode Aplikasi (Hanya beberapa KB)
@@ -132,13 +132,13 @@ docker image inspect --format='{{.Size}}' alpine
 
 * **Gabungkan Perintah `RUN`**: Setiap perintah `RUN` membuat layer. Gunakan `&&` untuk menggabungkan banyak perintah agar jumlah layer lebih sedikit dan ukuran image lebih ramping.
     * **Buruk ❌**:
-        ```
+        ```dockerfile
         RUN apk update
         RUN apk add curl
         ```
 
     * **Baik ✅**:
-        ```
+        ```dockerfile
         RUN apk update && apk add curl
         ```
 * **Letakkan yang Jarang Berubah di Atas**: Selalu letakkan `FROM` dan instalasi library/dependensi di atas. Letakkan `COPY . .` (kode sumber) di bagian bawah karena kode paling sering berubah dan akan membatalkan cache untuk baris-baris di bawahnya.
