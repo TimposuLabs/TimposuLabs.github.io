@@ -84,7 +84,7 @@ Sama seperti Node.js, Python memisahkan instalasi pip dari kode.
 
 * **Layer 1**: `requirements.txt`.
 * **Layer 2**: `pip install -r requirements.txt`.
-* **Layer 3**: File `.py` Anda.
+* **Layer 3**: File `.py`.
 
 **3. Go (Golang)**
 
@@ -103,7 +103,7 @@ Alasannya adalah **struktur file-nya**:
 
 ### 👎 Masalah pada JAR Tradisional
 
-Biasanya, Spring Boot menghasilkan "Fat JAR" di mana library pihak ketiga (seperti Hibernate, Spring Cloud) dan kode buatan Anda digabung jadi satu.
+Biasanya, Spring Boot menghasilkan "Fat JAR" di mana library pihak ketiga (seperti Hibernate, Spring Cloud, dll) dan kode buatan kita digabung jadi satu.
 
 * Jika ukuran JAR 100MB (95MB library + 5MB kode kita).
 * Setiap kali kita mengubah kode, Docker harus menyalin ulang **seluruh 100MB** ke dalam layer baru. Ini memboroskan waktu dan penyimpanan.
@@ -115,7 +115,7 @@ Dengan Layered JAR, isi JAR dipisahkan menjadi 4 kategori standar:
 1. **Spring Boot Loader**: File internal Spring untuk menjalankan JAR.
 2. **Dependencies**: Library dari pihak ketiga (jarang berubah).
 3. **Snapshot Dependencies**: Library versi pengembangan.
-4. **Application**: Kode sumber dan file konfigurasi Anda (paling sering berubah).
+4. **Application**: Kode sumber dan file konfigurasi (paling sering berubah).
 
 ![Layered JAR](https://camo.githubusercontent.com/ca6cb13a9b5c54fc6089976cb4cf3cb1db22e61e4cdb86cd062f01bb87ff8241/68747470733a2f2f7777772e6261656c64756e672e636f6d2f77702d636f6e74656e742f75706c6f6164732f323032302f31312f737072696e672d626f6f742d6c61796572732e6a7067)
 
