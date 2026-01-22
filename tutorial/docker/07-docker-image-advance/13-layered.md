@@ -65,7 +65,7 @@ Gunakan **Multi-Stage** untuk mendapatkan image yang **ringan**, dan gunakan **L
 
 ## 6️⃣ Layered JAR
 
-**Layered JAR** adalah teknik optimasi khusus Java (terutama Spring Boot) yang lebih canggi daripada sekadar multi-stage build biasa.
+**Layered JAR** adalah teknik optimasi khusus Java (terutama Spring Boot) yang lebih daripada sekadar *multi-stage build* biasa.
 
 Berikut adalah bagaimana bahasa lain menerapkan konsep yang sama (Layering):
 
@@ -152,4 +152,5 @@ RUN adduser -D ucup
 USER ucup
 ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]
 ```
+
 
