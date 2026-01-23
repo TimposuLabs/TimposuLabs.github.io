@@ -64,7 +64,7 @@ docker commit --author "Ucup Dev" --message "Sudah instal curl dan file data" ko
 
 ## 5️⃣ Bahaya Menggunakan `docker commit` ⚠️
 
-Kita harus tahu mengapa cara ini **tidak disarankan** untuk lingkungan produksi utama:
+Kita harus tahu mengapa cara ini **tidak disarankan** untuk lingkungan production:
 
 1. **Black Box**: Orang lain tidak tahu apa saja yang kita lakukan di dalam kontainer tersebut. Tidak ada resep (Dockerfile) yang bisa dibaca.
 2. **Ukuran Membengkak**: Setiap commit menciptakan layer baru yang seringkali tidak efisien dan membuat ukuran image menjadi sangat besar.
