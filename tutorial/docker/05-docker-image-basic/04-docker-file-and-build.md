@@ -75,3 +75,39 @@ Jika kita berencana melakukan `docker push` ke Docker Hub, maka namespace (Usern
 * **Satu Kontainer, Satu Proses**: Jangan mencoba menjalankan database dan web server di dalam satu Dockerfile yang sama. Gunakan Docker Compose untuk itu.
 * **Hapus Cache Package Manager**: Selalu gunakan `--no-cache` pada Alpine atau `&& rm -rf /var/lib/apt/lists/*` pada Ubuntu agar image tetap ramping.
 * **Gunakan User Non-Root**: Untuk alasan keamanan selalu gunakan instruksi `USER`, jangan gunakan **root** user demi keamanan.
+
+:::info
+Perintah `docker build` akan di-deprecated / dianggap "legacy", dan akan dihapus di masa mendatang. Docker sedang beralih ke mesin pembuat image baru yang lebih canggih bernama **BuildKit**.
+
+**Cara Mengatasinya**
+
+Kita memiliki dua pilihan utama untuk menghilangkan peringatan ini:
+
+1. **Cara Cepat: Gunakan Environment Variable**
+
+Kita bisa memaksa Docker menggunakan BuildKit tanpa instalasi tambahan dengan menambahkan variabel `DOCKER_BUILDKIT=1` sebelum perintah build:
+
+```bash
+DOCKER_BUILDKIT=1 docker build -t web-server:1.0 .
+```
+
+2. **Cara Permanen: Instal Docker Buildx (Direkomendasikan)**
+
+* Install Plugin di Mac (Untuk OS Linux sesuaikan dengan Distro masing-masing):
+
+```bash
+brew install docker-buildx
+```
+
+* Konfigurasi agar Docker mengenalinya:
+
+```bash
+mkdir -p ~/.docker/cli-plugins
+ln -sfn $(which docker-buildx) ~/.docker/cli-plugins/docker-buildx
+```
+* Gunakan perintah baru, kita bisa menggunakan perintah `buildx` yang lebih modern:
+
+```bash
+docker buildx build -t web-server:1.0 .
+```
+:::

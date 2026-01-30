@@ -5,7 +5,7 @@ title: 'Reverse Proxy'
 
 ## 🤔 Apa itu Reverse Proxy?
 
-**Reverse Proxy** adalah sebuah server (seperti Nginx) yang berada di depan satu atau lebih aplikasi backend (seperti Spring Boot, NodeJS, Go, dll).
+**Reverse Proxy** adalah sebuah server (seperti Nginx, Traefik, dll) yang berada di depan satu atau lebih aplikasi backend (seperti Spring Boot, NodeJS, Go, dll). Pada tutorial ini kita akan menggunakan Nginx sebagai reverse proxy, karena sangat populer digunakan dibanding yang lainnya.
 
 ![Docker Network](/img/docker/docker5.png)
 
