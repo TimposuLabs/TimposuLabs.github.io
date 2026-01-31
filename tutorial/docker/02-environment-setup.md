@@ -62,11 +62,9 @@ Pada seri tutorial ini, kami menggunakan Docker Engine dibanding Docker Desktop 
 
 * **Install Docker Engine di Linux**: Untuk melakukan instalasi Docker Engine di Linux dapat merujuk ke [**Dokumentasi Resmi Docker**](https://docs.docker.com/engine/install/).
 * **Install Docker Engine di Virtual Machine**: Cara ini mungkin agak sedikit berat karena kita perlu menginstall Virtual Machine seperti Virtual Box atau VMWare terlebih dahulu kemudian menginstall Linux dan menginstall Docker Engine di atasnya.
-* **Install Docker Engine di Windows dengan WSL**: Untuk menginstall Docker Engine di Windows kita perlu menginstall Windows Subsystem Linux (WSL) terlebih dahulu kemudian menjalankan Docker Engine di atasnya, cara ini lebih ringan dibanding menggunakan Virtual Machine. Untuk cara instalasinya bisa melihat video di bawah ini:
+* **Install Docker Engine di Windows dengan WSL**: Untuk menginstall Docker Engine di Windows kita perlu menginstall Windows Subsystem Linux (WSL) terlebih dahulu kemudian menjalankan Docker Engine di atasnya, cara ini lebih ringan dibanding menggunakan Virtual Machine.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/eT2qxoPfMBA?si=nqCe2GgyaFY9qgwf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-### 🔥 Install Docker pada Ubuntu
+### 🔥 Install Docker Engine pada Ubuntu
 
 Sebagai contoh install docker di Ubuntu Linux.
 
@@ -133,3 +131,68 @@ Agar user biasa dapat menjalankan perintah Docker tanpa perlu mengetik `sudo` se
 sudo usermod -aG docker $USER
 ```
 :::
+
+### 🪟 Install Docker Engine pada Windows
+
+Seperti sudah dibahas sebelumnya, untuk menginstall Docker Engine di Windows kita perlu menginstall Windows Subsystem Linux (WSL) terlebih dahulu kemudian menjalankan Docker Engine di atasnya. Untuk cara instalasinya bisa melihat video di bawah ini:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eT2qxoPfMBA?si=nqCe2GgyaFY9qgwf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+### 🍎 Install Docker Engine di MacOS
+
+Menginstall Docker Engine di Mac tanpa Docker Desktop paling efisien menggunakan **Colima** atau **Podman** melalui **Homebrew**. Colima menyediakan lingkungan/environment runtime Docker yang ringan dengan memanfaatkan mesin virtual Linux, menjadikannya pengganti CLI yang andal untuk macOS. 
+
+Sebelum mengikuti langkah-langkah di bawah ini pastikan sudah mengistall Homebrew di MacOS kalian.
+
+**1.** **Instal Docker CLI dan Colima**
+
+```bash
+# Instal Docker CLI dan Docker Compose
+brew install docker docker-compose
+
+# Instal Colima
+brew install docker colima
+```
+
+**2.** **Jalankan Colima**
+
+```bash
+colima start
+```
+
+*Catatan: Untuk kustomisasi (misal: Apple Silicon, memori, CPU), gunakan: `colima start --arch aarch64 --cpu 4 --memory 4`*.
+
+:::tip
+Untuk pengguna Mac Apple Silicon (M1/M2/M3), gunakan perintah ini untuk performa virtualisasi yang jauh lebih cepat (menggunakan Virtualization Framework Apple dan Rosetta):
+
+```bash
+colima start --vm-type=vz --vz-rosetta --mount-type=virtiofs
+```
+:::
+
+**3.** **Verifikasi Instalasi**
+
+Pastikan Docker sudah berjalan dengan perintah:
+
+```bash
+docker ps
+```
+
+Colima akan secara otomatis menghubungkan socket Docker agar perintah CLI berfungsi.
+
+**4.** **Kustomisasi Resource**
+
+Secara default, Colima menggunakan 2 CPU, 2GB RAM, dan 60GB Disk. Anda bisa mengubahnya saat start:
+
+```bash
+# Contoh: Memberi 4 CPU dan 8GB RAM
+colima stop
+colima start --cpu 4 --memory 8
+```
+
+*Catatan: Kapasitas disk tidak bisa diubah setelah dibuat, kita harus menjalankan `colima delete` terlebih dahulu jika ingin memperbesar disk.*
+
+**6.** **Tips**
+
+* **Autostart**: Jika ingin Colima otomatis berjalan saat Mac dinyalakan, gunakan: `brew services start colima`.
+* **Kubernetes**: Jika butuh Kubernetes lokal, cukup jalankan `colima start --with-kubernetes`.
