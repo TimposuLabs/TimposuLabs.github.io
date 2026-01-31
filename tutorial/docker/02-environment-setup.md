@@ -50,23 +50,22 @@ title: 'Environment Setup'
 
 ## 🖥️ Install Docker Desktop
 
-Untuk instalasi Docker Desktop di OS Windows, MacOS dan Linux, dapat merujuk ke link **https://docs.docker.com/get-started/get-docker/**.
+Untuk instalasi Docker Desktop di OS Windows, macOS dan Linux, dapat merujuk ke link **https://docs.docker.com/get-started/get-docker/**.
 
 :::warning
 **Penggunaan komersial Docker Desktop** di perusahaan besar (lebih dari 250 karyawan ATAU lebih dari $10 juta USD dalam pendapatan tahunan) memerlukan langganan berbayar.
 :::
 
-## 👍 Install Docker Engine
+## 🔥 Install Docker Engine
 
 Pada seri tutorial ini, kami menggunakan Docker Engine dibanding Docker Desktop karena alasan **lisensi, performa, kontrol, dan efisiensi**. Sebagai software engineer yang menyukai detail sistem, anda akan melihat bahwa Docker Engine menawarkan keunggulan teknis yang signifikan. Selain itu Docker Engine bersifat ***open-source*** yang menggunakan Lisensi Apache 2.0, yang dapat diperggunakan secara gratis untuk siapa saja, termasuk individu, hingga perusahaan besar berskala internasional.
 
 * **Install Docker Engine di Linux**: Untuk melakukan instalasi Docker Engine di Linux dapat merujuk ke [**Dokumentasi Resmi Docker**](https://docs.docker.com/engine/install/).
 * **Install Docker Engine di Virtual Machine**: Cara ini mungkin agak sedikit berat karena kita perlu menginstall Virtual Machine seperti Virtual Box atau VMWare terlebih dahulu kemudian menginstall Linux dan menginstall Docker Engine di atasnya.
 * **Install Docker Engine di Windows dengan WSL**: Untuk menginstall Docker Engine di Windows kita perlu menginstall Windows Subsystem Linux (WSL) terlebih dahulu kemudian menjalankan Docker Engine di atasnya, cara ini lebih ringan dibanding menggunakan Virtual Machine.
+* **Install Docker Engine di macOS**: Untuk menginstall Docker Engine di macOS kita bisa menggunakan alternatif Docker Desktop di macOS seperti OrbStack, Colima, Rancher, Podman dll.
 
-### 🔥 Install Docker Engine pada Ubuntu
-
-Sebagai contoh install docker di Ubuntu Linux.
+### 🐧 Cara Install Docker Engine pada Ubuntu
 
 * Sebelum menginstal Docker Engine untuk pertama kalinya pada mesin host baru, kita perlu menyiapkan repositori `apt` Docker. Setelah itu, kita dapat menginstal dan memperbarui Docker dari repositori tersebut.
 
@@ -138,11 +137,11 @@ Seperti sudah dibahas sebelumnya, untuk menginstall Docker Engine di Windows kit
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eT2qxoPfMBA?si=nqCe2GgyaFY9qgwf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-### 🍎 Install Docker Engine di MacOS
+### 🍎 Install Docker Engine di macOS
 
-Menginstall Docker Engine di Mac tanpa Docker Desktop paling efisien menggunakan **Colima** atau **Podman** melalui **Homebrew**. Colima menyediakan lingkungan/environment runtime Docker yang ringan dengan memanfaatkan mesin virtual Linux, menjadikannya pengganti CLI yang andal untuk macOS. 
+Menginstall Docker Engine di macOS tanpa Docker Desktop paling efisien menggunakan **Colima**, **OrbStack** atau **Podman** melalui **Homebrew** (pada tutorial ini kita akan menggunakan Colima). Colima menyediakan lingkungan/environment runtime Docker yang ringan di macOS dengan memanfaatkan mesin virtual (VM) Linux minimalis berbasis CLI, sehingga lebih efisien dan mudah digunakan sebagai alternatif Docker Desktop.
 
-Sebelum mengikuti langkah-langkah di bawah ini pastikan sudah mengistall Homebrew di MacOS kalian.
+Sebelum mengikuti langkah-langkah di bawah ini pastikan sudah mengistall Homebrew di macOS kalian.
 
 **1.** **Instal Docker CLI dan Colima**
 
@@ -185,12 +184,12 @@ Colima akan secara otomatis menghubungkan socket Docker agar perintah CLI berfun
 Secara default, Colima menggunakan 2 CPU, 2GB RAM, dan 60GB Disk. Anda bisa mengubahnya saat start:
 
 ```bash
-# Contoh: Memberi 4 CPU dan 8GB RAM
+# Contoh: Memberi 4 CPU, 8GB RAM
 colima stop
 colima start --cpu 4 --memory 8
 ```
 
-*Catatan: Kapasitas disk tidak bisa diubah setelah dibuat, kita harus menjalankan `colima delete` terlebih dahulu jika ingin memperbesar disk.*
+*Catatan: Kapasitas disk tidak bisa diubah setelah dibuat (contoh menambahkan 100GB disk `--disk 100`), kita harus menjalankan `colima delete` terlebih dahulu jika ingin memperbesar disk.*
 
 **6.** **Tips**
 

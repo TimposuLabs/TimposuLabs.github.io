@@ -407,7 +407,7 @@ docker compose up --scale springboot=2 -d
 
 6. Membuat Service Nginx
 
-Konfigurasi `load-balancer.conf`, sesuikan dengan nama container dengan service yang dibuat di Docker Compose. Untuk konfigurasi Nginx kita bisa melakukan beberapa cara di antaranya.
+Konfigurasi `load-balancer.conf`, sesuaikan dengan nama container dengan service yang dibuat di Docker Compose. Untuk konfigurasi Nginx kita bisa melakukan beberapa cara di antaranya.
 
 * **Cara 1**: Terlebih dahulu mengetahui nama container Springboot, setelah itu dimasukan ke dalam konfigurasi Nginx:
 
@@ -477,7 +477,7 @@ COPY load-balancer.conf /etc/nginx/conf.d/default.conf
 docker image build -t webserver:1.0 .
 ```
 
-7. Menambahkan service Nginx pada Docker Compose:
+7. Menambahkan service Nginx pada Docker Compose. Masalah klasik di Docker, meskipun kita menggunakan `depends_on`, Docker hanya menjamin kontainer `mysql-db` sudah **berjalan (running)**, bukan **siap (ready)** menerima koneksi. MySQL butuh waktu beberapa detik untuk inisialisasi internal sebelum port 3306 bisa dipakai.
 
 ```yaml
 services:
@@ -490,6 +490,14 @@ services:
       - backend-network
     volumes:
       - mysql-data:/var/lib/mysql
+    # Memastikan ,mysql-db siap (ready) menerima koneksi. 
+    # MySQL butuh waktu beberapa detik untuk inisialisasi internal sebelum port 3306 bisa dipakai. 
+    # Tambahkan juga file .env untuk value MYSQL_ROOT_PASSWORD=rahasia
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   springboot:
     image: timposulabs/springboot-crud-demo:v1.1 # springboot app image
@@ -501,8 +509,10 @@ services:
       - DB_NAME=belajar
       - DB_USER=root
       - DB_PASS=rahasia
+    # Update depends_on agar menunggu kondisi healthy
     depends_on:
-      - mysql # Memastikan urutan startup, mysql jalan dulu baru springboot
+      mysql:
+        condition: service_healthy
 
   nginx:
     container_name: webserver
