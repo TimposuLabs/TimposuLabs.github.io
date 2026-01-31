@@ -74,7 +74,3 @@ curl -X POST "http://103.150.101.12:8181/api/v1/login" -d '{"username" : "ucup",
 ```
 curl -H "Authorization: Bearer b1094abc0-54a4-3eab-7213-877142c33fh3" http://example.com/
 ````
-
-## Referensi 
-
-* https://www.baeldung.com/curl-rest
