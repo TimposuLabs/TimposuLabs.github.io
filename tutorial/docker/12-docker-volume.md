@@ -413,7 +413,7 @@ mysql> create database belajar;
 3. Pull aplikasi spring app dari Docker Hub:
 
 ```bash
-docker pull timposulabs/springboot-crud-demo:v1.0
+docker pull timposulabs/springboot-crud-demo:v1.1
 ```
 
 4. Membuat Container `app-1` dan `app-2`:
@@ -426,7 +426,7 @@ docker container run -d --name app-1 \
 -e DB_USER=root \
 -e DB_PASS=rahasia \
 --network backend-network \
-timposulabs/springboot-crud-demo:v1.0
+timposulabs/springboot-crud-demo:v1.1
 ```
 
 ```bash
@@ -437,7 +437,7 @@ docker container run -d --name app-2 \
 -e DB_USER=root \
 -e DB_PASS=rahasia \
 --network backend-network \
-timposulabs/springboot-crud-demo:v1.0
+timposulabs/springboot-crud-demo:v1.1
 ```
 
 :::info
@@ -465,7 +465,7 @@ server {
 }
 ```
 
-* Buat `dockerfile`:
+* Buat `dockerfile` untuk membuat image Nginx:
 
 ```dockerfile
 FROM nginx:stable-alpine

@@ -88,7 +88,7 @@ Kita memiliki dua pilihan utama untuk menghilangkan peringatan ini:
 Kita bisa memaksa Docker menggunakan BuildKit tanpa instalasi tambahan dengan menambahkan variabel `DOCKER_BUILDKIT=1` sebelum perintah build:
 
 ```bash
-DOCKER_BUILDKIT=1 docker build -t web-server:1.0 .
+DOCKER_BUILDKIT=1 docker build -t nama-image:tag .
 ```
 
 2. **Cara Permanen: Instal Docker Buildx (Direkomendasikan)**
@@ -108,6 +108,38 @@ ln -sfn $(which docker-buildx) ~/.docker/cli-plugins/docker-buildx
 * Gunakan perintah baru, kita bisa menggunakan perintah `buildx` yang lebih modern:
 
 ```bash
-docker buildx build -t web-server:1.0 .
+docker buildx build -t nama-image:tag .
 ```
+:::
+
+:::warning
+Dalam beberapa kasus image yang dibuild di Mac (arsitektur **ARM64**) tidak kompatibel jika dijalankan di Linux (arsitektur **AMD64**).
+Untuk mengatasinya, kita harus melakukan **cross-compilation** saat melakukan build di Mac agar hasilnya bisa dijalankan di Linux.
+
+1. Melalui Command Line (Docker Build)
+
+```bash
+docker build --platform linux/amd64 -t nama-image-anda:latest .
+```
+
+*Catatan: Flag `--platform linux/amd64` akan memaksa Docker di Mac untuk membuat image versi Intel/AMD (x86_64) yang cocok untuk Linux*
+
+2. Melalui Docker Compose
+
+```yaml
+services:
+  nginx:
+    build: .
+    platform: linux/amd64  # <--- Tambahkan baris ini
+    container_name: webserver
+    # ... konfigurasi lainnya
+```
+
+3. Solusi Terbaik: **Multi-Platform Build**
+
+```bash
+docker buildx build --platform linux/amd64,linux/arm64 -t username/repo:tag --push .
+```
+
+*Catatan: Metode `--push` langsung mengunggah ke Docker Hub karena lokal Docker tidak bisa menyimpan dua varian arsitektur sekaligus dalam satu tag secara default.*
 :::
