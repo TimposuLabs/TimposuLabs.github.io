@@ -318,7 +318,9 @@ Disini kita akan menggunakan contoh pada studi kasus sebelumnya pada [materi Doc
 
 ![Docker Volume Database](/img/docker/docker8.png)
 
-1. Kita akan membuat Docker Compose dengan catatan `network` dan `volume` sudah ada, kemudian pertama kita akan membuat service mysql pada docker compose. Kenapa dalam skenario ini perlu membuat container database terlebih dahulu? karena aplikasi Springboot yang akan kita jalankan menggunakan database MySQL, jika dijalankan bersama, maka Springboot error karena database belum dibuat, sehingga dia belum bisa terhubung ke database. Kecuali jika sebelumnya database telah dibuat pada Volume yang sama pada Docker Compose.
+**1.** **Membuat Docker Compose**
+
+ Kita akan membuat Docker Compose dengan catatan `network` dan `volume` sudah ada, kemudian pertama kita akan membuat service mysql pada docker compose. Kenapa dalam skenario ini perlu membuat container database terlebih dahulu? karena aplikasi Springboot yang akan kita jalankan menggunakan database MySQL, jika dijalankan bersama, maka Springboot error karena database belum dibuat, sehingga dia belum bisa terhubung ke database. Kecuali jika sebelumnya database telah dibuat pada Volume yang sama pada Docker Compose.
 
 ```yaml
 services:
@@ -342,13 +344,13 @@ volumes:
       driver: local
 ```
 
-2. Jalankan container dengan Docker Compose:
+**2.** **Jalankan container** dengan Docker Compose:
 
 ```bash
 docker compose up -d
 ```
 
-3. Buat database di dalam container:
+**3.** **Buat database** di dalam container:
 
 ```bash
 docker exec -it mysql-db mysql -u root -p
@@ -358,7 +360,9 @@ Enter password:
 mysql> create database belajar;
 ```
 
-4. Setelah membuat container MySQL dan databasenya, selanjutnya menambahkan service Spring Boot pada Docker Compose:
+**4.** **Membuat Service Springboot**:
+
+Setelah membuat container MySQL dan databasenya, selanjutnya menambahkan service Spring Boot pada Docker Compose:
 
 ```yaml
 services:
@@ -395,7 +399,9 @@ volumes:
       driver: local
 ```
 
-5. Karena pada contoh kasus ini kita akan membuat 2 kontainer aplikasi Spring Boot dari image yang sama kita perlu melakukan scaling.
+**5.** **Scaling**:
+
+Karena pada contoh kasus ini kita akan membuat 2 kontainer aplikasi Spring Boot dari image yang sama kita perlu melakukan scaling.
 
 ```bash
 docker compose up --scale springboot=2 -d
@@ -405,7 +411,7 @@ docker compose up --scale springboot=2 -d
 **Penting**: Dalam compose scale, tidak diperkenangkan menggunakan `container_name`, karena docker akan membuat name service secara otomatis secara berurutan.
 :::
 
-6. Membuat Service Nginx
+**6.** **Membuat Service Nginx**
 
 Konfigurasi `load-balancer.conf`, sesuaikan dengan nama container dengan service yang dibuat di Docker Compose. Untuk konfigurasi Nginx kita bisa melakukan beberapa cara di antaranya.
 
@@ -477,7 +483,55 @@ COPY load-balancer.conf /etc/nginx/conf.d/default.conf
 docker image build -t webserver:1.0 .
 ```
 
-7. Menambahkan service Nginx pada Docker Compose. Masalah klasik di Docker, meskipun kita menggunakan `depends_on`, Docker hanya menjamin kontainer `mysql-db` sudah **berjalan (running)**, bukan **siap (ready)** menerima koneksi. MySQL butuh waktu beberapa detik untuk inisialisasi internal sebelum port 3306 bisa dipakai.
+**7.** **Menambahkan service Nginx pada Docker Compose.**
+
+```yaml
+services:
+  mysql:
+    container_name: mysql-db
+    image: mysql:8.4.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=rahasia
+    networks:
+      - backend-network
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  springboot:
+    image: timposulabs/springboot-crud-demo:v1.1 # springboot app image
+    networks:
+      - backend-network
+    environment:
+      - DB_ADD=mysql-db
+      - DB_PORT=3306
+      - DB_NAME=belajar
+      - DB_USER=root
+      - DB_PASS=rahasia
+    depends_on:
+      - mysql # Memastikan urutan startup, mysql jalan dulu baru springboot
+
+  nginx:
+    container_name: webserver
+    image: webserver:1.0 # custom image nginx yang sudah terintegrasi dengan springboot app
+    ports:
+      - 80:80
+    networks:
+      - backend-network
+    depends_on:
+      - springboot # Memastikan urutan startup, springboot jalan dulu baru nginx 
+
+networks:
+  backend-network:
+    driver: bridge
+    external: true
+
+volumes:
+    mysql-data:
+      driver: local
+```
+
+:::tip
+**Troubleshooting**: Meskipun kita menggunakan `depends_on`, Docker hanya menjamin kontainer `mysql-db` sudah **berjalan (running)**, bukan **siap (ready)** menerima koneksi. Terkadang dalam beberapa kasus MySQL butuh waktu beberapa detik (bahkan lebih lama) untuk inisialisasi internal sebelum port 3306 bisa dipakai. Untuk mengatasi agar MySQL harus siap baru menjalankan service lain maka kita mengubah konfigurasinya sebagai berikut:
 
 ```yaml
 services:
@@ -534,13 +588,16 @@ volumes:
       driver: local
 ```
 
-8. Docker Compose Up:
+*Catatan: Buat juga file dengan nama `.env` dan masukan text value `MYSQL_ROOT_PASSWORD=rahasia` di dalamnya.*
+:::
+
+**8.** **Docker Compose Up:**
 
 ```bash
 docker compose up --scale springboot=2 -d
 ```
 
-9. Uji coba aplikasi dengan menggunakan Rest API Client seperti cURL, Postman dll, ke URL `http://localhost:80/products/`:
+**9.** **Uji coba aplikasi** dengan menggunakan Rest API Client seperti cURL, Postman dll, ke URL `http://localhost:80/products/`:
 
     Contoh:
 
