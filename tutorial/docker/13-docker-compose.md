@@ -49,6 +49,32 @@ Elemen ini mirip dengan `configs`, tetapi dirancang khusus untuk **data sensitif
 * **Fungsi**: Digunakan untuk menyimpan kata sandi (password), sertifikat SSL, atau API Key secara aman. Docker akan memastikan data ini tidak terlihat di log atau saat perintah `docker inspect`.
 * **Keamanan**: Data didekripsi dan diberikan ke kontainer hanya di dalam memori (RAM), tidak pernah ditulis ke disk kontainer dalam bentuk teks biasa.
 
+:::info
+Jika menggunakan **Colima di macOS**, kita perlu menginstall plugin Docker Compose via Homebrew.
+
+* Instal Docker Compose via Homebrew:
+
+```bash
+brew install docker-compose
+```
+
+* Hubungkan sebagai Plugin Docker:
+
+```bash
+# Buat folder plugin jika belum ada
+mkdir -p ~/.docker/cli-plugins
+
+# Buat symlink dari binary Homebrew ke folder plugin Docker
+ln -sfn $(which docker-compose) ~/.docker/cli-plugins/docker-compose
+```
+
+* Verifikasi:
+
+```bash
+docker compose version
+```
+:::
+
 ### Contoh Implementasi Gabungan (YAML):
 
 File ini menggunakan format **YAML** yang mengandalkan spasi (*indentasi*). Berikut adalah komponen utamanya:
