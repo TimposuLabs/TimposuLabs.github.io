@@ -124,6 +124,10 @@ const config = {
                 to: '/docker/',
                 label: 'Docker',
               },
+              {
+                to: '/networking/',
+                label: 'Networking',
+              },
               // {
               //   to: '#',
               //   label: 'Python',
@@ -291,7 +295,16 @@ const config = {
           routeBasePath: 'docker',
           sidebarPath: require.resolve('./sidebars.js'),
       },
-    ],   
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+          id: 'networking',
+          path: 'tutorial/networking/',
+          routeBasePath: 'networking',
+          sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],     
     [
       '@docusaurus/plugin-content-docs',
       {
