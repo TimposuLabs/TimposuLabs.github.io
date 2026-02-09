@@ -1,6 +1,6 @@
 ---
 slug: membuat-distro-linux-dari-0
-title:  Membuat Distro Linux Minimalis dari 0
+title:  Membuat Distro Linux Minimalis dari NOL
 authors: topekox
 tags: [linux, ubuntu, linuxfromscratch]
 ---
@@ -107,7 +107,7 @@ Untuk mengatasi itu:
 make -j 8
 ```
 
-* `initramfs` adalah tempat kernel akan me-load file system setelah booting, jadi kita akan memasukan / put Busybox kedalam direkori `/boot/initrams`
+* `initramfs` adalah tempat kernel akan me-load file system setelah booting, jadi kita akan memasukan `/` put Busybox kedalam direkori `/boot/initrams`
 
 ```bash
 mkdir /boot-files/initramfs
@@ -127,7 +127,7 @@ cd /boot-files/initramfs/
 ```bash
 ls
 
-bin  init  sbin  usr
+bin  linuxrc  sbin  usr
 ```
 
 * Kita akan memanggil shell ketika kernel memulai `initramfs`, kernel akan mencari `init` file, jadi disini saya akan membuat `init` file yang akan memanggil `sheel`. Fun fact kita akan menggunakan `shell` untuk memanggil `shell`:
