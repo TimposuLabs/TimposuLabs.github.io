@@ -1,5 +1,5 @@
 ---
-slug: tutorial-vahrant
+slug: tutorial-vagrant
 title: Tutorial Vagrant
 authors: topekox
 tags: [vagrant, virtual machine]
