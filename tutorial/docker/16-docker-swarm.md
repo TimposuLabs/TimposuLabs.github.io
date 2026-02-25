@@ -57,15 +57,17 @@ Docker Swarm menggunakan overlay network untuk komunikasi antar node. Container 
 
 ## 📊 Ilustrasi Topologi Swarm
 
+Ilustrasi kita memiliki 3 Node (Manager, Worker 1 dan Worker 2) dengan masing-masing IP Address yang berbeda:
+
 ```
 
                 [ Manager Node ]
-                    10.0.0.1
+                  192.168.33.10
                        │
           ─────────────────────────
           │                        │
     [ Worker 1 ]             [ Worker 2 ]
-      10.0.0.2                 10.0.0.3
+    192.168.33.11            192.168.33.12
 ```
 
 Jika kita deploy:
@@ -272,6 +274,18 @@ docker swarm init --advertise-addr 192.168.33.10
 ```
 
 Token akan keluar, copy token worker.
+
+:::tip
+Terkadang ada kasus dimana di beberapa environment Alpine Linux + VirtualBox, tidak otomatis diarahkan ke IPv4, sehingga manager MENOLAK koneksi TCP IPv4. Untuk mengatasi hal tersebut jalankan perintah dibawah ini untuk mengarahkan ke IPv4:
+
+```bash
+docker swarm init \
+  --advertise-addr 192.168.56.10 \
+  --listen-addr 0.0.0.0:2377
+```
+
+Value `--listen-addr 0.0.0.0:2377` dapat di ubah dengan IP langsung `--listen-addr 192.168.56.10:2377`.
+:::
 
 ### 2️⃣ Join Worker
 

@@ -69,7 +69,7 @@ Pada seri tutorial ini, kami menggunakan Docker Engine dibanding Docker Desktop 
 
 * Sebelum menginstal Docker Engine untuk pertama kalinya pada mesin host baru, kita perlu menyiapkan repositori `apt` Docker. Setelah itu, kita dapat menginstal dan memperbarui Docker dari repositori tersebut.
 
-```
+```bash
 # Add Docker's official GPG key:
 sudo apt update
 sudo apt install ca-certificates curl
@@ -91,27 +91,27 @@ sudo apt update
 
 * Install Docker Package:
 
-```
+```bash
 sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 :::info
 Service Docker dimulai secara otomatis setelah instalasi. Untuk memverifikasi bahwa Docker sedang berjalan, gunakan:
 
-```
+```bash
 sudo systemctl status docker
 ```
 
 Beberapa sistem mungkin harus dijalankan secara manual:
 
-```
+```bash
 sudo systemctl start docker
 ```
 :::
 
 * Untuk melakukan verifikasi bahwa Docker berhasil diinstall dengan baik, kita dapat menjalankan image `hello-world`:
 
-```
+```bash
 sudo docker run hello-world
 ```
 
@@ -119,7 +119,7 @@ Perintah ini melakukan pull image untuk uji coba dan menjalankannya dalam contai
 
 * Cek versi docker:
 
-```
+```bash
 sudo docker version
 ```
 
