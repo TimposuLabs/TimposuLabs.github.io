@@ -371,3 +371,18 @@ Jika service docker di jalankan lagi pada worker jangan lupa cek di manager stat
 ```bash
 docker node ls
 ```
+
+### 📈 Scale service yang sudah ada
+
+Cek service:
+
+```bash
+docker service ls
+docker service ps web
+```
+
+Scale service menjadi 3:
+
+```bash
+docker service scale web=3
+```

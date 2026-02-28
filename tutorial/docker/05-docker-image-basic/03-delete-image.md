@@ -15,7 +15,7 @@ Kita tidak bisa menghapus image jika masih ada kontainer (baik yang sedang jalan
 
 Perintah utama untuk menghapus satu atau lebih image adalah docker image `rm` atau aliasnya docker `rmi`.
 
-```
+```bash
 docker image rm [IMAGE_ID/NAMA_IMAGE]
 ```
 
@@ -28,7 +28,7 @@ docker image rm [IMAGE_ID/NAMA_IMAGE]
 
 Jika kita ingin menghapus image yang masih dikaitkan dengan kontainer yang sudah berhenti tanpa menghapus kontainernya (meskipun ini kurang disarankan), gunakan flag `-f` (force).
 
-```
+```bash
 docker rmi -f alpine:latest
 ```
 
@@ -38,13 +38,13 @@ Seringkali kita punya banyak image tanpa nama yang muncul sebagai `<none>:<none>
 
 * Menghapus Dangling Images saja:
 
-```
+```bash
 docker image prune
 ```
 
 * Menghapus SEMUA image yang tidak sedang digunakan oleh kontainer apa pun:
 
-```
+```bash
 docker image prune -a
 ```
 
@@ -56,7 +56,7 @@ docker image prune -a
 
 Jika Anda ingin membersihkan seluruh daftar image di komputer Anda (total reset):
 
-```
+```bash
 docker image rm $(docker image ls -q)
 ```
 
@@ -68,7 +68,7 @@ Perintah `$(docker image ls -q)` akan mengambil semua ID image dan memberikannya
 
 * **Cek Ruang yang Terpakai**: Sebelum menghapus, lihat berapa banyak ruang yang dimakan oleh Docker:
 
-```
+```bash
 docker system df
 ```
 
