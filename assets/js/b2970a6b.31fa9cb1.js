@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunktimposu=self.webpackChunktimposu||[]).push([[53258],{1266:t=>{t.exports=JSON.parse('{"tag":{"label":"ide","permalink":"/blog/tags/ide","allTagsPath":"/blog/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/blog/tags/ide","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

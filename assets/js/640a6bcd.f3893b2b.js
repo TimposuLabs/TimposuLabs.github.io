@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunktimposu=self.webpackChunktimposu||[]).push([[4233],{988:s=>{s.exports=JSON.parse('{"tag":{"label":"cisco","permalink":"/blog/tags/cisco","allTagsPath":"/blog/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/blog/tags/cisco","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
