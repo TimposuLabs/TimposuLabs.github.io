@@ -112,7 +112,7 @@ Dalam contoh kasus ini kita bisa melakukan konfigurasi NGINX terlebih dahulu.
 
 * `load-balancer.conf`:
 
-```conf
+```ini
 server {
   listen 80;
   server_name web-app;

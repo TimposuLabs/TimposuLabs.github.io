@@ -455,7 +455,7 @@ Dari hasil di atas kita mendapatkan nama container Springboot `demo5-springboot-
 
 File `load-balancer.conf`:
 
-```
+```ini
 upstream backend {
   server demo5-springboot-1:8080;
   server demo5-springboot-2:8080;
@@ -474,7 +474,7 @@ server {
 
 File `load-balancer.conf`:
 
-```
+```ini
 server {
   listen 80;
   
