@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunktimposu=globalThis.webpackChunktimposu||[]).push([[38947],{56600(e){e.exports=JSON.parse('{"authors":[{"name":"Ucup TopekoX","title":"TimposuLabs creator","imageURL":"https://topekox.github.io/assets/images/avatar.jpeg","key":"topekox","page":null,"count":47}]}')}}]);
