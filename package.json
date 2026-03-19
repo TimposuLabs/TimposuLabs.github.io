@@ -19,6 +19,7 @@
     "@docusaurus/preset-classic": "^3.9.2",
     "@easyops-cn/docusaurus-search-local": "^0.46.1",
     "@mdx-js/react": "^3.0.0",
+    "@tailwindcss/postcss": "^4.2.2",
     "clsx": "^1.1.1",
     "docusaurus": "^1.14.7",
     "prism-react-renderer": "^2.1.0",
@@ -28,7 +29,10 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.6.3",
     "@docusaurus/types": "3.6.3",
-    "ajv": "^7.2.4"
+    "ajv": "^7.2.4",
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.19"
   },
   "engines": {
     "node": ">=18.0"

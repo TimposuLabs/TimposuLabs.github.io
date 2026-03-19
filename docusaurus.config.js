@@ -235,6 +235,16 @@ const config = {
     }),
 
   plugins: [
+    async function myPlugin() {
+      return {
+        name: 'tailwind-plugin',
+        configurePostCss(opts) {
+          opts.plugins.push(require('tailwindcss'));
+          opts.plugins.push(require('autoprefixer'));
+          return opts;
+        },
+      };
+    },
     [
       '@docusaurus/plugin-content-docs',
       {
