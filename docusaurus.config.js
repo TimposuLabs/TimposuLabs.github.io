@@ -68,6 +68,11 @@ const config = {
       //   indexName: "TimposuLabs",
       //   appId: "EA5OG72GYH",
       // },
+      colorMode: {
+        defaultMode: 'dark',
+        disableSwitch: false,
+        respectPrefersColorScheme: false,
+      },
       navbar: {
         title: 'TimposuLabs',
         logo: {
