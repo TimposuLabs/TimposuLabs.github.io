@@ -68,6 +68,11 @@ const config = {
       //   indexName: "TimposuLabs",
       //   appId: "EA5OG72GYH",
       // },
+      colorMode: {
+        defaultMode: 'dark',
+        disableSwitch: false,
+        respectPrefersColorScheme: false,
+      },
       navbar: {
         title: 'TimposuLabs',
         logo: {
@@ -230,11 +235,21 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ['java', 'properties'],
+        additionalLanguages: ['java', 'properties', 'ruby', 'python', 'kotlin', 'javascript', 'typescript', 'bash', 'docker', 'yaml', 'json', 'ini'],
       },
     }),
 
   plugins: [
+    async function myPlugin() {
+      return {
+        name: 'tailwind-plugin',
+        configurePostCss(opts) {
+          opts.plugins.push(require('tailwindcss'));
+          opts.plugins.push(require('autoprefixer'));
+          return opts;
+        },
+      };
+    },
     [
       '@docusaurus/plugin-content-docs',
       {

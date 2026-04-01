@@ -19,20 +19,30 @@ Pada materi ini kita akan membahas perintah dasar Switch Cisco mencakup hierarki
 
 ## 2️⃣ Konfigurasi Identitas & Keamanan
 
-```
-# Ganti Nama Switch
+* Ganti Nama Switch
+
+```bash
 hostname SW-Lantai1
+```
 
-# Password Masuk Mode Privileged
+* Password Masuk Mode Privileged
+
+```bash
 enable secret password123
+```
 
-# Password Konsol
+* Password Konsol
+
+```bash
 line console 0
  password konsolpass
  login
  exit
+```
 
-# Password Remote (Telnet/SSH)
+* Password Remote (Telnet/SSH)
+
+```bash
 line vty 0 4
  password remotepass
  login
@@ -41,32 +51,43 @@ line vty 0 4
 
 ## 3️⃣ Konfigurasi VLAN & Port
 
-```
-# Membuat VLAN
+* Membuat VLAN
+
+```bash
 vlan 10
  name Jaringan_Admin
  exit
+```
 
-# Konfigurasi Port Access (PC/Laptop)
+* Konfigurasi Port Access (PC/Laptop)
+
+```bash
 interface fastEthernet 0/1
  switchport mode access
  switchport access vlan 10
  no shutdown
+```
 
-# Konfigurasi Port Trunk (Antar Switch)
+* Konfigurasi Port Trunk (Antar Switch)
+
+```bash
 interface fastEthernet 0/24
  switchport mode trunk
 ```
 
 ## 4️⃣ IP Management & Simpan Data
 
-```
-# IP untuk Remote Management
+* IP untuk Remote Management
+
+```bash
 interface vlan 1
  ip address 192.168.1.2 255.255.255.0
  no shutdown
+```
 
-# Simpan Konfigurasi
+* Simpan Konfigurasi
+
+```bash
 do write
 ```
 

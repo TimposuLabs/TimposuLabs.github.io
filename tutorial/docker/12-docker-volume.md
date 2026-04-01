@@ -100,8 +100,7 @@ Kita bisa melihat isi datanya dengan akses root / administrator komputer host:
 ```bash
 sudo su -
 
-ucup@timposulabs:~# cd /var/lib/docker/volumes/data-volume/_data
-ucup@timposulabs:/var/lib/docker/volumes/data-volume/_data# ls
+ls /var/lib/docker/volumes/data-volume/_data
 
 myfile
 ```

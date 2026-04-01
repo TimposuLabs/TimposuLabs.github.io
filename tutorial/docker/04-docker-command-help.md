@@ -9,7 +9,7 @@ Docker memiliki ribuan perintah. Tidak ada satu pun engineer (bahkan senior seka
 
 Jika lupa perintah apa saja yang tersedia di Docker, gunakan:
 
-```
+```bash
 docker --help
 ```
 
@@ -20,7 +20,7 @@ docker --help
 
 Docker mengelompokkan perintah berdasarkan objeknya (Container, Image, Network, Volume). Anda bisa melihat bantuan spesifik untuk setiap objek:
 
-```
+```bash
 docker container --help   # Bantuan tentang manajemen kontainer
 docker image --help       # Bantuan tentang manajemen image
 docker network --help     # Bantuan tentang manajemen jaringan
@@ -31,7 +31,7 @@ docker volume --help      # Bantuan tentang manajemen penyimpanan
 
 Ini adalah bagian paling penting. Jika Anda tahu ingin menggunakan run, tapi lupa cara membatasi RAM atau cara mengatur port, tambahkan `--help` setelah perintah tersebut.
 
-```
+```bash
 docker [objek] [perintah] --help
 ```
 
@@ -39,7 +39,7 @@ docker [objek] [perintah] --help
 
 * Lupa cara mengatur Port di run?
 
-```
+```bash
 docker container run --help
 ```
 
@@ -47,13 +47,13 @@ docker container run --help
 
 * Lupa cara menghapus semua image yang tidak terpakai?
 
-```
+```bash
 docker image prune --help
 ```
 
 * Lupa cara melihat IP address kontainer?
 
-```
+```bash
 docker container inspect --help
 ```
 
@@ -69,6 +69,6 @@ Saat kita menjalankan `--help`, Docker akan menampilkan struktur seperti ini:
 
 Jika output bantuan terlalu panjang dan kita hanya mencari kata kunci tertentu (misal: "port"), kita bisa menggabungkannya dengan perintah Linux `grep`:
 
-```
+```bash
 docker container run --help | grep port
 ```

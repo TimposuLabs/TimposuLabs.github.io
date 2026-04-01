@@ -13,7 +13,7 @@ Sebelum bisa menjalankan sebuah kontainer, Docker harus memiliki image-nya terle
 
 Untuk menampilkan Daftar Docker Image yang ada di komputer kita:
 
-```
+```bash
 docker image ls
 ```
 
@@ -21,19 +21,19 @@ docker image ls
 
 * Cari docker image di https://hub.docker.com atau search dengan perintah:
 
-```
+```bash
 docker search <nama_image>
 ```
 
 * Download / pull image
 
-```
+```bash
 docker image pull <name_space>/<nama_image>:<tag>
 ```
 
 atau
 
-```
+```bash
 docker image pull <nama_image>:<tag>
 ```
 
@@ -43,7 +43,7 @@ docker image pull <nama_image>:<tag>
 
 Contoh pull image database `mysql` dengan tag `8.4.7`:
 
-```
+```bash
 docker pull mysql:8.4.7
 ```
 
@@ -60,7 +60,7 @@ Kita tidak wajib melakukan `pull` secara manual sebelum melakukan `run`. Docker 
 
 Cukup dengan satu perintah ini:
 
-```
+```bash
 docker run -d -p 8080:80 --name my-web nginx:stable-bullseye
 ```
 

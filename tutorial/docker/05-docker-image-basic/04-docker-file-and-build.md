@@ -45,13 +45,13 @@ Instruksi Dockerfile akan dibahas lebih dalam pada materi **[Docker Image - Adva
 
 Setelah Dockerfile selesai ditulis, kita harus mengubahnya menjadi Image menggunakan perintah docker build.
 
-```
+```bash
 docker build -t <nama-image>:<tag> .
 ```
 
 Contoh:
 
-```
+```bash
 docker image build -t topekox/first-dockerfile:0.0.3 .
 ```
 
