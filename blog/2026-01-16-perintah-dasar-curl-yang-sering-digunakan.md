@@ -20,7 +20,7 @@ curl -v http://localhost:8082/spring-rest/foos/9
 ## POST
 
 ```
-curl -d 'id=9&name=baeldung' http://localhost:8082/spring-rest/foos/new
+curl -d 'id=9&name=ucup' http://localhost:8082/spring-rest/foos/new
 ```
 
 ```
@@ -29,7 +29,7 @@ curl -d @request.json -H "Content-Type: application/json"
 ```
 
 ```
-curl -d '{"id":9,"name":"baeldung"}' -H 'Content-Type: application/json' 
+curl -d '{"id":9,"name":"ucup"}' -H 'Content-Type: application/json' 
   http://localhost:8082/spring-rest/foos/new
 ```
 
@@ -49,7 +49,7 @@ curl -X DELETE http://localhost:8082/spring-rest/foos/9
 ## Costum Headers
 
 ```
-curl -H "Host: com.baeldung" http://example.com/
+curl -H "Host: com.timposulabs" http://example.com/
 ```
 
 ```
@@ -64,7 +64,7 @@ curl -d @request.json -H "Content-Type: application/json"
 ## Authentication
 
 ```
-curl --user baeldung:secretPassword http://example.com/
+curl --user ucup:secretPassword http://example.com/
 ```
 
 ```
