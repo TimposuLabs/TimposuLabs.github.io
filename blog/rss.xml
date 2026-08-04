@@ -4,10 +4,73 @@
         <title>TimposuLabs Blog</title>
         <link>https://timposulabs.com/blog</link>
         <description>TimposuLabs Blog</description>
-        <lastBuildDate>Fri, 24 Apr 2026 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 04 May 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Perbedaan Protokol TCP dan UDP]]></title>
+            <link>https://timposulabs.com/blog/perbedaan-udp-tcp</link>
+            <guid>https://timposulabs.com/blog/perbedaan-udp-tcp</guid>
+            <pubDate>Mon, 04 May 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[TCP dan UDP merupakan protokol pada Layer 4 (Transport Layer) yang bertugas mengirimkan data antar perangkat dalam jaringan. Meskipun memiliki fungsi yang sama, keduanya dirancang untuk kebutuhan yang berbeda. TCP mengutamakan keandalan (reliability), sedangkan UDP mengutamakan kecepatan (speed).]]></description>
+            <content:encoded><![CDATA[<p>TCP dan UDP merupakan protokol pada <strong>Layer 4 (Transport Layer)</strong> yang bertugas mengirimkan data antar perangkat dalam jaringan. Meskipun memiliki fungsi yang sama, keduanya dirancang untuk kebutuhan yang berbeda. <strong>TCP</strong> mengutamakan keandalan (<em>reliability</em>), sedangkan <strong>UDP</strong> mengutamakan kecepatan (<em>speed</em>).</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="1️⃣-apa-itu-tcp">1️⃣ Apa Itu TCP?<a href="https://timposulabs.com/blog/perbedaan-udp-tcp#1%EF%B8%8F%E2%83%A3-apa-itu-tcp" class="hash-link" aria-label="Direct link to 1️⃣ Apa Itu TCP?" title="Direct link to 1️⃣ Apa Itu TCP?" translate="no">​</a></h2>
+<p>TCP (<em>Transmission Control Protocol</em>) adalah protokol <strong>connection-oriented</strong>, artinya koneksi harus dibangun terlebih dahulu sebelum data dikirim.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-karakteristik">💡 Karakteristik<a href="https://timposulabs.com/blog/perbedaan-udp-tcp#-karakteristik" class="hash-link" aria-label="Direct link to 💡 Karakteristik" title="Direct link to 💡 Karakteristik" translate="no">​</a></h3>
+<ul>
+<li class="">Connection-oriented</li>
+<li class="">Reliable</li>
+<li class="">Menggunakan ACK (<em>Acknowledgement</em>)</li>
+<li class="">Retransmisi paket yang hilang</li>
+<li class="">Menjaga urutan paket</li>
+<li class="">Flow Control dan Congestion Control</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kelebihan">👍 Kelebihan<a href="https://timposulabs.com/blog/perbedaan-udp-tcp#-kelebihan" class="hash-link" aria-label="Direct link to 👍 Kelebihan" title="Direct link to 👍 Kelebihan" translate="no">​</a></h3>
+<ul>
+<li class="">Data sampai dengan lengkap</li>
+<li class="">Urutan paket terjamin</li>
+<li class="">Cocok untuk transaksi penting</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kekurangan">👎 Kekurangan<a href="https://timposulabs.com/blog/perbedaan-udp-tcp#-kekurangan" class="hash-link" aria-label="Direct link to 👎 Kekurangan" title="Direct link to 👎 Kekurangan" translate="no">​</a></h3>
+<ul>
+<li class="">Lebih lambat</li>
+<li class="">Overhead lebih besar</li>
+<li class="">Membutuhkan resource lebih banyak</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="2️⃣-apa-itu-udp">2️⃣ Apa Itu UDP?<a href="https://timposulabs.com/blog/perbedaan-udp-tcp#2%EF%B8%8F%E2%83%A3-apa-itu-udp" class="hash-link" aria-label="Direct link to 2️⃣ Apa Itu UDP?" title="Direct link to 2️⃣ Apa Itu UDP?" translate="no">​</a></h2>
+<p>UDP (<em>User Datagram Protocol</em>) adalah protokol <strong>connectionless</strong>, sehingga data langsung dikirim tanpa membangun koneksi.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-karakteristik-1">💡 Karakteristik<a href="https://timposulabs.com/blog/perbedaan-udp-tcp#-karakteristik-1" class="hash-link" aria-label="Direct link to 💡 Karakteristik" title="Direct link to 💡 Karakteristik" translate="no">​</a></h3>
+<ul>
+<li class="">Connectionless</li>
+<li class="">Tanpa ACK</li>
+<li class="">Tanpa retransmisi</li>
+<li class="">Latensi rendah</li>
+<li class="">Overhead kecil</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kelebihan-1">👍 Kelebihan<a href="https://timposulabs.com/blog/perbedaan-udp-tcp#-kelebihan-1" class="hash-link" aria-label="Direct link to 👍 Kelebihan" title="Direct link to 👍 Kelebihan" translate="no">​</a></h3>
+<ul>
+<li class="">Sangat cepat</li>
+<li class="">Ringan</li>
+<li class="">Cocok untuk aplikasi real-time</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kekurangan-1">👎 Kekurangan<a href="https://timposulabs.com/blog/perbedaan-udp-tcp#-kekurangan-1" class="hash-link" aria-label="Direct link to 👎 Kekurangan" title="Direct link to 👎 Kekurangan" translate="no">​</a></h3>
+<ul>
+<li class="">Tidak menjamin paket sampai</li>
+<li class="">Paket dapat hilang</li>
+<li class="">Urutan paket tidak dijamin</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="️-perbandingan">⚖️ Perbandingan<a href="https://timposulabs.com/blog/perbedaan-udp-tcp#%EF%B8%8F-perbandingan" class="hash-link" aria-label="Direct link to ⚖️ Perbandingan" title="Direct link to ⚖️ Perbandingan" translate="no">​</a></h2>
+<table><thead><tr><th style="text-align:left">Aspek</th><th style="text-align:left">TCP</th><th style="text-align:left">UDP</th></tr></thead><tbody><tr><td style="text-align:left">Jenis Koneksi</td><td style="text-align:left">Connection-oriented</td><td style="text-align:left">Connectionless</td></tr><tr><td style="text-align:left">Keandalan</td><td style="text-align:left">Sangat tinggi</td><td style="text-align:left">Rendah</td></tr><tr><td style="text-align:left">Handshake</td><td style="text-align:left">Ya</td><td style="text-align:left">Tidak</td></tr><tr><td style="text-align:left">ACK</td><td style="text-align:left">Ya</td><td style="text-align:left">Tidak</td></tr><tr><td style="text-align:left">Retransmisi</td><td style="text-align:left">Ya</td><td style="text-align:left">Tidak</td></tr><tr><td style="text-align:left">Urutan Paket</td><td style="text-align:left">Dijamin</td><td style="text-align:left">Tidak dijamin</td></tr><tr><td style="text-align:left">Kecepatan</td><td style="text-align:left">Lebih lambat</td><td style="text-align:left">Lebih cepat</td></tr><tr><td style="text-align:left">Overhead</td><td style="text-align:left">Besar</td><td style="text-align:left">Kecil</td></tr><tr><td style="text-align:left">Latensi</td><td style="text-align:left">Lebih tinggi</td><td style="text-align:left">Rendah</td></tr><tr><td style="text-align:left">Contoh Penggunaan</td><td style="text-align:left">HTTP/HTTPS, FTP, SSH, Email</td><td style="text-align:left">Streaming, Gaming, VoIP, DNS</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kapan-menggunakan-tcp">✅ Kapan Menggunakan TCP?<a href="https://timposulabs.com/blog/perbedaan-udp-tcp#-kapan-menggunakan-tcp" class="hash-link" aria-label="Direct link to ✅ Kapan Menggunakan TCP?" title="Direct link to ✅ Kapan Menggunakan TCP?" translate="no">​</a></h2>
+<p>Gunakan TCP ketika data harus sampai secara lengkap, urutan paket harus tetap terjaga, kehilangan data tidak dapat ditoleransi, dan aplikasi membutuhkan keandalan tinggi seperti web, email, file transfer, maupun transaksi perbankan.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kapan-menggunakan-udp">✅ Kapan Menggunakan UDP?<a href="https://timposulabs.com/blog/perbedaan-udp-tcp#-kapan-menggunakan-udp" class="hash-link" aria-label="Direct link to ✅ Kapan Menggunakan UDP?" title="Direct link to ✅ Kapan Menggunakan UDP?" translate="no">​</a></h2>
+<p>Gunakan UDP ketika aplikasi membutuhkan latensi rendah, komunikasi berlangsung secara real-time, sedikit kehilangan paket masih dapat diterima, dan kecepatan lebih penting dibandingkan akurasi, misalnya pada game online, video streaming, VoIP, dan DNS.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-kesimpulan">🔥 Kesimpulan<a href="https://timposulabs.com/blog/perbedaan-udp-tcp#-kesimpulan" class="hash-link" aria-label="Direct link to 🔥 Kesimpulan" title="Direct link to 🔥 Kesimpulan" translate="no">​</a></h2>
+<p>Tidak ada protokol yang selalu lebih baik. <strong>TCP</strong> cocok untuk aplikasi yang membutuhkan keandalan dan integritas data, sedangkan <strong>UDP</strong> cocok untuk aplikasi yang membutuhkan kecepatan dan latensi rendah. Pilihlah protokol berdasarkan kebutuhan aplikasi, bukan karena salah satunya lebih populer.</p>]]></content:encoded>
+            <category>jaringan</category>
+            <category>networking</category>
+        </item>
         <item>
             <title><![CDATA[Perbedaan React, Angular, dan Vue]]></title>
             <link>https://timposulabs.com/blog/perbedaan-react-angular-vue</link>
@@ -1603,100 +1666,6 @@ Kelebihan: Mencegah aplikasi menjadi lambat (lag) saat harus menampilkan ribuan 
             <category>springboot</category>
             <category>rest</category>
             <category>spring</category>
-        </item>
-        <item>
-            <title><![CDATA[Menjalankan PostgreSQL di Docker Container pada Windows Subsystem for Linux (WSL)]]></title>
-            <link>https://timposulabs.com/blog/postgres-docker-wsl</link>
-            <guid>https://timposulabs.com/blog/postgres-docker-wsl</guid>
-            <pubDate>Thu, 10 Apr 2025 00:00:00 GMT</pubDate>
-            <description><![CDATA[Jadi saya biasanya menggunakan Docker pada sistem operasi Linux (Ubuntu, Fedora) menggunakan Docker Engine saja tanpa Docker Desktop, karena menurut saya lebih mudah digunakan. Docker Engine mudah digunakan di Linux karena dirancang untuk memanfaatkan fitur-fitur kernel Linux, seperti namespaces dan cgroups, yang mendukung isolasi dan efisiensi kontainer.]]></description>
-            <content:encoded><![CDATA[<p>Jadi saya biasanya menggunakan Docker pada sistem operasi Linux (Ubuntu, Fedora) menggunakan Docker Engine saja tanpa Docker Desktop, karena menurut saya lebih mudah digunakan. Docker Engine mudah digunakan di Linux karena dirancang untuk memanfaatkan fitur-fitur kernel Linux, seperti <em>namespaces</em> dan <em>cgroups</em>, yang mendukung isolasi dan efisiensi kontainer.</p>
-<p><img decoding="async" loading="lazy" alt="HeidiSQL" src="https://timposulabs.com/assets/images/logo-wsl-9944d4489afded196cca5abdfeecdb5a.jpg" width="1472" height="832" class="img_ev3q"></p>
-<p>Docker Engine sering lebih dipilih dibandingkan Docker Desktop karena beberapa alasan berikut:</p>
-<ol>
-<li class=""><strong>Ringan dan Efisien</strong>: Docker Engine tidak memerlukan antarmuka grafis atau mesin virtual, sehingga lebih ringan dan efisien, terutama di sistem operasi berbasis Linux.</li>
-<li class=""><strong>Gratis untuk Penggunaan Komersial</strong>: Docker Engine tidak memiliki batasan lisensi seperti Docker Desktop, yang memerlukan langganan berbayar untuk penggunaan komersial di perusahaan besar.</li>
-<li class=""><strong>Kontrol Lebih Besar</strong>: Dengan Docker Engine, pengguna memiliki kontrol penuh atas konfigurasi dan pengelolaan kontainer tanpa tambahan fitur yang mungkin tidak diperlukan.</li>
-<li class=""><strong>Kompatibilitas Linux</strong>: Docker Engine dirancang untuk berjalan langsung di Linux, sehingga tidak memerlukan layer tambahan seperti mesin virtual yang digunakan Docker Desktop di Windows atau macOS.</li>
-</ol>
-<p>Jadi itulah beberapa alasan saya lebih memilih Docker Engine dibanding Docker Desktop. Tapi ketika menggunakan sistem operasi Windows 11, tidak terdapat akses langsung menggunakan Docker Engine. Solusi yang dapat digunakan untuk menggunakan Docker Engine di Windows 11 adalah menginstallnya pada Windows Subsystem for Linux (WSL) atau menginstallnya pada software virtual mesin seperti Virtual Box, VMWare atau Qemu.</p>
-<p>Pada artikel ini saya akan menggunakan WSL karena lebih cepat dalam pengoperasiannya dibanding menggunakan software virtual mesin.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-install-wsl-2-pada-windows-11">✅ Install WSL 2 pada Windows 11<a href="https://timposulabs.com/blog/postgres-docker-wsl#-install-wsl-2-pada-windows-11" class="hash-link" aria-label="Direct link to ✅ Install WSL 2 pada Windows 11" title="Direct link to ✅ Install WSL 2 pada Windows 11" translate="no">​</a></h2>
-<p>Pada tutorial ini kami berasumsi bahwa teman-teman sudah melakukan instalasi WSL 2 dan sudah menginstall Ubuntu pada mesin WSL.</p>
-<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Untuk instalasi WSL 2 pada Windows 11 dapat melihat dokumentasi lengkapnya di sini:</p><p><a href="https://learn.microsoft.com/en-us/windows/wsl/install" target="_blank" rel="noopener noreferrer" class="">https://learn.microsoft.com/en-us/windows/wsl/install</a></p></div></div>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-install-docker-pada-wsl-2">✅ Install Docker pada WSL 2<a href="https://timposulabs.com/blog/postgres-docker-wsl#-install-docker-pada-wsl-2" class="hash-link" aria-label="Direct link to ✅ Install Docker pada WSL 2" title="Direct link to ✅ Install Docker pada WSL 2" translate="no">​</a></h2>
-<ol>
-<li class="">Buka Ubuntu pada bash WSL 2.</li>
-<li class="">Update Linux Repository</li>
-</ol>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">sudo apt-get update</span><br></span></code></pre></div></div>
-<ol start="3">
-<li class="">Download dependency dan menambahkan Docker GPG Key</li>
-</ol>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">sudo apt-get install ca-certificates curl</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">sudo install -m 0755 -d /etc/apt/keyrings</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">sudo chmod a+r /etc/apt/keyrings/docker.asc</span><br></span></code></pre></div></div>
-<ol start="4">
-<li class="">Menambahkan repository Docker</li>
-</ol>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">echo \</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  $(. /etc/os-release &amp;&amp; echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br></span></code></pre></div></div>
-<ol start="5">
-<li class="">Update</li>
-</ol>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">sudo apt-get update</span><br></span></code></pre></div></div>
-<ol start="6">
-<li class="">Install Docker</li>
-</ol>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span><br></span></code></pre></div></div>
-<ol start="7">
-<li class="">Cek Instalasi</li>
-</ol>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">ucup@Timposu:~$ docker --version</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">Docker version 28.0.4, build b8034c0</span><br></span></code></pre></div></div>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-jalankan-container-postgresql">✅ Jalankan Container Postgresql<a href="https://timposulabs.com/blog/postgres-docker-wsl#-jalankan-container-postgresql" class="hash-link" aria-label="Direct link to ✅ Jalankan Container Postgresql" title="Direct link to ✅ Jalankan Container Postgresql" translate="no">​</a></h2>
-<ol>
-<li class="">Agar datanya tetap ada, maka kita perlu membuat volume, di sini saya akan membuat volume dengann nama <code>postgres-volume</code>:</li>
-</ol>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">docker volume create postgres-volume</span><br></span></code></pre></div></div>
-<ol start="2">
-<li class="">Membuat container Postgresql dengan nama <code>postgresqldatabase</code> dan password <code>secretpassword</code>:</li>
-</ol>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">docker container run -d --rm --name postgresqldatabase -e POSTGRES_PASSWORD=secretpassword -p 5432:5432 -v postgres-volume:/var/lib/postgresql</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">/data postgres</span><br></span></code></pre></div></div>
-<ol start="3">
-<li class="">Cek container:</li>
-</ol>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">ucup@Timposu:~$ docker container ps</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">CONTAINER ID   IMAGE           COMMAND                  CREATED         STATUS         PORTS                                         NAMES</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">59c7cb0f2a7f   postgres:17.4   "docker-entrypoint.s…"   2 seconds ago   Up 2 seconds   0.0.0.0:5432-&gt;5432/tcp, [::]:5432-&gt;5432/tcp   postgresqldatabase</span><br></span></code></pre></div></div>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-menghubungkan-database-postgres-ke-windows">✅ Menghubungkan Database Postgres ke Windows<a href="https://timposulabs.com/blog/postgres-docker-wsl#-menghubungkan-database-postgres-ke-windows" class="hash-link" aria-label="Direct link to ✅ Menghubungkan Database Postgres ke Windows" title="Direct link to ✅ Menghubungkan Database Postgres ke Windows" translate="no">​</a></h2>
-<p>Untuk menghubungkan aplikasi kita dengan PostgreSQL yang ada pada container Docker di WSL2, kita bisa menggunakan aplikasi client lain seperti HeidiSQL, DBEaver atau PGAdmin.</p>
-<div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Docker pada WSL berjalan ketika bash Ubuntu sedang aktif, pastikan bash Ubuntu pada WSL terbuka.</p></div></div>
-<ol>
-<li class="">
-<p>Buka Powershell di Windows</p>
-</li>
-<li class="">
-<p>Cek IP Address WSL 2 dengan perintah</p>
-</li>
-</ol>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">wsl hostname -I</span><br></span></code></pre></div></div>
-<p>Kita akan mendapatkan 2 IP Address:</p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">PS C:\Users\ucup&gt; wsl hostname -I</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">172.30.163.213 172.17.0.1</span><br></span></code></pre></div></div>
-<p>Dimana IP Address pertama yaitu <code>172.30.163.213</code> adalah IP Address dari WSL 2 (hasil IP Address mungkin berbeda dimasing-masing komputer).</p>
-<ol start="3">
-<li class="">Sekarang kita akan melakukan koneksi TCP pada Port 5432 dimana port tersebut yang digunakan oleh Postgresql yang ada dalam DOcker container pada WSL 2.</li>
-</ol>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">Test-NetConnection -ComputerName 172.30.163.213 -Port 5432</span><br></span></code></pre></div></div>
-<p>Ganti IP Address di atas dengan IP Address teman-teman</p>
-<p>Tunggu beberapa saat, jika berhasil maka hasil akan terlihat seperti di bawah ini:</p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#F8F8F2;--prism-background-color:#282A36"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#F8F8F2;background-color:#282A36"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#F8F8F2"><span class="token plain">PS C:\Users\ucup&gt; Test-NetConnection -ComputerName 172.30.163.213 -Port 5432                                           </span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">ComputerName     : 172.30.163.213</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">RemoteAddress    : 172.30.163.213</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">RemotePort       : 5432</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">InterfaceAlias   : vEthernet (WSL (Hyper-V firewall))</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">SourceAddress    : 172.30.160.1</span><br></span><span class="token-line" style="color:#F8F8F2"><span class="token plain">TcpTestSucceeded : True</span><br></span></code></pre></div></div>
-<p>Jika nilai dari <code>TcpTestSucceeded</code> adalah <code>True</code> maka koneksi berhasil. <strong>Jika nilai <code>TcpTestSucceeded</code> adalah <code>False</code></strong> maka silahkan cek koneksi atau container apakah sudah sesuai port, konfigurasinya seperti di atas.</p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-cek-koneksi">✅ Cek koneksi<a href="https://timposulabs.com/blog/postgres-docker-wsl#-cek-koneksi" class="hash-link" aria-label="Direct link to ✅ Cek koneksi" title="Direct link to ✅ Cek koneksi" translate="no">​</a></h2>
-<p>Sekarang kita dapat melakukan uji coba menggunakan PostgreSQL Client seperti HeidiSQL, DBEaver atau PGAdmin.</p>
-<p><img decoding="async" loading="lazy" alt="HeidiSQL" src="https://timposulabs.com/assets/images/heidi-f201fd20a58f8db9129aa5c97a482abc.png" width="859" height="604" class="img_ev3q"></p>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-referensi">🌐 Referensi<a href="https://timposulabs.com/blog/postgres-docker-wsl#-referensi" class="hash-link" aria-label="Direct link to 🌐 Referensi" title="Direct link to 🌐 Referensi" translate="no">​</a></h2>
-<ul>
-<li class=""><a href="https://medium.com/@jkarelins/run-postgresql-database-in-docker-container-on-wsl2-656ed3c02280" target="_blank" rel="noopener noreferrer" class="">https://medium.com/@jkarelins/run-postgresql-database-in-docker-container-on-wsl2-656ed3c02280</a></li>
-<li class=""><a href="https://learn.microsoft.com/en-us/windows/wsl/install" target="_blank" rel="noopener noreferrer" class="">https://learn.microsoft.com/en-us/windows/wsl/install</a></li>
-</ul>]]></content:encoded>
-            <category>docker</category>
-            <category>postgres</category>
-            <category>wsl</category>
         </item>
     </channel>
 </rss>
