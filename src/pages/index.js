@@ -67,12 +67,27 @@ function NavbarSection() {
                     <a href="/tutorial" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
                       onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
                       onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
-                      📚 Semua Tutorial
+                      Java
                     </a>
-                    <a href="/docs/intro" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
+                    <a href="/kotlin" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
                       onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
                       onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
-                      📖 Dokumentasi
+                      Kotlin
+                    </a>
+                    <a href="/nodejs" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
+                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
+                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
+                      Node.js
+                    </a>
+                    <a href="/spring" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
+                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
+                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
+                      Spring
+                    </a>
+                    <a href="/docker" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
+                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
+                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
+                      Docker
                     </a>
                   </div>
                 </div>
@@ -84,11 +99,6 @@ function NavbarSection() {
                 Blog
               </a>
 
-              <a href="/docs/intro" style={{ color: '#e2e8f0', fontWeight: '700', fontSize: '0.95rem', padding: '8px 12px', borderRadius: '6px', textDecoration: 'none' }}
-                onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
-                onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
-                Docs
-              </a>
             </div>
           )}
 
@@ -217,13 +227,13 @@ function HeroSection() {
           Belajar dari dasar hingga mahir dengan materi terstruktur.
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px' }}>
-          <a href="/docs/intro"
+          <a href="/coming-soon"
             style={{ color: '#0f172a', textDecoration: 'none', backgroundColor: '#ffffff', padding: '16px 32px', borderRadius: '12px', fontWeight: '700', fontSize: '1rem', boxShadow: '0 20px 40px rgba(0,0,0,0.2)', transition: 'background-color 0.15s ease', display: 'inline-block' }}
             onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#e2e8f0'; e.currentTarget.style.color = '#0f172a'; }}
             onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#ffffff'; e.currentTarget.style.color = '#0f172a'; }}>
             👩‍💻 Mulai Belajar Sekarang
           </a>
-          <a href="/blog"
+          <a href="/blog/archive"
             style={{ color: '#e2e8f0', textDecoration: 'none', backgroundColor: '#1e293b', border: '1px solid #334155', padding: '16px 32px', borderRadius: '12px', fontWeight: '700', fontSize: '1rem', transition: 'background-color 0.15s ease', display: 'inline-block' }}
             onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#e2e8f0'; }}
             onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#1e293b'; e.currentTarget.style.color = '#e2e8f0'; }}>
@@ -331,7 +341,7 @@ function CTASection() {
           <p style={{ color: '#bfdbfe', marginBottom: '40px', maxWidth: '480px', margin: '0 auto 40px', position: 'relative', zIndex: 10 }}>
             Bergabung dengan ribuan developer yang sudah meningkatkan skill mereka. Mulai dari sekarang, gratis!
           </p>
-          <a href="/docs/intro"
+          <a href="/coming-soon"
             style={{ display: 'inline-block', backgroundColor: '#ffffff', color: '#312e81', padding: '16px 40px', borderRadius: '16px', fontWeight: '700', textDecoration: 'none', position: 'relative', zIndex: 10, transition: 'background-color 0.15s ease' }}
             onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#e2e8f0'; e.currentTarget.style.color = '#312e81'; }}
             onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#ffffff'; e.currentTarget.style.color = '#312e81'; }}>
