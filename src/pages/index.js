@@ -64,7 +64,7 @@ function NavbarSection() {
                   minWidth: '200px', zIndex: 100,
                 }}>
                   <div style={{ backgroundColor: '#1e293b', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '8px', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
-                    <a href="/tutorial" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
+                    <a href="/java" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
                       onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
                       onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
                       Java
