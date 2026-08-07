@@ -129,6 +129,10 @@ const config = {
                 to: '/docker/',
                 label: 'Docker',
               },
+              {
+                to: '/react/',
+                label: 'React',
+              },
               // {
               //   to: '#',
               //   label: 'Python',
@@ -304,6 +308,15 @@ const config = {
           id: 'docker',
           path: 'tutorial/docker/',
           routeBasePath: 'docker',
+          sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+          id: 'react',
+          path: 'tutorial/react/',
+          routeBasePath: 'react',
           sidebarPath: require.resolve('./sidebars.js'),
       },
     ],   
