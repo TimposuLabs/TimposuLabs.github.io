@@ -166,15 +166,30 @@ function NavbarSection() {
               </button>
               {mobileDropdownOpen && (
                 <div style={{ paddingLeft: '16px', paddingTop: '4px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                  <a href="/tutorial" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#94a3b8', textDecoration: 'none' }}
+                  <a href="/java" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#94a3b8', textDecoration: 'none' }}
                     onMouseEnter={e => { e.currentTarget.style.color = '#60a5fa'; e.currentTarget.style.backgroundColor = '#334155'; }}
                     onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.backgroundColor = 'transparent'; }}>
-                    📚 Semua Tutorial
+                    Java
                   </a>
-                  <a href="/docs/intro" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#94a3b8', textDecoration: 'none' }}
+                  <a href="/kotlin" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#94a3b8', textDecoration: 'none' }}
                     onMouseEnter={e => { e.currentTarget.style.color = '#60a5fa'; e.currentTarget.style.backgroundColor = '#334155'; }}
                     onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.backgroundColor = 'transparent'; }}>
-                    📖 Dokumentasi
+                    Kotlin
+                  </a>
+                  <a href="/nodejs" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#94a3b8', textDecoration: 'none' }}
+                    onMouseEnter={e => { e.currentTarget.style.color = '#60a5fa'; e.currentTarget.style.backgroundColor = '#334155'; }}
+                    onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.backgroundColor = 'transparent'; }}>
+                    Node.js
+                  </a>
+                  <a href="/spring" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#94a3b8', textDecoration: 'none' }}
+                    onMouseEnter={e => { e.currentTarget.style.color = '#60a5fa'; e.currentTarget.style.backgroundColor = '#334155'; }}
+                    onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.backgroundColor = 'transparent'; }}>
+                    Spring
+                  </a>
+                  <a href="/docker" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#94a3b8', textDecoration: 'none' }}
+                    onMouseEnter={e => { e.currentTarget.style.color = '#60a5fa'; e.currentTarget.style.backgroundColor = '#334155'; }}
+                    onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.backgroundColor = 'transparent'; }}>
+                    Docker
                   </a>
                 </div>
               )}
@@ -186,15 +201,9 @@ function NavbarSection() {
               Blog
             </a>
 
-            <a href="/docs/intro" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.95rem', fontWeight: '700', color: '#e2e8f0', textDecoration: 'none' }}
-              onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
-              onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
-              Docs
-            </a>
-
             {/* CTA full width */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '8px', paddingTop: '12px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-              <a href="/ebook" style={{ display: 'block', textAlign: 'center', backgroundColor: '#16a34a', color: '#ffffff', padding: '10px 16px', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '600', textDecoration: 'none' }}>
+              <a href="/coming-soon" style={{ display: 'block', textAlign: 'center', backgroundColor: '#16a34a', color: '#ffffff', padding: '10px 16px', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '600', textDecoration: 'none' }}>
                 📗 Download Ebook
               </a>
               <a href="/coming-soon" style={{ display: 'block', textAlign: 'center', backgroundColor: '#2563eb', color: '#ffffff', padding: '10px 16px', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '600', textDecoration: 'none' }}>
