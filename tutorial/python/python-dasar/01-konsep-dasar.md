@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: "Konsep Dasar Pemrogramman"
+title: "Konsep Dasar Pemrograman"
 ---
 
 ## 4 Pilar Utama Mempelajari Bahasa Pemrograman
