@@ -114,6 +114,10 @@ const config = {
                 label: 'Java',
               },
               {
+                to: '/python/',
+                label: 'Python',
+              },
+              {
                 to: '/kotlin/',
                 label: 'Kotlin',
               },
@@ -133,10 +137,6 @@ const config = {
                 to: '/react/',
                 label: 'React',
               },
-              // {
-              //   to: '#',
-              //   label: 'Python',
-              // }
             ],
           },
           // {
