@@ -442,6 +442,8 @@ Hasil:
 
 Hal penting yang perlu diingat:
 
-> **`complex` adalah salah satu tipe data numerik Python, sedangkan biner adalah sistem representasi angka yang menggunakan 0 dan 1.**
+:::tip
+**`complex` adalah salah satu tipe data numerik Python, sedangkan biner adalah sistem representasi angka yang menggunakan 0 dan 1.**
+:::
 
 Memahami konsep ini memberikan dasar yang lebih baik untuk memahami bagaimana data direpresentasikan dan diproses oleh komputer.

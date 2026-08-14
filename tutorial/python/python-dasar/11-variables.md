@@ -645,6 +645,8 @@ total_price = 50000
 
 Penamaan variable yang baik akan membuat kode lebih mudah dibaca, dipahami, dan dirawat.
 
-> **Code is read much more often than it is written.**
+:::tip
+**Code is read much more often than it is written.**
+:::
 
 Karena itu, biasakan memberikan nama variable yang dapat membantu programmer lain memahami maksud kode tanpa harus menebak-nebak.
