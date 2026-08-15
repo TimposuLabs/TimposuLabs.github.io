@@ -403,6 +403,10 @@ Python Data Types
     └── None
 ```
 
+Ilustrasi gambar:
+
+![Struktur tipe data python](/img/python/struktur-type-data.png)
+
 ---
 
 ## 15. Mutable dan Immutable

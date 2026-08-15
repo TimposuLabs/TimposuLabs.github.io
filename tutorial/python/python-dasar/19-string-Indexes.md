@@ -1,5 +1,5 @@
 ---
-sidebar_position: 21
+sidebar_position: 19
 title: "String Indexes & String Slicing"
 ---
 

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 7
-title: "Tipe Data Numbers"
+title: "Numbers"
 ---
 
 ## Integer dan Float
