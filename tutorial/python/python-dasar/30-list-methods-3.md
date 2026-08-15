@@ -1,6 +1,6 @@
 ---
 sidebar_position: 30
-title: "List Methods 3"
+title: "List Methods - 3"
 ---
 
 Pada materi sebelumnya, kita telah mempelajari berbagai list methods untuk menambahkan, menghapus, mencari, dan memeriksa elemen.

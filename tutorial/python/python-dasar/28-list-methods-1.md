@@ -1,6 +1,6 @@
 ---
 sidebar_position: 28
-title: "List Methods"
+title: "List Methods - 1"
 ---
 
 **List methods** adalah method yang disediakan Python untuk melakukan berbagai operasi terhadap sebuah list.
