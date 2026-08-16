@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunktimposu||=[]).push([[88903],{49422(t){t.exports=JSON.parse('{"tag":{"label":"postgres","permalink":"/blog/tags/postgres","allTagsPath":"/blog/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/blog/tags/postgres","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
