@@ -186,7 +186,7 @@ const config = {
                 to: '/contact',
               },
               {
-                label: 'Archive',
+                label: 'Blog Archive',
                 to: '/blog/archive',
               },
               {
