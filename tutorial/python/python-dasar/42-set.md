@@ -105,7 +105,9 @@ Jangan mengandalkan posisi tertentu dari elemen di dalam Set.
 
 Jika urutan data penting, gunakan struktur data seperti List atau Tuple.
 
-> **Catatan:** Pada Python modern, Set tetap tidak menyediakan konsep indexing dan tidak boleh diperlakukan sebagai sequence yang memiliki posisi elemen tetap.
+:::info
+**Catatan:** Pada Python modern, Set tetap tidak menyediakan konsep indexing dan tidak boleh diperlakukan sebagai sequence yang memiliki posisi elemen tetap.
+:::
 
 ---
 
