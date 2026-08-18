@@ -621,7 +621,9 @@ Contoh:
 
 `key` membantu React mengidentifikasi setiap item dalam list.
 
-> Sebaiknya gunakan identifier yang benar-benar unik seperti `id` jika tersedia.
+:::tip
+Sebaiknya gunakan identifier yang benar-benar unik seperti `id` jika tersedia.
+:::
 
 Contoh:
 

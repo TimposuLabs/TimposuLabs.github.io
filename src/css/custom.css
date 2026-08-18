@@ -16,6 +16,7 @@
 .blog-sidebar-more {
   display: inline-flex;
   align-items: center;
+  margin-top: 0.35rem;
   color: var(--ifm-color-primary);
   font-weight: 600;
   text-decoration: none;

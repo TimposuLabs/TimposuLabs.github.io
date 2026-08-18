@@ -1,9 +1,7 @@
 ---
 sidebar_position: 14
-title: "Component Composition"
+title: "Component Composition & Prop Children"
 ---
-
-## Component Composition dan Prop `children`
 
 Dalam React, sebuah component tidak hanya dapat menerima data melalui atribut atau Props. Component juga dapat menerima **konten yang ditempatkan di antara tag pembuka dan penutupnya**.
 
