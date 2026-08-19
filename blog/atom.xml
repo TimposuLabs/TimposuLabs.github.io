@@ -93,7 +93,7 @@
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="7-teknologi-yang-digunakan">7. Teknologi yang Digunakan<a href="https://timposulabs.com/blog/spring-boot-rest-api-jwt-authentication#7-teknologi-yang-digunakan" class="hash-link" aria-label="Direct link to 7. Teknologi yang Digunakan" title="Direct link to 7. Teknologi yang Digunakan" translate="no">​</a></h2>
 <p>Project ini menggunakan:</p>
-<table><thead><tr><th>Teknologi</th><th>Fungsi</th></tr></thead><tbody><tr><td>Java 21</td><td>Bahasa pemrograman</td></tr><tr><td>Spring Boot</td><td>Framework aplikasi</td></tr><tr><td>Spring Web</td><td>Membuat REST API</td></tr><tr><td>Spring Security</td><td>Authentication dan Authorization</td></tr><tr><td>Spring Data JPA</td><td>Database access</td></tr><tr><td>PostgreSQL</td><td>Database</td></tr><tr><td>JWT</td><td>Authentication token</td></tr><tr><td>BCrypt</td><td>Password hashing</td></tr><tr><td>Maven</td><td>Dependency management</td></tr><tr><td>Lombok</td><td>Mengurangi boilerplate code</td></tr><tr><td>Validation</td><td>Validasi request</td></tr></tbody></table>
+<table><thead><tr><th>Teknologi</th><th>Fungsi</th></tr></thead><tbody><tr><td>Java 21+</td><td>Bahasa pemrograman</td></tr><tr><td>Spring Boot</td><td>Framework aplikasi</td></tr><tr><td>Spring Web</td><td>Membuat REST API</td></tr><tr><td>Spring Security</td><td>Authentication dan Authorization</td></tr><tr><td>Spring Data JPA</td><td>Database access</td></tr><tr><td>PostgreSQL</td><td>Database</td></tr><tr><td>JWT</td><td>Authentication token</td></tr><tr><td>BCrypt</td><td>Password hashing</td></tr><tr><td>Maven</td><td>Dependency management</td></tr><tr><td>Lombok</td><td>Mengurangi boilerplate code</td></tr><tr><td>Validation</td><td>Validasi request</td></tr></tbody></table>
 <hr>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="8-membuat-project-spring-boot">8. Membuat Project Spring Boot<a href="https://timposulabs.com/blog/spring-boot-rest-api-jwt-authentication#8-membuat-project-spring-boot" class="hash-link" aria-label="Direct link to 8. Membuat Project Spring Boot" title="Direct link to 8. Membuat Project Spring Boot" translate="no">​</a></h2>
 <p>Project dapat dibuat menggunakan Spring Initializr.</p>
@@ -913,7 +913,7 @@ Bayangkan kamu memasukkan buah apel, jeruk, dan pisang ke dalam blender. Setelah
 <li class=""><strong>Box</strong>: Sebutan untuk template atau file gambar OS yang sudah jadi (semacam ISO mini). Kita bisa cari ribuan Box di Vagrant Cloud.</li>
 <li class=""><strong>Vagrantfile</strong>: File konfigurasi (berbasis bahasa Ruby) yang menentukan spesifikasi VM (RAM, IP, Port, dll).</li>
 </ul>
-<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="3️⃣-persiapan">3️⃣ Persiapan<a href="https://timposulabs.com/blog/tutorial-vagrant#3%EF%B8%8F%E2%83%A3-persiapan" class="hash-link" aria-label="Direct link to 3️�⃣ Persiapan" title="Direct link to 3️⃣ Persiapan" translate="no">​</a></h2>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="3️⃣-persiapan">3️⃣ Persiapan<a href="https://timposulabs.com/blog/tutorial-vagrant#3%EF%B8%8F%E2%83%A3-persiapan" class="hash-link" aria-label="Direct link to 3️⃣ Persiapan" title="Direct link to 3️⃣ Persiapan" translate="no">​</a></h2>
 <p>Pastikan kita sudah download dua tools ini:</p>
 <ul>
 <li class=""><strong>Hypervisor</strong>: Download <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener noreferrer" class="">VirtualBox</a> / <a href="https://www.vmware.com/" target="_blank" rel="noopener noreferrer" class="">Vmware</a> / Docker / Hyper-V / KVM (sebagai mesinnya).</li>
@@ -1589,7 +1589,7 @@ Bayangkan kamu memasukkan buah apel, jeruk, dan pisang ke dalam blender. Setelah
 </ul>
 <p>Dengan menggunakan versi <code>25.05</code> ke atas, kita mendapatkan peningkatan stabilitas pada pembacaan media penyimpanan seperti SSD melalui port USB.</p>
 <div class="theme-admonition theme-admonition-info admonition_xJq3 alert alert--info"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg></span>info</div><div class="admonitionContent_BuS1"><p>Pada tutorial ini saya menggunakan Armbian <code>Armbian_26.02.0_amlogic_s905x_bookworm_6.1.159_server_2026.01.01.img.gz</code> yang di download pada link: <a href="https://github.com/ophub/amlogic-s9xxx-armbian/releases/tag/Armbian_bookworm_arm64_server_2026.01" target="_blank" rel="noopener noreferrer" class="">https://github.com/ophub/amlogic-s9xxx-armbian/releases/tag/Armbian_bookworm_arm64_server_2026.01</a></p></div></div>
-<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2️⃣-flashing-image">2️⃣ Flashing Image<a href="https://timposulabs.com/blog/unlock-install-armbian-stb-hg680p#2%EF%B8%8F%E2%83%A3-flashing-image" class="hash-link" aria-label="Direct link to 2️��⃣ Flashing Image" title="Direct link to 2️⃣ Flashing Image" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="2️⃣-flashing-image">2️⃣ Flashing Image<a href="https://timposulabs.com/blog/unlock-install-armbian-stb-hg680p#2%EF%B8%8F%E2%83%A3-flashing-image" class="hash-link" aria-label="Direct link to 2️⃣ Flashing Image" title="Direct link to 2️⃣ Flashing Image" translate="no">​</a></h3>
 <p>Sekarang kita akan flashing image Armbian ke SDCard:</p>
 <ol>
 <li class="">Colokan Micro SDCard ke PC/Laptop.</li>
@@ -1631,7 +1631,9 @@ Bayangkan kamu memasukkan buah apel, jeruk, dan pisang ke dalam blender. Setelah
 <div class="theme-admonition theme-admonition-tip admonition_xJq3 alert alert--success"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 12 16"><path fill-rule="evenodd" d="M6.5 0C3.48 0 1 2.19 1 5c0 .92.55 2.25 1 3 1.34 2.25 1.78 2.78 2 4v1h5v-1c.22-1.22.66-1.75 2-4 .45-.75 1-2.08 1-3 0-2.81-2.48-5-5.5-5zm3.64 7.48c-.25.44-.47.8-.67 1.11-.86 1.41-1.25 2.06-1.45 3.23-.02.05-.02.11-.02.17H5c0-.06 0-.13-.02-.17-.2-1.17-.59-1.83-1.45-3.23-.2-.31-.42-.67-.67-1.11C2.44 6.78 2 5.65 2 5c0-2.2 2.02-4 4.5-4 1.22 0 2.36.42 3.22 1.19C10.55 2.94 11 3.94 11 5c0 .66-.44 1.78-.86 2.48zM4 14h5c-.23 1.14-1.3 2-2.5 2s-2.27-.86-2.5-2z"></path></svg></span>tip</div><div class="admonitionContent_BuS1"><ul>
 <li class=""><strong>Akses Terminal</strong>: Setelah berhasil masuk Armbian, gunakan aplikasi PuTTY atau Terminal Shell seperti PowerSheel di PC untuk remote via SSH agar lebih nyaman melakukan konfigurasi.</li>
 <li class=""><strong>Pendingin</strong>: HG680-P cenderung panas saat menjalankan Linux secara intensif. Pastikan sirkulasi udara baik atau tambahkan heatsink/fan kecil jika digunakan sebagai server 24 jam.</li>
-</ul></div></div>]]></content>
+</ul></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="-video">📹 Video<a href="https://timposulabs.com/blog/unlock-install-armbian-stb-hg680p#-video" class="hash-link" aria-label="Direct link to 📹 Video" title="Direct link to 📹 Video" translate="no">​</a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/17u-J7ysT-w?si=i36kGzqZv1BihQ0R" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>]]></content>
         <author>
             <name>Ucup TopekoX</name>
         </author>
