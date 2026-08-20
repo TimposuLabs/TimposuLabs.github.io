@@ -22,10 +22,7 @@ Pada tahap dasar, kita akan mempelajari berbagai konsep fundamental dalam pemrog
 
 - Struktur dasar program Python
 - Variabel dan tipe data
-- Operator
-- Input dan output
-- Percabangan
-- Perulangan
+- Operator dasar
 - Konsep dasar lainnya dalam Python
 
 Materi akan dipelajari secara bertahap dari konsep yang paling sederhana hingga konsep yang lebih kompleks.

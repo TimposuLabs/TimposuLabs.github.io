@@ -206,6 +206,11 @@ function NavbarSection() {
                     onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.backgroundColor = 'transparent'; }}>
                     Docker
                   </a>
+                  <a href="/react" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#94a3b8', textDecoration: 'none' }}
+                    onMouseEnter={e => { e.currentTarget.style.color = '#60a5fa'; e.currentTarget.style.backgroundColor = '#334155'; }}
+                    onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.backgroundColor = 'transparent'; }}>
+                    React
+                  </a>
                 </div>
               )}
             </div>
