@@ -153,3 +153,7 @@ Instalasi Armbian Berhasil! STB kita sekarang memiliki fungsi penuh sebagai mini
 * **Akses Terminal**: Setelah berhasil masuk Armbian, gunakan aplikasi PuTTY atau Terminal Shell seperti PowerSheel di PC untuk remote via SSH agar lebih nyaman melakukan konfigurasi.
 * **Pendingin**: HG680-P cenderung panas saat menjalankan Linux secara intensif. Pastikan sirkulasi udara baik atau tambahkan heatsink/fan kecil jika digunakan sebagai server 24 jam.
 :::
+
+## 📹 Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/17u-J7ysT-w?si=i36kGzqZv1BihQ0R" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

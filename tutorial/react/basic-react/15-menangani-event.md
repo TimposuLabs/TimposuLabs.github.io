@@ -263,7 +263,6 @@ Secara sederhana:
 
 ```text
 onClick={handleClick}
-
         │
         ▼
 Kirim referensi fungsi

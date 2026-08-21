@@ -227,7 +227,7 @@ Project ini menggunakan:
 
 | Teknologi | Fungsi |
 |---|---|
-| Java 21 | Bahasa pemrograman |
+| Java 21+ | Bahasa pemrograman |
 | Spring Boot | Framework aplikasi |
 | Spring Web | Membuat REST API |
 | Spring Security | Authentication dan Authorization |
