@@ -1,6 +1,6 @@
 ---
 sidebar_position: 39
-title: "Dictionary Methods - 2"
+title: "Dictionary Methods - Memeriksa, Menyalin & Memodifikasi Data"
 ---
 
 Pada materi sebelumnya, kita telah mempelajari beberapa cara untuk mengakses data dalam dictionary menggunakan `[]` dan `.get()`.

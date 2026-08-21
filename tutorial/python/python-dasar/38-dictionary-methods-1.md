@@ -1,6 +1,6 @@
 ---
 sidebar_position: 38
-title: "Dictionary Methods - 1"
+title: "Dictionary Methods - Mengakses Data"
 ---
 
 Dictionary memiliki berbagai method yang dapat digunakan untuk mengakses, memeriksa, dan mengelola data.

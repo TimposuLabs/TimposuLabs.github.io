@@ -1,6 +1,6 @@
 ---
 sidebar_position: 29
-title: "List Methods - 2"
+title: "List Methods - Mencari & Memeriksa Elemen"
 ---
 
 Pada materi sebelumnya, kita telah mempelajari beberapa list methods untuk **menambahkan dan menghapus elemen**.

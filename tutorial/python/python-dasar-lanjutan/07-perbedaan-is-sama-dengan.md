@@ -1,6 +1,6 @@
 ---
 sidebar_position: 7
-title: "is vs =="
+title: "Operator is vs =="
 ---
 
 Python menyediakan beberapa operator untuk membandingkan objek. Dua operator yang sering dianggap sama adalah `==` dan `is`.
