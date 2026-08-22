@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-python docs-version-current docs-doc-page docs-doc-id-python-oop/index" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.10.2">
+<title data-rh="true">Python OOP | TimposuLabs</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://timposulabs.com/python/python-oop"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-python-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-python-current"><meta data-rh="true" property="og:title" content="Python OOP | TimposuLabs"><meta data-rh="true" name="description" content="Pengantar Object-Oriented Programming (OOP) di Python"><meta data-rh="true" property="og:description" content="Pengantar Object-Oriented Programming (OOP) di Python"><link data-rh="true" rel="icon" href="/img/timposulabs.png"><link data-rh="true" rel="canonical" href="https://timposulabs.com/python/python-oop"><link data-rh="true" rel="alternate" href="https://timposulabs.com/python/python-oop" hreflang="en"><link data-rh="true" rel="alternate" href="https://timposulabs.com/python/python-oop" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Python OOP","item":"https://timposulabs.com/python/python-oop/"}]}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="TimposuLabs RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="TimposuLabs Atom Feed">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5NK2V38RCW"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-5NK2V38RCW",{anonymize_ip:!0})</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4504493660273886" async crossorigin="anonymous"></script><link rel="stylesheet" href="/assets/css/styles.78e82c71.css">
+<script src="/assets/js/runtime~main.8e89c214.js" defer="defer"></script>
+<script src="/assets/js/main.9eda889a.js" defer="defer"></script>
+</head>
+<body>
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"dark"),document.documentElement.setAttribute("data-theme-choice",t||"dark")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo-topekox.svg" alt="TimposuLabs Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/img/logo-topekox.svg" alt="TimposuLabs Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">TimposuLabs</b></a><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">Tutorial</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/java">Java</a></li><li><a aria-current="page" class="dropdown__link dropdown__link--active" href="/python">Python</a></li><li><a class="dropdown__link" href="/kotlin">Kotlin</a></li><li><a class="dropdown__link" href="/nodejs">Node.js</a></li><li><a class="dropdown__link" href="/spring">Spring</a></li><li><a class="dropdown__link" href="/docker">Docker</a></li><li><a class="dropdown__link" href="/react">React</a></li></ul></div><a class="navbar__item navbar__link" href="/blog">Blog</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://saweria.co/TimposuLabs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Donasi<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><a href="https://www.youtube.com/@TimposuLabs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Youtube<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><a href="https://github.com/TimposuLabs" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Github<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"><div class="navbar__search searchBarContainer_NW3z" dir="ltr"><input placeholder="Search" aria-label="Search" class="navbar__search-input" value=""><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/python"><span class="linkLabel_WmDU">Intro</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/python/python-dasar"><span class="categoryLinkLabel_W154">Python Dasar</span></a><button aria-label="Expand sidebar category &#x27;Python Dasar&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist" href="/python/python-dasar-lanjutan"><span class="categoryLinkLabel_W154">Python Dasar Lanjutan</span></a><button aria-label="Expand sidebar category &#x27;Python Dasar Lanjutan&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible menu__list-item-collapsible--active"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" aria-current="page" href="/python/python-oop"><span class="categoryLinkLabel_W154">Python OOP</span></a><button aria-label="Collapse sidebar category &#x27;Python OOP&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/apa-itu-oop"><span class="linkLabel_WmDU">Pengenalan OOP</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/class-object"><span class="linkLabel_WmDU">Class &amp; Object</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/konsep-dasar-oop"><span class="linkLabel_WmDU">Konsep Dasar &amp; Fitur OOP</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/attribute-instance"><span class="linkLabel_WmDU">Class Object Attributes &amp;  Instance Attributes</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/constructor-init"><span class="linkLabel_WmDU">Constructor __init__</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/classmethod-staticmethod"><span class="linkLabel_WmDU">Class Method dan Static Method</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/encapsulation"><span class="linkLabel_WmDU">Encapsulation</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/abstraction"><span class="linkLabel_WmDU">Abstraction</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/public-private"><span class="linkLabel_WmDU">Public &amp; Private</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/inheritance"><span class="linkLabel_WmDU">Inheritance</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/polymorphism"><span class="linkLabel_WmDU">Polymorphism</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/super"><span class="linkLabel_WmDU">super()</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/object-introspection"><span class="linkLabel_WmDU">Object Introspection</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/dunder-method"><span class="linkLabel_WmDU">Dunder Methods</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/latihan-extending-list-dengan-superList"><span class="linkLabel_WmDU">Latihan: Extending List dengan SuperList</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/multiple-inheritance"><span class="linkLabel_WmDU">Multiple Inheritance</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/python/python-oop/mro"><span class="linkLabel_WmDU">Method Resolution Order</span></a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">Python OOP</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Python OOP</h1></header>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="pengantar-object-oriented-programming-oop-di-python">Pengantar Object-Oriented Programming (OOP) di Python<a href="#pengantar-object-oriented-programming-oop-di-python" class="hash-link" aria-label="Direct link to Pengantar Object-Oriented Programming (OOP) di Python" title="Direct link to Pengantar Object-Oriented Programming (OOP) di Python" translate="no">​</a></h2>
+<p>Setelah mempelajari dasar-dasar Python seperti variabel, tipe data, conditional, looping, function, scope, dan berbagai struktur data, kita mulai memasuki konsep penting dalam pengembangan aplikasi, yaitu <strong>Object-Oriented Programming (OOP)</strong>.</p>
+<p>OOP merupakan pendekatan pemrograman yang digunakan untuk menyusun program berdasarkan <strong>objek dan hubungan antarobjek</strong>.</p>
+<p>Jika sebelumnya kita lebih banyak berfokus pada bagaimana membuat instruksi dan function untuk menjalankan suatu proses, pada OOP kita mulai berpikir tentang:</p>
+<ul>
+<li class="">Data apa yang dimiliki suatu objek?</li>
+<li class="">Perilaku apa yang dapat dilakukan objek tersebut?</li>
+<li class="">Bagaimana objek berinteraksi dengan objek lainnya?</li>
+<li class="">Bagaimana program yang besar dapat disusun menjadi bagian-bagian yang lebih terorganisir?</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="mengapa-perlu-belajar-oop">Mengapa Perlu Belajar OOP?<a href="#mengapa-perlu-belajar-oop" class="hash-link" aria-label="Direct link to Mengapa Perlu Belajar OOP?" title="Direct link to Mengapa Perlu Belajar OOP?" translate="no">​</a></h2>
+<p>Program sederhana dapat dibuat hanya dengan menggunakan variabel, conditional, looping, dan function.</p>
+<p>Namun, ketika aplikasi semakin besar, jumlah data dan function juga akan semakin banyak.</p>
+<p>Tanpa struktur yang baik, program dapat menjadi:</p>
+<ul>
+<li class="">Sulit dipahami.</li>
+<li class="">Sulit dikembangkan.</li>
+<li class="">Sulit diperbaiki ketika terjadi bug.</li>
+<li class="">Sulit digunakan kembali.</li>
+<li class="">Memiliki hubungan antarbagian yang semakin kompleks.</li>
+</ul>
+<p>OOP membantu kita membuat struktur program yang lebih terorganisir dengan menggabungkan <strong>data dan perilaku yang saling berkaitan</strong> ke dalam suatu objek.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="berpikir-dalam-bentuk-objek">Berpikir dalam Bentuk Objek<a href="#berpikir-dalam-bentuk-objek" class="hash-link" aria-label="Direct link to Berpikir dalam Bentuk Objek" title="Direct link to Berpikir dalam Bentuk Objek" translate="no">​</a></h2>
+<p>Salah satu cara memahami OOP adalah dengan melihat dunia nyata.</p>
+<p>Misalnya sebuah sistem memiliki pengguna.</p>
+<p>Seorang pengguna dapat memiliki berbagai informasi:</p>
+<ul>
+<li class="">Nama.</li>
+<li class="">Email.</li>
+<li class="">Umur.</li>
+<li class="">Status akun.</li>
+</ul>
+<p>Pengguna juga memiliki berbagai perilaku:</p>
+<ul>
+<li class="">Login.</li>
+<li class="">Logout.</li>
+<li class="">Mengubah profil.</li>
+<li class="">Mengirim pesan.</li>
+</ul>
+<p>Dalam pendekatan OOP, informasi dan perilaku yang berkaitan dengan pengguna tersebut dapat dikelompokkan sebagai sebuah <strong>objek</strong>.</p>
+<p>Dengan cara berpikir seperti ini, program menjadi lebih dekat dengan bagaimana kita memahami suatu sistem di dunia nyata.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="class-dan-object">Class dan Object<a href="#class-dan-object" class="hash-link" aria-label="Direct link to Class dan Object" title="Direct link to Class dan Object" translate="no">​</a></h2>
+<p>Dua istilah yang sangat penting dalam OOP adalah <strong>class</strong> dan <strong>object</strong>.</p>
+<p>Secara sederhana:</p>
+<blockquote>
+<p><strong>Class adalah rancangan atau blueprint, sedangkan object adalah instance yang dibuat berdasarkan rancangan tersebut.</strong></p>
+</blockquote>
+<p>Sebagai analogi, bayangkan sebuah cetakan kue.</p>
+<p>Cetakan menentukan bentuk dan karakteristik kue yang akan dibuat.</p>
+<p>Cetakan dapat dianggap sebagai <strong>class</strong>, sedangkan kue yang dihasilkan dari cetakan tersebut dapat dianggap sebagai <strong>object</strong>.</p>
+<p>Satu class dapat digunakan untuk membuat banyak object.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="data-dan-perilaku">Data dan Perilaku<a href="#data-dan-perilaku" class="hash-link" aria-label="Direct link to Data dan Perilaku" title="Direct link to Data dan Perilaku" translate="no">​</a></h2>
+<p>OOP tidak hanya berbicara tentang data.</p>
+<p>Sebuah objek biasanya memiliki dua bagian penting:</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="data">Data<a href="#data" class="hash-link" aria-label="Direct link to Data" title="Direct link to Data" translate="no">​</a></h3>
+<p>Data menggambarkan keadaan atau karakteristik sebuah objek.</p>
+<p>Contohnya:</p>
+<ul>
+<li class="">Nama pengguna.</li>
+<li class="">Umur pengguna.</li>
+<li class="">Saldo rekening.</li>
+<li class="">Harga produk.</li>
+<li class="">Warna kendaraan.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="perilaku">Perilaku<a href="#perilaku" class="hash-link" aria-label="Direct link to Perilaku" title="Direct link to Perilaku" translate="no">​</a></h3>
+<p>Perilaku menggambarkan sesuatu yang dapat dilakukan oleh objek.</p>
+<p>Contohnya:</p>
+<ul>
+<li class="">Pengguna melakukan login.</li>
+<li class="">Rekening melakukan penarikan uang.</li>
+<li class="">Produk mengubah harga.</li>
+<li class="">Kendaraan bergerak.</li>
+</ul>
+<p>Dengan demikian, OOP membantu mengorganisasi:</p>
+<p><strong>Objek → Data + Perilaku</strong></p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="oop-untuk-program-yang-lebih-besar">OOP untuk Program yang Lebih Besar<a href="#oop-untuk-program-yang-lebih-besar" class="hash-link" aria-label="Direct link to OOP untuk Program yang Lebih Besar" title="Direct link to OOP untuk Program yang Lebih Besar" translate="no">​</a></h2>
+<p>OOP menjadi semakin berguna ketika aplikasi memiliki banyak bagian yang saling berhubungan.</p>
+<p>Misalnya aplikasi toko online memiliki:</p>
+<ul>
+<li class="">Pengguna.</li>
+<li class="">Produk.</li>
+<li class="">Keranjang belanja.</li>
+<li class="">Pesanan.</li>
+<li class="">Pembayaran.</li>
+<li class="">Pengiriman.</li>
+</ul>
+<p>Masing-masing bagian memiliki data dan perilakunya sendiri.</p>
+<p>Dengan pendekatan OOP, bagian-bagian tersebut dapat direpresentasikan sebagai objek yang memiliki tanggung jawab masing-masing.</p>
+<p>Hal ini membantu program menjadi lebih terstruktur.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="konsep-utama-oop">Konsep Utama OOP<a href="#konsep-utama-oop" class="hash-link" aria-label="Direct link to Konsep Utama OOP" title="Direct link to Konsep Utama OOP" translate="no">​</a></h2>
+<p>Dalam pembelajaran OOP, kita akan mengenal beberapa konsep utama.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="class">Class<a href="#class" class="hash-link" aria-label="Direct link to Class" title="Direct link to Class" translate="no">​</a></h3>
+<p>Digunakan sebagai rancangan untuk membuat objek.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="object">Object<a href="#object" class="hash-link" aria-label="Direct link to Object" title="Direct link to Object" translate="no">​</a></h3>
+<p>Merupakan instance dari sebuah class.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="attribute">Attribute<a href="#attribute" class="hash-link" aria-label="Direct link to Attribute" title="Direct link to Attribute" translate="no">​</a></h3>
+<p>Merepresentasikan data atau karakteristik yang dimiliki oleh object.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="method">Method<a href="#method" class="hash-link" aria-label="Direct link to Method" title="Direct link to Method" translate="no">​</a></h3>
+<p>Merepresentasikan perilaku atau kemampuan yang dimiliki oleh object.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="encapsulation">Encapsulation<a href="#encapsulation" class="hash-link" aria-label="Direct link to Encapsulation" title="Direct link to Encapsulation" translate="no">​</a></h3>
+<p>Mengatur bagaimana data dan perilaku suatu object dikelola serta diakses.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="inheritance">Inheritance<a href="#inheritance" class="hash-link" aria-label="Direct link to Inheritance" title="Direct link to Inheritance" translate="no">​</a></h3>
+<p>Memungkinkan sebuah class memperoleh karakteristik dan perilaku dari class lainnya.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="polymorphism">Polymorphism<a href="#polymorphism" class="hash-link" aria-label="Direct link to Polymorphism" title="Direct link to Polymorphism" translate="no">​</a></h3>
+<p>Memungkinkan objek yang berbeda memiliki implementasi perilaku yang berbeda dengan konsep atau interface yang sama.</p>
+<p>Konsep-konsep tersebut akan dipelajari secara bertahap.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="oop-dan-pengembangan-software">OOP dan Pengembangan Software<a href="#oop-dan-pengembangan-software" class="hash-link" aria-label="Direct link to OOP dan Pengembangan Software" title="Direct link to OOP dan Pengembangan Software" translate="no">​</a></h2>
+<p>OOP banyak digunakan dalam pengembangan software karena membantu developer mengelola kompleksitas aplikasi.</p>
+<p>Contohnya dalam aplikasi web, kita dapat memiliki objek yang merepresentasikan:</p>
+<ul>
+<li class="">User</li>
+<li class="">Product</li>
+<li class="">Order</li>
+<li class="">Payment</li>
+<li class="">Notification</li>
+</ul>
+<p>Masing-masing objek memiliki data dan tanggung jawab tertentu.</p>
+<p>Dengan pembagian tersebut, perubahan pada satu bagian aplikasi dapat lebih mudah dikelola tanpa harus mengubah seluruh program.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="oop-bukan-sekadar-hafalan-konsep">OOP Bukan Sekadar Hafalan Konsep<a href="#oop-bukan-sekadar-hafalan-konsep" class="hash-link" aria-label="Direct link to OOP Bukan Sekadar Hafalan Konsep" title="Direct link to OOP Bukan Sekadar Hafalan Konsep" translate="no">​</a></h2>
+<p>Belajar OOP bukan hanya menghafal istilah seperti:</p>
+<ul>
+<li class="">Class.</li>
+<li class="">Object.</li>
+<li class="">Attribute.</li>
+<li class="">Method.</li>
+<li class="">Inheritance.</li>
+<li class="">Encapsulation.</li>
+<li class="">Polymorphism.</li>
+</ul>
+<p>Yang lebih penting adalah memahami <strong>cara berpikir menggunakan objek untuk menyelesaikan masalah</strong>.</p>
+<p>Sebelum menulis program, kita perlu mampu mengidentifikasi:</p>
+<ol>
+<li class="">Apa saja objek yang terdapat dalam sistem?</li>
+<li class="">Data apa yang dimiliki masing-masing objek?</li>
+<li class="">Perilaku apa yang dapat dilakukan masing-masing objek?</li>
+<li class="">Bagaimana objek tersebut saling berinteraksi?</li>
+</ol>
+<p>Kemampuan tersebut akan sangat berguna ketika mulai membuat aplikasi yang lebih kompleks.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kapan-oop-dibutuhkan">Kapan OOP Dibutuhkan?<a href="#kapan-oop-dibutuhkan" class="hash-link" aria-label="Direct link to Kapan OOP Dibutuhkan?" title="Direct link to Kapan OOP Dibutuhkan?" translate="no">​</a></h2>
+<p>Tidak semua program membutuhkan OOP.</p>
+<p>Untuk program yang sangat sederhana, penggunaan function dan struktur data mungkin sudah cukup.</p>
+<p>Namun, OOP menjadi semakin bermanfaat ketika:</p>
+<ul>
+<li class="">Program memiliki banyak komponen.</li>
+<li class="">Data dan perilaku saling berkaitan.</li>
+<li class="">Aplikasi terus berkembang.</li>
+<li class="">Banyak developer bekerja pada project yang sama.</li>
+<li class="">Program membutuhkan struktur yang jelas.</li>
+<li class="">Banyak object dengan karakteristik dan perilaku yang serupa.</li>
+</ul>
+<p>Karena itu, OOP sebaiknya dipahami sebagai <strong>alat untuk mengelola kompleksitas program</strong>, bukan sebagai aturan bahwa semua program harus menggunakan class.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="hubungan-dengan-materi-python-sebelumnya">Hubungan dengan Materi Python Sebelumnya<a href="#hubungan-dengan-materi-python-sebelumnya" class="hash-link" aria-label="Direct link to Hubungan dengan Materi Python Sebelumnya" title="Direct link to Hubungan dengan Materi Python Sebelumnya" translate="no">​</a></h2>
+<p>Materi dasar Python yang telah dipelajari sebelumnya tetap menjadi fondasi untuk memahami OOP.</p>
+<p>Konsep-konsep tersebut dapat digambarkan sebagai berikut:</p>
+<p><strong>Variabel → Tipe Data → Struktur Data → Conditional → Looping → Function → Parameter dan Argument → Return → Scope → Object-Oriented Programming</strong></p>
+<p>Semua konsep tersebut saling berhubungan.</p>
+<p>Sebagai contoh, method dalam OOP pada dasarnya tetap menggunakan konsep function yang telah dipelajari sebelumnya.</p>
+<p>Perbedaannya adalah function tersebut menjadi bagian dari sebuah class dan berhubungan dengan object.</p>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="tujuan-pembelajaran-oop">Tujuan Pembelajaran OOP<a href="#tujuan-pembelajaran-oop" class="hash-link" aria-label="Direct link to Tujuan Pembelajaran OOP" title="Direct link to Tujuan Pembelajaran OOP" translate="no">​</a></h2>
+<p>Setelah menyelesaikan bagian OOP, diharapkan kita dapat:</p>
+<ul>
+<li class="">Memahami konsep object dan class.</li>
+<li class="">Memodelkan suatu masalah menggunakan object.</li>
+<li class="">Mengelompokkan data dan perilaku yang saling berkaitan.</li>
+<li class="">Membuat program yang lebih terstruktur.</li>
+<li class="">Memahami hubungan antarobject.</li>
+<li class="">Menggunakan konsep inheritance dengan tepat.</li>
+<li class="">Memahami encapsulation dan polymorphism.</li>
+<li class="">Membangun aplikasi Python dengan struktur yang lebih baik.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kesimpulan">Kesimpulan<a href="#kesimpulan" class="hash-link" aria-label="Direct link to Kesimpulan" title="Direct link to Kesimpulan" translate="no">​</a></h2>
+<p>Object-Oriented Programming adalah pendekatan pemrograman yang membantu kita menyusun program berdasarkan <strong>object yang memiliki data dan perilaku</strong>.</p>
+<p>Jika sebelumnya kita berfokus pada:</p>
+<blockquote>
+<p>&quot;Apa yang harus dilakukan program?&quot;</p>
+</blockquote>
+<p>Dengan OOP, kita mulai berpikir:</p>
+<blockquote>
+<p>&quot;Objek apa yang ada dalam sistem, data apa yang dimilikinya, apa yang dapat dilakukannya, dan bagaimana objek tersebut berinteraksi?&quot;</p>
+</blockquote>
+<p>Cara berpikir ini akan membantu kita beralih dari membuat program sederhana menuju pembangunan aplikasi Python yang lebih <strong>terstruktur, modular, dan mudah dikembangkan</strong>.</p></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/python/python-dasar-lanjutan/pentingnya-scope"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Pentingnya Scope</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/python/python-oop/apa-itu-oop"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Pengenalan OOP</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#pengantar-object-oriented-programming-oop-di-python" class="table-of-contents__link toc-highlight">Pengantar Object-Oriented Programming (OOP) di Python</a></li><li><a href="#mengapa-perlu-belajar-oop" class="table-of-contents__link toc-highlight">Mengapa Perlu Belajar OOP?</a></li><li><a href="#berpikir-dalam-bentuk-objek" class="table-of-contents__link toc-highlight">Berpikir dalam Bentuk Objek</a></li><li><a href="#class-dan-object" class="table-of-contents__link toc-highlight">Class dan Object</a></li><li><a href="#data-dan-perilaku" class="table-of-contents__link toc-highlight">Data dan Perilaku</a><ul><li><a href="#data" class="table-of-contents__link toc-highlight">Data</a></li><li><a href="#perilaku" class="table-of-contents__link toc-highlight">Perilaku</a></li></ul></li><li><a href="#oop-untuk-program-yang-lebih-besar" class="table-of-contents__link toc-highlight">OOP untuk Program yang Lebih Besar</a></li><li><a href="#konsep-utama-oop" class="table-of-contents__link toc-highlight">Konsep Utama OOP</a><ul><li><a href="#class" class="table-of-contents__link toc-highlight">Class</a></li><li><a href="#object" class="table-of-contents__link toc-highlight">Object</a></li><li><a href="#attribute" class="table-of-contents__link toc-highlight">Attribute</a></li><li><a href="#method" class="table-of-contents__link toc-highlight">Method</a></li><li><a href="#encapsulation" class="table-of-contents__link toc-highlight">Encapsulation</a></li><li><a href="#inheritance" class="table-of-contents__link toc-highlight">Inheritance</a></li><li><a href="#polymorphism" class="table-of-contents__link toc-highlight">Polymorphism</a></li></ul></li><li><a href="#oop-dan-pengembangan-software" class="table-of-contents__link toc-highlight">OOP dan Pengembangan Software</a></li><li><a href="#oop-bukan-sekadar-hafalan-konsep" class="table-of-contents__link toc-highlight">OOP Bukan Sekadar Hafalan Konsep</a></li><li><a href="#kapan-oop-dibutuhkan" class="table-of-contents__link toc-highlight">Kapan OOP Dibutuhkan?</a></li><li><a href="#hubungan-dengan-materi-python-sebelumnya" class="table-of-contents__link toc-highlight">Hubungan dengan Materi Python Sebelumnya</a></li><li><a href="#tujuan-pembelajaran-oop" class="table-of-contents__link toc-highlight">Tujuan Pembelajaran OOP</a></li><li><a href="#kesimpulan" class="table-of-contents__link toc-highlight">Kesimpulan</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Pages</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/about">About</a></li><li class="footer__item"><a class="footer__link-item" href="/contact">Contact</a></li><li class="footer__item"><a class="footer__link-item" href="/blog/archive">Blog Archive</a></li><li class="footer__item"><a class="footer__link-item" href="/terms-conditions">Terms &amp; Conditions</a></li><li class="footer__item"><a class="footer__link-item" href="/privacy-policy">Privacy Policy</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Social Media</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.youtube.com/@TimposuLabs" target="_blank" rel="noopener noreferrer" class="footer__link-item">Youtube<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.facebook.com/TimposuLabs" target="_blank" rel="noopener noreferrer" class="footer__link-item">Facebook<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://www.instagram.com/timposulabs" target="_blank" rel="noopener noreferrer" class="footer__link-item">Instagram<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Link</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://saweria.co/TimposuLabs" target="_blank" rel="noopener noreferrer" class="footer__link-item">Donasi<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/TimposuLabs" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://github.com/TimposuLabs/forum/discussions/categories/tanya-jawab" target="_blank" rel="noopener noreferrer" class="footer__link-item">Diskusi<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">🐒 2026 &bull; TimposuLabs &bull; Build with Love 🚀</div></div></div></footer></div>
+</body>
+</html>
