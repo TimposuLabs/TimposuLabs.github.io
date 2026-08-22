@@ -1,6 +1,6 @@
 ---
 sidebar_position: 41
-title: "Tuple - Slicing, Unpacking dan Methods"
+title: "Tuple - Slicing, Unpacking & Methods"
 ---
 
 Pada materi sebelumnya, kita telah mempelajari konsep dasar Tuple, termasuk sifatnya yang **immutable**, cara mengakses elemen, dan perbedaannya dengan List.

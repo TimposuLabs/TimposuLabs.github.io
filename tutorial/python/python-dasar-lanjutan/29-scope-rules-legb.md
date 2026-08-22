@@ -1,6 +1,6 @@
 ---
 sidebar_position: 29
-title: "Scope Rules dan LEGB"
+title: "Scope Rules & LEGB"
 ---
 
 ## Scope Rules di Python

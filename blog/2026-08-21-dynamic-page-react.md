@@ -1308,4 +1308,4 @@ Dengan memahami pendekatan sederhana berbasis `useState` terlebih dahulu, kita a
 ## Source
 
 * Code: https://gitlab.com/topekox/demo-dynamic-page-react
-* Live Demo: https://demo-dynamic-page-react-dmvsfnpbx-timposu-labs.vercel.app/
+* Live Demo: https://demo-dynamic-page-react.vercel.app/

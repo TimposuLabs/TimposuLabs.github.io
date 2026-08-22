@@ -1,6 +1,6 @@
 ---
 sidebar_position: 25
-title: "args dan kwargs"
+title: "Args & Kwargs"
 ---
 
 ## `*args` dan `**kwargs` di Python

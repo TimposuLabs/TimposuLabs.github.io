@@ -1,6 +1,6 @@
 ---
 sidebar_position: 10
-title: "Tipe Data Complex dan Sistem Biner"
+title: "Tipe Data Complex & Sistem Biner"
 ---
 
 Selain `int` dan `float`, Python memiliki tipe data numerik lainnya, yaitu **`complex`**.

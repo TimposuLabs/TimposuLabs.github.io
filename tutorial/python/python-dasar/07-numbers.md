@@ -1,6 +1,6 @@
 ---
 sidebar_position: 7
-title: "Numbers"
+title: "Numbers & Operator Aritmatika"
 ---
 
 ## Integer dan Float

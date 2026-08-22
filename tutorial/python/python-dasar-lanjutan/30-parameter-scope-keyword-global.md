@@ -1,6 +1,6 @@
 ---
 sidebar_position: 30
-title: "Parameter Scope dan Keyword Global"
+title: "Parameter Scope & Keyword Global"
 ---
 
 Pada materi sebelumnya kita telah mempelajari **scope** dan aturan pencarian variabel menggunakan **LEGB**.
