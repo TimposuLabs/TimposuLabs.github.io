@@ -586,7 +586,6 @@ Setelah memahami pengantar Functional Programming, kita akan mempelajari konsep-
 - Memahami `filter`.
 - Memahami `reduce`.
 - Memahami function composition.
-- Memahami iterator dan generator.
 - Menggabungkan Functional Programming dengan konsep Python lainnya.
 
 ---
