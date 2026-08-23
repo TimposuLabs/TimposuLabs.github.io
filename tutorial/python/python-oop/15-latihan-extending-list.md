@@ -1,6 +1,6 @@
 ---
 sidebar_position: 15
-title: "Latihan: Extending List dengan SuperList"
+title: "Latihan: Extending List"
 ---
 
 Pada latihan ini kita akan menerapkan beberapa konsep OOP yang telah dipelajari sebelumnya, yaitu:
