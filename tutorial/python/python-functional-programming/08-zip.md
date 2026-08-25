@@ -62,7 +62,7 @@ Setiap elemen akan digabungkan berdasarkan posisi.
 
 ---
 
-## Cara Kerja zip()
+## Cara Kerja `zip()`
 
 Misalnya kita memiliki:
 
@@ -223,7 +223,7 @@ grades  → list
 
 ---
 
-## zip() dengan String
+## `zip()` dengan String
 
 String juga merupakan iterable.
 
@@ -263,7 +263,7 @@ dapat diiterasi menjadi:
 
 ---
 
-## zip() dengan Iterable yang Berbeda Panjang
+## `zip()` dengan Iterable yang Berbeda Panjang
 
 Salah satu hal penting yang perlu diperhatikan adalah panjang iterable dapat berbeda.
 
@@ -318,7 +318,7 @@ tidak memiliki pasangan sehingga tidak dimasukkan ke hasil.
 
 ---
 
-## zip() Menghasilkan zip Object
+## `zip()` Menghasilkan zip Object
 
 Seperti `map()` dan `filter()`, `zip()` menghasilkan sebuah **zip object** yang bersifat iterator.
 
@@ -352,7 +352,7 @@ Output:
 
 ---
 
-## zip() Hanya Dapat Dikonsumsi Sekali
+## `zip()` Hanya Dapat Dikonsumsi Sekali
 
 Karena `zip()` menghasilkan iterator, setelah seluruh data dikonsumsi, iterator tersebut tidak dapat digunakan kembali untuk mendapatkan data yang sama.
 
@@ -403,7 +403,7 @@ Output:
 
 ---
 
-## Mengubah Hasil zip() Menjadi Dictionary
+## Mengubah Hasil `zip()` Menjadi Dictionary
 
 Salah satu penggunaan `zip()` yang sangat berguna adalah membuat dictionary dari dua iterable.
 
@@ -554,7 +554,7 @@ Output:
 
 ---
 
-## zip() dan Unpacking
+## `zip()` dan Unpacking
 
 Hasil `zip()` juga dapat digunakan bersama **unpacking**.
 
@@ -596,7 +596,7 @@ age = 25
 
 ---
 
-## zip() dalam Perulangan
+## `zip()` dalam Perulangan
 
 `zip()` sangat sering digunakan langsung dalam `for`.
 
@@ -622,7 +622,7 @@ Pendekatan ini lebih praktis daripada menggunakan index secara manual.
 
 ---
 
-## Tanpa zip()
+## Tanpa `zip()`
 
 Tanpa `zip()`, kita mungkin perlu menggunakan index:
 
@@ -648,7 +648,7 @@ Kode menjadi lebih sederhana dan langsung menunjukkan hubungan antara kedua data
 
 ---
 
-## zip() dan Functional Programming
+## `zip()` dan Functional Programming
 
 `zip()` sering digunakan dalam Functional Programming untuk menggabungkan beberapa sumber data sebelum diproses lebih lanjut.
 
@@ -674,7 +674,7 @@ filter()
 
 ---
 
-## Menggabungkan zip() dengan map()
+## Menggabungkan `zip()` dengan `map()`
 
 Contoh:
 
@@ -722,7 +722,7 @@ numbers2
 
 ---
 
-## zip() dan Immutability
+## `zip()` dan Immutability
 
 `zip()` tidak mengubah iterable yang digunakan.
 
@@ -758,11 +758,11 @@ Data asli tetap sama.
 
 ---
 
-## Perbedaan map(), filter(), dan zip()
+## Perbedaan `map()`, `filter()`, dan `zip()`
 
 Ketiga function ini memiliki tujuan yang berbeda.
 
-### map()
+### `map()`
 
 Digunakan untuk **transformasi**.
 
@@ -785,7 +785,7 @@ list(
 )
 ```
 
-### filter()
+### `filter()`
 
 Digunakan untuk **seleksi**.
 
@@ -808,7 +808,7 @@ list(
 )
 ```
 
-### zip()
+### `zip()`
 
 Digunakan untuk **menggabungkan data berdasarkan posisi**.
 
@@ -831,7 +831,7 @@ list(
 
 ---
 
-## Kapan Menggunakan zip()?
+## Kapan Menggunakan `zip()`?
 
 `zip()` cocok digunakan ketika:
 

@@ -146,11 +146,11 @@ count(x) > 1
     ↓
 ambil elemen yang duplikat
     ↓
-set
+   set
     ↓
 hapus duplikasi
     ↓
-list
+  list
 ```
 
 ## Mengapa Menggunakan `set`?

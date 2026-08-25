@@ -783,11 +783,11 @@ First-Class Functions
       +
 Higher-Order Functions
       +
-map()
+    map()
       +
-filter()
+    filter()
       +
-reduce()
+    reduce()
       +
 Comprehensions
       +

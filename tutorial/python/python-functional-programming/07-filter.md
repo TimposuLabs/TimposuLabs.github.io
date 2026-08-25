@@ -92,7 +92,7 @@ dapat dibaca:
 
 ---
 
-## Cara Kerja filter()
+## Cara Kerja `filter()`
 
 Misalnya kita memiliki:
 

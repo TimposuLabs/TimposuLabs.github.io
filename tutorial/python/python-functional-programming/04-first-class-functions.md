@@ -275,9 +275,9 @@ multiply_by_two
        ↓
 execute()
        ↓
-10
+      10
        ↓
-20
+      20
 ```
 
 Function `execute()` tidak perlu mengetahui secara detail bagaimana `multiply_by_two()` bekerja.
@@ -330,11 +330,11 @@ create_greeting()
        ↓
 Function baru
        ↓
-hello
+    hello
        ↓
-hello()
+    hello()
        ↓
-"Hello"
+    "Hello"
 ```
 
 Kemampuan ini akan menjadi sangat penting ketika mempelajari **Higher-Order Function** dan **Decorator**.
@@ -768,11 +768,11 @@ First-Class Functions
         ↓
 Higher-Order Functions
         ↓
-map()
-filter()
-reduce()
+      map()
+     filter()
+     reduce()
         ↓
-Decorator
+    Decorator
 ```
 
 Setelah memahami First-Class Function, langkah berikutnya yang sangat penting adalah mempelajari **Higher-Order Function**, yaitu function yang menerima function sebagai argument atau mengembalikan function sebagai hasil.

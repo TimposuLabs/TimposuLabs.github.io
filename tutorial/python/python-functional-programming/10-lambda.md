@@ -136,11 +136,11 @@ Output:
 Secara konsep:
 
 ```text
-5
+ 5
  ↓
-5²
+ 5²
  ↓
-25
+ 25
 ```
 
 ---
@@ -421,7 +421,7 @@ execute()
   ↓
 function dijalankan
   ↓
-20
+ 20
 ```
 
 ---

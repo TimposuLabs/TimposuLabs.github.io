@@ -186,19 +186,19 @@ number = 1
     ↓
 1 * 2
     ↓
-2
+    2
 
 number = 2
     ↓
 2 * 2
     ↓
-4
+    4
 
 number = 3
     ↓
 3 * 2
     ↓
-6
+    6
 ```
 
 Hasilnya:

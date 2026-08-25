@@ -34,7 +34,7 @@ Hasil yang diharapkan:
 [25, 16, 9]
 ```
 
-### Solusi dengan Lambda dan map()
+### Solusi dengan Lambda dan `map()`
 
 ```python
 my_list = [5, 4, 3]
@@ -136,7 +136,7 @@ Hasil yang diharapkan:
 
 ---
 
-## Solusi dengan sort() dan Lambda
+## Solusi dengan `sort()` dan Lambda
 
 ```python
 a = [
@@ -210,7 +210,7 @@ Sehingga urutan tuple menjadi:
 
 ---
 
-## Mengapa Menggunakan x[1]?
+## Mengapa Menggunakan `x[1]`?
 
 Tuple memiliki index yang dimulai dari `0`.
 
@@ -261,7 +261,7 @@ lambda x: x[1]
 
 ---
 
-## sort() Mengubah List Asli
+## `sort()` Mengubah List Asli
 
 Method:
 
@@ -296,11 +296,11 @@ Berbeda dengan function `sorted()` yang menghasilkan list baru.
 
 ---
 
-## sort() vs sorted()
+## `sort()` vs `sorted()`
 
 Python menyediakan dua pendekatan yang umum digunakan untuk sorting.
 
-### Menggunakan sort()
+### Menggunakan `sort()`
 
 ```python
 numbers = [3, 1, 2]
@@ -318,7 +318,7 @@ Output:
 
 List `numbers` diubah secara langsung.
 
-### Menggunakan sorted()
+### Menggunakan `sorted()`
 
 ```python
 numbers = [3, 1, 2]
@@ -371,7 +371,7 @@ User
   ↓
 lambda user: user["age"]
   ↓
-Age
+ Age
   ↓
 Sorting
 ```
@@ -423,7 +423,7 @@ lambda item: item ** 2
 
 digunakan untuk melakukan operasi sederhana terhadap sebuah nilai.
 
-### Lambda dengan map()
+### Lambda dengan `map()`
 
 ```python
 map(
@@ -444,7 +444,7 @@ sort(
 
 Lambda menentukan nilai yang digunakan sebagai dasar pengurutan.
 
-### sort() Melakukan In-Place Sorting
+### `sort()` Melakukan In-Place Sorting
 
 ```python
 a.sort()

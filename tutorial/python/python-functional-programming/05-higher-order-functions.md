@@ -174,7 +174,7 @@ value = 10
        ↓
 multiply_by_two(10)
        ↓
-20
+      20
 ```
 
 Function `execute()` tidak perlu mengetahui bagaimana `multiply_by_two()` melakukan perhitungannya.
@@ -267,11 +267,11 @@ create_greeting()
        ↓
 Function greeting
        ↓
-hello
+    hello
        ↓
-hello()
+    hello()
        ↓
-"Hello"
+    "Hello"
 ```
 
 ---

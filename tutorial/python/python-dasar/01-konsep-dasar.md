@@ -12,7 +12,7 @@ Secara umum, terdapat **4 pilar utama** yang perlu dikuasai ketika mempelajari b
 1. **Istilah dan Terminologi**
 2. **Tipe Data**
 3. **Aksi dan Operasi**
-4. **Praktik Terbaik**
+4. **Praktik Terbaik / Best Practice**
 
 Keempat hal tersebut saling berhubungan dan akan terus digunakan sepanjang proses belajar pemrograman.
 

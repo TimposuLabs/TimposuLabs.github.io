@@ -127,7 +127,7 @@ Output:
 Urutan proses:
 
 ```text
-5
+ 5
  ↓
 multiply_by_two(5)
  ↓
@@ -176,7 +176,7 @@ Output:
 Alurnya:
 
 ```text
-5
+ 5
  ↓
 multiply_by_two()
  ↓
@@ -250,7 +250,7 @@ Output:
 Prosesnya:
 
 ```text
-5
+ 5
  ↓
 double()
  ↓
@@ -403,7 +403,7 @@ Output:
 Alurnya:
 
 ```text
-5
+ 5
  ↓
 double()
  ↓
@@ -457,11 +457,11 @@ menghasilkan:
 ```text
 double(5)
     ↓
-10
+   10
     ↓
 add_ten(10)
     ↓
-20
+   20
 ```
 
 Secara konsep:

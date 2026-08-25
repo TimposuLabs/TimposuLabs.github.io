@@ -248,7 +248,7 @@ function HeroSection() {
           Belajar Aja Dulu · Nanti Juga Kaya
         </div>
         <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-8 leading-tight">
-          Upgrade Skill Kamu Disini <br/>
+          Upgrade Skill kamu di sini! <br/>
           <span style={{ color: '#3b82f6' }}>Lengkap & Terstruktur</span>
         </h1>
         <p style={{ color: '#94a3b8', fontSize: '1.125rem', maxWidth: '768px', margin: '0 auto 48px' }}>
@@ -502,7 +502,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>TimposuLabs | Belajar Programming</title>
+        <title>TimposuLabs | Upgrade skill kamu di sini!</title>
         <meta name="description" content="Dokumentasi dan tutorial programming untuk developer Indonesia." />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
       </Head>

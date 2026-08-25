@@ -25,7 +25,7 @@ Pada contoh tersebut, seluruh angka digabungkan melalui proses akumulasi:
 
 ---
 
-## Mengimpor reduce()
+## Mengimpor `reduce()`
 
 Berbeda dengan `map()` dan `filter()`, fungsi `reduce()` bukan merupakan built-in function yang tersedia langsung.
 
@@ -131,7 +131,7 @@ Output:
 
 ---
 
-## Cara Kerja reduce()
+## Cara Kerja `reduce()`
 
 Perhatikan kode berikut:
 
@@ -275,7 +275,7 @@ Sehingga:
     ↓
 reduce()
     ↓
-   6
+    6
 ```
 
 ---
@@ -317,7 +317,7 @@ Dari output tersebut terlihat bahwa hasil sebelumnya selalu menjadi `acc` pada p
 
 ---
 
-## reduce() dengan Lambda
+## `reduce()` dengan Lambda
 
 Karena `reduce()` menerima function sebagai argument, kita juga dapat menggunakan lambda.
 
@@ -536,7 +536,7 @@ Nilai akhirnya adalah:
 
 ---
 
-## reduce() Menghasilkan Satu Nilai
+## `reduce()` Menghasilkan Satu Nilai
 
 Salah satu karakteristik utama `reduce()` adalah hasil akhirnya berupa **satu nilai**.
 
@@ -573,7 +573,7 @@ Dengan `reduce()`:
    ↓
 akumulasi
    ↓
-15
+  15
 ```
 
 Secara sederhana:
@@ -591,7 +591,7 @@ reduce()
 
 ---
 
-## reduce() dan Higher-Order Function
+## `reduce()` dan Higher-Order Function
 
 `reduce()` merupakan contoh **Higher-Order Function** karena menerima function sebagai argument.
 
@@ -630,7 +630,7 @@ Hal ini dimungkinkan karena Python mendukung konsep **First-Class Function**.
 
 ---
 
-## reduce() dan Immutability
+## `reduce()` dan Immutability
 
 `reduce()` tidak harus mengubah iterable asli.
 
@@ -672,7 +672,7 @@ Sedangkan hasil akumulasinya adalah:
 
 ---
 
-## Perbandingan map(), filter(), zip(), dan reduce()
+## Perbandingan `map()`, `filter()`, `zip()`, dan `reduce()`
 
 Keempat function tersebut memiliki tujuan yang berbeda.
 
@@ -719,7 +719,7 @@ Satu nilai
 
 ---
 
-## Kapan Menggunakan reduce()?
+## Kapan Menggunakan `reduce()`?
 
 `reduce()` dapat digunakan ketika kita ingin mengubah sekumpulan nilai menjadi satu hasil.
 
@@ -744,7 +744,7 @@ Contoh sederhana:
 
 ---
 
-## Kapan Tidak Perlu Menggunakan reduce()?
+## Kapan Tidak Perlu Menggunakan `reduce()`?
 
 Meskipun `reduce()` sangat fleksibel, bukan berarti semua proses akumulasi harus menggunakan `reduce()`.
 
