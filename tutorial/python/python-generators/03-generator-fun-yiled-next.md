@@ -498,7 +498,7 @@ Alur sederhananya:
 ```text
 Generator Function
        ↓
-      yield
+     yield
        ↓
 Hasilkan nilai
        ↓
@@ -506,15 +506,15 @@ Hasilkan nilai
        ↓
      next()
        ↓
-Lanjutkan
+    Lanjutkan
        ↓
 Hasilkan nilai berikutnya
        ↓
-     ...
+      ...
        ↓
 Tidak ada nilai
        ↓
-StopIteration
+ StopIteration
 ```
 
 Konsep berikutnya yang penting untuk dipelajari adalah **perbedaan lebih mendalam antara generator, iterator, dan iterable**, serta bagaimana generator dapat digunakan dalam **pemrosesan data secara efisien**.

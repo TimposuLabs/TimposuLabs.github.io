@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: "Generators"
+title: "Generator"
 ---
 
 **Generator** adalah fitur khusus dalam Python yang memungkinkan program menghasilkan serangkaian nilai secara **bertahap**, bukan menghasilkan seluruh nilai sekaligus.

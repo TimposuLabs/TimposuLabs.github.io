@@ -76,7 +76,7 @@ Nilai 3
   ↓
 Diproses
   ↓
-...
+ ...
 ```
 
 Program tidak perlu membuat list berisi seluruh hasil sebelum proses dimulai.
