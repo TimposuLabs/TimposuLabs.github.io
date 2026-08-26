@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: "Custom Decorator"
+title: "Membuat Custom Decorator"
 ---
 
 Setelah memahami konsep **First-Class Functions**, **Higher-Order Functions**, **Inner Function**, dan **Closure**, kita dapat mulai membuat decorator sendiri.
