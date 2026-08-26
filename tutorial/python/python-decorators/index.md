@@ -2,7 +2,7 @@
 sidebar_position: 6
 ---
 
-# Python Decorator
+# Python Decorators
 
 Decorator adalah salah satu fitur Python yang memungkinkan kita **menambahkan atau memodifikasi perilaku sebuah fungsi atau class tanpa harus mengubah kode asli dari fungsi atau class tersebut**.
 

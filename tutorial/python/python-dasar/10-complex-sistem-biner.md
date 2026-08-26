@@ -218,7 +218,7 @@ Artinya:
 ```text
 0b101
  ↓
-  5
+ 5
 ```
 
 Kita juga dapat menuliskan bilangan binernya tanpa awalan `0b`:
