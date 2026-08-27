@@ -1,3 +1,7 @@
+---
+sidebar_position: 8
+---
+
 # Python Generators
 
 Dalam pemrograman, kita sering bekerja dengan sekumpulan data yang perlu diproses satu per satu. Cara sederhana adalah menyimpan seluruh data tersebut di dalam sebuah struktur data seperti `list`. Namun, ketika jumlah data yang diproses sangat besar, pendekatan tersebut dapat menggunakan lebih banyak memory karena seluruh data harus tersedia sekaligus.
