@@ -99,7 +99,7 @@ Gunakan dalam project
 PyPI dapat dianggap sebagai salah satu pusat utama ekosistem package Python.
 
 :::tip
-Kunjungi link https://pypi.org/ repositori perangkat lunak untuk bahasa pemrograman Python.
+Website https://pypi.org/ adalah repositori perangkat lunak resmi dan pusat untuk pustaka serta paket bahasa pemrograman Python.
 :::
 
 ## Mengapa Membutuhkan Third-Party Package?
@@ -515,13 +515,13 @@ Kelola dependency
 
 Misalnya kita ingin menggunakan `pyfiglet`.
 
-### Langkah 1 — Tentukan kebutuhan
+### Langkah 1 - Tentukan kebutuhan
 
 ```text
 Membuat ASCII art dari teks
 ```
 
-### Langkah 2 — Cari solusi
+### Langkah 2 - Cari solusi
 
 Kita menemukan package:
 
@@ -529,19 +529,19 @@ Kita menemukan package:
 pyfiglet
 ```
 
-### Langkah 3 — Install
+### Langkah 3 - Install
 
 ```text
 pip install pyfiglet
 ```
 
-### Langkah 4 — Import
+### Langkah 4 - Import
 
 ```python
 import pyfiglet
 ```
 
-### Langkah 5 — Gunakan
+### Langkah 5 - Gunakan
 
 ```python
 print(pyfiglet.figlet_format("Python"))
