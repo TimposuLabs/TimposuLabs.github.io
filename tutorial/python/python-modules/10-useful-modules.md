@@ -1,6 +1,6 @@
 ---
 sidebar_position: 10
-title: "Useful Modules"
+title: "Useful Modules Standard Library"
 ---
 
 Python menyediakan **Standard Library** yang berisi berbagai module siap pakai untuk membantu menyelesaikan kebutuhan pemrograman.

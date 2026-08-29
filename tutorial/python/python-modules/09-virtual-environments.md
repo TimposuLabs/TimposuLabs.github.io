@@ -468,6 +468,8 @@ Developer lain dapat membuat virtual environment baru kemudian menginstal depend
 
 ### Membuat `requirements.txt` secara otomatis
 
+Kita dapat membuat file `requirements.txt` secara otomatis tanpa membuatnya secara manual, dengan menggunakan `pip freeze`.
+
 Pastikan virtual environment sudah aktif:
 
 ```bash
