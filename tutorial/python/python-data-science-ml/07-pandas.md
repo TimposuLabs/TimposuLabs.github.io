@@ -1,6 +1,6 @@
 ---
 sidebar_position: 7
-title: "Eksplorasi Dataset dengan Pandas"
+title: "Eksplor Dataset dengan Pandas"
 ---
 
 Dalam Machine Learning, salah satu langkah pertama yang perlu dilakukan adalah **mengimpor dan memahami data**.
@@ -540,3 +540,7 @@ Explorasi Data
 ```
 
 Pada tahap ini, tujuan utama bukan membuat model, melainkan **memahami data terlebih dahulu**. Setelah memahami struktur dan karakteristik dataset, barulah kita dapat melanjutkan ke tahap berikutnya seperti **data cleaning dan preprocessing**.
+
+:::tip
+**Baca Juga:** [Cara Kerja Pandas](/blog/cara-kerja-pandas)
+:::

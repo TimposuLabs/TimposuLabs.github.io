@@ -1,6 +1,6 @@
 ---
 sidebar_position: 8
-title: "Clean the Data"
+title: "Data Cleaning"
 ---
 
 Setelah data berhasil diimpor dan dieksplorasi, langkah berikutnya dalam workflow Machine Learning adalah **membersihkan dan mempersiapkan data**.
@@ -211,9 +211,21 @@ Konversi ini dapat dilakukan menggunakan sebuah fungsi khusus.
 Contoh struktur fungsi:
 
 ```python
-def value_to_float(value):
+def value_to_float(x):
     # proses konversi
-    ...
+    if type(x) == float or type(x) == int:
+        return x
+    if 'K' in x:
+        if len(x) > 1:
+            return float(x.replace('K', '')) * 1000
+        return 1000.0
+    if 'M' in x:
+        if len(x) > 1:
+            return float(x.replace('M', '')) * 1000000
+        return 1000000.0
+    if 'B' in x:
+        return float(x.replace('B', '')) * 1000000000
+    return 0.0
 ```
 
 Fungsi tersebut bertugas menerima nilai seperti:
@@ -409,17 +421,26 @@ df1 = pd.DataFrame(
     columns=['Name', 'Wage', 'Value']
 )
 
-# Menghapus simbol mata uang
-wage = df1['Wage'].str.replace('€', '', regex=True)
 
-# Mengubah format nilai menjadi angka
-df1['Wage'] = wage.apply(value_to_float)
+# Konversi
+def value_to_float(x):
+    if type(x) == float or type(x) == int:
+        return x
+    if 'K' in x:
+        if len(x) > 1:
+            return float(x.replace('K', '')) * 1000
+        return 1000.0
+    if 'M' in x:
+        if len(x) > 1:
+            return float(x.replace('M', '')) * 1000000
+        return 1000000.0
+    if 'B' in x:
+        return float(x.replace('B', '')) * 1000000000
+    return 0.0
 
-df1['Value'] = (
-    df1['Value']
-    .str.replace('€', '', regex=True)
-    .apply(value_to_float)
-)
+# Menghapus simbol mata uang & Mengubah format nilai menjadi angka
+wage = df1['Wage'].replace('[\€,]', '', regex=True).apply(value_to_float)
+value = df1['Value'].replace('[\€,]', '', regex=True).apply(value_to_float)
 
 # Menghitung selisih Value dan Wage
 df1['Difference'] = df1['Value'] - df1['Wage']
