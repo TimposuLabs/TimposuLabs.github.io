@@ -52,15 +52,7 @@ Sulit untuk melihat hubungan antara `Wage` dan `Value` hanya dengan membaca tabe
 
 Dengan visualisasi, hubungan tersebut dapat ditampilkan dalam bentuk grafik:
 
-```text
-Value
-  ↑
-  │              •
-  │         •
-  │    •
-  │ •
-  └──────────────────→ Wage
-```
+![Visualisasi](/img/python/1.png)
 
 Dengan grafik, pola dan hubungan antarvariabel dapat lebih mudah dipahami.
 
@@ -110,9 +102,13 @@ Seaborn menyediakan antarmuka yang relatif sederhana untuk membuat berbagai jeni
 
 Salah satu penggunaannya adalah membuat **scatter plot**.
 
+:::tip
+**Ingformasi lengkap kunjungi:** https://seaborn.pydata.org/
+:::
+
 ---
 
-## Scatter Plot
+### Scatter Plot
 
 Scatter plot atau diagram sebar digunakan untuk melihat hubungan antara dua variabel.
 
@@ -127,22 +123,13 @@ Dengan demikian, setiap titik pada grafik mewakili satu pemain.
 
 Secara konseptual:
 
-```text
-Value
-  ↑
-  │       •
-  │              •
-  │   •
-  │                    •
-  │ •
-  └────────────────────────→ Wage
-```
+![Visualisasi](/img/python/1.png)
 
 Grafik tersebut membantu kita melihat bagaimana `Wage` berhubungan dengan `Value`.
 
 ---
 
-## Membuat Scatter Plot dengan Seaborn
+### Membuat Scatter Plot dengan Seaborn
 
 Import Seaborn:
 
@@ -186,9 +173,11 @@ data=df1
 
 menentukan DataFrame yang digunakan sebagai sumber data.
 
+![Visualisasi](/img/python/1.png)
+
 ---
 
-## Keunggulan Seaborn
+### Keunggulan Seaborn
 
 Seaborn memiliki beberapa keunggulan untuk eksplorasi data:
 
@@ -202,7 +191,7 @@ Dengan beberapa baris kode, kita sudah dapat menghasilkan visualisasi dari datas
 
 ---
 
-## Keterbatasan Visualisasi Statis
+### Keterbatasan Visualisasi Statis
 
 Grafik yang dibuat menggunakan pendekatan seperti Seaborn umumnya bersifat **statis**.
 
@@ -244,9 +233,13 @@ Hover
 
 Dengan fitur **hover**, pengguna dapat mengarahkan kursor ke sebuah titik dan mendapatkan informasi mengenai data tersebut.
 
+:::tip
+**Baca Dokumentasi Bokeh:** https://docs.bokeh.org/en/latest/docs/user_guide.html
+:::
+
 ---
 
-## Membuat Visualisasi dengan Bokeh
+### Membuat Visualisasi dengan Bokeh
 
 Untuk membuat grafik menggunakan Bokeh, kita dapat mengimpor beberapa komponen:
 
@@ -273,7 +266,7 @@ Menampilkan grafik
 
 ---
 
-## Membuat Hover Tooltip
+### Membuat Hover Tooltip
 
 Kita dapat menentukan informasi yang ingin ditampilkan ketika pengguna mengarahkan kursor ke sebuah titik.
 
@@ -303,7 +296,7 @@ Hal ini membuat grafik menjadi lebih informatif.
 
 ---
 
-## Memahami `$` dan `@` pada Bokeh
+### Memahami `$` dan `@` pada Bokeh
 
 Pada konfigurasi tooltip Bokeh terdapat dua simbol penting:
 
@@ -366,7 +359,7 @@ berarti tooltip akan mengambil nilai dari kolom `Name`.
 
 ---
 
-## Membuat Canvas Grafik
+### Membuat Canvas Grafik
 
 Setelah tooltip dibuat, kita dapat membuat objek grafik menggunakan:
 
@@ -401,7 +394,7 @@ Tools interaktif yang tersedia
 
 ---
 
-## Menambahkan Data ke Grafik
+### Menambahkan Data ke Grafik
 
 Selanjutnya kita dapat menambahkan titik data menggunakan:
 
@@ -431,7 +424,7 @@ menentukan DataFrame yang menjadi sumber data.
 
 ---
 
-## Menampilkan Grafik
+### Menampilkan Grafik
 
 Setelah grafik selesai dibuat, gunakan:
 
@@ -448,18 +441,18 @@ DataFrame
     ↓
 HoverTool
     ↓
-Figure
+  Figure
     ↓
 Circle / Scatter
     ↓
-Show
+  Show
     ↓
 Interactive Visualization
 ```
 
 ---
 
-## Contoh Kode Lengkap Bokeh
+### Contoh Kode Lengkap Bokeh
 
 Berikut contoh implementasi berdasarkan studi kasus pemain sepak bola:
 
@@ -494,6 +487,8 @@ show(p)
 ```
 
 Hasilnya adalah scatter plot yang dapat digunakan secara interaktif.
+
+![Visualisasi](/img/python/2.png)
 
 ---
 

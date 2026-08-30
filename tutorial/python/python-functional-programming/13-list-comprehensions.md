@@ -873,7 +873,7 @@ Pola yang perlu diingat:
 ```text
 Iterable
    ↓
-for
+  for
    ↓
 Expression
    ↓

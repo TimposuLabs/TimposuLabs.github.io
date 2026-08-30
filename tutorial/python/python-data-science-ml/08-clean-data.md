@@ -422,7 +422,7 @@ df1 = pd.DataFrame(
 )
 
 
-# Konversi
+# Konversi data string pada field mata uang, ke int
 def value_to_float(x):
     if type(x) == float or type(x) == int:
         return x
@@ -623,9 +623,9 @@ Wage & Value → Numeric
          ↓
 Difference = Value - Wage
          ↓
-       Sorting
+      Sorting
          ↓
-Value for Money
+   Value for Money
 ```
 
 ---

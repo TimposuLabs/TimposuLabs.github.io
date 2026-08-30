@@ -19,7 +19,7 @@ Artificial Intelligence (AI)
 
 Sementara **Data Science** merupakan bidang yang lebih luas dan bersinggungan dengan statistik, analisis data, pemrosesan data, dan Machine Learning.
 
-![hubungan data science, ai, manchine learning dan deep learning](https://miro.medium.com/v2/resize:fit:1400/0*2K4rIKIp7d4NU8JP.jpeg)
+![hubungan data science, ai, manchine learning dan deep learning](/img/python/2.jpg)
 
 ---
 
