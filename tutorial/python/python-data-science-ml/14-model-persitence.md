@@ -3,181 +3,141 @@ sidebar_position: 14
 title: "Model Persistence"
 ---
 
-## Menyimpan dan Memuat Model Machine Learning
+Setelah model Machine Learning berhasil dilatih dan memiliki performa yang baik, model tersebut tidak harus selalu dilatih ulang setiap kali program dijalankan.
 
-Setelah sebuah model Machine Learning selesai dilatih, model tersebut tidak selalu perlu dilatih ulang setiap kali program dijalankan.
+Kita dapat **menyimpan model yang sudah dilatih** ke dalam sebuah file, kemudian memuatnya kembali ketika dibutuhkan.
 
-Proses **training** dapat membutuhkan waktu, memori, dan sumber daya komputasi, terutama ketika dataset yang digunakan berukuran besar. Oleh karena itu, model yang sudah dilatih dapat disimpan ke dalam sebuah file dan digunakan kembali ketika dibutuhkan.
+Proses ini sangat penting dalam penerapan Machine Learning karena model yang sudah dilatih dapat digunakan kembali oleh aplikasi tanpa harus melakukan proses training dari awal.
 
-Proses tersebut dikenal sebagai **Model Persistence**.
-
----
-
-## Apa itu Model Persistence?
-
-**Model Persistence** adalah proses menyimpan model Machine Learning yang sudah dilatih ke dalam sebuah file sehingga model tersebut dapat dimuat kembali dan digunakan tanpa melakukan training dari awal.
-
-Alur sederhananya:
+Secara sederhana:
 
 ```text
 Dataset
    ↓
 Training
    ↓
-Model
+ Model
    ↓
- Save
+Evaluasi
    ↓
-Model File
+Model Siap Digunakan
+   ↓
+Simpan ke File
 ```
 
-Ketika model diperlukan kembali:
+Kemudian pada waktu lain:
 
 ```text
-Model File
+File Model
    ↓
- Load
+Load
    ↓
-Trained Model
+Model Terlatih
+   ↓
+Data Baru
    ↓
 Prediction
 ```
-
-Dengan demikian, proses training yang membutuhkan banyak sumber daya tidak perlu dilakukan setiap kali aplikasi dijalankan.
 
 ---
 
 ## Mengapa Model Perlu Disimpan?
 
-Bayangkan sebuah model membutuhkan waktu cukup lama untuk melakukan training.
+Proses training Machine Learning dapat membutuhkan waktu dan sumber daya yang cukup besar, terutama ketika dataset berukuran besar atau algoritma yang digunakan cukup kompleks.
 
-Jika setiap kali aplikasi dijalankan model harus dilatih kembali:
+Bayangkan sebuah model membutuhkan waktu beberapa menit atau bahkan beberapa jam untuk dilatih.
 
-```text
-Jalankan aplikasi
-      ↓
-Load dataset
-      ↓
-  Training
-      ↓
-  Model siap
-      ↓
-  Prediction
-```
+Jika aplikasi harus melakukan training ulang setiap kali dijalankan, hal tersebut tentu tidak efisien.
 
-Proses tersebut menjadi tidak efisien.
-
-Dengan Model Persistence:
+Dengan menyimpan model:
 
 ```text
-Training
-   ↓
-Save Model
-   ↓
-Model File
+Training dilakukan satu kali
+          ↓
+     Model disimpan
+          ↓
+Model dapat digunakan berkali-kali
 ```
 
-Kemudian aplikasi dapat langsung:
+Keuntungan utamanya adalah:
 
-```text
-Load Model
-   ↓
-Prediction
-```
-
-Beberapa manfaatnya antara lain:
-
-- Menghemat waktu training.
-- Mengurangi penggunaan sumber daya komputasi.
-- Memungkinkan model digunakan kembali.
-- Memudahkan proses deployment.
-- Memisahkan proses training dengan proses prediction.
+- Tidak perlu melakukan training ulang setiap kali aplikasi dijalankan.
+- Menghemat waktu dan sumber daya komputasi.
+- Model dapat digunakan oleh aplikasi lain.
+- Memudahkan proses deployment Machine Learning.
+- Memisahkan proses **training** dan **prediction**.
 
 ---
 
-## Library `joblib`
+## Apa itu `joblib`?
 
-Salah satu library yang umum digunakan untuk menyimpan model Machine Learning berbasis Python adalah **`joblib`**.
+`joblib` adalah library Python yang dapat digunakan untuk menyimpan (*serialize*) dan memuat kembali objek Python.
 
-`joblib` menyediakan mekanisme untuk melakukan:
+Dalam Machine Learning, `joblib` sering digunakan untuk menyimpan model yang telah dilatih menggunakan `scikit-learn`.
 
-- **Serialization** → menyimpan objek Python ke dalam file.
-- **Deserialization** → memuat kembali objek dari file.
-
-Dalam konteks Machine Learning, `joblib` sering digunakan untuk menyimpan model dari **scikit-learn**.
-
-Dua fungsi utama yang digunakan adalah:
+Pada materi atau tutorial lama mungkin ditemukan kode:
 
 ```python
-joblib.dump()
+from sklearn.externals import joblib
 ```
 
-dan:
+Cara tersebut **sudah tidak digunakan pada versi `scikit-learn` modern**.
+
+Gunakan `joblib` sebagai package terpisah:
 
 ```python
-joblib.load()
+from joblib import dump, load
 ```
+
+Dengan demikian, `joblib` perlu tersedia di environment Python yang digunakan.
+
+Jika belum terinstal, jalankan:
+
+```bash
+pip install joblib
+```
+
+Jika menggunakan virtual environment, pastikan environment tersebut sudah aktif sebelum melakukan instalasi.
 
 ---
 
-## `joblib.dump()`
+## Menyimpan Model dengan `dump()`
 
-Fungsi `joblib.dump()` digunakan untuk menyimpan objek ke dalam file.
-
-Bentuk sederhananya:
+Setelah model selesai dilatih, kita dapat menggunakan fungsi:
 
 ```python
-joblib.dump(model, 'trained_model.joblib')
+dump()
 ```
 
-Parameter pertama adalah objek yang ingin disimpan.
-
-Parameter kedua adalah nama file tempat objek tersebut disimpan.
+untuk menyimpan model ke dalam file.
 
 Contohnya:
 
 ```python
-import joblib
+from joblib import dump
 
-joblib.dump(knn, 'trained_model.joblib')
+dump(knn, 'knn_model.joblib')
 ```
 
-Setelah kode dijalankan, model akan disimpan sebagai:
+Kode tersebut menyimpan model `knn` ke dalam file:
 
 ```text
-trained_model.joblib
+knn_model.joblib
 ```
+
+File tersebut berisi representasi model yang telah dilatih sehingga dapat digunakan kembali.
 
 ---
 
-## `joblib.load()`
+## Contoh Training dan Penyimpanan Model
 
-Setelah model disimpan, kita dapat memuatnya kembali menggunakan `joblib.load()`.
-
-Contohnya:
+Misalnya kita menggunakan Iris Dataset dan algoritma KNN:
 
 ```python
-import joblib
-
-trained_knn = joblib.load('trained_model.joblib')
-```
-
-Variabel `trained_knn` sekarang berisi model yang sebelumnya sudah dilatih dan disimpan.
-
-Model tersebut dapat digunakan kembali untuk melakukan prediksi.
-
----
-
-## Melatih dan Menyimpan Model
-
-Berikut contoh menggunakan dataset Iris dan algoritma KNN:
-
-```python
-import joblib
-
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
+from joblib import dump
 
 # Load dataset
 iris = load_iris()
@@ -189,250 +149,420 @@ y = iris.target
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
-    test_size=0.2
+    test_size=0.2,
+    random_state=42
 )
 
-# Membuat dan melatih model
-knn = KNeighborsClassifier(
-    n_neighbors=3
-)
+# Membuat model
+knn = KNeighborsClassifier(n_neighbors=3)
 
+# Training model
 knn.fit(X_train, y_train)
 
 # Menyimpan model
-joblib.dump(
-    knn,
-    'trained_model.joblib'
-)
+dump(knn, 'knn_model.joblib')
 
-print('Model berhasil disimpan!')
+print("Model berhasil disimpan.")
 ```
 
-Alurnya adalah:
+Setelah program dijalankan, akan terdapat file:
 
 ```text
-Iris Dataset
-     ↓
-Train/Test Split
-     ↓
-    KNN
-     ↓
-Training (.fit)
-     ↓
-Trained Model
-     ↓
-joblib.dump()
-     ↓
-trained_model.joblib
+knn_model.joblib
+```
+
+Struktur proyek dapat menjadi:
+
+```text
+project/
+│
+├── knn_model.joblib
+└── train.py
 ```
 
 ---
 
-## Memuat Model yang Sudah Disimpan
+## Memuat Model dengan `load()`
 
-Setelah model tersimpan, kita tidak perlu melakukan training kembali untuk menggunakannya.
-
-Kita cukup memuat file model:
+Setelah model disimpan, kita dapat memuatnya kembali menggunakan:
 
 ```python
-import joblib
+from joblib import load
 
-trained_knn = joblib.load(
-    'trained_model.joblib'
-)
+knn = load('knn_model.joblib')
 ```
 
-Setelah itu model dapat digunakan untuk melakukan prediksi.
+Model yang dimuat akan kembali menjadi objek model KNN yang sudah dilatih.
 
-Contohnya:
+Kita dapat langsung menggunakannya untuk melakukan prediksi tanpa melakukan training ulang.
+
+---
+
+## Menggunakan Model yang Telah Disimpan
+
+Contoh:
 
 ```python
-sample_data = [
-    [5.1, 3.5, 1.4, 0.2]
+from joblib import load
+
+# Memuat model
+knn = load('knn_model.joblib')
+
+# Data baru
+sample = [
+    [3, 5, 4, 2],
+    [2, 3, 5, 4]
 ]
 
-prediction = trained_knn.predict(
-    sample_data
-)
+# Melakukan prediksi
+predictions = knn.predict(sample)
 
-print(prediction)
+print(predictions)
 ```
 
-Alurnya:
+Model dapat langsung digunakan meskipun proses training tidak dilakukan kembali pada program tersebut.
+
+---
+
+## Mengubah Label Menjadi Nama Spesies
+
+Hasil prediksi dari model Iris berupa angka:
 
 ```text
-trained_model.joblib
-        ↓
-  joblib.load()
-        ↓
-  Trained Model
-        ↓
-     predict()
-        ↓
-   Prediction
+0
+1
+2
+```
+
+Kita dapat mengubahnya menjadi nama spesies menggunakan `target_names`.
+
+```python
+from joblib import load
+from sklearn.datasets import load_iris
+
+# Load dataset untuk mendapatkan target_names
+iris = load_iris()
+
+# Load model
+knn = load('knn_model.joblib')
+
+# Data baru
+sample = [
+    [3, 5, 4, 2],
+    [2, 3, 5, 4]
+]
+
+# Prediksi
+predictions = knn.predict(sample)
+
+# Mengubah label menjadi nama spesies
+predicted_species = [
+    iris.target_names[p]
+    for p in predictions
+]
+
+print("Hasil Prediksi:", predicted_species)
+```
+
+Contoh output:
+
+```text
+Hasil Prediksi: ['versicolor', 'virginica']
 ```
 
 ---
 
-## Training vs Prediction
+## Memisahkan Training dan Prediction
 
-Model Persistence membantu memisahkan dua proses yang berbeda:
+Dalam aplikasi Machine Learning yang lebih nyata, proses training dan prediction biasanya dipisahkan.
 
-### Training
+### Program Training
 
-Training dilakukan ketika kita ingin membuat atau memperbarui model.
+Program training bertanggung jawab untuk:
 
 ```text
 Dataset
    ↓
+Preprocessing
+   ↓
 Training
    ↓
- Model
+Evaluasi
    ↓
- Save
+Simpan Model
 ```
 
-### Prediction
+Contohnya:
 
-Prediction menggunakan model yang sudah tersedia.
+```python
+from joblib import dump
+
+# training model
+knn.fit(X_train, y_train)
+
+# simpan model
+dump(knn, 'knn_model.joblib')
+```
+
+Program ini tidak perlu dijalankan setiap kali pengguna ingin melakukan prediksi.
+
+---
+
+### Program Prediction
+
+Program prediction hanya perlu:
 
 ```text
 Load Model
-   ↓
-Input Baru
-   ↓
+    ↓
+Data Baru
+    ↓
 Prediction
+    ↓
+ Hasil
 ```
 
-Tidak diperlukan proses training ulang setiap kali ingin melakukan prediksi.
-
----
-
-## Contoh Struktur Proyek
-
-Model yang sudah dilatih dapat disimpan sebagai bagian dari proyek:
-
-```text
-machine-learning/
-│
-├── train.py
-├── predict.py
-├── trained_model.joblib
-└── dataset.csv
-```
-
-Misalnya:
-
-- `train.py` digunakan untuk melatih dan menyimpan model.
-- `trained_model.joblib` menyimpan model yang sudah dilatih.
-- `predict.py` memuat model dan melakukan prediksi.
-- `dataset.csv` merupakan dataset yang digunakan untuk training.
-
-Dengan struktur seperti ini, proses training dan prediction dapat dipisahkan.
-
----
-
-## Model Persistence dalam Deployment
-
-Model Persistence sangat berguna ketika model akan digunakan dalam aplikasi.
-
-Misalnya sebuah model Machine Learning digunakan pada aplikasi web:
-
-```text
-             Training
-                ↓
-           Machine Learning
-                ↓
-           Save Model
-                ↓
-      trained_model.joblib
-                ↓
-        ┌───────┴───────┐
-        ↓               ↓
-     Flask            FastAPI
-        ↓               ↓
-        └───────┬───────┘
-                ↓
-            Prediction
-```
-
-Aplikasi tidak perlu melakukan training setiap kali pengguna mengirimkan permintaan.
-
-Model cukup dimuat ketika aplikasi dijalankan dan kemudian digunakan untuk melayani proses prediction.
-
----
-
-## Catatan Penggunaan `joblib`
-
-Pada lingkungan Python modern, gunakan `joblib` sebagai library tersendiri:
+Contohnya:
 
 ```python
-import joblib
+from joblib import load
+
+# Load model
+knn = load('knn_model.joblib')
+
+# Data baru
+sample = [
+    [3, 5, 4, 2]
+]
+
+# Prediction
+prediction = knn.predict(sample)
+
+print(prediction)
 ```
 
-Pendekatan ini lebih umum dibandingkan penggunaan:
+Dengan pendekatan ini, aplikasi tidak perlu melakukan training ulang.
+
+---
+
+## `dump()` dan `load()`
+
+Dua fungsi utama yang digunakan dari `joblib` adalah:
+
+| Fungsi | Kegunaan |
+| --- | --- |
+| `dump()` | Menyimpan objek/model ke file |
+| `load()` | Memuat objek/model dari file |
+
+Pola penggunaannya:
+
+```python
+from joblib import dump, load
+```
+
+Menyimpan:
+
+```python
+dump(model, 'model.joblib')
+```
+
+Memuat:
+
+```python
+model = load('model.joblib')
+```
+
+Cara mudah mengingatnya:
+
+```text
+dump()
+→ menyimpan
+
+load()
+→ memuat
+```
+
+---
+
+## Format File Model
+
+File model dapat menggunakan ekstensi:
+
+```text
+.joblib
+```
+
+Contohnya:
+
+```text
+knn_model.joblib
+```
+
+Nama file sebenarnya bebas, tetapi penggunaan ekstensi `.joblib` membuat isi file lebih mudah dikenali sebagai file model yang disimpan menggunakan `joblib`.
+
+---
+
+## Catatan tentang Versi Tutorial Lama
+
+Jika Anda mengikuti tutorial Machine Learning lama, Anda mungkin menemukan:
 
 ```python
 from sklearn.externals import joblib
+```
+
+Kode tersebut berasal dari pendekatan lama dan **tidak perlu digunakan pada lingkungan `scikit-learn` modern**.
+
+Gunakan:
+
+```python
+from joblib import dump, load
+```
+
+Jika hanya membutuhkan salah satu fungsi, Anda juga dapat mengimpornya secara spesifik:
+
+```python
+from joblib import dump
+```
+
+atau:
+
+```python
+from joblib import load
 ```
 
 ---
 
 ## Hal yang Perlu Diperhatikan
 
-File model bukan sekadar file data biasa. Model yang disimpan bergantung pada struktur objek dan environment Python yang digunakan ketika model dibuat.
+File model tidak selalu dapat dipindahkan secara bebas antar lingkungan Python.
 
-Karena itu, ketika model digunakan kembali, penting untuk memperhatikan:
+Kompatibilitas dapat dipengaruhi oleh:
 
 - Versi Python.
-- Versi scikit-learn.
-- Versi library yang digunakan model.
-- Dependency yang dibutuhkan.
-- Sumber file model.
+- Versi `scikit-learn`.
+- Versi `joblib`.
+- Library lain yang digunakan oleh model.
+- Struktur atau kode yang digunakan saat model dibuat.
 
-Hal ini menjadi semakin penting ketika model dipindahkan ke komputer atau server lain.
+Karena itu, ketika model digunakan dalam deployment, sebaiknya environment dan dependency proyek dikelola dengan baik, misalnya menggunakan virtual environment dan `requirements.txt`.
+
+Contoh:
+
+```text
+project/
+│
+├── model/
+│   └── knn_model.joblib
+│
+├── app.py
+├── requirements.txt
+└── .venv/
+```
+
+Folder `.venv` tidak perlu disertakan ke repository. Dependency proyek cukup dicatat dalam `requirements.txt`.
+
+---
+
+## Keamanan `load()`
+
+File yang dibuat menggunakan mekanisme serialisasi seperti `joblib` **tidak boleh dianggap sebagai file data biasa yang aman untuk dibuka dari sumber yang tidak dipercaya**.
+
+Hindari melakukan:
+
+```python
+load('unknown_model.joblib')
+```
+
+jika file berasal dari sumber yang tidak Anda percaya.
+
+Gunakan file model yang berasal dari sumber terpercaya dan Anda ketahui bagaimana file tersebut dibuat.
+
+---
+
+## Workflow Machine Learning hingga Deployment
+
+Dengan adanya penyimpanan model, workflow Machine Learning menjadi lebih lengkap:
+
+```text
+1. Import Data
+       ↓
+2. Clean Data
+       ↓
+3. Split Data
+       ↓
+4. Train Model
+       ↓
+5. Evaluate Model
+       ↓
+6. Improve Model
+       ↓
+7. Save Model
+       ↓
+8. Deploy Application
+       ↓
+9. Load Model
+       ↓
+10. Predict Data Baru
+```
+
+Tahap **Save Model** menjadi jembatan antara proses pengembangan model dengan proses penggunaan model di aplikasi.
 
 ---
 
 ## Ringkasan
 
-**Model Persistence** memungkinkan model Machine Learning yang sudah dilatih disimpan dan digunakan kembali tanpa melakukan training dari awal.
+Pada materi ini kita mempelajari cara menyimpan dan memuat model Machine Learning menggunakan `joblib`.
 
-Fungsi utama `joblib`:
+Poin penting:
 
-| Fungsi | Kegunaan |
-| --- | --- |
-| `joblib.dump()` | Menyimpan model |
-| `joblib.load()` | Memuat model |
+- Model yang sudah dilatih dapat disimpan ke dalam file.
+- `joblib` dapat digunakan untuk melakukan serialisasi model Python.
+- Gunakan `dump()` untuk menyimpan model.
+- Gunakan `load()` untuk memuat model.
+- Pada versi modern, gunakan:
 
-Alur keseluruhannya:
-
-```text
-Training
-   ↓
-Trained Model
-   ↓
-joblib.dump()
-   ↓
-Model File
-   ↓
-joblib.load()
-   ↓
-Trained Model
-   ↓
-Prediction
+```python
+from joblib import dump, load
 ```
 
-Konsep ini merupakan bagian penting dalam Machine Learning karena proses **training** dan **prediction** dapat dipisahkan. Model dapat dilatih sekali, disimpan, kemudian digunakan berulang kali oleh aplikasi.
+- Jangan lagi menggunakan pendekatan lama:
+
+```python
+from sklearn.externals import joblib
+```
+
+- Model yang telah disimpan dapat digunakan kembali tanpa melakukan training ulang.
+- Pemisahan training dan prediction membuat aplikasi Machine Learning lebih efisien.
+- Pastikan dependency dan versi environment dikelola dengan baik ketika model digunakan untuk deployment.
 
 ---
 
 ## Kesimpulan
 
-Model Persistence menjawab masalah sederhana tetapi penting:
+Training model adalah proses untuk membuat model belajar dari data, sedangkan penyimpanan model memungkinkan hasil pembelajaran tersebut digunakan kembali.
 
-> **Bagaimana menggunakan model yang sudah dilatih tanpa harus melakukan training ulang setiap kali program dijalankan?**
+Dengan `joblib`, prosesnya menjadi sederhana:
 
-Jawabannya adalah dengan **menyimpan model ke dalam file dan memuatnya kembali ketika diperlukan**.
+```python
+from joblib import dump, load
+```
 
-Dalam Python, `joblib` menyediakan cara praktis untuk melakukan proses tersebut, terutama ketika bekerja dengan model dari scikit-learn.
+Simpan model:
+
+```python
+dump(model, 'model.joblib')
+```
+
+Kemudian pada aplikasi lain:
+
+```python
+model = load('model.joblib')
+```
+
+Setelah model dimuat, model dapat langsung digunakan:
+
+```python
+prediction = model.predict(data_baru)
+```
+
+Dengan demikian, aplikasi tidak perlu melatih model dari awal setiap kali dijalankan.
