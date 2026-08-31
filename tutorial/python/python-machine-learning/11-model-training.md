@@ -5,7 +5,7 @@ title: "Model Training, Prediction & Evaluation"
 
 Setelah dataset dibagi menjadi **Training Set** dan **Test Set**, tahap berikutnya adalah menggunakan data tersebut untuk membuat model Machine Learning.
 
-Pada [materi sebelumnya](/python/python-data-science-ml/ml-workflow), kita sudah memiliki:
+Pada [materi sebelumnya](/python/python-machine-learning/ml-workflow), kita sudah memiliki:
 
 ```text
 X_train → Features untuk training

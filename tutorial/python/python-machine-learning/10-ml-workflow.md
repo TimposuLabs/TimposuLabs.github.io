@@ -705,7 +705,7 @@ train_test_split()
 └───────────────┘
 ```
 
-Setelah tahap ini selesai, kita sudah memiliki data yang siap digunakan untuk **[membangun dan melatih model Machine Learning](/python/python-data-science-ml/model-training)**.
+Setelah tahap ini selesai, kita sudah memiliki data yang siap digunakan untuk **[membangun dan melatih model Machine Learning](/python/python-machine-learning/model-training)**.
 
 :::tip
 **Baca Dokumentasi Lengkap:** https://scikit-learn.org/stable/user_guide.html
