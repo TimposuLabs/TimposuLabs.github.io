@@ -2,7 +2,7 @@
 sidebar_position: 17
 ---
 
-# Python Manchine Learning & Data Science
+# Python Manchine Learning
 
 ## Pengantar Machine Learning
 
