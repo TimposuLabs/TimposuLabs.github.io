@@ -1,6 +1,6 @@
 ---
 slug: algoritma-manchine-learning
-title: Semua Algoritma Manchine Learning
+title: Jenis-jenis Algoritma Manchine Learning
 authors: topekox
 tags: [manchine learning, data mining, ai, data science]
 ---
