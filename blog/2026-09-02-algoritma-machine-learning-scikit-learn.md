@@ -11,18 +11,44 @@ Semua contoh kode memakai scikit-learn versi 1.3 ke atas dan ditulis dalam gaya 
 
 <!-- truncate -->
 
-## Cara Membaca Artikel Ini
+## Kerangka Pemilihan Algoritma
 
-Sebelum masuk ke algoritma satu per satu, ada empat pertanyaan yang menentukan hampir seluruh keputusan teknis:
+### Empat Pertanyaan Penyaring
 
-1. **Apakah ada label?** Ada label berarti supervised (klasifikasi atau regresi). Tidak ada label berarti unsupervised (clustering, reduksi dimensi, deteksi anomali).
-2. **Berapa rasio jumlah baris terhadap jumlah fitur?** Data lebar (fitur banyak, baris sedikit) menuntut regularisasi kuat dan model linear. Data panjang (baris banyak, fitur sedikit) memberi ruang untuk model non-linear yang kompleks.
-3. **Apakah hubungan antar variabel linear?** Jika batas keputusan berbentuk kotak-kotak dan berbasis ambang (threshold), model berbasis pohon menang. Jika hubungannya mulus dan aditif, model linear menang.
-4. **Apa biaya kesalahannya?** Jika biaya false negative jauh lebih besar daripada false positive, akurasi bukan metrik yang layak dipakai. Ini menentukan `class_weight`, ambang keputusan, dan metrik evaluasi.
+Sebelum masuk ke algoritma satu per satu, ada empat pertanyaan yang menentukan hampir seluruh keputusan teknis.
 
-## Fondasi: Struktur Kode yang Dipakai di Seluruh Artikel
+#### Apakah Ada Label?
+
+Ada label berarti supervised learning: klasifikasi jika targetnya kategorikal, regresi jika targetnya kontinu. Tidak ada label berarti unsupervised: clustering, reduksi dimensi, atau deteksi anomali. Ada juga kondisi setengah jalan, yaitu label tersedia tapi sangat sedikit, yang mengarah ke pendekatan semi-supervised atau deteksi anomali.
+
+#### Berapa Rasio Jumlah Baris terhadap Jumlah Fitur?
+
+Data lebar (fitur banyak, baris sedikit) menuntut regularisasi kuat dan model linear. Data panjang (baris banyak, fitur sedikit) memberi ruang untuk model non-linear yang kompleks. Aturan kasarnya, jika jumlah fitur mendekati atau melebihi jumlah baris, model kompleks hampir pasti overfit.
+
+#### Apakah Hubungan Antar Variabel Linear?
+
+Jika batas keputusan berbentuk kotak-kotak dan berbasis ambang, model berbasis pohon menang. Jika hubungannya mulus dan aditif, model linear menang. Cara termurah mengetahuinya adalah membandingkan skor validasi silang antara regresi logistik dan Random Forest di awal proyek.
+
+#### Apa Biaya Kesalahannya?
+
+Jika biaya false negative jauh lebih besar daripada false positive, akurasi bukan metrik yang layak dipakai. Pertanyaan ini menentukan `class_weight`, ambang keputusan, dan metrik evaluasi, dan seharusnya dijawab sebelum satu baris kode pun ditulis.
+
+### Peta Kategori Algoritma
+
+| Kategori | Tujuan | Contoh Algoritma |
+|---|---|---|
+| Supervised, regresi | Memprediksi nilai kontinu | Linear, Ridge, Lasso, Random Forest Regressor |
+| Supervised, klasifikasi | Memprediksi kelas | Logistic Regression, SVM, KNN, Naive Bayes |
+| Ensemble berbasis pohon | Akurasi maksimal pada data tabular | Random Forest, Gradient Boosting, Stacking |
+| Clustering | Menemukan kelompok alami | K-Means, DBSCAN, GMM, Agglomerative |
+| Reduksi dimensi | Memampatkan dan memvisualisasi | PCA, t-SNE |
+| Deteksi anomali | Menandai pengamatan langka | Isolation Forest, One-Class SVM |
+
+### Fondasi Kode: Pipeline dan Preprocessing
 
 Hampir semua algoritma di bawah ini memakai kerangka yang sama. Preprocessing dibungkus dalam `ColumnTransformer`, lalu digabung dengan estimator dalam satu `Pipeline`.
+
+#### Impor dan Konfigurasi Dasar
 
 ```python
 import numpy as np
@@ -34,8 +60,14 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 RANDOM_STATE = 42
+cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=RANDOM_STATE)
+```
 
-# Preprocessing untuk model yang sensitif terhadap skala
+#### Varian A: Preprocessing untuk Model Sensitif Skala
+
+Dipakai oleh KNN, SVM, regresi logistik, MLP, K-Means, dan PCA.
+
+```python
 preprocessor_scaled = ColumnTransformer(
     transformers=[
         ("num", Pipeline([
@@ -49,8 +81,13 @@ preprocessor_scaled = ColumnTransformer(
     ],
     remainder="drop",
 )
+```
 
-# Preprocessing untuk model berbasis pohon (tanpa scaling)
+#### Varian B: Preprocessing untuk Model Berbasis Pohon
+
+Dipakai oleh Decision Tree, Random Forest, dan Gradient Boosting.
+
+```python
 preprocessor_tree = ColumnTransformer(
     transformers=[
         ("num", SimpleImputer(strategy="median"),
@@ -62,24 +99,69 @@ preprocessor_tree = ColumnTransformer(
     ],
     remainder="drop",
 )
-
-cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=RANDOM_STATE)
 ```
 
-Dua varian preprocessing ini bukan formalitas. Model berbasis jarak dan berbasis gradien (KNN, SVM, regresi logistik, MLP, K-Means, PCA) rusak total jika fitur punya skala berbeda. Model berbasis pohon sama sekali tidak terpengaruh oleh transformasi monoton, sehingga standardisasi hanya membuang waktu komputasi.
+Pemisahan dua varian ini bukan formalitas. Model berbasis jarak dan berbasis gradien rusak total jika fitur punya skala berbeda. Model berbasis pohon sama sekali tidak terpengaruh oleh transformasi monoton, sehingga standardisasi hanya membuang waktu komputasi.
 
-## Regresi Linear dan Variannya
+## Algoritma Supervised: Regresi
 
-**Konsep.** Mencari kombinasi linear dari fitur yang meminimalkan jumlah kuadrat galat. Ridge menambahkan penalti L2 (mengecilkan koefisien), Lasso menambahkan penalti L1 (mengenolkan koefisien), ElasticNet menggabungkan keduanya.
+### Ordinary Least Squares
 
-**Kapan dipakai.** Ketika target bersifat kontinu dan yang dibutuhkan bukan hanya prediksi tapi juga interpretasi arah dan besar pengaruh tiap variabel. Ini pilihan default untuk baseline regresi dan untuk konteks yang menuntut pertanggungjawaban (kebijakan, ekonometrika, audit).
+#### Konsep
 
-**Jenis data yang cocok.** Fitur numerik dengan hubungan yang mendekati linear terhadap target, multikolinearitas rendah sampai sedang, residual yang relatif homoskedastik. Lasso dan ElasticNet unggul pada data lebar dengan banyak fitur tidak relevan (misalnya data ekspresi gen atau fitur teks TF-IDF), karena keduanya melakukan seleksi fitur secara implisit.
+Mencari kombinasi linear dari fitur yang meminimalkan jumlah kuadrat galat antara nilai prediksi dan nilai sebenarnya. Solusinya tertutup dan dapat dihitung langsung tanpa iterasi.
 
-**Kelemahan.** Tidak menangkap interaksi atau non-linearitas kecuali ditambahkan manual, sangat sensitif terhadap outlier, dan koefisiennya menyesatkan ketika fitur berkorelasi tinggi.
+#### Kapan Digunakan
+
+Ketika target bersifat kontinu dan yang dibutuhkan bukan hanya prediksi tapi juga interpretasi arah dan besar pengaruh tiap variabel. Ini pilihan default untuk baseline regresi dan untuk konteks yang menuntut pertanggungjawaban seperti kebijakan publik, ekonometrika, dan audit.
+
+#### Jenis Data yang Cocok
+
+Fitur numerik dengan hubungan yang mendekati linear terhadap target, multikolinearitas rendah, dan residual yang relatif homoskedastik. Jumlah baris harus jauh lebih besar daripada jumlah fitur.
+
+#### Kelemahan dan Batasan
+
+Tidak menangkap interaksi atau non-linearitas kecuali ditambahkan manual. Sangat sensitif terhadap outlier karena galat dikuadratkan. Koefisiennya menyesatkan ketika fitur saling berkorelasi tinggi.
+
+#### Implementasi
 
 ```python
-from sklearn.linear_model import LinearRegression, RidgeCV, LassoCV, ElasticNetCV
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, r2_score
+
+ols = Pipeline([
+    ("prep", preprocessor_scaled),
+    ("model", LinearRegression()),
+])
+ols.fit(X_train, y_train)
+pred = ols.predict(X_test)
+
+print("MAE:", mean_absolute_error(y_test, pred))
+print("R2 :", r2_score(y_test, pred))
+```
+
+### Regularisasi: Ridge, Lasso, ElasticNet
+
+#### Konsep
+
+Ridge menambahkan penalti L2 yang mengecilkan seluruh koefisien secara proporsional. Lasso menambahkan penalti L1 yang mampu mengenolkan koefisien sepenuhnya sehingga sekaligus melakukan seleksi fitur. ElasticNet menggabungkan keduanya dengan rasio yang bisa diatur.
+
+#### Kapan Digunakan
+
+Ridge dipakai ketika fitur saling berkorelasi dan semuanya diyakini relevan. Lasso dipakai ketika diduga banyak fitur tidak relevan dan diinginkan model yang ringkas. ElasticNet dipakai ketika fitur berkorelasi dalam kelompok, karena Lasso murni cenderung memilih satu fitur dari tiap kelompok secara acak.
+
+#### Jenis Data yang Cocok
+
+Data lebar dengan banyak fitur, misalnya data ekspresi gen, fitur TF-IDF dari teks, atau hasil rekayasa fitur otomatis. Standardisasi wajib, karena penalti bekerja pada besaran koefisien.
+
+#### Kelemahan dan Batasan
+
+Koefisien menjadi bias secara sengaja, sehingga tidak layak dipakai untuk inferensi statistik formal. Nilai `alpha` harus dipilih lewat validasi silang, bukan ditebak.
+
+#### Implementasi
+
+```python
+from sklearn.linear_model import RidgeCV, LassoCV, ElasticNetCV
 
 ridge = Pipeline([
     ("prep", preprocessor_scaled),
@@ -92,25 +174,74 @@ lasso = Pipeline([
                       random_state=RANDOM_STATE)),
 ])
 
-ridge.fit(X_train, y_train)
+elastic = Pipeline([
+    ("prep", preprocessor_scaled),
+    ("model", ElasticNetCV(l1_ratio=[0.1, 0.5, 0.7, 0.9, 0.95, 1.0],
+                           max_iter=10_000, random_state=RANDOM_STATE)),
+])
 
-# Membaca koefisien: hanya bermakna jika fitur sudah distandardisasi
-nama_fitur = ridge.named_steps["prep"].get_feature_names_out()
-koef = pd.Series(ridge.named_steps["model"].coef_, index=nama_fitur)
-print(koef.sort_values(key=abs, ascending=False).head(10))
+lasso.fit(X_train, y_train)
+nama_fitur = lasso.named_steps["prep"].get_feature_names_out()
+koef = pd.Series(lasso.named_steps["model"].coef_, index=nama_fitur)
+print("Fitur bertahan:", (koef != 0).sum(), "dari", len(koef))
+print(koef[koef != 0].sort_values(key=abs, ascending=False).head(10))
 ```
 
-Untuk data dengan outlier berat, ganti dengan `HuberRegressor` atau `RANSACRegressor` yang jauh lebih tahan terhadap pencilan.
+### Regresi Robust: Huber dan RANSAC
 
-## Regresi Logistik
+#### Konsep
 
-**Konsep.** Model linear yang memetakan kombinasi fitur ke probabilitas melalui fungsi sigmoid (biner) atau softmax (multikelas). Meski namanya regresi, ini algoritma klasifikasi.
+`HuberRegressor` mengganti fungsi kerugian kuadrat dengan fungsi yang tumbuh linear setelah ambang tertentu, sehingga outlier tidak mendominasi. `RANSACRegressor` berulang kali mencocokkan model pada subset acak dan memilih model dengan inlier terbanyak.
 
-**Kapan dipakai.** Sebagai baseline wajib untuk setiap masalah klasifikasi. Juga menjadi pilihan akhir ketika sistem produksi menuntut latensi rendah, ukuran model kecil, dan probabilitas yang terkalibrasi baik tanpa post-processing tambahan.
+#### Kapan Digunakan
 
-**Jenis data yang cocok.** Data numerik terstandardisasi dengan batas keputusan yang mendekati linear di ruang fitur. Sangat kuat pada data berdimensi sangat tinggi dan jarang (sparse), misalnya representasi teks bag-of-words, di mana model kompleks justru overfit.
+Ketika data mengandung outlier yang diketahui berasal dari kesalahan pengukuran atau proses berbeda, dan menghapusnya secara manual tidak praktis.
 
-**Kelemahan.** Batas keputusan linear. Untuk pola berbentuk XOR atau melingkar, performanya akan buruk kecuali fitur direkayasa terlebih dahulu.
+#### Jenis Data yang Cocok
+
+Data numerik dengan hubungan linear yang jelas, tetapi tercemar sebagian kecil pengamatan ekstrem. RANSAC bekerja baik jika proporsi outlier di bawah sekitar 50 persen.
+
+#### Kelemahan dan Batasan
+
+Lebih lambat dari OLS dan punya hyperparameter tambahan (`epsilon` untuk Huber, `residual_threshold` untuk RANSAC). Jika outlier sebenarnya merupakan sinyal penting, model ini justru membuang informasi.
+
+#### Implementasi
+
+```python
+from sklearn.linear_model import HuberRegressor, RANSACRegressor
+
+huber = Pipeline([
+    ("prep", preprocessor_scaled),
+    ("model", HuberRegressor(epsilon=1.35, alpha=1e-4, max_iter=500)),
+])
+
+ransac = Pipeline([
+    ("prep", preprocessor_scaled),
+    ("model", RANSACRegressor(random_state=RANDOM_STATE)),
+])
+```
+
+## Algoritma Supervised: Klasifikasi
+
+### Logistic Regression
+
+#### Konsep
+
+Model linear yang memetakan kombinasi fitur ke probabilitas melalui fungsi sigmoid untuk kasus biner, atau softmax untuk multikelas. Meski namanya mengandung kata regresi, ini adalah algoritma klasifikasi.
+
+#### Kapan Digunakan
+
+Sebagai baseline wajib untuk setiap masalah klasifikasi. Juga menjadi pilihan akhir ketika sistem produksi menuntut latensi rendah, ukuran model kecil, dan probabilitas terkalibrasi baik tanpa post-processing tambahan.
+
+#### Jenis Data yang Cocok
+
+Data numerik terstandardisasi dengan batas keputusan yang mendekati linear. Sangat kuat pada data berdimensi sangat tinggi dan jarang, misalnya representasi teks bag-of-words, di mana model kompleks justru overfit.
+
+#### Kelemahan dan Batasan
+
+Batas keputusan linear. Untuk pola berbentuk XOR atau melingkar, performanya buruk kecuali fitur direkayasa lebih dulu, misalnya lewat `PolynomialFeatures`.
+
+#### Implementasi
 
 ```python
 from sklearn.linear_model import LogisticRegression
@@ -123,7 +254,7 @@ logreg = Pipeline([
         C=1.0,
         solver="lbfgs",
         max_iter=2000,
-        class_weight="balanced",   # penting saat kelas tidak seimbang
+        class_weight="balanced",
         random_state=RANDOM_STATE,
     )),
 ])
@@ -135,19 +266,29 @@ print(classification_report(y_test, logreg.predict(X_test), digits=4))
 print("PR-AUC:", average_precision_score(y_test, proba))
 ```
 
-Parameter `class_weight="balanced"` menaikkan bobot kelas minoritas secara otomatis. Pada kasus dengan biaya false negative tinggi (deteksi penipuan, deteksi intrusi jaringan, skrining penyakit), ini biasanya lebih efektif dan lebih murah daripada oversampling.
+#### Catatan untuk Data Tidak Seimbang
 
-Untuk data dengan ribuan fitur dan kebutuhan seleksi otomatis, gunakan `penalty="l1"` dengan `solver="liblinear"` atau `solver="saga"`.
+Parameter `class_weight="balanced"` menaikkan bobot kelas minoritas secara otomatis. Pada kasus dengan biaya false negative tinggi seperti deteksi penipuan, deteksi intrusi jaringan, atau skrining penyakit, pendekatan ini biasanya lebih efektif dan lebih murah daripada oversampling. Untuk data dengan ribuan fitur dan kebutuhan seleksi otomatis, gunakan `penalty="l1"` dengan `solver="saga"`.
 
-## K-Nearest Neighbors (KNN)
+### K-Nearest Neighbors
 
-**Konsep.** Tidak ada proses pelatihan dalam arti sebenarnya. Prediksi dilakukan dengan mencari *k* tetangga terdekat dari titik uji dan mengambil suara mayoritas (klasifikasi) atau rata-rata (regresi).
+#### Konsep
 
-**Kapan dipakai.** Dataset kecil sampai sedang dengan batas keputusan yang sangat tidak beraturan, atau ketika dibutuhkan baseline non-parametrik yang cepat dibangun. Juga berguna sebagai komponen sistem rekomendasi berbasis kemiripan.
+Tidak ada proses pelatihan dalam arti sebenarnya. Prediksi dilakukan dengan mencari *k* tetangga terdekat dari titik uji lalu mengambil suara mayoritas untuk klasifikasi atau rata-rata untuk regresi.
 
-**Jenis data yang cocok.** Fitur numerik dalam jumlah sedikit (idealnya di bawah 20), sudah distandardisasi, dan padat. Sampel per kelas harus cukup banyak agar tetangga yang ditemukan representatif.
+#### Kapan Digunakan
 
-**Kelemahan.** Ini algoritma yang paling cepat runtuh oleh *curse of dimensionality*. Pada dimensi tinggi, semua titik menjadi berjarak hampir sama sehingga konsep "tetangga" kehilangan makna. Biaya prediksi juga tumbuh linear terhadap ukuran data latih, sehingga tidak layak untuk sistem real-time berskala besar.
+Dataset kecil sampai sedang dengan batas keputusan yang sangat tidak beraturan, atau ketika dibutuhkan baseline non-parametrik yang cepat dibangun. Juga berguna sebagai komponen sistem rekomendasi berbasis kemiripan.
+
+#### Jenis Data yang Cocok
+
+Fitur numerik dalam jumlah sedikit, idealnya di bawah 20, sudah distandardisasi, dan padat. Sampel per kelas harus cukup banyak agar tetangga yang ditemukan representatif.
+
+#### Kelemahan dan Batasan
+
+Ini algoritma yang paling cepat runtuh oleh *curse of dimensionality*. Pada dimensi tinggi, semua titik menjadi berjarak hampir sama sehingga konsep tetangga kehilangan makna. Biaya prediksi juga tumbuh linear terhadap ukuran data latih, sehingga tidak layak untuk sistem real-time berskala besar.
+
+#### Implementasi
 
 ```python
 from sklearn.neighbors import KNeighborsClassifier
@@ -175,15 +316,25 @@ print(grid.best_params_, grid.best_score_)
 
 Gunakan `weights="distance"` ketika kepadatan data tidak seragam antar wilayah.
 
-## Naive Bayes
+### Naive Bayes
 
-**Konsep.** Menerapkan teorema Bayes dengan asumsi bahwa semua fitur saling bebas jika kelas diketahui. Asumsi ini hampir selalu salah, tetapi modelnya tetap sering bekerja baik.
+#### Konsep
 
-**Kapan dipakai.** Klasifikasi teks (spam, sentimen, kategorisasi dokumen), dan sebagai baseline yang sangat cepat ketika data latih sangat sedikit. Waktu pelatihan praktis sekali lewat data.
+Menerapkan teorema Bayes dengan asumsi bahwa semua fitur saling bebas jika kelas diketahui. Asumsi ini hampir selalu salah, tetapi modelnya tetap sering bekerja baik karena yang dibutuhkan hanya urutan probabilitas yang benar, bukan nilainya.
 
-**Jenis data yang cocok.** `MultinomialNB` untuk data cacahan seperti frekuensi kata atau TF-IDF. `BernoulliNB` untuk fitur biner. `GaussianNB` untuk fitur kontinu yang distribusinya mendekati normal per kelas. `CategoricalNB` untuk fitur kategorikal murni.
+#### Kapan Digunakan
 
-**Kelemahan.** Probabilitas keluarannya buruk secara kalibrasi (cenderung ekstrem mendekati 0 atau 1), dan performa turun tajam ketika fitur sangat berkorelasi.
+Klasifikasi teks seperti penyaringan spam, analisis sentimen, dan kategorisasi dokumen. Juga sebagai baseline sangat cepat ketika data latih sedikit, karena pelatihannya praktis satu kali lewat data.
+
+#### Jenis Data yang Cocok
+
+`MultinomialNB` untuk data cacahan seperti frekuensi kata atau TF-IDF. `BernoulliNB` untuk fitur biner. `GaussianNB` untuk fitur kontinu yang distribusinya mendekati normal per kelas. `CategoricalNB` untuk fitur kategorikal murni.
+
+#### Kelemahan dan Batasan
+
+Probabilitas keluarannya buruk secara kalibrasi karena cenderung ekstrem mendekati 0 atau 1. Performa turun tajam ketika fitur sangat berkorelasi, misalnya ketika unigram dan bigram dipakai bersamaan tanpa penyesuaian.
+
+#### Implementasi
 
 ```python
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -198,15 +349,25 @@ teks_clf.fit(dokumen_train, label_train)
 
 Parameter `alpha` adalah Laplace smoothing yang mencegah probabilitas nol untuk kata yang tidak pernah muncul saat pelatihan.
 
-## Support Vector Machine (SVM)
+### Support Vector Machine
 
-**Konsep.** Mencari hyperplane yang memaksimalkan margin antar kelas. Dengan kernel trick, data dipetakan ke ruang berdimensi lebih tinggi sehingga batas non-linear di ruang asal menjadi linear di ruang baru.
+#### Konsep
 
-**Kapan dipakai.** Dataset berukuran kecil sampai menengah (di bawah sekitar 50.000 baris) dengan batas keputusan kompleks dan margin antar kelas yang cukup jelas. Sangat kuat pada data berdimensi tinggi dengan jumlah sampel terbatas, seperti klasifikasi citra sederhana atau data biomedis.
+Mencari hyperplane yang memaksimalkan margin antar kelas. Dengan kernel trick, data dipetakan ke ruang berdimensi lebih tinggi sehingga batas non-linear di ruang asal menjadi linear di ruang baru.
 
-**Jenis data yang cocok.** Fitur numerik terstandardisasi. `LinearSVC` untuk data sparse berdimensi tinggi. `SVC(kernel="rbf")` untuk data padat berdimensi rendah sampai menengah.
+#### Kapan Digunakan
 
-**Kelemahan.** Kompleksitas pelatihan `SVC` berada di kisaran kuadratik sampai kubik terhadap jumlah sampel, sehingga tidak praktis untuk data besar. Model juga tidak memberi probabilitas secara langsung; `probability=True` memicu kalibrasi internal yang memperlambat pelatihan berkali lipat. Interpretasinya rendah.
+Dataset kecil sampai menengah, di bawah sekitar 50.000 baris, dengan batas keputusan kompleks dan margin antar kelas yang cukup jelas. Sangat kuat pada data berdimensi tinggi dengan jumlah sampel terbatas, seperti klasifikasi citra sederhana atau data biomedis.
+
+#### Jenis Data yang Cocok
+
+Fitur numerik terstandardisasi. `LinearSVC` untuk data sparse berdimensi tinggi. `SVC(kernel="rbf")` untuk data padat berdimensi rendah sampai menengah.
+
+#### Kelemahan dan Batasan
+
+Kompleksitas pelatihan `SVC` berada di kisaran kuadratik sampai kubik terhadap jumlah sampel, sehingga tidak praktis untuk data besar. Model tidak memberi probabilitas secara langsung; `probability=True` memicu kalibrasi internal yang memperlambat pelatihan berkali lipat. Interpretasinya rendah.
+
+#### Implementasi
 
 ```python
 from sklearn.svm import SVC, LinearSVC
@@ -217,7 +378,7 @@ svm_rbf = Pipeline([
                   class_weight="balanced", random_state=RANDOM_STATE)),
 ])
 
-# Untuk data besar dan sparse (misalnya TF-IDF)
+# Untuk data besar dan sparse, misalnya TF-IDF
 svm_linear = Pipeline([
     ("prep", preprocessor_scaled),
     ("model", LinearSVC(C=1.0, class_weight="balanced", dual="auto",
@@ -225,17 +386,29 @@ svm_linear = Pipeline([
 ])
 ```
 
-`C` mengendalikan trade-off antara margin lebar dan kesalahan klasifikasi. Nilai `C` besar membuat model lebih ketat dan berisiko overfit.
+Parameter `C` mengendalikan trade-off antara margin lebar dan kesalahan klasifikasi. Nilai `C` besar membuat model lebih ketat dan berisiko overfit.
 
-## Decision Tree
+## Algoritma Berbasis Pohon dan Ensemble
 
-**Konsep.** Membagi ruang fitur secara rekursif dengan aturan ambang tunggal per node, memilih pemisahan yang paling menurunkan impurity (Gini atau entropi).
+### Decision Tree
 
-**Kapan dipakai.** Ketika interpretasi menjadi kebutuhan utama dan aturan keputusan harus bisa dibaca manusia atau diterjemahkan menjadi prosedur operasional. Juga menjadi blok dasar bagi semua metode ensemble berbasis pohon.
+#### Konsep
 
-**Jenis data yang cocok.** Campuran fitur numerik dan kategorikal, tidak sensitif terhadap skala, toleran terhadap outlier, dan mampu menangkap interaksi antar fitur tanpa spesifikasi manual.
+Membagi ruang fitur secara rekursif dengan aturan ambang tunggal per node, memilih pemisahan yang paling menurunkan impurity, diukur dengan Gini atau entropi.
 
-**Kelemahan.** Varians tinggi. Perubahan kecil pada data latih dapat menghasilkan struktur pohon yang sangat berbeda. Pohon tunggal tanpa pembatasan kedalaman hampir pasti overfit.
+#### Kapan Digunakan
+
+Ketika interpretasi menjadi kebutuhan utama dan aturan keputusan harus bisa dibaca manusia atau diterjemahkan menjadi prosedur operasional. Juga menjadi blok dasar bagi semua metode ensemble berbasis pohon.
+
+#### Jenis Data yang Cocok
+
+Campuran fitur numerik dan kategorikal. Tidak sensitif terhadap skala, toleran terhadap outlier, dan mampu menangkap interaksi antar fitur tanpa spesifikasi manual.
+
+#### Kelemahan dan Batasan
+
+Varians tinggi. Perubahan kecil pada data latih dapat menghasilkan struktur pohon yang sangat berbeda. Pohon tunggal tanpa pembatasan kedalaman hampir pasti overfit.
+
+#### Implementasi
 
 ```python
 from sklearn.tree import DecisionTreeClassifier, export_text
@@ -246,7 +419,7 @@ tree = Pipeline([
         criterion="gini",
         max_depth=8,
         min_samples_leaf=20,
-        ccp_alpha=0.0,            # pruning berbasis cost-complexity
+        ccp_alpha=0.0,
         class_weight="balanced",
         random_state=RANDOM_STATE,
     )),
@@ -260,17 +433,29 @@ print(export_text(
 ))
 ```
 
-Cara paling bersih mengendalikan kompleksitas adalah cost-complexity pruning. Ambil jalur alpha dengan `cost_complexity_pruning_path()`, lalu pilih `ccp_alpha` terbaik melalui validasi silang.
+#### Mengendalikan Kompleksitas dengan Pruning
 
-## Random Forest
+Cara paling bersih mengendalikan kompleksitas adalah cost-complexity pruning. Ambil jalur alpha dengan `cost_complexity_pruning_path()`, lalu pilih `ccp_alpha` terbaik melalui validasi silang, bukan dengan menebak `max_depth`.
 
-**Konsep.** Membangun banyak pohon pada sampel bootstrap yang berbeda, dan pada setiap pemisahan hanya mempertimbangkan subset fitur secara acak. Prediksi akhir adalah agregasi dari seluruh pohon. Dekorelasi antar pohon inilah yang menurunkan varians.
+### Random Forest
 
-**Kapan dipakai.** Ini default terbaik untuk data tabular ketika waktu tuning terbatas. Performanya kuat dengan hyperparameter bawaan, sulit dibuat overfit parah, dan berjalan paralel dengan baik.
+#### Konsep
 
-**Jenis data yang cocok.** Data tabular berukuran sedang sampai besar, campuran tipe fitur, dengan interaksi non-linear. Tahan terhadap fitur tidak relevan dan skala yang berbeda-beda.
+Membangun banyak pohon pada sampel bootstrap yang berbeda, dan pada setiap pemisahan hanya mempertimbangkan subset fitur secara acak. Prediksi akhir adalah agregasi seluruh pohon. Dekorelasi antar pohon inilah yang menurunkan varians.
 
-**Kelemahan.** Ukuran model besar dan lambat saat inferensi jika jumlah pohon banyak. Tidak mampu melakukan ekstrapolasi di luar rentang nilai target yang pernah dilihat, sehingga lemah untuk regresi dengan tren. Ukuran kepentingan fitur berbasis impurity juga bias terhadap fitur berkardinalitas tinggi.
+#### Kapan Digunakan
+
+Ini default terbaik untuk data tabular ketika waktu tuning terbatas. Performanya kuat dengan hyperparameter bawaan, sulit dibuat overfit parah, dan berjalan paralel dengan baik.
+
+#### Jenis Data yang Cocok
+
+Data tabular berukuran sedang sampai besar, campuran tipe fitur, dengan interaksi non-linear. Tahan terhadap fitur tidak relevan dan skala yang berbeda-beda.
+
+#### Kelemahan dan Batasan
+
+Ukuran model besar dan lambat saat inferensi jika jumlah pohon banyak. Tidak mampu melakukan ekstrapolasi di luar rentang nilai target yang pernah dilihat, sehingga lemah untuk regresi dengan tren. Ukuran kepentingan fitur berbasis impurity bias terhadap fitur berkardinalitas tinggi.
+
+#### Implementasi
 
 ```python
 from sklearn.ensemble import RandomForestClassifier
@@ -290,22 +475,32 @@ rf = Pipeline([
 ])
 rf.fit(X_train, y_train)
 
-# Gunakan permutation importance, bukan feature_importances_ bawaan
 hasil = permutation_importance(rf, X_test, y_test, n_repeats=10,
-                               scoring="f1_macro", random_state=RANDOM_STATE, n_jobs=-1)
+                               scoring="f1_macro", random_state=RANDOM_STATE,
+                               n_jobs=-1)
 peringkat = pd.Series(hasil.importances_mean, index=X_test.columns)
 print(peringkat.sort_values(ascending=False).head(10))
 ```
 
-## Gradient Boosting dan HistGradientBoosting
+### Gradient Boosting dan HistGradientBoosting
 
-**Konsep.** Pohon dibangun secara berurutan, masing-masing memperbaiki residual atau gradien galat dari model sebelumnya. Berbeda dengan Random Forest yang menurunkan varians, boosting menurunkan bias.
+#### Konsep
 
-**Kapan dipakai.** Ketika akurasi maksimal pada data tabular menjadi tujuan dan tersedia waktu untuk tuning. Pada sebagian besar kompetisi dan benchmark data tabular, gradient boosting mengungguli Random Forest maupun jaringan saraf.
+Pohon dibangun secara berurutan, masing-masing memperbaiki residual atau gradien galat dari model sebelumnya. Berbeda dengan Random Forest yang menurunkan varians, boosting menurunkan bias.
 
-**Jenis data yang cocok.** Sama seperti Random Forest, tetapi hasilnya lebih baik ketika sinyalnya halus dan dataset cukup besar. `HistGradientBoostingClassifier` menangani nilai hilang secara native dan melakukan binning histogram, sehingga jauh lebih cepat pada data dengan puluhan ribu baris ke atas.
+#### Kapan Digunakan
 
-**Kelemahan.** Lebih sensitif terhadap hyperparameter dibandingkan Random Forest, terutama `learning_rate` dan jumlah iterasi. Pelatihan bersifat sekuensial sehingga tidak bisa diparalelkan sepenuhnya. Rentan overfit pada data berisik jika early stopping tidak dipakai.
+Ketika akurasi maksimal pada data tabular menjadi tujuan dan tersedia waktu untuk tuning. Pada sebagian besar benchmark data tabular, gradient boosting mengungguli Random Forest maupun jaringan saraf.
+
+#### Jenis Data yang Cocok
+
+Sama seperti Random Forest, tetapi hasilnya lebih baik ketika sinyalnya halus dan dataset cukup besar. `HistGradientBoostingClassifier` menangani nilai hilang secara native dan melakukan binning histogram, sehingga jauh lebih cepat pada data dengan puluhan ribu baris ke atas.
+
+#### Kelemahan dan Batasan
+
+Lebih sensitif terhadap hyperparameter dibandingkan Random Forest, terutama `learning_rate` dan jumlah iterasi. Pelatihan bersifat sekuensial sehingga tidak bisa diparalelkan sepenuhnya. Rentan overfit pada data berisik jika early stopping tidak dipakai.
+
+#### Implementasi
 
 ```python
 from sklearn.ensemble import HistGradientBoostingClassifier
@@ -326,17 +521,73 @@ hgb.fit(X_train_numerik, y_train)   # menerima NaN secara langsung
 print("Iterasi terpakai:", hgb.n_iter_)
 ```
 
-Aturan praktis untuk tuning: turunkan `learning_rate`, naikkan `max_iter`, dan biarkan early stopping menentukan titik berhenti.
+#### Strategi Tuning
 
-## Multi-Layer Perceptron
+Aturan praktisnya: turunkan `learning_rate`, naikkan `max_iter`, dan biarkan early stopping menentukan titik berhenti. Setelah itu baru sesuaikan `max_leaf_nodes` dan `l2_regularization`. Mengubah banyak parameter sekaligus membuat sumber perbaikan tidak bisa dilacak.
 
-**Konsep.** Jaringan saraf feed-forward dengan satu atau lebih lapisan tersembunyi, dilatih dengan backpropagation.
+### Voting dan Stacking
 
-**Kapan dipakai.** Ketika hubungan antara fitur dan target sangat non-linear dan data cukup besar. Pada data tabular, MLP jarang mengalahkan gradient boosting, sehingga pemakaiannya lebih sering dibenarkan pada data tidak terstruktur atau embedding.
+#### Konsep
 
-**Jenis data yang cocok.** Fitur numerik terstandardisasi, jumlah sampel besar (puluhan ribu ke atas), dan sinyal yang benar-benar non-linear.
+Voting menggabungkan prediksi beberapa model melalui suara mayoritas (hard) atau rata-rata probabilitas (soft). Stacking melatih meta-model di atas prediksi model-model dasar.
 
-**Kelemahan.** Membutuhkan tuning arsitektur dan learning rate, tidak interpretable, sensitif terhadap inisialisasi, dan `MLPClassifier` scikit-learn tidak mendukung GPU. Untuk kebutuhan deep learning serius, pindah ke PyTorch atau TensorFlow.
+#### Kapan Digunakan
+
+Pada tahap akhir ketika beberapa model dengan karakteristik berbeda punya performa setara tetapi membuat kesalahan pada sampel yang berbeda. Semakin rendah korelasi galat antar model dasar, semakin besar keuntungannya.
+
+#### Jenis Data yang Cocok
+
+Sama seperti model dasarnya. Yang menentukan adalah keberagaman model, bukan jumlahnya. Menggabungkan tiga varian Random Forest hampir tidak memberi manfaat.
+
+#### Kelemahan dan Batasan
+
+Biaya pelatihan dan inferensi berlipat, interpretasi makin jauh, dan keuntungan performanya sering hanya sepersekian persen. Pertimbangkan biaya operasionalnya sebelum dipakai di produksi.
+
+#### Implementasi
+
+```python
+from sklearn.ensemble import StackingClassifier, VotingClassifier
+
+estimators = [
+    ("logreg", logreg),
+    ("rf", rf),
+    ("hgb", Pipeline([
+        ("prep", preprocessor_tree),
+        ("model", HistGradientBoostingClassifier(random_state=RANDOM_STATE)),
+    ])),
+]
+
+stack = StackingClassifier(
+    estimators=estimators,
+    final_estimator=LogisticRegression(max_iter=2000, class_weight="balanced"),
+    cv=cv,                 # wajib, untuk mencegah kebocoran data
+    stack_method="predict_proba",
+    n_jobs=-1,
+)
+stack.fit(X_train, y_train)
+```
+
+## Jaringan Saraf Tiruan
+
+### Multi-Layer Perceptron
+
+#### Konsep
+
+Jaringan saraf feed-forward dengan satu atau lebih lapisan tersembunyi, dilatih dengan backpropagation. Non-linearitas diperoleh dari fungsi aktivasi seperti ReLU.
+
+#### Kapan Digunakan
+
+Ketika hubungan antara fitur dan target sangat non-linear dan data cukup besar. Pada data tabular, MLP jarang mengalahkan gradient boosting, sehingga pemakaiannya lebih sering dibenarkan pada data tidak terstruktur atau pada representasi embedding.
+
+#### Jenis Data yang Cocok
+
+Fitur numerik terstandardisasi, jumlah sampel besar dalam orde puluhan ribu ke atas, dan sinyal yang benar-benar non-linear.
+
+#### Kelemahan dan Batasan
+
+Membutuhkan tuning arsitektur dan learning rate, tidak interpretable, sensitif terhadap inisialisasi, dan `MLPClassifier` scikit-learn tidak mendukung GPU. Untuk kebutuhan deep learning serius, pindah ke PyTorch atau TensorFlow.
+
+#### Implementasi
 
 ```python
 from sklearn.neural_network import MLPClassifier
@@ -358,45 +609,65 @@ mlp = Pipeline([
 ])
 ```
 
-Perhatikan bahwa `MLPClassifier` tidak punya parameter `class_weight`. Untuk data tidak seimbang, tangani lewat resampling atau penyesuaian ambang keputusan.
+`MLPClassifier` tidak punya parameter `class_weight`. Untuk data tidak seimbang, tangani lewat resampling atau penyesuaian ambang keputusan pada probabilitas keluaran.
 
-## K-Means
+## Algoritma Unsupervised: Clustering
 
-**Konsep.** Membagi data menjadi *k* klaster dengan meminimalkan jumlah kuadrat jarak setiap titik ke centroid klasternya.
+### K-Means
 
-**Kapan dipakai.** Segmentasi pelanggan, kompresi warna, kuantisasi vektor, dan pembuatan fitur baru dari data tanpa label. Cepat dan mudah diskalakan.
+#### Konsep
 
-**Jenis data yang cocok.** Fitur numerik terstandardisasi, klaster yang berbentuk relatif bulat dengan ukuran dan kepadatan setara, serta jumlah klaster yang bisa diperkirakan dari domain.
+Membagi data menjadi *k* klaster dengan meminimalkan jumlah kuadrat jarak setiap titik ke centroid klasternya, lewat iterasi penugasan dan pembaruan centroid.
 
-**Kelemahan.** Jumlah klaster harus ditentukan di awal. Asumsi bentuk bulat membuatnya gagal pada klaster memanjang atau melengkung. Sangat sensitif terhadap outlier dan skala fitur.
+#### Kapan Digunakan
+
+Segmentasi pelanggan, kompresi warna, kuantisasi vektor, dan pembuatan fitur baru dari data tanpa label. Cepat dan mudah diskalakan.
+
+#### Jenis Data yang Cocok
+
+Fitur numerik terstandardisasi, klaster berbentuk relatif bulat dengan ukuran dan kepadatan setara, serta jumlah klaster yang bisa diperkirakan dari domain.
+
+#### Kelemahan dan Batasan
+
+Jumlah klaster harus ditentukan di awal. Asumsi bentuk bulat membuatnya gagal pada klaster memanjang atau melengkung. Sangat sensitif terhadap outlier dan skala fitur.
+
+#### Implementasi
 
 ```python
 from sklearn.cluster import KMeans
-from sklearn.metrics import silhouette_score
+from sklearn.metrics import silhouette_score, davies_bouldin_score
 
 X_scaled = preprocessor_scaled.fit_transform(X)
 
-skor = {}
 for k in range(2, 11):
     km = KMeans(n_clusters=k, n_init="auto", random_state=RANDOM_STATE)
     label = km.fit_predict(X_scaled)
-    skor[k] = silhouette_score(X_scaled, label)
-
-for k, s in skor.items():
-    print(f"k={k}  silhouette={s:.4f}  inertia dievaluasi terpisah")
+    print(f"k={k}  silhouette={silhouette_score(X_scaled, label):.4f}"
+          f"  db={davies_bouldin_score(X_scaled, label):.4f}"
+          f"  inertia={km.inertia_:.1f}")
 ```
 
 Metode elbow pada inertia sering ambigu. Silhouette score dan Davies-Bouldin index memberi sinyal yang lebih tegas. Untuk data sangat besar, gunakan `MiniBatchKMeans`.
 
-## DBSCAN
+### DBSCAN
 
-**Konsep.** Mengelompokkan titik berdasarkan kepadatan. Titik yang punya cukup banyak tetangga dalam radius `eps` menjadi inti klaster; titik yang tidak masuk klaster mana pun diberi label -1 sebagai noise.
+#### Konsep
 
-**Kapan dipakai.** Ketika bentuk klaster tidak beraturan, jumlah klaster tidak diketahui, dan data mengandung outlier yang justru ingin diidentifikasi. Cocok untuk data spasial dan deteksi pola geografis.
+Mengelompokkan titik berdasarkan kepadatan. Titik yang punya cukup banyak tetangga dalam radius `eps` menjadi inti klaster, sementara titik yang tidak masuk klaster mana pun diberi label -1 sebagai noise.
 
-**Jenis data yang cocok.** Fitur numerik berdimensi rendah sampai menengah dengan perbedaan kepadatan yang jelas antara klaster dan latar belakang.
+#### Kapan Digunakan
 
-**Kelemahan.** Sangat sensitif terhadap `eps`. Gagal ketika klaster punya kepadatan yang sangat berbeda-beda. Performanya menurun pada dimensi tinggi karena jarak kehilangan daya diskriminasi.
+Ketika bentuk klaster tidak beraturan, jumlah klaster tidak diketahui, dan data mengandung outlier yang justru ingin diidentifikasi. Cocok untuk data spasial dan deteksi pola geografis.
+
+#### Jenis Data yang Cocok
+
+Fitur numerik berdimensi rendah sampai menengah dengan perbedaan kepadatan yang jelas antara klaster dan latar belakang.
+
+#### Kelemahan dan Batasan
+
+Sangat sensitif terhadap `eps`. Gagal ketika klaster punya kepadatan yang sangat berbeda-beda. Performanya menurun pada dimensi tinggi karena jarak kehilangan daya diskriminasi.
+
+#### Implementasi
 
 ```python
 from sklearn.cluster import DBSCAN
@@ -405,8 +676,7 @@ from sklearn.neighbors import NearestNeighbors
 # Menentukan eps lewat grafik k-distance
 k = 5
 jarak, _ = NearestNeighbors(n_neighbors=k).fit(X_scaled).kneighbors(X_scaled)
-k_dist = np.sort(jarak[:, k - 1])
-# Titik siku pada kurva k_dist adalah kandidat eps
+k_dist = np.sort(jarak[:, k - 1])   # titik siku pada kurva ini adalah kandidat eps
 
 db = DBSCAN(eps=0.8, min_samples=10, n_jobs=-1)
 label = db.fit_predict(X_scaled)
@@ -416,15 +686,25 @@ print("Proporsi noise:", np.mean(label == -1))
 
 Jika kepadatan antar klaster bervariasi, gunakan `HDBSCAN` yang sudah tersedia di scikit-learn sejak versi 1.3.
 
-## Agglomerative Clustering
+### Agglomerative Clustering
 
-**Konsep.** Clustering hierarkis bottom-up. Setiap titik dimulai sebagai klaster sendiri, lalu pasangan klaster terdekat digabung berulang kali hingga terbentuk struktur pohon (dendrogram).
+#### Konsep
 
-**Kapan dipakai.** Ketika struktur hierarki antar kelompok punya makna substantif, misalnya taksonomi produk, pengelompokan dokumen, atau analisis filogenetik. Dendrogram memungkinkan pemilihan jumlah klaster setelah melihat strukturnya.
+Clustering hierarkis bottom-up. Setiap titik dimulai sebagai klaster sendiri, lalu pasangan klaster terdekat digabung berulang kali hingga terbentuk dendrogram.
 
-**Jenis data yang cocok.** Dataset kecil sampai menengah (kompleksitasnya kuadratik terhadap jumlah sampel), dengan metrik jarak yang bermakna secara domain.
+#### Kapan Digunakan
 
-**Kelemahan.** Tidak skalabel untuk data besar dan penggabungan bersifat final, tidak bisa dikoreksi di iterasi berikutnya.
+Ketika struktur hierarki antar kelompok punya makna substantif, misalnya taksonomi produk, pengelompokan dokumen, atau analisis filogenetik. Dendrogram memungkinkan pemilihan jumlah klaster setelah melihat strukturnya.
+
+#### Jenis Data yang Cocok
+
+Dataset kecil sampai menengah, karena kompleksitasnya kuadratik terhadap jumlah sampel, dengan metrik jarak yang bermakna secara domain.
+
+#### Kelemahan dan Batasan
+
+Tidak skalabel untuk data besar, dan penggabungan bersifat final sehingga tidak bisa dikoreksi di iterasi berikutnya.
+
+#### Implementasi
 
 ```python
 from sklearn.cluster import AgglomerativeClustering
@@ -434,17 +714,27 @@ agg = AgglomerativeClustering(n_clusters=None, distance_threshold=15.0,
 label = agg.fit_predict(X_scaled)
 ```
 
-Linkage `ward` hanya bekerja dengan metrik Euclidean. Untuk metrik lain (cosine, manhattan), gunakan `average` atau `complete`.
+Linkage `ward` hanya bekerja dengan metrik Euclidean. Untuk metrik lain seperti cosine atau manhattan, gunakan `average` atau `complete`.
 
-## Gaussian Mixture Model
+### Gaussian Mixture Model
 
-**Konsep.** Mengasumsikan data dihasilkan dari campuran beberapa distribusi Gaussian, dan mengestimasi parameternya dengan algoritma Expectation-Maximization. Berbeda dengan K-Means, keanggotaan klaster bersifat probabilistik.
+#### Konsep
 
-**Kapan dipakai.** Ketika dibutuhkan soft clustering (satu titik boleh sebagian milik beberapa klaster), atau ketika klaster berbentuk elips dengan orientasi berbeda. Juga berguna sebagai model densitas untuk deteksi anomali.
+Mengasumsikan data dihasilkan dari campuran beberapa distribusi Gaussian, dan mengestimasi parameternya dengan algoritma Expectation-Maximization. Berbeda dengan K-Means, keanggotaan klaster bersifat probabilistik.
 
-**Jenis data yang cocok.** Fitur numerik kontinu yang plausibel dimodelkan sebagai campuran Gaussian.
+#### Kapan Digunakan
 
-**Kelemahan.** Lebih lambat dari K-Means, bisa konvergen ke optimum lokal, dan membutuhkan cukup banyak sampel per komponen agar matriks kovarians stabil.
+Ketika dibutuhkan soft clustering, yaitu satu titik boleh sebagian menjadi anggota beberapa klaster, atau ketika klaster berbentuk elips dengan orientasi berbeda. Juga berguna sebagai model densitas untuk deteksi anomali.
+
+#### Jenis Data yang Cocok
+
+Fitur numerik kontinu yang plausibel dimodelkan sebagai campuran Gaussian, dengan jumlah sampel per komponen cukup banyak agar matriks kovarians stabil.
+
+#### Kelemahan dan Batasan
+
+Lebih lambat dari K-Means dan bisa konvergen ke optimum lokal. Pada dimensi tinggi dengan `covariance_type="full"`, jumlah parameter meledak dan estimasi menjadi tidak stabil.
+
+#### Implementasi
 
 ```python
 from sklearn.mixture import GaussianMixture
@@ -462,15 +752,27 @@ proba_klaster = gmm.predict_proba(X_scaled)
 
 Kriteria BIC atau AIC memberi cara objektif memilih jumlah komponen, keunggulan yang tidak dimiliki K-Means.
 
-## Principal Component Analysis
+## Algoritma Unsupervised: Reduksi Dimensi
 
-**Konsep.** Memproyeksikan data ke arah-arah ortogonal yang menangkap varians terbesar. Bersifat linear dan tidak menggunakan label.
+### Principal Component Analysis
 
-**Kapan dipakai.** Mengurangi dimensi sebelum melatih model yang lambat pada dimensi tinggi, mengatasi multikolinearitas, mempercepat komputasi, atau memvisualisasikan struktur global data.
+#### Konsep
 
-**Jenis data yang cocok.** Fitur numerik terstandardisasi yang saling berkorelasi. Jika fitur hampir tidak berkorelasi, PCA tidak akan banyak membantu.
+Memproyeksikan data ke arah-arah ortogonal yang menangkap varians terbesar. Bersifat linear dan tidak menggunakan label.
 
-**Kelemahan.** Komponen hasil PCA adalah kombinasi linear dari fitur asli, sehingga interpretasinya hilang. PCA juga bisa membuang arah dengan varians kecil yang justru paling diskriminatif untuk klasifikasi.
+#### Kapan Digunakan
+
+Mengurangi dimensi sebelum melatih model yang lambat pada dimensi tinggi, mengatasi multikolinearitas, mempercepat komputasi, atau memvisualisasikan struktur global data.
+
+#### Jenis Data yang Cocok
+
+Fitur numerik terstandardisasi yang saling berkorelasi. Jika fitur hampir tidak berkorelasi, PCA tidak akan banyak membantu karena varians tersebar merata di semua arah.
+
+#### Kelemahan dan Batasan
+
+Komponen hasil PCA adalah kombinasi linear dari fitur asli, sehingga interpretasinya hilang. PCA juga bisa membuang arah dengan varians kecil yang justru paling diskriminatif untuk klasifikasi, karena label tidak pernah dilihat.
+
+#### Implementasi
 
 ```python
 from sklearn.decomposition import PCA
@@ -480,7 +782,6 @@ X_pca = pca.fit_transform(X_scaled)
 print("Dimensi:", X_scaled.shape[1], "->", X_pca.shape[1])
 print("Varians kumulatif:", np.cumsum(pca.explained_variance_ratio_)[:10])
 
-# PCA sebagai langkah dalam pipeline
 pipe_pca = Pipeline([
     ("prep", preprocessor_scaled),
     ("pca", PCA(n_components=0.95)),
@@ -490,84 +791,109 @@ pipe_pca = Pipeline([
 
 Menuliskan `n_components=0.95` berarti mempertahankan komponen secukupnya untuk menjelaskan 95 persen varians.
 
-## t-SNE dan Reduksi Dimensi Non-Linear
+### t-SNE
 
-**Konsep.** t-SNE memetakan data ke dua atau tiga dimensi dengan mempertahankan kemiripan lokal antar titik.
+#### Konsep
 
-**Kapan dipakai.** Khusus untuk visualisasi eksplorasi. Ini bukan alat preprocessing.
+Memetakan data ke dua atau tiga dimensi dengan mempertahankan kemiripan lokal antar titik, mengorbankan struktur global.
 
-**Jenis data yang cocok.** Data berdimensi tinggi dengan struktur klaster yang ingin dilihat secara visual, misalnya embedding, data ekspresi gen, atau representasi hasil autoencoder.
+#### Kapan Digunakan
 
-**Kelemahan.** Tidak punya metode `transform` untuk data baru, jarak antar klaster pada plot tidak bermakna kuantitatif, dan hasilnya berubah tergantung `perplexity` serta seed. Jangan pernah memasukkan hasil t-SNE sebagai fitur ke model prediktif.
+Khusus untuk visualisasi eksplorasi. Ini bukan alat preprocessing dan hasilnya tidak boleh dijadikan fitur untuk model prediktif.
+
+#### Jenis Data yang Cocok
+
+Data berdimensi tinggi dengan struktur klaster yang ingin dilihat secara visual, misalnya embedding, data ekspresi gen, atau representasi hasil autoencoder.
+
+#### Kelemahan dan Batasan
+
+Tidak punya metode `transform` untuk data baru. Jarak antar klaster pada plot tidak bermakna kuantitatif. Hasilnya berubah tergantung `perplexity` dan seed, sehingga kesimpulan visual harus diverifikasi dengan cara lain.
+
+#### Implementasi
 
 ```python
 from sklearn.manifold import TSNE
 
-# Reduksi awal dengan PCA sangat disarankan untuk stabilitas dan kecepatan
+# Reduksi awal dengan PCA disarankan untuk stabilitas dan kecepatan
 X_awal = PCA(n_components=50, random_state=RANDOM_STATE).fit_transform(X_scaled)
 X_tsne = TSNE(n_components=2, perplexity=30, learning_rate="auto",
               init="pca", random_state=RANDOM_STATE).fit_transform(X_awal)
 ```
 
-## Deteksi Anomali: Isolation Forest dan One-Class SVM
+## Algoritma Deteksi Anomali
 
-**Konsep.** Isolation Forest mengisolasi titik dengan pemisahan acak; anomali terisolasi dengan lebih sedikit pemisahan sehingga skornya berbeda. One-Class SVM mempelajari batas yang membungkus data normal.
+### Isolation Forest
 
-**Kapan dipakai.** Ketika label anomali sangat sedikit atau tidak ada sama sekali, misalnya deteksi intrusi jaringan, deteksi kecurangan transaksi, atau pemantauan kondisi mesin. Ini pendekatan yang tepat ketika kelas positif terlalu langka untuk dilatih secara supervised.
+#### Konsep
 
-**Jenis data yang cocok.** Isolation Forest bekerja baik pada data tabular berdimensi menengah sampai tinggi dan berskala besar. One-Class SVM lebih cocok untuk data kecil dengan batas normal yang kompleks, tetapi jauh lebih lambat.
+Mengisolasi titik dengan pemisahan acak berulang. Anomali terisolasi dengan lebih sedikit pemisahan karena letaknya jauh dari kerumunan, sehingga skor kedalamannya berbeda dari titik normal.
 
-**Kelemahan.** Keduanya membutuhkan estimasi proporsi anomali (`contamination`) yang sering hanya bisa ditebak. Hasilnya juga sulit divalidasi tanpa label.
+#### Kapan Digunakan
+
+Ketika label anomali sangat sedikit atau tidak ada sama sekali, misalnya deteksi intrusi jaringan, deteksi kecurangan transaksi, atau pemantauan kondisi mesin. Ini pendekatan yang tepat ketika kelas positif terlalu langka untuk dilatih secara supervised.
+
+#### Jenis Data yang Cocok
+
+Data tabular berdimensi menengah sampai tinggi dan berskala besar. Tidak menuntut standardisasi karena berbasis pemisahan ambang.
+
+#### Kelemahan dan Batasan
+
+Membutuhkan estimasi proporsi anomali lewat parameter `contamination`, yang sering hanya bisa ditebak. Hasilnya sulit divalidasi tanpa label.
+
+#### Implementasi
 
 ```python
 from sklearn.ensemble import IsolationForest
 
 iso = IsolationForest(
     n_estimators=300,
-    contamination=0.02,       # perkiraan proporsi anomali
+    contamination=0.02,
     max_samples="auto",
     random_state=RANDOM_STATE,
     n_jobs=-1,
 )
 iso.fit(X_train_normal)
 
-skor = -iso.score_samples(X_test)      # semakin tinggi semakin anomali
-prediksi = iso.predict(X_test)         # -1 anomali, 1 normal
+skor = -iso.score_samples(X_test)   # semakin tinggi semakin anomali
+prediksi = iso.predict(X_test)      # -1 anomali, 1 normal
 ```
 
 Jika ada sebagian kecil label yang tersedia, pakai untuk mengatur ambang skor, bukan untuk melatih modelnya.
 
-## Ensemble Lanjutan: Voting dan Stacking
+### One-Class SVM
 
-**Konsep.** Voting menggabungkan prediksi beberapa model melalui suara mayoritas (hard) atau rata-rata probabilitas (soft). Stacking melatih meta-model di atas prediksi model-model dasar.
+#### Konsep
 
-**Kapan dipakai.** Pada tahap akhir ketika beberapa model dengan karakteristik berbeda punya performa setara tetapi membuat kesalahan pada sampel yang berbeda. Semakin rendah korelasi galat antar model dasar, semakin besar keuntungannya.
+Mempelajari batas yang membungkus wilayah data normal di ruang fitur, lalu menandai titik di luar batas sebagai anomali.
 
-**Jenis data yang cocok.** Sama seperti model dasarnya. Yang penting adalah keberagaman model, bukan jumlahnya.
+#### Kapan Digunakan
 
-**Kelemahan.** Biaya pelatihan dan inferensi berlipat, interpretasi makin jauh, dan keuntungan performanya sering hanya sepersekian persen. Pertimbangkan biaya operasionalnya sebelum dipakai di produksi.
+Ketika data normal punya struktur kompleks yang tidak bisa dibungkus bentuk sederhana, dan ukuran data cukup kecil untuk ditangani kernel method.
+
+#### Jenis Data yang Cocok
+
+Fitur numerik terstandardisasi dengan jumlah sampel terbatas dan data latih yang benar-benar bersih dari anomali.
+
+#### Kelemahan dan Batasan
+
+Jauh lebih lambat daripada Isolation Forest dan sangat sensitif terhadap `nu` dan `gamma`. Tidak praktis di atas beberapa puluh ribu baris.
+
+#### Implementasi
 
 ```python
-from sklearn.ensemble import StackingClassifier, VotingClassifier
+from sklearn.svm import OneClassSVM
 
-estimators = [
-    ("logreg", logreg),
-    ("rf", rf),
-    ("hgb", Pipeline([("prep", preprocessor_tree),
-                      ("model", HistGradientBoostingClassifier(random_state=RANDOM_STATE))])),
-]
-
-stack = StackingClassifier(
-    estimators=estimators,
-    final_estimator=LogisticRegression(max_iter=2000, class_weight="balanced"),
-    cv=cv,                 # wajib, untuk mencegah kebocoran data
-    stack_method="predict_proba",
-    n_jobs=-1,
-)
-stack.fit(X_train, y_train)
+ocsvm = Pipeline([
+    ("prep", preprocessor_scaled),
+    ("model", OneClassSVM(kernel="rbf", nu=0.02, gamma="scale")),
+])
+ocsvm.fit(X_train_normal)
+prediksi = ocsvm.predict(X_test)
 ```
 
-## Tabel Ringkas Pemilihan Algoritma
+## Panduan Pemilihan Cepat
+
+### Tabel Pemetaan Karakteristik Data
 
 | Karakteristik data | Algoritma yang layak dicoba lebih dulu | Yang sebaiknya dihindari |
 |---|---|---|
@@ -575,29 +901,51 @@ stack.fit(X_train, y_train)
 | Fitur sangat banyak, sampel sedikit | Logistic Regression L1/L2, LinearSVC, Naive Bayes | KNN, Decision Tree dalam, MLP |
 | Teks (bag-of-words, TF-IDF) | MultinomialNB, LinearSVC, Logistic Regression | KNN, Random Forest |
 | Butuh interpretasi aturan | Decision Tree, model linear | Boosting, MLP, Stacking |
-| Kelas sangat tidak seimbang | Model dengan `class_weight` + tuning ambang | Optimasi berbasis accuracy |
-| Batas keputusan sangat non-linear, data kecil | SVM-RBF, KNN | Model linear |
+| Kelas sangat tidak seimbang | Model dengan `class_weight` dan tuning ambang | Optimasi berbasis accuracy |
+| Batas keputusan non-linear, data kecil | SVM-RBF, KNN | Model linear murni |
+| Target kontinu dengan outlier | HuberRegressor, RANSAC | OLS biasa |
 | Tanpa label, klaster bulat | K-Means, GMM | DBSCAN |
-| Tanpa label, bentuk tidak beraturan + outlier | DBSCAN, HDBSCAN | K-Means |
+| Tanpa label, bentuk tidak beraturan | DBSCAN, HDBSCAN | K-Means |
 | Anomali sangat langka | Isolation Forest, One-Class SVM | Klasifikasi supervised biasa |
 | Latensi inferensi kritis | Logistic Regression, Decision Tree | KNN, Stacking, SVM besar |
 
+### Urutan Kerja yang Disarankan
+
+1. Tetapkan metrik evaluasi berdasarkan biaya kesalahan, sebelum melihat model.
+2. Bangun baseline dengan `DummyClassifier` atau `DummyRegressor`.
+3. Jalankan model linear (regresi logistik atau Ridge) sebagai pembanding pertama yang serius.
+4. Jalankan Random Forest dengan parameter bawaan untuk menguji apakah ada sinyal non-linear.
+5. Jika Random Forest jauh lebih baik, lanjutkan ke HistGradientBoosting dengan tuning.
+6. Berhenti ketika penambahan kompleksitas tidak lagi memperbaiki metrik target secara berarti.
+
 ## Kesalahan Umum yang Menghabiskan Waktu
 
-**Melakukan scaling atau imputasi sebelum split.** Statistik dari data uji bocor ke data latih dan skor validasi menjadi terlalu optimistis. Selalu bungkus preprocessing dalam `Pipeline`.
+### Kebocoran Data lewat Preprocessing
 
-**Memakai accuracy pada data tidak seimbang.** Pada dataset dengan 1 persen kelas positif, model yang selalu memprediksi negatif mencapai akurasi 99 persen dan sama sekali tidak berguna. Gunakan recall, F1-macro, atau PR-AUC sesuai biaya kesalahan yang sebenarnya. Untuk kelas yang sangat langka, PR-AUC (`average_precision_score`) lebih informatif daripada ROC-AUC karena ROC-AUC dapat terlihat tinggi meski precision-nya buruk.
+Melakukan scaling, imputasi, atau seleksi fitur sebelum split membuat statistik dari data uji bocor ke data latih, sehingga skor validasi menjadi terlalu optimistis. Selalu bungkus seluruh preprocessing dalam `Pipeline` agar transformasi dipelajari ulang di setiap fold.
 
-**Mengandalkan `feature_importances_` bawaan model pohon.** Ukuran ini bias terhadap fitur kontinu dan berkardinalitas tinggi. `permutation_importance` pada data uji jauh lebih dapat dipercaya.
+### Memilih Metrik yang Keliru
 
-**Tuning hyperparameter pada data uji.** Data uji hanya boleh disentuh satu kali di akhir. Gunakan validasi silang di dalam data latih untuk semua pemilihan model.
+Pada dataset dengan 1 persen kelas positif, model yang selalu memprediksi negatif mencapai akurasi 99 persen dan sama sekali tidak berguna. Gunakan recall, F1-macro, atau PR-AUC sesuai biaya kesalahan yang sebenarnya. Untuk kelas yang sangat langka, `average_precision_score` lebih informatif daripada ROC-AUC, karena ROC-AUC dapat terlihat tinggi meski precision-nya buruk.
 
-**Langsung melompat ke model kompleks.** Baseline sederhana (`DummyClassifier`, regresi logistik) menetapkan garis dasar. Tanpa itu, tidak ada cara mengetahui apakah gradient boosting benar-benar memberi nilai tambah.
+### Salah Membaca Kepentingan Fitur
 
-**Mengabaikan struktur temporal atau kelompok.** Jika data punya urutan waktu atau pengamatan berulang dari entitas yang sama, `StratifiedKFold` biasa akan membocorkan informasi. Gunakan `TimeSeriesSplit` atau `GroupKFold`.
+Atribut `feature_importances_` pada model pohon bias terhadap fitur kontinu dan berkardinalitas tinggi. `permutation_importance` yang dihitung pada data uji jauh lebih dapat dipercaya, meski lebih mahal secara komputasi.
+
+### Tuning pada Data Uji
+
+Data uji hanya boleh disentuh satu kali di akhir. Semua pemilihan model dan hyperparameter harus dilakukan lewat validasi silang di dalam data latih. Setiap kali data uji dipakai untuk mengambil keputusan, estimasi performanya menjadi bias ke atas.
+
+### Mengabaikan Struktur Temporal atau Kelompok
+
+Jika data punya urutan waktu atau pengamatan berulang dari entitas yang sama, `StratifiedKFold` biasa akan membocorkan informasi antar fold. Gunakan `TimeSeriesSplit` untuk data deret waktu dan `GroupKFold` untuk data dengan pengelompokan entitas.
+
+### Langsung Melompat ke Model Kompleks
+
+Baseline sederhana menetapkan garis dasar. Tanpa itu, tidak ada cara mengetahui apakah gradient boosting benar-benar memberi nilai tambah atau hanya menambah biaya komputasi dan kesulitan pemeliharaan.
 
 ## Penutup
 
 Tidak ada algoritma yang unggul di semua situasi. Yang bisa dilakukan adalah mempersempit ruang kandidat dengan cepat berdasarkan bentuk data, ukuran data, kebutuhan interpretasi, dan biaya kesalahan, lalu membandingkan kandidat yang tersisa secara jujur dengan validasi silang dan metrik yang benar-benar mencerminkan tujuan.
 
-Urutan kerja yang hampir selalu efisien untuk data tabular: mulai dari baseline dummy, lalu regresi logistik atau linear, lalu Random Forest, lalu HistGradientBoosting dengan tuning. Berhenti ketika penambahan kompleksitas tidak lagi memberi perbaikan yang berarti terhadap metrik yang menjadi target.
+Keputusan yang paling menentukan hasil akhir biasanya bukan pemilihan algoritma, melainkan kualitas fitur, kebersihan proses validasi, dan kesesuaian metrik dengan tujuan organisasi. Algoritma hanyalah langkah terakhir dari rangkaian keputusan yang sudah dibuat jauh sebelumnya.
