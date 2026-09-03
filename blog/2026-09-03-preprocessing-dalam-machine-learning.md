@@ -5,1070 +5,1095 @@ authors: topekox
 tags: [manchine learning, data mining, ai, data science]
 ---
 
-Model machine learning hanya sebaik data yang masuk ke dalamnya. Dalam praktik industri, sekitar 60 sampai 80 persen waktu proyek habis di tahap preprocessing, bukan di pemilihan algoritma. Artikel ini membahas setiap tahap preprocessing secara berurutan, dengan pola yang sama untuk tiap teknik: apa masalahnya, apa solusinya, bagaimana implementasinya, dan jebakan apa yang harus dihindari.
-
-Semua contoh memakai Python dengan pandas, NumPy, dan scikit-learn versi 1.3 ke atas.
+Banyak pemula mengira pekerjaan utama dalam machine learning adalah memilih algoritma yang tepat. Kenyataannya, sebagian besar waktu justru habis untuk membereskan data sebelum algoritma apa pun dijalankan. Proses membereskan itulah yang disebut **preprocessing**.
+ 
+Artikel ini membahas setiap tahap preprocessing secara berurutan dengan bahasa sederhana. Tiap teknik dijelaskan dengan pola yang sama: apa masalahnya, kenapa itu jadi masalah, bagaimana solusinya, dan contoh kodenya.
+ 
+Kita akan memakai satu dataset contoh yang sengaja dibuat berantakan, dan membereskannya bersama-sama dari awal sampai akhir.
 
 <!-- truncate -->
 
-## Fondasi: Aturan Main Preprocessing
-
-### Aturan Emas: Fit di Data Latih, Transform di Data Uji
-
-#### Masalah
-
-Kesalahan paling merusak dan paling sering terjadi adalah *data leakage*. Ketika rata-rata, standar deviasi, median, atau daftar kategori dihitung dari seluruh dataset sebelum pembagian data, informasi dari data uji ikut masuk ke proses pelatihan. Akibatnya skor validasi terlihat bagus, tetapi model gagal di dunia nyata.
-
-#### Solusi
-
-Semua parameter transformasi harus dipelajari hanya dari data latih (`fit`), lalu diterapkan ke data uji (`transform`). Cara paling aman memastikan hal ini adalah membungkus seluruh preprocessing dalam objek `Pipeline` scikit-learn, sehingga setiap fold validasi silang otomatis mempelajari ulang transformasinya.
-
-#### Implementasi
-
+## Apa Itu Preprocessing dan Kenapa Penting
+ 
+### Analogi Sederhana
+ 
+Bayangkan Anda mau memasak. Bahan yang baru dibeli dari pasar tidak bisa langsung dimasukkan ke wajan. Sayur harus dicuci, wortel harus dikupas, daging harus dipotong seukuran yang pas, dan bahan busuk harus dibuang.
+ 
+Preprocessing adalah tahap persiapan bahan itu. Sehebat apa pun kokinya, kalau bahannya kotor dan busuk, masakannya tetap tidak enak.
+ 
+Data mentah dari dunia nyata hampir selalu berantakan: ada yang kosong, ada yang salah ketik, ada satuan yang tidak konsisten, ada angka yang mustahil seperti umur 999 tahun. Model machine learning tidak bisa membereskan itu sendiri.
+ 
+### Apa yang Terjadi Kalau Dilewati
+ 
+Kalau preprocessing dilewati atau dikerjakan asal-asalan, tiga hal biasanya terjadi:
+ 
+**Program berhenti dengan error.** Banyak algoritma langsung menolak data yang mengandung sel kosong atau berisi teks.
+ 
+**Model jadi tidak akurat.** Kolom dengan angka besar akan mendominasi perhitungan, dan pola yang sebenarnya jadi tertutup.
+ 
+**Hasilnya terlihat bagus padahal palsu.** Ini yang paling berbahaya, karena Anda tidak menyadarinya. Skor di layar tinggi, tapi begitu dipakai di dunia nyata modelnya gagal total.
+ 
+## Istilah Dasar yang Perlu Dipahami
+ 
+Sebelum lanjut, mari samakan dulu pemahaman beberapa istilah yang akan sering muncul.
+ 
+### Baris, Kolom, Fitur, dan Label
+ 
+Anggap data Anda berupa tabel seperti di Excel.
+ 
+**Baris** adalah satu contoh data, misalnya satu orang pelanggan.
+ 
+**Kolom** adalah satu jenis informasi, misalnya umur atau kota asal.
+ 
+**Fitur** adalah kolom-kolom yang dipakai untuk memprediksi. Dalam kode biasanya diberi nama `X`.
+ 
+**Label** atau **target** adalah kolom jawaban yang ingin diprediksi. Dalam kode biasanya diberi nama `y`.
+ 
+### Nilai Hilang
+ 
+Sel yang kosong dalam tabel. Dalam Python biasanya muncul sebagai `NaN`, singkatan dari *Not a Number*. Penyebabnya bisa macam-macam: responden tidak mengisi, sensor rusak, atau data memang tidak berlaku untuk baris itu.
+ 
+### Outlier
+ 
+Nilai yang jauh menyimpang dari kebanyakan data. Misalnya di kolom gaji yang isinya rata-rata 5 sampai 15 juta, tiba-tiba ada satu baris bernilai 900 juta. Bisa jadi itu salah ketik, bisa juga memang benar karena orang itu direktur.
+ 
+### Encoding
+ 
+Proses mengubah kata menjadi angka. Komputer tidak bisa menghitung kata "Jakarta", jadi harus diubah dulu jadi bentuk angka.
+ 
+### Scaling atau Penskalaan
+ 
+Proses menyamakan rentang angka antar kolom, supaya kolom bernilai besar tidak mendominasi kolom bernilai kecil.
+ 
+### Pipeline
+ 
+Wadah yang menggabungkan semua langkah persiapan data dan model menjadi satu kesatuan. Analoginya seperti resep tertulis: siapa pun yang menjalankannya akan melakukan langkah yang sama persis dengan urutan yang sama.
+ 
+### Kebocoran Data
+ 
+Istilah aslinya *data leakage*. Ini kondisi saat informasi dari data uji tanpa sengaja ikut masuk ke proses pelatihan. Akibatnya skor jadi bagus palsu. Bagian berikutnya membahas ini secara khusus karena sangat penting.
+ 
+## Aturan Paling Penting: Jangan Sampai Data Bocor
+ 
+### Analogi Sederhana
+ 
+Bayangkan seorang guru menyiapkan ujian. Kalau soal ujiannya bocor duluan ke siswa, semua siswa akan dapat nilai tinggi. Tapi nilai itu tidak berarti apa-apa, karena tidak mengukur kemampuan sebenarnya.
+ 
+Dalam machine learning, hal serupa terjadi kalau model secara tidak sengaja "mengintip" data uji saat masa persiapan.
+ 
+### Kapan Kebocoran Terjadi
+ 
+Ini contoh paling sering. Anda ingin menyamakan skala kolom gaji, jadi Anda hitung rata-rata gaji dari seluruh data, lalu baru membagi data jadi latih dan uji.
+ 
+Masalahnya, rata-rata itu ikut menghitung baris-baris yang nanti akan jadi data uji. Artinya model sudah tahu sedikit tentang data uji sebelum ujian dimulai.
+ 
+Kedengarannya sepele, tapi efeknya nyata: skor Anda akan lebih tinggi daripada yang seharusnya, dan Anda tidak akan sadar sampai model dipakai di dunia nyata.
+ 
+### Aturannya
+ 
+Semua perhitungan yang mempelajari sesuatu dari data — rata-rata, median, daftar kategori, nilai minimum dan maksimum — **hanya boleh dihitung dari data latih**, lalu diterapkan ke data uji.
+ 
+Dalam scikit-learn, ini diwujudkan lewat dua perintah:
+ 
+- `fit()` artinya mempelajari. Hanya dipanggil pada data latih.
+- `transform()` artinya menerapkan. Dipanggil pada data latih dan data uji.
+- `fit_transform()` adalah gabungan keduanya, dan hanya boleh dipakai di data latih.
+### Contoh Salah dan Benar
+ 
 ```python
-# SALAH: statistik dihitung dari seluruh data
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+ 
+# SALAH: menghitung dari seluruh data sebelum dibagi
 scaler = StandardScaler()
-X_all = scaler.fit_transform(X)              # kebocoran terjadi di sini
-X_train, X_test = train_test_split(X_all)
-
-# BENAR: split dulu, fit hanya di latih
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, stratify=y, random_state=42
-)
+X_semua = scaler.fit_transform(X)                    # kebocoran terjadi di sini
+X_train, X_test = train_test_split(X_semua)
+ 
+# BENAR: bagi dulu, pelajari hanya dari data latih
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 scaler = StandardScaler()
-X_train_s = scaler.fit_transform(X_train)    # belajar dari latih saja
-X_test_s = scaler.transform(X_test)          # hanya menerapkan
-
-# PALING BENAR: bungkus dalam Pipeline
-pipe = Pipeline([("scaler", StandardScaler()), ("model", LogisticRegression())])
+X_train_siap = scaler.fit_transform(X_train)         # mempelajari dari latih
+X_test_siap = scaler.transform(X_test)               # hanya menerapkan
 ```
-
+ 
+### Cara Paling Aman: Pakai Pipeline
+ 
+Mengingat aturan `fit` dan `transform` secara manual itu mudah keliru. Cara paling aman adalah membungkus semuanya dalam `Pipeline`, yang otomatis melakukannya dengan benar.
+ 
+```python
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LogisticRegression
+ 
+model = Pipeline([
+    ("scaler", StandardScaler()),
+    ("model", LogisticRegression()),
+])
+model.fit(X_train, y_train)     # semua langkah belajar dari data latih saja
+model.predict(X_test)           # semua langkah hanya menerapkan
+```
+ 
 ### Urutan Tahap yang Benar
-
-Urutan berikut bukan sekadar konvensi, melainkan ketergantungan logis. Membalik urutannya menghasilkan hasil yang salah atau tidak stabil.
-
-1. Audit data dan pemahaman struktur
-2. Pembersihan (duplikat, tipe data, nilai tidak konsisten)
-3. Pembagian data latih dan uji
-4. Penanganan nilai hilang
-5. Encoding kategorikal
-6. Penskalaan numerik
-7. Rekayasa fitur
-8. Seleksi fitur
-9. Penanganan ketidakseimbangan kelas (hanya pada data latih)
-
-Perhatikan bahwa pembagian data terjadi di langkah ketiga, bukan terakhir. Langkah 4 sampai 9 semuanya mempelajari parameter dari data, sehingga harus berada setelah split.
-
-### Kerangka Kode Dasar
-
+ 
+Perhatikan bahwa pembagian data terjadi di urutan ketiga, bukan terakhir. Ini sering terbalik di tutorial yang kurang teliti.
+ 
+1. Kenali data
+2. Bersihkan hal-hal yang jelas salah (duplikat, salah ketik, tipe data)
+3. **Bagi data latih dan data uji**
+4. Isi data kosong
+5. Tangani nilai ekstrem
+6. Ubah kata menjadi angka
+7. Samakan skala
+8. Buat fitur baru
+9. Pilih fitur yang berguna
+10. Tangani kelas yang timpang (hanya di data latih)
+## Menyiapkan Data Contoh
+ 
+Supaya lebih mudah diikuti, mari buat satu dataset kecil yang sengaja dibuat berantakan. Semua masalah yang akan kita bahas ada di dalamnya.
+ 
 ```python
 import numpy as np
 import pandas as pd
-from sklearn import set_config
-from sklearn.compose import ColumnTransformer, make_column_selector
-from sklearn.impute import SimpleImputer
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from sklearn.model_selection import train_test_split, StratifiedKFold
-
-set_config(transform_output="pandas")   # keluaran tetap DataFrame, memudahkan debug
-RANDOM_STATE = 42
-
-df = pd.read_csv("data.csv")
-X = df.drop(columns=["target"])
-y = df["target"]
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, stratify=y, random_state=RANDOM_STATE
-)
+ 
+np.random.seed(42)
+n = 300
+ 
+df = pd.DataFrame({
+    "id_pelanggan": range(1, n + 1),
+    "umur": np.random.randint(18, 70, n).astype(float),
+    "gaji": np.random.randint(3_000_000, 20_000_000, n).astype(float),
+    "lama_langganan": np.random.randint(1, 60, n).astype(float),
+    "kota": np.random.choice(["Jakarta", "jakarta", "BANDUNG", "Surabaya ",
+                              "Palu", "Medan"], n),
+    "paket": np.random.choice(["basic", "premium", "vip"], n),
+    "tanggal_daftar": pd.to_datetime("2023-01-01") +
+                      pd.to_timedelta(np.random.randint(0, 900, n), unit="D"),
+    "berhenti": np.random.choice([0, 1], n, p=[0.85, 0.15]),   # target
+})
+ 
+# Sengaja disisipi masalah
+df.loc[df.sample(30, random_state=1).index, "gaji"] = np.nan       # sel kosong
+df.loc[df.sample(15, random_state=2).index, "umur"] = np.nan
+df.loc[df.sample(5, random_state=3).index, "umur"] = 999           # nilai mustahil
+df.loc[df.sample(8, random_state=4).index, "gaji"] = 900_000_000   # outlier
+df = pd.concat([df, df.head(10)], ignore_index=True)               # baris duplikat
+ 
+print(df.head())
+print("Ukuran data:", df.shape)
 ```
-
-Pengaturan `set_config(transform_output="pandas")` membuat setiap transformer mengembalikan DataFrame dengan nama kolom, bukan array NumPy tanpa identitas. Ini sangat membantu ketika harus melacak fitur mana yang bermasalah.
-
-## Tahap 1: Audit dan Pemahaman Data Awal
-
-### Inventarisasi Struktur Data
-
-#### Masalah
-
-Banyak proyek langsung melompat ke pemodelan tanpa mengetahui berapa banyak nilai hilang, apakah ada kolom konstan, atau apakah tipe data terbaca benar. Masalah yang tidak terlihat di awal akan muncul sebagai error atau performa buruk di akhir.
-
-#### Solusi
-
-Buat satu fungsi audit yang dijalankan sekali di awal dan menghasilkan ringkasan per kolom: tipe data, jumlah nilai unik, proporsi nilai hilang, dan contoh nilai.
-
-#### Implementasi
-
+ 
+Data ini punya lima masalah sekaligus: sel kosong, nilai mustahil, outlier, duplikat, dan penulisan kota yang tidak seragam. Kita akan membereskannya satu per satu.
+ 
+## Tahap 1: Mengenali Data Dulu
+ 
+### Kenapa Tahap Ini Sering Dilewati Padahal Penting
+ 
+Pemula sering langsung ingin melatih model. Padahal kalau Anda tidak tahu ada berapa sel kosong, kolom mana yang isinya sama semua, atau kolom mana yang jadi nomor urut, masalahnya akan muncul belakangan dalam bentuk yang membingungkan.
+ 
+Anggap tahap ini seperti membuka semua kantong belanjaan dan memeriksa isinya sebelum mulai memasak.
+ 
+### Melihat Gambaran Umum
+ 
 ```python
-def audit(df: pd.DataFrame) -> pd.DataFrame:
-    ringkasan = pd.DataFrame({
-        "tipe": df.dtypes.astype(str),
-        "n_unik": df.nunique(dropna=True),
-        "n_hilang": df.isna().sum(),
-        "pct_hilang": (df.isna().mean() * 100).round(2),
-        "contoh": df.apply(lambda s: s.dropna().iloc[0] if s.notna().any() else None),
+print(df.shape)          # berapa baris dan berapa kolom
+print(df.dtypes)         # tipe tiap kolom: angka, teks, atau tanggal
+print(df.head())         # 5 baris pertama
+print(df.describe())     # ringkasan statistik kolom angka
+```
+ 
+Pada hasil `describe()`, langsung perhatikan baris `max` dan `min`. Kalau umur maksimalnya 999, itu jelas salah. Kalau gaji maksimalnya jauh sekali dari nilai tengahnya, berarti ada outlier.
+ 
+### Membuat Ringkasan Per Kolom
+ 
+Fungsi kecil ini merangkum semua yang perlu diketahui dalam satu tabel.
+ 
+```python
+def ringkas(data):
+    hasil = pd.DataFrame({
+        "tipe": data.dtypes.astype(str),
+        "jumlah_kosong": data.isna().sum(),
+        "persen_kosong": (data.isna().mean() * 100).round(1),
+        "nilai_unik": data.nunique(),
+        "contoh": data.apply(lambda kolom: kolom.dropna().iloc[0]
+                             if kolom.notna().any() else None),
     })
-    ringkasan["kardinalitas"] = np.where(
-        ringkasan["n_unik"] == 1, "konstan",
-        np.where(ringkasan["n_unik"] > 0.9 * len(df), "hampir-unik", "normal")
-    )
-    return ringkasan.sort_values("pct_hilang", ascending=False)
-
-print(audit(X_train))
+    return hasil.sort_values("persen_kosong", ascending=False)
+ 
+print(ringkas(df))
 ```
-
-#### Cara Membaca Hasilnya
-
-Kolom bertanda `konstan` tidak membawa informasi dan bisa dibuang. Kolom bertanda `hampir-unik` biasanya adalah ID atau timestamp mentah, yang jika dimasukkan ke model akan menyebabkan overfitting parah. Kolom dengan proporsi hilang di atas 60 persen perlu keputusan eksplisit, bukan diimputasi diam-diam.
-
-### Deteksi Kebocoran Target
-
-#### Masalah
-
-Terkadang ada kolom yang berkorelasi hampir sempurna dengan target karena kolom itu sebenarnya dibuat *setelah* target diketahui. Contohnya kolom `tanggal_pelunasan` pada prediksi gagal bayar, atau `jumlah_penanganan_tiket` pada prediksi keluhan pelanggan. Model akan mencapai akurasi mendekati sempurna di validasi dan gagal total di produksi.
-
-#### Solusi
-
-Periksa korelasi setiap fitur dengan target di awal. Fitur tunggal yang mampu memprediksi target dengan akurasi mencurigakan tinggi harus diaudit asal-usulnya, bukan dirayakan.
-
-#### Implementasi
-
+ 
+### Tanda Bahaya yang Harus Dicari
+ 
+**Kolom dengan nilai unik hanya 1.** Isinya sama semua, jadi tidak membawa informasi apa pun. Buang saja.
+ 
+**Kolom dengan nilai unik hampir sebanyak jumlah barisnya.** Biasanya ini nomor ID atau kode transaksi. Kalau dimasukkan ke model, model akan menghafal nomornya alih-alih belajar pola. Kolom `id_pelanggan` di data contoh kita termasuk kategori ini.
+ 
+**Kolom dengan sel kosong di atas 60 persen.** Perlu keputusan sadar: dibuang, atau tetap dipakai tapi dengan penanda khusus.
+ 
+**Kolom angka yang terbaca sebagai teks.** Biasanya karena ada pemisah ribuan atau simbol mata uang.
+ 
+## Tahap 2: Membersihkan Data
+ 
+### Baris Duplikat
+ 
+#### Masalahnya
+ 
+Baris yang persis sama muncul dua kali membuat model menganggap pola itu dua kali lebih penting. Lebih parah lagi, kalau salinannya tersebar di data latih dan data uji, model sebenarnya sudah pernah melihat soal ujiannya.
+ 
+#### Solusinya
+ 
+Hapus baris yang benar-benar identik. Ini dilakukan sebelum pembagian data, karena termasuk pembersihan struktural, bukan perhitungan yang mempelajari sesuatu.
+ 
+#### Contoh Kode
+ 
 ```python
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import cross_val_score
-
-for kolom in X_train.select_dtypes(include=np.number).columns:
-    skor = cross_val_score(
-        DecisionTreeClassifier(max_depth=3, random_state=RANDOM_STATE),
-        X_train[[kolom]].fillna(-999), y_train,
-        cv=3, scoring="roc_auc",
-    ).mean()
-    if skor > 0.95:
-        print(f"CURIGA bocor: {kolom} -> AUC tunggal {skor:.4f}")
+print("Jumlah duplikat:", df.duplicated().sum())
+df = df.drop_duplicates().reset_index(drop=True)
+print("Setelah dibersihkan:", df.shape)
+ 
+# Kalau yang duplikat adalah identitasnya, ambil yang paling baru
+# df = df.sort_values("tanggal_daftar").drop_duplicates("id_pelanggan", keep="last")
 ```
-
-## Tahap 2: Pembersihan Data
-
-### Duplikat
-
-#### Masalah
-
-Baris duplikat membuat model memberi bobot berlebih pada pola tertentu. Jika duplikat tersebar di data latih dan data uji, skor evaluasi menjadi terlalu optimistis karena model sebenarnya sudah pernah melihat baris uji itu.
-
-#### Solusi
-
-Bedakan duplikat penuh (semua kolom sama) dan duplikat kunci (identitas sama tetapi isi berbeda). Duplikat penuh biasanya aman dihapus. Duplikat kunci butuh keputusan bisnis: ambil yang terbaru, gabungkan, atau tandai sebagai anomali.
-
-#### Implementasi
-
+ 
+### Tulisan yang Tidak Seragam
+ 
+#### Masalahnya
+ 
+Lihat kolom kota di data contoh kita. Ada `"Jakarta"`, `"jakarta"`, dan `"Surabaya "` dengan spasi di belakang. Bagi komputer ketiganya adalah tiga kategori berbeda, padahal `"Jakarta"` dan `"jakarta"` jelas kota yang sama.
+ 
+Kalau dibiarkan, sinyal untuk Jakarta terpecah jadi dua bagian yang masing-masing lebih lemah.
+ 
+#### Solusinya
+ 
+Seragamkan penulisan: hapus spasi berlebih, samakan jadi huruf kecil semua, lalu petakan singkatan yang sudah diketahui.
+ 
+#### Contoh Kode
+ 
 ```python
-print("Duplikat penuh:", df.duplicated().sum())
-df = df.drop_duplicates()
-
-# Duplikat berdasarkan kunci identitas, ambil catatan terbaru
-df = (df.sort_values("tanggal_update")
-        .drop_duplicates(subset=["id_pelanggan"], keep="last"))
+print("Sebelum:", df["kota"].unique())
+ 
+df["kota"] = (df["kota"]
+              .str.strip()                          # hapus spasi di ujung
+              .str.lower()                          # semua jadi huruf kecil
+              .str.replace(r"\s+", " ", regex=True))  # spasi ganda jadi tunggal
+ 
+# Kalau ada penulisan berbeda untuk hal yang sama
+kamus = {"dki jakarta": "jakarta", "jkt": "jakarta"}
+df["kota"] = df["kota"].replace(kamus)
+ 
+print("Sesudah:", df["kota"].unique())
 ```
-
-Penghapusan duplikat harus dilakukan **sebelum** pembagian data, karena ini termasuk pembersihan struktural, bukan transformasi yang mempelajari parameter.
-
-### Ketidakkonsistenan Nilai Kategorikal
-
-#### Masalah
-
-Kategori yang sebenarnya sama tertulis berbeda: `"Jakarta"`, `"jakarta"`, `"JAKARTA"`, `"Jakarta "`, `"DKI Jakarta"`. One-hot encoding akan memperlakukan semuanya sebagai kategori terpisah, memecah sinyal dan meledakkan dimensi.
-
-#### Solusi
-
-Normalisasi teks secara sistematis: pangkas spasi, seragamkan huruf, lalu petakan sinonim yang diketahui lewat kamus eksplisit. Jangan mengandalkan pencocokan fuzzy otomatis tanpa verifikasi, karena bisa menggabungkan kategori yang sebenarnya berbeda.
-
-#### Implementasi
-
-```python
-def bersihkan_teks(s: pd.Series) -> pd.Series:
-    return (s.astype("string")
-             .str.strip()
-             .str.lower()
-             .str.replace(r"\s+", " ", regex=True))
-
-kamus_kota = {
-    "dki jakarta": "jakarta",
-    "jkt": "jakarta",
-    "bandung kota": "bandung",
-}
-
-df["kota"] = bersihkan_teks(df["kota"]).replace(kamus_kota)
-print(df["kota"].value_counts(dropna=False).head(20))
-```
-
+ 
 ### Tipe Data yang Salah Terbaca
-
-#### Masalah
-
-Kolom numerik terbaca sebagai teks karena ada pemisah ribuan, simbol mata uang, atau penanda nilai hilang berupa string seperti `"N/A"` atau `"-"`. Kolom tanggal terbaca sebagai objek. Kolom kategorikal berkode angka (misalnya `1=pria`, `2=wanita`) terbaca sebagai numerik dan diperlakukan seolah punya urutan.
-
-#### Solusi
-
-Konversi tipe secara eksplisit setelah membersihkan karakter pengganggu. Kolom kategorikal berkode angka harus dipaksa menjadi tipe kategorikal atau string.
-
-#### Implementasi
-
+ 
+#### Masalahnya
+ 
+Kolom gaji yang ditulis `"Rp 5.000.000"` akan terbaca sebagai teks, bukan angka, sehingga tidak bisa dihitung. Kolom tanggal yang terbaca sebagai teks juga tidak bisa dipakai untuk menghitung selisih hari.
+ 
+Ada juga jebakan sebaliknya: kolom kode wilayah berisi angka 1, 2, 3 terbaca sebagai angka, sehingga model mengira wilayah 3 "lebih besar" daripada wilayah 1. Padahal itu cuma kode.
+ 
+#### Solusinya
+ 
+Ubah tipe secara eksplisit setelah membersihkan karakter pengganggu.
+ 
+#### Contoh Kode
+ 
 ```python
-# Numerik yang terbaca sebagai teks
-df["pendapatan"] = (df["pendapatan"].astype(str)
-                    .str.replace(r"[^\d,.\-]", "", regex=True)
-                    .str.replace(".", "", regex=False)
-                    .str.replace(",", ".", regex=False))
-df["pendapatan"] = pd.to_numeric(df["pendapatan"], errors="coerce")
-
+# Angka yang tertulis sebagai teks
+contoh = pd.Series(["Rp 5.000.000", "Rp 12.500.000", "N/A"])
+bersih = (contoh.str.replace(r"[^\d]", "", regex=True)   # sisakan digit saja
+                 .replace("", np.nan))
+print(pd.to_numeric(bersih, errors="coerce"))
+ 
 # Tanggal
-df["tanggal"] = pd.to_datetime(df["tanggal"], errors="coerce", format="mixed")
-
-# Kategorikal berkode angka
-df["kode_wilayah"] = df["kode_wilayah"].astype("category")
-
-# Penanda nilai hilang yang tersamar
-df = df.replace(["N/A", "n/a", "-", "", "NULL", "null", "?", -999], np.nan)
+df["tanggal_daftar"] = pd.to_datetime(df["tanggal_daftar"], errors="coerce")
+ 
+# Kode yang sebenarnya kategori, bukan angka
+# df["kode_wilayah"] = df["kode_wilayah"].astype(str)
 ```
-
-Parameter `errors="coerce"` mengubah nilai yang gagal dikonversi menjadi `NaN`, sehingga masalah menjadi terlihat sebagai nilai hilang alih-alih membuat proses berhenti.
-
-### Outlier
-
-#### Masalah
-
-Outlier bisa berasal dari kesalahan input (usia 999 tahun), satuan yang tidak konsisten (tinggi dalam meter tercampur sentimeter), atau memang pengamatan ekstrem yang valid (transaksi besar dari nasabah korporat). Menghapus semuanya secara membabi buta akan membuang sinyal penting, terutama pada kasus deteksi penipuan dan deteksi anomali.
-
-#### Solusi
-
-Deteksi lebih dulu, klasifikasi asal-usulnya, baru tentukan tindakan. Ada empat pilihan tindakan: perbaiki jika jelas salah input, potong nilainya (winsorizing), transformasi distribusinya, atau biarkan dan gunakan model yang tahan outlier.
-
-#### Implementasi
-
+ 
+Bagian `errors="coerce"` artinya: kalau ada nilai yang gagal diubah jadi angka, jadikan saja sel kosong. Ini lebih baik daripada program berhenti dengan error, karena masalahnya berubah jadi sesuatu yang bisa ditangani di tahap berikutnya.
+ 
+### Nilai Kosong yang Menyamar
+ 
+#### Masalahnya
+ 
+Kadang sel kosong tidak benar-benar kosong. Isinya berupa tulisan `"N/A"`, `"-"`, `"tidak ada"`, atau angka aneh seperti `-999` dan `9999`. Python menganggap itu nilai valid, padahal maksudnya kosong.
+ 
+Di data contoh kita, ada umur bernilai 999 yang jelas mustahil.
+ 
+#### Solusinya
+ 
+Ubah semua penanda semacam itu menjadi `NaN` supaya bisa ditangani dengan cara yang benar.
+ 
+#### Contoh Kode
+ 
 ```python
-def deteksi_outlier_iqr(s: pd.Series, k: float = 1.5):
-    q1, q3 = s.quantile([0.25, 0.75])
-    iqr = q3 - q1
-    batas_bawah, batas_atas = q1 - k * iqr, q3 + k * iqr
-    return (s < batas_bawah) | (s > batas_atas), batas_bawah, batas_atas
-
-mask, bb, ba = deteksi_outlier_iqr(X_train["pendapatan"])
-print(f"Outlier: {mask.sum()} ({mask.mean():.2%}), batas [{bb:.1f}, {ba:.1f}]")
-
-# Winsorizing: potong ke persentil, batas dipelajari dari data latih saja
-batas = X_train["pendapatan"].quantile([0.01, 0.99]).values
-X_train["pendapatan"] = X_train["pendapatan"].clip(*batas)
-X_test["pendapatan"] = X_test["pendapatan"].clip(*batas)   # pakai batas latih
+# Penanda berupa teks
+df = df.replace(["N/A", "n/a", "-", "", "NULL", "?"], np.nan)
+ 
+# Nilai yang mustahil secara logika
+df.loc[df["umur"] > 120, "umur"] = np.nan
+df.loc[df["umur"] < 0, "umur"] = np.nan
+ 
+print("Sel kosong sekarang:")
+print(df.isna().sum())
 ```
-
-#### Jebakan yang Sering Terjadi
-
-Metode IQR mengasumsikan distribusi yang relatif simetris. Pada distribusi miring seperti pendapatan atau durasi sesi, metode ini akan menandai terlalu banyak nilai valid sebagai outlier. Untuk data miring, transformasi logaritma dulu baru deteksi, atau gunakan pendekatan berbasis kuantil murni.
-
-## Tahap 3: Penanganan Nilai Hilang
-
-### Diagnosis Mekanisme Kehilangan
-
-#### Masalah
-
-Strategi imputasi yang tepat bergantung pada *mengapa* nilai itu hilang. Mengisi semua nilai hilang dengan rata-rata tanpa memahami mekanismenya bisa menghapus sinyal atau menyuntikkan bias sistematis.
-
-#### Tiga Mekanisme
-
-**MCAR (Missing Completely At Random).** Kehilangan tidak berhubungan dengan apa pun, misalnya sensor mati acak. Imputasi sederhana aman.
-
-**MAR (Missing At Random).** Kehilangan berhubungan dengan variabel lain yang teramati, misalnya pendapatan lebih sering kosong pada responden muda. Imputasi berbasis model yang memakai variabel lain lebih tepat.
-
-**MNAR (Missing Not At Random).** Kehilangan berhubungan dengan nilai yang hilang itu sendiri, misalnya orang berpendapatan sangat tinggi menolak mengisi. Di sini, fakta bahwa nilainya hilang justru merupakan informasi dan harus dijadikan fitur tersendiri.
-
-#### Cara Mendiagnosis
-
+ 
+## Tahap 3: Membagi Data Latih dan Data Uji
+ 
+### Kenapa Dilakukan Sekarang, Bukan Nanti
+ 
+Semua tahap setelah ini melibatkan perhitungan yang mempelajari sesuatu dari data: rata-rata untuk mengisi sel kosong, daftar kategori untuk encoding, nilai minimum dan maksimum untuk penskalaan.
+ 
+Kalau pembagian dilakukan belakangan, semua perhitungan itu sudah tercemar informasi dari data uji.
+ 
+### Contoh Kode
+ 
 ```python
-# Apakah pola hilang berhubungan dengan target? (indikasi MNAR/MAR informatif)
-for kolom in X_train.columns[X_train.isna().any()]:
-    hilang = X_train[kolom].isna()
-    print(f"{kolom:25s} target rate saat hilang={y_train[hilang].mean():.4f} "
-          f"| saat ada={y_train[~hilang].mean():.4f}")
+from sklearn.model_selection import train_test_split
+ 
+X = df.drop(columns=["berhenti", "id_pelanggan"])   # id dibuang, tidak berguna
+y = df["berhenti"]
+ 
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.2,          # 20 persen untuk data uji
+    stratify=y,             # proporsi kelas dijaga sama di kedua bagian
+    random_state=42,        # supaya hasilnya sama tiap dijalankan
+)
+ 
+print("Data latih:", X_train.shape)
+print("Data uji  :", X_test.shape)
+print("Proporsi kelas di latih:", y_train.value_counts(normalize=True).round(3).to_dict())
+print("Proporsi kelas di uji  :", y_test.value_counts(normalize=True).round(3).to_dict())
 ```
-
-Jika tingkat target berbeda jauh antara baris yang hilang dan yang tidak, kehilangan itu informatif dan indikator biner harus dibuat.
-
-### Solusi 1: Penghapusan
-
+ 
+### Kapan Pembagian Acak Tidak Boleh Dipakai
+ 
+**Kalau data punya urutan waktu.** Misalnya memprediksi penjualan bulan depan. Pembagian acak akan membuat model belajar dari masa depan untuk menebak masa lalu, yang mustahil dilakukan di dunia nyata. Untuk kasus ini, bagi berdasarkan tanggal: data lama untuk latih, data baru untuk uji.
+ 
+**Kalau satu orang punya banyak baris.** Misalnya satu pasien dengan beberapa kali kunjungan. Pembagian acak bisa menempatkan kunjungan pasien yang sama di dua sisi, sehingga model menghafal identitas pasien. Pakai `GroupKFold` untuk kasus ini.
+ 
+```python
+from sklearn.model_selection import TimeSeriesSplit, GroupKFold
+ 
+# Untuk data berurutan waktu
+df_urut = df.sort_values("tanggal_daftar")
+batas = int(len(df_urut) * 0.8)
+latih, uji = df_urut.iloc[:batas], df_urut.iloc[batas:]
+```
+ 
+## Tahap 4: Menangani Data Kosong
+ 
+### Kenapa Ada Data Kosong
+ 
+Memahami sebabnya menentukan cara menanganinya. Ada tiga kemungkinan.
+ 
+**Kosong karena kebetulan.** Sensor mati sesaat, atau petugas lupa mengisi. Tidak ada polanya. Kasus ini paling mudah, cukup diisi dengan nilai wajar.
+ 
+**Kosong karena berkaitan dengan kolom lain.** Misalnya kolom gaji lebih sering kosong pada responden berusia muda karena mereka belum bekerja. Di sini, kolom lain bisa dipakai untuk menebak isinya.
+ 
+**Kosong justru karena nilainya.** Misalnya orang berpenghasilan sangat tinggi cenderung menolak mengisi kolom gaji. Ini kasus paling penting, karena fakta bahwa selnya kosong justru merupakan informasi berharga. Kalau diisi begitu saja, informasi itu hilang.
+ 
+### Cara Mengecek Apakah Kekosongan Itu Bermakna
+ 
+Bandingkan target antara baris yang kosong dan yang terisi. Kalau angkanya berbeda jauh, berarti kekosongan itu membawa informasi.
+ 
+```python
+for kolom in ["gaji", "umur"]:
+    kosong = X_train[kolom].isna()
+    print(f"{kolom}: rata-rata target saat kosong = {y_train[kosong].mean():.3f}, "
+          f"saat terisi = {y_train[~kosong].mean():.3f}")
+```
+ 
+### Cara 1: Menghapus
+ 
 #### Kapan Dipakai
-
-Hapus kolom jika proporsi hilangnya sangat tinggi (di atas 70 sampai 80 persen) dan tidak ada alasan domain untuk mempertahankannya. Hapus baris hanya jika proporsi baris yang terdampak sangat kecil (di bawah sekitar 5 persen) dan mekanismenya MCAR.
-
-#### Risiko
-
-Penghapusan baris pada mekanisme MAR atau MNAR menghasilkan sampel yang bias, karena yang terbuang bukan kelompok acak. Penghapusan baris juga tidak bisa dilakukan pada data uji atau data produksi, sehingga menciptakan ketidakcocokan antara pelatihan dan penerapan.
-
-#### Implementasi
-
+ 
+Buang kolomnya kalau lebih dari 70 persen isinya kosong dan tidak ada alasan kuat mempertahankannya.
+ 
+Buang barisnya hanya kalau yang terdampak sangat sedikit, di bawah 5 persen, dan kekosongannya memang kebetulan.
+ 
+#### Kenapa Harus Hati-hati
+ 
+Menghapus baris tidak bisa dilakukan di dunia nyata. Kalau nanti ada pelanggan baru yang kolom gajinya kosong, Anda tidak bisa bilang "maaf, tidak bisa diprediksi". Model harus tetap bisa menjawab.
+ 
+#### Contoh Kode
+ 
 ```python
-# Buang kolom dengan kehilangan ekstrem
-ambang = 0.7
-kolom_buang = X_train.columns[X_train.isna().mean() > ambang]
-X_train = X_train.drop(columns=kolom_buang)
-X_test = X_test.drop(columns=kolom_buang)   # daftar kolom dari data latih
+# Buang kolom yang terlalu banyak kosong
+batas = 0.7
+kolom_buang = X_train.columns[X_train.isna().mean() > batas]
+print("Kolom yang dibuang:", list(kolom_buang))
 ```
-
-### Solusi 2: Imputasi Statistik Sederhana
-
+ 
+### Cara 2: Mengisi dengan Nilai Statistik
+ 
 #### Kapan Dipakai
-
-Baseline default untuk sebagian besar kasus. Median untuk numerik karena tahan outlier, modus untuk kategorikal, dan konstanta khusus ketika kehilangan punya makna tersendiri.
-
-#### Risiko
-
-Imputasi rata-rata atau median mengecilkan varians dan melemahkan korelasi antar variabel. Pada proporsi hilang di atas sekitar 20 persen, distorsi ini menjadi signifikan.
-
-#### Implementasi
-
+ 
+Ini pilihan default yang aman untuk sebagian besar kasus.
+ 
+Untuk kolom angka, isi dengan **median** (nilai tengah), bukan rata-rata. Alasannya, rata-rata mudah tertarik oleh nilai ekstrem. Kalau ada satu gaji 900 juta di antara gaji 10 juta, rata-ratanya jadi tidak masuk akal, sementara median tetap wajar.
+ 
+Untuk kolom kategori, isi dengan **modus** (nilai yang paling sering muncul), atau dengan kategori khusus seperti `"tidak_diketahui"`.
+ 
+#### Contoh Kode
+ 
 ```python
 from sklearn.impute import SimpleImputer
-
-imputer_num = SimpleImputer(strategy="median", add_indicator=True)
-imputer_cat = SimpleImputer(strategy="most_frequent")
-imputer_konstan = SimpleImputer(strategy="constant", fill_value="tidak_diketahui")
+ 
+pengisi_angka = SimpleImputer(strategy="median")
+pengisi_kategori = SimpleImputer(strategy="most_frequent")
+ 
+kolom_angka = ["umur", "gaji", "lama_langganan"]
+pengisi_angka.fit(X_train[kolom_angka])                  # belajar dari latih
+ 
+X_train_isi = pengisi_angka.transform(X_train[kolom_angka])
+X_test_isi = pengisi_angka.transform(X_test[kolom_angka])  # pakai nilai dari latih
+ 
+print("Median yang dipakai:", pengisi_angka.statistics_.round(0))
 ```
-
-Parameter `add_indicator=True` menambahkan kolom biner yang menandai baris mana yang diimputasi. Ini cara termurah mempertahankan informasi MNAR dan sering menaikkan performa model secara nyata.
-
-### Solusi 3: Imputasi Berbasis Model
-
-#### Kapan Dipakai
-
-Ketika mekanismenya MAR dan hubungan antar fitur cukup kuat sehingga nilai yang hilang bisa diprediksi dari fitur lain. `KNNImputer` mencari baris paling mirip; `IterativeImputer` memodelkan tiap kolom sebagai fungsi dari kolom lain secara bergantian.
-
-#### Risiko
-
-Jauh lebih lambat, terutama `KNNImputer` yang harus menghitung jarak antar seluruh baris. Keduanya juga bisa memperkenalkan korelasi palsu antar fitur yang sebenarnya independen.
-
-#### Implementasi
-
+ 
+### Cara 3: Menambahkan Penanda Kosong
+ 
+#### Masalah yang Diselesaikan
+ 
+Kalau sel kosong langsung diisi median, informasi bahwa sel itu tadinya kosong hilang selamanya. Padahal seperti dibahas tadi, kekosongan itu sendiri kadang membawa sinyal.
+ 
+#### Solusinya
+ 
+Tambahkan kolom baru berisi 0 atau 1 yang menandai baris mana yang tadinya kosong. Model bisa memakainya kalau ternyata berguna, dan mengabaikannya kalau tidak.
+ 
+#### Contoh Kode
+ 
 ```python
-from sklearn.experimental import enable_iterative_imputer   # wajib diimpor lebih dulu
-from sklearn.impute import IterativeImputer, KNNImputer
-from sklearn.ensemble import HistGradientBoostingRegressor
-
-knn_imp = KNNImputer(n_neighbors=5, weights="distance")
-
-iter_imp = IterativeImputer(
-    estimator=HistGradientBoostingRegressor(random_state=RANDOM_STATE),
-    max_iter=10,
-    random_state=RANDOM_STATE,
-)
+pengisi = SimpleImputer(strategy="median", add_indicator=True)
+hasil = pengisi.fit_transform(X_train[kolom_angka])
+ 
+print("Kolom asli:", len(kolom_angka))
+print("Kolom setelah ditambah penanda:", hasil.shape[1])
 ```
-
-`KNNImputer` membutuhkan fitur yang sudah diskalakan, karena berbasis jarak. Urutannya: skalakan dulu, baru imputasi.
-
-### Solusi 4: Membiarkan Model Menanganinya
-
+ 
+Ini trik murah yang sering menaikkan performa model secara nyata. Cukup tambahkan satu parameter.
+ 
+### Cara 4: Membiarkan Model Menanganinya
+ 
 #### Kapan Dipakai
-
-`HistGradientBoostingClassifier` dan `HistGradientBoostingRegressor` menangani `NaN` secara native dengan mempelajari ke arah mana baris bernilai hilang harus dialirkan di tiap pemisahan. Ini sering lebih baik daripada imputasi manual, karena keputusannya dioptimalkan terhadap target.
-
-#### Implementasi
-
+ 
+Beberapa algoritma bisa menangani sel kosong sendiri tanpa perlu diisi. `HistGradientBoostingClassifier` adalah salah satunya, dan biasanya hasilnya lebih baik daripada pengisian manual.
+ 
+#### Contoh Kode
+ 
 ```python
 from sklearn.ensemble import HistGradientBoostingClassifier
-
-model = HistGradientBoostingClassifier(random_state=RANDOM_STATE)
-model.fit(X_train_numerik, y_train)   # NaN dibiarkan apa adanya
+ 
+model = HistGradientBoostingClassifier(random_state=42)
+model.fit(X_train[kolom_angka], y_train)   # sel kosong dibiarkan apa adanya
+print("Akurasi:", round(model.score(X_test[kolom_angka], y_test), 3))
 ```
-
-## Tahap 4: Encoding Variabel Kategorikal
-
+ 
+## Tahap 5: Menangani Nilai Ekstrem
+ 
+### Masalahnya
+ 
+Di data contoh kita ada gaji bernilai 900 juta di antara gaji yang rata-rata 10 jutaan. Nilai seperti ini bisa membuat rata-rata jadi tidak mewakili, membuat penskalaan menjadi kacau, dan menarik garis prediksi jauh melenceng.
+ 
+### Tapi Jangan Langsung Dibuang
+ 
+Ini kesalahan pemula yang umum. Sebelum menghapus, tanyakan dulu asal-usulnya.
+ 
+**Kalau salah ketik**, misalnya umur 999, perbaiki atau jadikan sel kosong.
+ 
+**Kalau salah satuan**, misalnya tinggi badan tercampur antara meter dan sentimeter, konversikan.
+ 
+**Kalau memang benar**, misalnya transaksi besar dari nasabah korporat, jangan dibuang. Pada kasus deteksi penipuan, outlier justru adalah hal yang ingin ditemukan. Membuangnya sama saja membuang jawabannya.
+ 
+### Cara Mendeteksi dengan Metode IQR
+ 
+IQR adalah singkatan dari *Interquartile Range*, yaitu rentang antara nilai di posisi 25 persen dan 75 persen ketika data diurutkan. Data yang jauh di luar rentang itu ditandai sebagai outlier.
+ 
+```python
+def cari_outlier(kolom, pengali=1.5):
+    q1 = kolom.quantile(0.25)
+    q3 = kolom.quantile(0.75)
+    iqr = q3 - q1
+    bawah = q1 - pengali * iqr
+    atas = q3 + pengali * iqr
+    return (kolom < bawah) | (kolom > atas), bawah, atas
+ 
+penanda, bawah, atas = cari_outlier(X_train["gaji"].dropna())
+print(f"Outlier: {penanda.sum()} baris")
+print(f"Batas wajar: {bawah:,.0f} sampai {atas:,.0f}")
+```
+ 
+### Cara Menanganinya: Memotong Nilai
+ 
+Alih-alih membuang barisnya, potong nilainya sampai batas tertentu. Cara ini disebut *winsorizing*. Baris tetap ada, informasinya tetap terpakai, tapi nilai ekstremnya tidak lagi merusak.
+ 
+```python
+# Batas dipelajari dari data latih saja
+batas_bawah, batas_atas = X_train["gaji"].quantile([0.01, 0.99])
+ 
+X_train["gaji"] = X_train["gaji"].clip(batas_bawah, batas_atas)
+X_test["gaji"] = X_test["gaji"].clip(batas_bawah, batas_atas)   # batas dari latih
+ 
+print(f"Nilai dipotong pada rentang {batas_bawah:,.0f} - {batas_atas:,.0f}")
+```
+ 
+## Tahap 6: Mengubah Kata Menjadi Angka
+ 
+### Masalahnya
+ 
+Sebagian besar algoritma hanya bisa menghitung angka. Kolom `kota` yang berisi `"jakarta"` dan `"palu"` harus diubah bentuknya dulu.
+ 
 ### One-Hot Encoding
-
-#### Masalah yang Diselesaikan
-
-Sebagian besar algoritma hanya menerima angka. Kategori nominal seperti warna atau kota tidak punya urutan, sehingga tidak boleh diberi kode angka berurutan yang menyiratkan `merah < biru < hijau`.
-
-#### Solusi
-
-Buat satu kolom biner untuk tiap kategori. Model kemudian memperlakukan setiap kategori secara independen.
-
-#### Implementasi
-
+ 
+#### Cara Kerjanya
+ 
+Buat satu kolom baru untuk tiap kategori, berisi 1 kalau cocok dan 0 kalau tidak.
+ 
+Kolom `kota` yang berisi tiga kategori berubah menjadi:
+ 
+| kota | kota_jakarta | kota_bandung | kota_palu |
+|---|---|---|---|
+| jakarta | 1 | 0 | 0 |
+| palu | 0 | 0 | 1 |
+ 
+#### Kapan Dipakai
+ 
+Ini pilihan standar untuk kategori yang **tidak punya urutan**. Kota, warna, dan jenis produk tidak bisa diurutkan mana yang lebih besar.
+ 
+#### Contoh Kode
+ 
 ```python
 from sklearn.preprocessing import OneHotEncoder
-
+ 
 ohe = OneHotEncoder(
-    handle_unknown="infrequent_if_exist",   # kategori baru masuk ke kelompok jarang
-    min_frequency=0.01,                      # kategori <1% digabung jadi "infrequent"
+    handle_unknown="ignore",   # kategori baru tidak bikin error
     sparse_output=False,
-    drop=None,                               # gunakan "first" untuk model linear
 )
+kolom_kategori = ["kota", "paket"]
+hasil = ohe.fit_transform(X_train[kolom_kategori])
+ 
+print("Kolom asli:", len(kolom_kategori))
+print("Kolom setelah encoding:", hasil.shape[1])
+print("Nama kolom baru:", ohe.get_feature_names_out()[:6])
 ```
-
-#### Jebakan
-
-Pada model linear dengan intercept, one-hot penuh menimbulkan kolinearitas sempurna. Gunakan `drop="first"` untuk model linear, tetapi jangan gunakan pada model berbasis pohon karena justru mengurangi kualitas pemisahan.
-
+ 
 ### Ordinal Encoding
-
+ 
+#### Cara Kerjanya
+ 
+Tiap kategori diberi nomor urut: 0, 1, 2, dan seterusnya.
+ 
 #### Kapan Dipakai
-
-Hanya untuk kategori yang benar-benar punya urutan bermakna, misalnya tingkat pendidikan, ukuran baju, atau skala kepuasan. Urutannya harus ditentukan manual, bukan diserahkan pada urutan abjad.
-
-#### Implementasi
-
+ 
+Hanya untuk kategori yang **memang punya urutan bermakna**. Contohnya tingkat pendidikan, ukuran baju, atau tingkat kepuasan.
+ 
+Yang penting, urutannya harus Anda tentukan sendiri. Kalau diserahkan ke komputer, urutannya jadi berdasarkan abjad, sehingga "besar" bisa saja mendapat nomor lebih kecil daripada "kecil".
+ 
+#### Contoh Kode
+ 
 ```python
 from sklearn.preprocessing import OrdinalEncoder
-
-urutan_pendidikan = ["sd", "smp", "sma", "d3", "s1", "s2", "s3"]
-
+ 
+urutan_paket = ["basic", "premium", "vip"]   # urutan ditentukan manual
+ 
 ord_enc = OrdinalEncoder(
-    categories=[urutan_pendidikan],
+    categories=[urutan_paket],
     handle_unknown="use_encoded_value",
-    unknown_value=-1,
+    unknown_value=-1,          # kategori tak dikenal jadi -1
+)
+hasil = ord_enc.fit_transform(X_train[["paket"]])
+print("5 nilai pertama:", hasil[:5].ravel())
+```
+ 
+#### Jebakan Umum
+ 
+Jangan memakai ordinal encoding untuk kategori tanpa urutan pada model linear. Kalau Jakarta diberi angka 1 dan Surabaya angka 3, model akan mengira Surabaya "tiga kali Jakarta", yang jelas tidak masuk akal.
+ 
+Pengecualiannya adalah model berbasis pohon seperti Random Forest, yang bisa memisahkan kategori lewat beberapa pertanyaan berurutan sehingga urutan sembarang tidak terlalu merugikan.
+ 
+### Kalau Kategorinya Terlalu Banyak
+ 
+#### Masalahnya
+ 
+Bayangkan kolom kode pos dengan 5.000 nilai berbeda. One-hot encoding akan menghasilkan 5.000 kolom baru yang hampir seluruhnya berisi nol. Data jadi sangat lebar, pelatihan jadi lambat, dan model mudah overfitting.
+ 
+#### Solusi Sederhana
+ 
+Gabungkan kategori yang jarang muncul menjadi satu kelompok bernama "lainnya".
+ 
+```python
+ohe = OneHotEncoder(
+    handle_unknown="infrequent_if_exist",
+    min_frequency=0.01,        # kategori di bawah 1 persen digabung
+    sparse_output=False,
 )
 ```
-
-Untuk model berbasis pohon, ordinal encoding juga bisa dipakai pada kategori nominal berkardinalitas tinggi. Pohon mampu memisahkan kategori dengan beberapa pemisahan berurutan, sehingga urutan yang arbitrer tidak fatal seperti pada model linear.
-
-### Target Encoding
-
-#### Masalah yang Diselesaikan
-
-Kategori berkardinalitas tinggi seperti kode pos, ID produk, atau nama kecamatan menghasilkan ribuan kolom jika di-one-hot. Dimensinya meledak dan sebagian besar kolom nyaris selalu bernilai nol.
-
-#### Solusi
-
-Ganti tiap kategori dengan rata-rata target pada kategori tersebut, dihaluskan terhadap rata-rata global agar kategori langka tidak menghasilkan estimasi ekstrem.
-
-#### Risiko Utama
-
-Ini teknik yang paling rawan menyebabkan kebocoran, karena menggunakan nilai target. Implementasi naif akan membuat model menghafal target lewat encoding. `TargetEncoder` scikit-learn memakai skema validasi silang internal untuk mencegah hal ini.
-
-#### Implementasi
-
+ 
+### Kategori Baru yang Belum Pernah Ada
+ 
+#### Masalahnya
+ 
+Model dilatih dengan data yang berisi 6 kota. Suatu hari datang pelanggan dari kota ketujuh yang belum pernah ada di data latih. Kalau tidak diantisipasi, program bisa berhenti dengan error.
+ 
+#### Solusinya
+ 
+Selalu atur parameter `handle_unknown` secara eksplisit. Lalu uji dengan sengaja memasukkan kategori palsu.
+ 
 ```python
-from sklearn.preprocessing import TargetEncoder
-
-te = TargetEncoder(
-    target_type="binary",
-    smooth="auto",       # penghalusan otomatis berdasarkan ukuran kategori
-    cv=5,                # cross-fitting internal untuk mencegah kebocoran
-    random_state=RANDOM_STATE,
-)
+X_uji_baru = X_test.copy()
+X_uji_baru.loc[X_uji_baru.index[0], "kota"] = "kota_antah_berantah"
+# pipeline.predict(X_uji_baru)   # seharusnya jalan tanpa error
 ```
-
-Target encoding harus berada di dalam `Pipeline` dan divalidasi lewat validasi silang. Menghitungnya manual di luar pipeline hampir selalu menghasilkan skor yang menyesatkan.
-
-### Menangani Kategori Tak Dikenal di Produksi
-
-#### Masalah
-
-Kategori yang muncul di data produksi tetapi tidak pernah ada di data latih akan menyebabkan error atau perilaku tak terduga.
-
-#### Solusi
-
-Setiap encoder harus dikonfigurasi eksplisit untuk kasus ini. `OneHotEncoder` dengan `handle_unknown="ignore"` menghasilkan baris nol semua; dengan `"infrequent_if_exist"` kategori baru dipetakan ke kelompok jarang, yang biasanya lebih baik. `OrdinalEncoder` memakai `unknown_value`.
-
-#### Implementasi
-
-```python
-# Uji ketahanan pipeline terhadap kategori baru
-X_baru = X_test.copy()
-X_baru.loc[X_baru.index[0], "kota"] = "kota_yang_belum_pernah_ada"
-pipe.predict(X_baru)   # harus berjalan tanpa error
-```
-
-## Tahap 5: Penskalaan dan Transformasi Numerik
-
-### Mengapa Skala Penting
-
-#### Masalah
-
-Fitur `pendapatan` dalam jutaan dan fitur `usia` dalam puluhan berada pada skala yang berbeda ribuan kali. Algoritma berbasis jarak (KNN, K-Means, SVM) akan didominasi oleh fitur berskala besar. Algoritma berbasis gradien (regresi logistik, MLP) akan konvergen sangat lambat. Regularisasi L1 dan L2 juga menghukum fitur secara tidak adil jika skalanya berbeda.
-
-#### Kapan Scaling Tidak Diperlukan
-
-Model berbasis pohon (Decision Tree, Random Forest, Gradient Boosting) sama sekali tidak terpengaruh transformasi monoton, karena hanya membandingkan nilai terhadap ambang. Menskalakan data untuk model ini hanya membuang waktu komputasi tanpa manfaat.
-
+ 
+## Tahap 7: Menyamakan Skala Angka
+ 
+### Kenapa Perlu
+ 
+Lihat dua kolom di data kita: `umur` yang isinya sekitar 18 sampai 70, dan `gaji` yang isinya jutaan.
+ 
+Algoritma yang menghitung jarak antar data, seperti KNN dan SVM, akan menganggap perbedaan gaji 1 juta jauh lebih penting daripada perbedaan umur 40 tahun, semata-mata karena angkanya lebih besar. Padahal belum tentu begitu.
+ 
+Penskalaan menyamakan rentangnya supaya semua kolom diperlakukan adil.
+ 
 ### StandardScaler
-
-#### Cara Kerja
-
-Mengurangi rata-rata lalu membagi standar deviasi, menghasilkan distribusi dengan rata-rata nol dan standar deviasi satu.
-
+ 
+#### Cara Kerjanya
+ 
+Mengubah tiap kolom sehingga rata-ratanya menjadi 0 dan sebarannya menjadi 1. Nilai di atas rata-rata jadi positif, di bawah rata-rata jadi negatif.
+ 
 #### Kapan Dipakai
-
-Default untuk sebagian besar kasus, terutama ketika distribusi mendekati normal dan algoritma yang dipakai mengasumsikan data terpusat, seperti PCA, regresi logistik, dan SVM.
-
-#### Batasan
-
-Sangat sensitif terhadap outlier, karena rata-rata dan standar deviasi keduanya terpengaruh nilai ekstrem.
-
+ 
+Pilihan default untuk sebagian besar kasus.
+ 
+#### Kelemahan
+ 
+Karena memakai rata-rata, metode ini mudah terganggu outlier.
+ 
 ### MinMaxScaler
-
-#### Cara Kerja
-
-Memetakan nilai ke rentang tetap, biasanya 0 sampai 1.
-
+ 
+#### Cara Kerjanya
+ 
+Memetakan nilai terkecil menjadi 0 dan terbesar menjadi 1, sisanya di antaranya.
+ 
 #### Kapan Dipakai
-
-Ketika algoritma menuntut rentang terbatas, misalnya jaringan saraf dengan aktivasi sigmoid, atau ketika data akan dipakai untuk pemrosesan citra.
-
-#### Batasan
-
-Nilai di luar rentang data latih akan keluar dari batas 0 sampai 1 di data uji. Satu outlier ekstrem memampatkan seluruh nilai lain ke wilayah sempit.
-
+ 
+Saat Anda butuh angka yang pasti berada di rentang 0 sampai 1, misalnya untuk jaringan saraf atau pengolahan gambar.
+ 
+#### Kelemahan
+ 
+Satu outlier ekstrem bisa memampatkan semua nilai lain ke ruang yang sangat sempit.
+ 
 ### RobustScaler
-
-#### Cara Kerja
-
-Menggunakan median dan rentang interkuartil alih-alih rata-rata dan standar deviasi.
-
+ 
+#### Cara Kerjanya
+ 
+Memakai median dan rentang tengah, bukan rata-rata.
+ 
 #### Kapan Dipakai
-
-Ketika data mengandung outlier yang tidak ingin dihapus tetapi tidak boleh mendominasi penskalaan. Ini pilihan yang lebih aman daripada `StandardScaler` pada data keuangan dan data sensor.
-
-#### Perbandingan Implementasi
-
+ 
+Saat data mengandung outlier yang tidak ingin dibuang. Ini pilihan yang lebih aman untuk data gaji, harga, dan data keuangan pada umumnya.
+ 
+#### Perbandingan Ketiganya
+ 
 ```python
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
-
-kandidat = {
-    "standard": StandardScaler(),
-    "minmax": MinMaxScaler(feature_range=(0, 1)),
-    "robust": RobustScaler(quantile_range=(25.0, 75.0)),
-}
-
-for nama, sc in kandidat.items():
-    hasil = sc.fit_transform(X_train[["pendapatan"]])
-    print(f"{nama:9s} mean={hasil.mean():7.3f} std={hasil.std():6.3f} "
+ 
+data_uji = X_train[["gaji"]].fillna(X_train["gaji"].median())
+ 
+for nama, alat in [("Standard", StandardScaler()),
+                   ("MinMax", MinMaxScaler()),
+                   ("Robust", RobustScaler())]:
+    hasil = alat.fit_transform(data_uji)
+    print(f"{nama:9s} rata-rata={hasil.mean():7.3f} "
           f"min={hasil.min():8.3f} max={hasil.max():8.3f}")
 ```
-
-### Transformasi Distribusi
-
-#### Masalah
-
-Fitur dengan distribusi sangat miring, seperti pendapatan, durasi, atau jumlah transaksi, melanggar asumsi normalitas pada model linear dan membuat sebagian besar nilai menumpuk di satu sisi.
-
-#### Solusi
-
-Transformasi logaritma untuk data positif dengan kemiringan kanan, Box-Cox untuk data positif secara umum, Yeo-Johnson jika ada nilai nol atau negatif, dan `QuantileTransformer` sebagai opsi paling agresif yang memaksa distribusi apa pun menjadi normal atau seragam.
-
-#### Implementasi
-
+ 
+### Kalau Data Sangat Miring
+ 
+#### Masalahnya
+ 
+Kolom seperti gaji, harga, atau lama tunggu biasanya menumpuk di nilai kecil dengan ekor panjang ke kanan. Sebagian besar orang bergaji 5 sampai 15 juta, sedikit yang 100 juta, sangat sedikit yang 900 juta.
+ 
+Bentuk seperti ini menyulitkan model linear.
+ 
+#### Solusinya
+ 
+Transformasi logaritma memampatkan ekor panjang itu sehingga bentuknya lebih seimbang.
+ 
 ```python
-from sklearn.preprocessing import PowerTransformer, QuantileTransformer
-
-# Log sederhana, aman untuk nilai nol
-X_train["log_pendapatan"] = np.log1p(X_train["pendapatan"])
-
-# Yeo-Johnson: menerima nilai negatif, lambda dipelajari dari data
-pt = PowerTransformer(method="yeo-johnson", standardize=True)
-
-# Quantile: memaksa jadi normal, sangat efektif tapi menghancurkan interpretasi
-qt = QuantileTransformer(
-    output_distribution="normal",
-    n_quantiles=min(1000, len(X_train)),
-    random_state=RANDOM_STATE,
-)
-
-print("Skewness sebelum:", X_train["pendapatan"].skew().round(3))
-print("Skewness sesudah:", np.log1p(X_train["pendapatan"]).skew().round(3))
+gaji = X_train["gaji"].dropna()
+print("Kemiringan sebelum:", round(gaji.skew(), 2))
+print("Kemiringan sesudah:", round(np.log1p(gaji).skew(), 2))
 ```
-
-#### Jebakan
-
-`QuantileTransformer` memetakan berdasarkan peringkat, sehingga hubungan jarak asli hilang sepenuhnya dan interpretasi koefisien menjadi tidak mungkin. Gunakan hanya ketika performa prediktif lebih penting daripada interpretasi.
-
-## Tahap 6: Rekayasa Fitur
-
-### Fitur Interaksi dan Polinomial
-
-#### Masalah yang Diselesaikan
-
-Model linear tidak bisa menangkap efek interaksi. Jika pengaruh pendapatan terhadap target berbeda tergantung usia, model linear murni tidak akan menemukannya.
-
-#### Solusi
-
-Buat fitur perkalian atau pangkat secara eksplisit. Untuk model berbasis pohon, langkah ini biasanya tidak perlu karena interaksi ditemukan sendiri lewat pemisahan bertingkat.
-
-#### Implementasi
-
+ 
+Fungsi `np.log1p` adalah logaritma yang aman untuk nilai nol. Semakin dekat angka kemiringan ke nol, semakin seimbang bentuk datanya.
+ 
+### Algoritma yang Tidak Butuh Penskalaan
+ 
+Semua algoritma berbasis pohon keputusan — Decision Tree, Random Forest, Gradient Boosting — tidak terpengaruh sama sekali oleh skala. Algoritma ini hanya bertanya "apakah gaji lebih dari 10 juta?", dan jawabannya tidak berubah meski satuannya diubah.
+ 
+Jadi kalau Anda memakai Random Forest, langkah penskalaan bisa dilewati tanpa rugi apa pun.
+ 
+## Tahap 8: Membuat Fitur Baru
+ 
+### Apa Itu Rekayasa Fitur
+ 
+Ini proses membuat kolom baru dari kolom yang sudah ada, supaya pola yang tersembunyi jadi lebih mudah ditemukan model.
+ 
+Sering kali langkah ini memberi peningkatan lebih besar daripada mengganti algoritma.
+ 
+### Fitur dari Tanggal
+ 
+#### Masalahnya
+ 
+Tanggal mentah seperti `2024-03-15` hampir tidak berguna bagi model, karena nilainya nyaris unik untuk tiap baris.
+ 
+#### Solusinya
+ 
+Uraikan menjadi bagian-bagian yang bermakna: tahun, bulan, hari dalam minggu, akhir pekan atau bukan, dan sudah berapa lama sejak tanggal itu.
+ 
+#### Contoh Kode
+ 
 ```python
-from sklearn.preprocessing import PolynomialFeatures
-
-poly = PolynomialFeatures(degree=2, interaction_only=True, include_bias=False)
-
-# Rasio dan selisih berbasis domain sering lebih berguna daripada polinomial buta
-X_train["rasio_utang_pendapatan"] = X_train["utang"] / (X_train["pendapatan"] + 1)
-X_train["selisih_saldo"] = X_train["saldo_akhir"] - X_train["saldo_awal"]
+t = pd.to_datetime(X_train["tanggal_daftar"])
+ 
+X_train["tahun_daftar"] = t.dt.year
+X_train["bulan_daftar"] = t.dt.month
+X_train["hari_minggu"] = t.dt.dayofweek          # 0=Senin, 6=Minggu
+X_train["akhir_pekan"] = (t.dt.dayofweek >= 5).astype(int)
+X_train["umur_akun_hari"] = (pd.Timestamp("2026-01-01") - t).dt.days
+ 
+print(X_train[["tahun_daftar", "bulan_daftar", "akhir_pekan", "umur_akun_hari"]].head())
 ```
-
-Jumlah fitur polinomial tumbuh sangat cepat. Dengan 50 fitur dan derajat 2, hasilnya lebih dari 1.200 kolom. Batasi dengan `interaction_only=True` atau pilih pasangan fitur berdasarkan pengetahuan domain.
-
-### Diskretisasi (Binning)
-
-#### Masalah yang Diselesaikan
-
-Hubungan antara fitur dan target kadang tidak monoton. Misalnya risiko kredit tinggi pada usia sangat muda dan sangat tua, tetapi rendah di tengah. Model linear tidak bisa menangkap bentuk U seperti ini.
-
-#### Solusi
-
-Ubah fitur kontinu menjadi beberapa kelompok, lalu perlakukan sebagai kategorikal.
-
-#### Implementasi
-
+ 
+### Fitur Berupa Rasio dan Selisih
+ 
+#### Kenapa Berguna
+ 
+Kadang yang penting bukan nilai mentahnya, tapi perbandingannya. Gaji 10 juta itu besar atau kecil tergantung berapa cicilan yang harus dibayar. Rasio antara keduanya membawa informasi yang tidak ada di kolom mana pun secara terpisah.
+ 
+#### Contoh Kode
+ 
 ```python
-from sklearn.preprocessing import KBinsDiscretizer
-
-binner = KBinsDiscretizer(
-    n_bins=5,
-    encode="onehot-dense",
-    strategy="quantile",     # tiap bin berisi jumlah sampel yang setara
-    subsample=None,
-)
-
-# Binning manual berbasis domain sering lebih baik
-X_train["kel_usia"] = pd.cut(
-    X_train["usia"],
+X_train["gaji_per_bulan_langganan"] = X_train["gaji"] / (X_train["lama_langganan"] + 1)
+X_train["gaji_dibanding_umur"] = X_train["gaji"] / X_train["umur"]
+```
+ 
+Angka `+1` di penyebut mencegah pembagian dengan nol.
+ 
+### Mengelompokkan Angka Menjadi Kategori
+ 
+#### Kapan Berguna
+ 
+Kadang hubungan antara kolom dan target tidak lurus. Misalnya risiko berhenti berlangganan tinggi pada pelanggan sangat baru dan sangat lama, tapi rendah di tengah. Bentuk seperti ini sulit ditangkap model linear.
+ 
+Mengubah angka menjadi kelompok membuat pola seperti ini jadi terlihat.
+ 
+#### Contoh Kode
+ 
+```python
+X_train["kelompok_umur"] = pd.cut(
+    X_train["umur"],
     bins=[0, 25, 35, 50, 65, 120],
     labels=["<25", "25-34", "35-49", "50-64", "65+"],
 )
+print(X_train["kelompok_umur"].value_counts())
 ```
-
-Binning membuang informasi di dalam tiap kelompok. Pada model berbasis pohon, teknik ini hampir selalu merugikan karena pohon sudah melakukan binning secara adaptif.
-
-### Fitur Tanggal dan Waktu
-
-#### Masalah
-
-Timestamp mentah tidak berguna bagi model. Nilainya hampir unik untuk setiap baris, sehingga model akan menghafal alih-alih belajar pola.
-
-#### Solusi
-
-Uraikan menjadi komponen bermakna, dan encode komponen siklis (jam, bulan, hari) dengan sinus dan kosinus agar jarak antara jam 23 dan jam 0 dikenali sebagai dekat.
-
-#### Implementasi
-
-```python
-def fitur_waktu(df: pd.DataFrame, kolom: str) -> pd.DataFrame:
-    t = pd.to_datetime(df[kolom])
-    out = pd.DataFrame(index=df.index)
-    out["tahun"] = t.dt.year
-    out["bulan"] = t.dt.month
-    out["hari_dalam_minggu"] = t.dt.dayofweek
-    out["jam"] = t.dt.hour
-    out["akhir_pekan"] = (t.dt.dayofweek >= 5).astype(int)
-
-    # Encoding siklis
-    out["jam_sin"] = np.sin(2 * np.pi * out["jam"] / 24)
-    out["jam_cos"] = np.cos(2 * np.pi * out["jam"] / 24)
-    out["bulan_sin"] = np.sin(2 * np.pi * out["bulan"] / 12)
-    out["bulan_cos"] = np.cos(2 * np.pi * out["bulan"] / 12)
-
-    # Jarak waktu terhadap titik acuan
-    out["umur_hari"] = (pd.Timestamp("2026-01-01") - t).dt.days
-    return out
-```
-
-### Fitur Agregasi
-
-#### Kapan Dipakai
-
-Ketika satu entitas punya banyak baris riwayat, misalnya satu pelanggan dengan banyak transaksi. Model butuh ringkasan per entitas, bukan baris mentah.
-
-#### Jebakan Kebocoran Temporal
-
-Agregasi harus dihitung hanya dari periode sebelum titik prediksi. Menghitung rata-rata transaksi seorang pelanggan menggunakan seluruh riwayat, termasuk masa depan relatif terhadap label, adalah bentuk kebocoran yang sangat sering terlewat.
-
-#### Implementasi
-
-```python
-agg = (transaksi[transaksi["tanggal"] < tanggal_potong]
-       .groupby("id_pelanggan")
-       .agg(
-           total_transaksi=("nominal", "sum"),
-           rata_transaksi=("nominal", "mean"),
-           std_transaksi=("nominal", "std"),
-           jumlah_transaksi=("nominal", "count"),
-           nominal_maks=("nominal", "max"),
-           hari_terakhir=("tanggal", "max"),
-       )
-       .reset_index())
-
-X = X.merge(agg, on="id_pelanggan", how="left")
-```
-
-## Tahap 7: Seleksi Fitur
-
-### Menghapus Fitur Tanpa Informasi
-
-#### Masalah
-
-Kolom konstan, kolom hampir konstan, dan kolom identitas menambah dimensi tanpa menambah sinyal, memperlambat pelatihan dan meningkatkan risiko overfitting.
-
-#### Implementasi
-
+ 
+Perlu diingat, pengelompokan membuang detail di dalam tiap kelompok. Untuk model berbasis pohon, biasanya ini justru merugikan karena pohon sudah melakukan pengelompokan sendiri secara otomatis.
+ 
+## Tahap 9: Memilih Fitur yang Berguna
+ 
+### Kenapa Perlu
+ 
+Kolom yang tidak berguna bukan cuma tidak membantu, tapi bisa merugikan. Pelatihan jadi lambat, model jadi lebih mudah overfitting, dan hasilnya lebih sulit dijelaskan.
+ 
+### Membuang Kolom yang Jelas Tidak Berguna
+ 
 ```python
 from sklearn.feature_selection import VarianceThreshold
-
-vt = VarianceThreshold(threshold=0.0)   # buang kolom yang benar-benar konstan
-
-# Fitur yang saling berkorelasi sangat tinggi
-korelasi = X_train.select_dtypes(include=np.number).corr().abs()
-segitiga_atas = korelasi.where(np.triu(np.ones(korelasi.shape), k=1).astype(bool))
-redundan = [k for k in segitiga_atas.columns if any(segitiga_atas[k] > 0.95)]
-print("Fitur redundan:", redundan)
+ 
+# Kolom yang isinya sama semua
+konstan = X_train.columns[X_train.nunique() <= 1]
+print("Kolom konstan:", list(konstan))
+ 
+# Kolom yang saling berhubungan sangat erat, salah satunya bisa dibuang
+angka_saja = X_train.select_dtypes(include=np.number)
+korelasi = angka_saja.corr().abs()
+atas = korelasi.where(np.triu(np.ones(korelasi.shape), k=1).astype(bool))
+kembar = [k for k in atas.columns if any(atas[k] > 0.95)]
+print("Kolom yang isinya nyaris kembar:", kembar)
 ```
-
-### Metode Filter
-
-#### Cara Kerja
-
-Menilai tiap fitur secara independen terhadap target menggunakan uji statistik, tanpa melibatkan model.
-
-#### Kapan Dipakai
-
-Sebagai penyaring cepat pada data berdimensi sangat tinggi, sebelum metode yang lebih mahal.
-
-#### Batasan
-
-Karena menilai fitur satu per satu, metode ini melewatkan fitur yang hanya berguna dalam kombinasi dengan fitur lain.
-
-#### Implementasi
-
+ 
+### Membiarkan Model yang Memilih
+ 
+Cara paling praktis adalah membiarkan model menilai sendiri kolom mana yang berguna.
+ 
 ```python
-from sklearn.feature_selection import SelectKBest, mutual_info_classif, f_classif
-
-# Mutual information menangkap hubungan non-linear, f_classif hanya linear
-selector = SelectKBest(score_func=mutual_info_classif, k=30)
-```
-
-### Metode Embedded
-
-#### Cara Kerja
-
-Seleksi terjadi sebagai bagian dari pelatihan model, misalnya lewat penalti L1 yang mengenolkan koefisien, atau lewat ukuran kepentingan pada model pohon.
-
-#### Kapan Dipakai
-
-Pilihan paling praktis untuk sebagian besar kasus, karena mempertimbangkan interaksi antar fitur dan tidak memerlukan iterasi eksternal yang mahal.
-
-#### Implementasi
-
-```python
-from sklearn.feature_selection import SelectFromModel
-from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
-
-sfm_l1 = SelectFromModel(
-    LogisticRegression(penalty="l1", solver="saga", C=0.1, max_iter=5000),
-    threshold="median",
-)
-
-sfm_rf = SelectFromModel(
-    RandomForestClassifier(n_estimators=300, random_state=RANDOM_STATE),
-    threshold="1.25*mean",
-)
+ 
+kolom_angka = ["umur", "gaji", "lama_langganan"]
+data_latih = X_train[kolom_angka].fillna(X_train[kolom_angka].median())
+ 
+rf = RandomForestClassifier(n_estimators=200, random_state=42)
+rf.fit(data_latih, y_train)
+ 
+penting = pd.Series(rf.feature_importances_, index=kolom_angka)
+print(penting.sort_values(ascending=False).round(4))
 ```
-
-### Metode Wrapper
-
-#### Cara Kerja
-
-Melatih model berulang kali dengan subset fitur berbeda dan memilih subset terbaik. `RFECV` menghapus fitur paling lemah satu per satu sambil mengukur performa lewat validasi silang.
-
-#### Batasan
-
-Sangat mahal secara komputasi. Untuk 100 fitur dengan validasi silang 5-fold, jumlah pelatihan model mencapai ratusan kali.
-
-#### Implementasi
-
+ 
+#### Jebakan Penting
+ 
+Seleksi fitur harus jadi bagian dari `Pipeline`, bukan dikerjakan sekali di luar lalu baru divalidasi. Kalau dikerjakan di luar, informasi target dari seluruh data sudah ikut menentukan kolom mana yang dipilih, dan itu bentuk kebocoran juga.
+ 
+## Tahap 10: Menangani Kelas yang Timpang
+ 
+### Masalahnya
+ 
+Di data contoh kita, hanya sekitar 15 persen pelanggan yang berhenti. Kalau perbandingannya lebih ekstrem lagi, misalnya 1 banding 99, model bisa mengambil jalan pintas: selalu menjawab "tidak berhenti".
+ 
+Model seperti itu akan mencatat akurasi 99 persen dan sama sekali tidak berguna, karena tidak pernah berhasil menemukan satu pun kasus yang ingin kita temukan.
+ 
+### Langkah Pertama: Ganti Cara Mengukur
+ 
+Sebelum mengutak-atik data, ganti dulu ukuran keberhasilannya. Jangan pakai akurasi.
+ 
+**Recall** menjawab: dari semua pelanggan yang benar-benar berhenti, berapa persen yang berhasil kita deteksi?
+ 
+**Precision** menjawab: dari semua yang kita tebak akan berhenti, berapa persen yang benar?
+ 
+**F1-score** menggabungkan keduanya secara seimbang.
+ 
+### Solusi 1: Memberi Bobot Lebih pada Kelas Minoritas
+ 
+#### Cara Kerjanya
+ 
+Beri tahu model bahwa kesalahan pada kelas yang jarang itu lebih mahal. Model akan lebih berhati-hati untuk tidak melewatkannya.
+ 
+#### Kenapa Ini Pilihan Pertama
+ 
+Tidak menambah data, tidak menambah waktu, dan tidak mengubah distribusi asli. Cukup satu parameter.
+ 
 ```python
-from sklearn.feature_selection import RFECV
-
-rfecv = RFECV(
-    estimator=RandomForestClassifier(n_estimators=200, random_state=RANDOM_STATE),
-    step=0.1,                 # buang 10% fitur tiap iterasi agar lebih cepat
-    cv=StratifiedKFold(5),
-    scoring="f1_macro",
-    n_jobs=-1,
-)
+from sklearn.linear_model import LogisticRegression
+ 
+model = LogisticRegression(class_weight="balanced", max_iter=5000)
 ```
-
-## Tahap 8: Penanganan Ketidakseimbangan Kelas
-
-### Memahami Masalahnya
-
-#### Masalah
-
-Pada dataset dengan 1 persen kelas positif, model yang selalu memprediksi negatif mencapai akurasi 99 persen dan sama sekali tidak berguna. Fungsi kerugian standar memperlakukan semua kesalahan setara, padahal biaya melewatkan kasus positif sering jauh lebih besar.
-
-#### Prasyarat Sebelum Memilih Solusi
-
-Tentukan metrik yang benar lebih dulu. Untuk kelas langka, gunakan recall, F1, atau PR-AUC (`average_precision_score`), bukan akurasi. ROC-AUC bisa terlihat tinggi meski precision-nya buruk, karena mayoritas negatif yang besar membuat false positive rate tetap kecil.
-
-### Solusi 1: Pembobotan Kelas
-
-#### Kapan Dipakai
-
-Ini pilihan pertama yang harus dicoba. Tidak menambah data, tidak menambah waktu pelatihan, dan tidak mengubah distribusi asli.
-
-#### Implementasi
-
+ 
+Parameter ini juga tersedia di `DecisionTreeClassifier`, `RandomForestClassifier`, dan `SVC`.
+ 
+### Solusi 2: Menambah Data Buatan dengan SMOTE
+ 
+#### Cara Kerjanya
+ 
+SMOTE membuat contoh baru untuk kelas yang jarang, dengan cara membuat data "di antara" dua data asli yang berdekatan. Bukan sekadar menggandakan, tapi membuat variasi baru.
+ 
+#### Jebakan yang Wajib Diingat
+ 
+SMOTE **hanya boleh diterapkan pada data latih**, tidak boleh pada data uji. Data uji harus mencerminkan kondisi dunia nyata yang memang timpang.
+ 
+Kalau SMOTE dijalankan sebelum pembagian data, data buatan bisa muncul di kedua sisi, dan skor Anda akan terlihat luar biasa padahal palsu.
+ 
+#### Contoh Kode
+ 
 ```python
-from sklearn.utils.class_weight import compute_class_weight
-
-bobot = compute_class_weight("balanced", classes=np.unique(y_train), y=y_train)
-print(dict(zip(np.unique(y_train), bobot.round(3))))
-
-model = LogisticRegression(class_weight="balanced", max_iter=2000)
-# Tersedia juga pada DecisionTree, RandomForest, SVC, dan HistGradientBoosting
-```
-
-### Solusi 2: Oversampling dengan SMOTE
-
-#### Cara Kerja
-
-SMOTE membuat sampel sintetis kelas minoritas dengan interpolasi antara sampel minoritas dan tetangga terdekatnya, bukan sekadar menduplikasi.
-
-#### Jebakan Kritis
-
-Resampling **hanya boleh dilakukan pada data latih**, dan harus berada di dalam pipeline validasi silang. Melakukan SMOTE sebelum split membuat sampel sintetis dari data latih bocor ke data uji, menghasilkan skor yang sangat menyesatkan.
-
-#### Implementasi
-
-```python
+# pip install imbalanced-learn
 from imblearn.over_sampling import SMOTE
-from imblearn.pipeline import Pipeline as ImbPipeline
-
-pipe_smote = ImbPipeline([
-    ("prep", preprocessor),
-    ("smote", SMOTE(k_neighbors=5, random_state=RANDOM_STATE)),  # aktif saat fit saja
-    ("model", RandomForestClassifier(random_state=RANDOM_STATE)),
+from imblearn.pipeline import Pipeline as PipelineImb
+ 
+model = PipelineImb([
+    ("scaler", StandardScaler()),
+    ("smote", SMOTE(random_state=42)),      # otomatis nonaktif saat prediksi
+    ("model", RandomForestClassifier(random_state=42)),
 ])
 ```
-
-`ImbPipeline` dari imbalanced-learn otomatis menonaktifkan langkah resampling saat `transform` dan `predict`, sehingga data uji tidak pernah ikut di-resample.
-
-### Solusi 3: Penyesuaian Ambang Keputusan
-
-#### Cara Kerja
-
-Alih-alih mengubah data, ubah ambang probabilitas yang memisahkan kelas. Ambang bawaan 0,5 jarang optimal pada data tidak seimbang.
-
-#### Kapan Dipakai
-
-Hampir selalu layak dicoba, karena murah dan tidak mengubah model sama sekali. Ambang dipilih berdasarkan trade-off precision dan recall yang sesuai biaya bisnis.
-
-#### Implementasi
-
+ 
+`PipelineImb` dari library imbalanced-learn secara otomatis mematikan langkah SMOTE saat memprediksi, jadi data uji tetap aman.
+ 
+### Solusi 3: Mengubah Ambang Keputusan
+ 
+#### Cara Kerjanya
+ 
+Model sebenarnya menghasilkan probabilitas, misalnya 0,35. Secara bawaan, nilai di atas 0,5 dianggap positif. Tapi angka 0,5 itu tidak sakral.
+ 
+Kalau Anda menurunkannya jadi 0,3, model jadi lebih mudah menyatakan positif, sehingga lebih banyak kasus terdeteksi meski salah tebaknya juga bertambah.
+ 
+#### Kenapa Layak Dicoba
+ 
+Ini solusi paling murah. Modelnya tidak perlu dilatih ulang sama sekali.
+ 
 ```python
-from sklearn.metrics import precision_recall_curve
-
-proba = model.predict_proba(X_valid)[:, 1]
-precision, recall, ambang = precision_recall_curve(y_valid, proba)
-
-# Contoh: cari ambang terkecil yang masih menjamin recall minimal 0,90
-target_recall = 0.90
-layak = np.where(recall[:-1] >= target_recall)[0]
-ambang_pilih = ambang[layak[-1]]
-print(f"Ambang={ambang_pilih:.4f} recall={recall[layak[-1]]:.4f} "
-      f"precision={precision[layak[-1]]:.4f}")
-
-prediksi = (model.predict_proba(X_test)[:, 1] >= ambang_pilih).astype(int)
+from sklearn.metrics import classification_report
+ 
+probabilitas = model.predict_proba(X_test_siap)[:, 1]
+ 
+for ambang in [0.3, 0.5, 0.7]:
+    tebakan = (probabilitas >= ambang).astype(int)
+    print(f"\nAmbang {ambang}:")
+    print(classification_report(y_test, tebakan, digits=3))
 ```
-
-Ambang harus dipilih dari data validasi terpisah, bukan dari data uji akhir.
-
-## Tahap 9: Pembagian Data yang Benar
-
-### Pembagian Acak Berstrata
-
-#### Kapan Dipakai
-
-Data independen tanpa struktur waktu atau pengelompokan. Stratifikasi menjaga proporsi kelas tetap sama di setiap bagian, yang penting terutama pada data tidak seimbang.
-
-#### Implementasi
-
+ 
+Perhatikan bagaimana recall naik dan precision turun saat ambang diturunkan. Pilih titik yang paling sesuai kebutuhan Anda.
+ 
+## Menggabungkan Semuanya dengan Pipeline
+ 
+### Kenapa Harus Pipeline
+ 
+Tiga alasan.
+ 
+**Mencegah kebocoran data secara otomatis.** Anda tidak perlu lagi mengingat kapan harus `fit` dan kapan harus `transform`.
+ 
+**Kolom berbeda bisa diperlakukan berbeda.** Kolom angka diisi median lalu diskalakan, kolom kategori diisi modus lalu di-encode. Semuanya berjalan otomatis.
+ 
+**Bisa disimpan sebagai satu berkas.** Saat dipakai nanti, urutan langkahnya dijamin sama persis dengan saat pelatihan.
+ 
+### Contoh Lengkap dari Awal Sampai Akhir
+ 
 ```python
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, stratify=y, random_state=RANDOM_STATE
-)
-```
-
-### Pembagian Berbasis Waktu
-
-#### Masalah
-
-Pada data deret waktu, pembagian acak membuat model belajar dari masa depan untuk memprediksi masa lalu. Skor validasi menjadi jauh lebih baik daripada performa nyata.
-
-#### Solusi
-
-Bagi berdasarkan urutan waktu, dan gunakan `TimeSeriesSplit` untuk validasi silang yang menghormati urutan.
-
-#### Implementasi
-
-```python
-from sklearn.model_selection import TimeSeriesSplit
-
-df = df.sort_values("tanggal")
-potong = int(len(df) * 0.8)
-train, test = df.iloc[:potong], df.iloc[potong:]
-
-tscv = TimeSeriesSplit(n_splits=5, gap=30)   # gap mencegah kebocoran antar fold
-```
-
-### Pembagian Berbasis Kelompok
-
-#### Masalah
-
-Jika satu pasien punya beberapa kunjungan atau satu pengguna punya beberapa sesi, pembagian acak menempatkan baris dari entitas yang sama di data latih dan data uji. Model menghafal identitas entitas, bukan pola umum.
-
-#### Solusi
-
-Pastikan seluruh baris dari satu entitas berada di satu sisi saja.
-
-#### Implementasi
-
-```python
-from sklearn.model_selection import GroupKFold, StratifiedGroupKFold
-
-sgkf = StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=RANDOM_STATE)
-for i_train, i_valid in sgkf.split(X, y, groups=df["id_pasien"]):
-    ...
-```
-
-## Menyatukan Semuanya dalam Pipeline Produksi
-
-### Menyusun ColumnTransformer Lengkap
-
-```python
-from sklearn.compose import ColumnTransformer, make_column_selector
+from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import OneHotEncoder, StandardScaler, PowerTransformer
-
-alur_numerik = Pipeline([
-    ("imputer", SimpleImputer(strategy="median", add_indicator=True)),
-    ("power", PowerTransformer(method="yeo-johnson", standardize=False)),
-    ("scaler", StandardScaler()),
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report
+ 
+kolom_angka = ["umur", "gaji", "lama_langganan"]
+kolom_kategori = ["kota", "paket"]
+ 
+# Resep untuk kolom angka
+alur_angka = Pipeline([
+    ("isi", SimpleImputer(strategy="median", add_indicator=True)),
+    ("skala", StandardScaler()),
 ])
-
-alur_kategorik = Pipeline([
-    ("imputer", SimpleImputer(strategy="constant", fill_value="tidak_diketahui")),
-    ("ohe", OneHotEncoder(handle_unknown="infrequent_if_exist",
-                          min_frequency=0.01, sparse_output=False)),
+ 
+# Resep untuk kolom kategori
+alur_kategori = Pipeline([
+    ("isi", SimpleImputer(strategy="constant", fill_value="tidak_diketahui")),
+    ("encode", OneHotEncoder(handle_unknown="ignore", sparse_output=False)),
 ])
-
-preprocessor = ColumnTransformer(
-    transformers=[
-        ("num", alur_numerik, make_column_selector(dtype_include=np.number)),
-        ("cat", alur_kategorik, make_column_selector(dtype_include=object)),
-    ],
-    remainder="drop",
-    verbose_feature_names_out=True,
-)
-
-pipe = Pipeline([
-    ("prep", preprocessor),
-    ("model", LogisticRegression(class_weight="balanced", max_iter=2000)),
+ 
+# Gabungkan: kolom mana pakai resep mana
+persiapan = ColumnTransformer([
+    ("angka", alur_angka, kolom_angka),
+    ("kategori", alur_kategori, kolom_kategori),
 ])
+ 
+# Gabungkan persiapan dengan model
+model_lengkap = Pipeline([
+    ("persiapan", persiapan),
+    ("model", RandomForestClassifier(
+        n_estimators=300, class_weight="balanced", random_state=42)),
+])
+ 
+model_lengkap.fit(X_train, y_train)
+print(classification_report(y_test, model_lengkap.predict(X_test), digits=3))
 ```
-
-### Memvalidasi Pipeline
-
+ 
+### Mengecek Hasil Persiapan
+ 
 ```python
-from sklearn.model_selection import cross_validate
-
-skor = cross_validate(
-    pipe, X_train, y_train,
-    cv=StratifiedKFold(5, shuffle=True, random_state=RANDOM_STATE),
-    scoring=["recall", "precision", "f1_macro", "average_precision"],
-    return_train_score=True,
-    n_jobs=-1,
-)
-
-for k in ["test_recall", "test_f1_macro", "test_average_precision"]:
-    print(f"{k:25s} {skor[k].mean():.4f} +/- {skor[k].std():.4f}")
+nama_kolom = model_lengkap.named_steps["persiapan"].get_feature_names_out()
+print("Jumlah kolom setelah persiapan:", len(nama_kolom))
+print("Contoh nama kolom:", nama_kolom[:8])
 ```
-
-Selisih besar antara `train_score` dan `test_score` menandakan overfitting. Selisih yang sama-sama rendah menandakan underfitting atau fitur yang kurang informatif.
-
-### Memeriksa Nama Fitur Keluaran
-
+ 
+Kalau jumlah kolomnya meledak, misalnya dari 6 kolom jadi 3.000, berarti ada kolom kategori dengan terlalu banyak nilai unik yang perlu ditangani.
+ 
+### Menguji dengan Validasi Silang
+ 
 ```python
-pipe.fit(X_train, y_train)
-nama = pipe.named_steps["prep"].get_feature_names_out()
-print(f"Jumlah fitur setelah preprocessing: {len(nama)}")
-print(nama[:20])
+from sklearn.model_selection import cross_validate, StratifiedKFold
+ 
+cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+hasil = cross_validate(
+    model_lengkap, X_train, y_train, cv=cv,
+    scoring=["recall", "precision", "f1"],
+)
+ 
+for ukuran in ["test_recall", "test_precision", "test_f1"]:
+    print(f"{ukuran:16s} {hasil[ukuran].mean():.3f} "
+          f"(naik-turun {hasil[ukuran].std():.3f})")
 ```
-
-Ledakan jumlah fitur setelah encoding adalah tanda bahaya. Jika 30 kolom asli menjadi 4.000 kolom, kemungkinan besar ada kolom berkardinalitas tinggi yang salah di-one-hot.
-
-### Menyimpan dan Memuat Pipeline
-
+ 
+### Menyimpan untuk Dipakai Nanti
+ 
 ```python
 import joblib
-
-joblib.dump(pipe, "pipeline_produksi.joblib")
-pipe_dimuat = joblib.load("pipeline_produksi.joblib")
-prediksi = pipe_dimuat.predict(data_baru)   # preprocessing ikut tersimpan
+ 
+joblib.dump(model_lengkap, "model_saya.joblib")
+ 
+# Saat mau dipakai lagi
+model_dimuat = joblib.load("model_saya.joblib")
+hasil = model_dimuat.predict(data_pelanggan_baru)   # persiapan ikut jalan otomatis
 ```
-
-Menyimpan model tanpa preprocessing adalah sumber bug produksi yang sangat umum. Simpan seluruh pipeline sebagai satu objek agar transformasi di produksi identik dengan saat pelatihan. Catat juga versi library yang dipakai, karena objek yang di-pickle tidak selalu kompatibel antar versi scikit-learn.
-
-## Katalog Masalah dan Solusi
-
-| Masalah | Gejala | Solusi |
+ 
+Ini keuntungan besar dari `Pipeline`. Kalau Anda menyimpan modelnya saja tanpa langkah persiapan, Anda harus mengulang semua langkah persiapan secara manual saat memakainya, dan satu langkah yang terlewat akan membuat hasilnya kacau.
+ 
+## Tabel Masalah dan Solusi
+ 
+| Masalah | Tandanya | Solusinya |
 |---|---|---|
-| Data leakage | Skor validasi tinggi, produksi buruk | Split lebih dulu, bungkus semua transformasi dalam `Pipeline` |
-| Nilai hilang | Error saat fit, atau bias hasil | `SimpleImputer` + `add_indicator`, atau `HistGradientBoosting` |
-| Nilai hilang tersamar | `-999`, `"N/A"`, `"-"` terbaca sebagai nilai valid | `replace()` ke `np.nan` di tahap pembersihan |
-| Outlier ekstrem | Scaler terdistorsi, model tidak stabil | `RobustScaler`, winsorizing, atau transformasi log |
-| Distribusi miring | Model linear underfit | `np.log1p`, `PowerTransformer`, `QuantileTransformer` |
-| Skala fitur berbeda jauh | KNN/SVM buruk, gradien lambat konvergen | `StandardScaler` atau `RobustScaler` |
-| Kardinalitas kategorikal tinggi | Dimensi meledak setelah one-hot | `min_frequency`, `TargetEncoder`, atau ordinal untuk model pohon |
-| Kategori baru di produksi | Error saat inferensi | `handle_unknown="infrequent_if_exist"` atau `unknown_value` |
-| Kelas tidak seimbang | Recall kelas minoritas mendekati nol | `class_weight="balanced"`, SMOTE dalam `ImbPipeline`, tuning ambang |
-| Fitur redundan | Koefisien tidak stabil, pelatihan lambat | Hapus korelasi > 0,95, `VarianceThreshold`, `SelectFromModel` |
-| Kebocoran temporal | Skor sempurna yang tidak masuk akal | `TimeSeriesSplit`, agregasi hanya dari periode sebelum label |
-| Kebocoran antar entitas | Model menghafal identitas | `GroupKFold` atau `StratifiedGroupKFold` |
-| Timestamp mentah jadi fitur | Overfitting parah | Uraikan menjadi komponen, encode siklis dengan sin/cos |
-| Pipeline tidak tersimpan utuh | Prediksi produksi berbeda dari pelatihan | `joblib.dump` seluruh `Pipeline`, catat versi library |
-
-## Kesalahan Umum yang Merusak Model
-
-### Melakukan Preprocessing Sebelum Split
-
-Ini penyebab nomor satu skor validasi yang menyesatkan. Bahkan `StandardScaler` sederhana pun membocorkan informasi jika di-fit pada seluruh data.
-
+| Data bocor | Skor bagus tapi gagal di dunia nyata | Bagi data dulu, bungkus semua dalam `Pipeline` |
+| Sel kosong | Program error atau hasil bias | `SimpleImputer` dengan `add_indicator=True` |
+| Kosong yang menyamar | Ada `"N/A"`, `"-"`, atau `999` | Ubah jadi `NaN` dengan `replace()` |
+| Baris duplikat | Skor terlalu bagus | `drop_duplicates()` sebelum membagi data |
+| Tulisan tidak seragam | Kategori pecah jadi banyak | `.str.strip().str.lower()` lalu petakan |
+| Nilai ekstrem | Rata-rata jadi aneh, model tidak stabil | `RobustScaler` atau potong dengan `.clip()` |
+| Data miring | Model linear kurang akurat | `np.log1p()` |
+| Skala kolom beda jauh | KNN dan SVM hasilnya buruk | `StandardScaler` |
+| Kategori terlalu banyak | Kolom meledak setelah encoding | `min_frequency` pada `OneHotEncoder` |
+| Kategori baru saat dipakai | Error saat prediksi | `handle_unknown="ignore"` |
+| Kelas timpang | Recall kelas minoritas nol | `class_weight="balanced"` atau SMOTE |
+| Kolom ID ikut masuk | Overfitting parah | Buang kolom ID sebelum melatih |
+| Tanggal mentah jadi fitur | Model menghafal | Uraikan jadi tahun, bulan, hari |
+ 
+## Kesalahan Pemula yang Sering Terjadi
+ 
+### Menskalakan Sebelum Membagi Data
+ 
+Ini kesalahan nomor satu. Kelihatannya sepele, efeknya besar. Selalu bagi data dulu, atau lebih baik lagi pakai `Pipeline`.
+ 
 ### Menerapkan SMOTE pada Data Uji
-
-Data uji harus mencerminkan distribusi dunia nyata. Menyeimbangkannya membuat metrik kehilangan makna, karena proporsi kelas di produksi tidak akan seimbang.
-
-### Menghapus Semua Outlier Tanpa Analisis
-
-Pada deteksi penipuan dan deteksi anomali, outlier justru merupakan target yang ingin ditemukan. Menghapusnya sama saja dengan menghapus kelas positif.
-
-### Mengimputasi Sebelum Memahami Mekanismenya
-
-Fakta bahwa suatu nilai hilang sering merupakan sinyal kuat. Mengisinya dengan median tanpa menambahkan indikator akan menghapus informasi itu secara permanen.
-
-### One-Hot Encoding pada Kardinalitas Sangat Tinggi
-
-Kolom dengan 10.000 nilai unik menghasilkan 10.000 kolom yang hampir seluruhnya nol. Gunakan `min_frequency`, target encoding, atau pertimbangkan apakah kolom itu memang layak dipakai.
-
-### Menyeleksi Fitur di Luar Validasi Silang
-
-Jika seleksi fitur dilakukan sekali pada seluruh data latih lalu validasi silang dijalankan, informasi target dari semua fold sudah masuk ke pilihan fitur. Seleksi fitur harus menjadi salah satu langkah di dalam `Pipeline`.
-
-### Mengabaikan Reproduktibilitas
-
-Tanpa `random_state` yang tetap, hasil tidak bisa diulang dan perbandingan antar eksperimen menjadi tidak valid. Tetapkan seed pada split, model, dan setiap komponen yang mengandung keacakan.
-
+ 
+Data uji harus mencerminkan kondisi nyata. Kalau diseimbangkan, semua ukuran performanya jadi tidak berarti.
+ 
+### Menghapus Semua Outlier Tanpa Diperiksa
+ 
+Pada deteksi penipuan dan deteksi kerusakan, outlier justru adalah target yang dicari. Membuangnya sama saja membuang jawabannya.
+ 
+### Mengisi Sel Kosong Tanpa Memikirkan Sebabnya
+ 
+Kadang kekosongan itu sendiri adalah petunjuk penting. Tambahkan `add_indicator=True` supaya informasi itu tidak hilang.
+ 
+### Memasukkan Kolom ID ke Model
+ 
+Nomor pelanggan atau nomor transaksi tidak punya makna, tapi model bisa menghafalnya. Buang kolom semacam ini di awal.
+ 
+### Mengisi Sel Kosong dengan Rata-rata pada Data yang Ada Outlier
+ 
+Rata-rata mudah tertarik nilai ekstrem. Gunakan median, yang tidak terpengaruh berapa besar nilai ekstremnya.
+ 
+### Lupa Menetapkan random_state
+ 
+Tanpa itu, hasil akan berbeda tiap kali dijalankan dan Anda tidak bisa membandingkan dua percobaan secara adil.
+ 
+### Mengerjakan Semuanya Manual Tanpa Pipeline
+ 
+Semakin banyak langkah manual, semakin besar peluang ada yang terlewat saat model dipakai di dunia nyata. Pipeline menghilangkan risiko itu.
+ 
 ## Penutup
-
-Preprocessing bukan tahap persiapan yang bisa diselesaikan sambil lalu. Sebagian besar perbedaan performa antara model yang berhasil dan yang gagal berasal dari kualitas keputusan di tahap ini, bukan dari algoritma yang dipilih di akhir.
-
-Tiga prinsip yang paling menentukan hasil: pastikan setiap transformasi dipelajari hanya dari data latih, pahami penyebab masalah sebelum memilih solusinya, dan bungkus seluruh proses dalam satu `Pipeline` yang bisa disimpan dan dijalankan ulang secara identik di produksi. Preprocessing yang benar membuat model sederhana bekerja baik; preprocessing yang salah membuat model paling canggih sekalipun menghasilkan angka yang tidak bisa dipercaya.
+ 
+Preprocessing bukan pekerjaan sampingan sebelum bagian yang "sesungguhnya" dimulai. Justru di sinilah sebagian besar perbedaan antara model yang berhasil dan yang gagal ditentukan.
+ 
+Kalau harus mengingat tiga hal saja dari artikel ini, ingat ini:
+ 
+**Pertama**, bagi data latih dan uji sebelum melakukan perhitungan apa pun yang mempelajari sesuatu dari data.
+ 
+**Kedua**, pahami dulu penyebab masalahnya sebelum memilih solusi. Sel kosong karena sensor rusak dan sel kosong karena orang enggan menjawab butuh perlakuan berbeda.
+ 
+**Ketiga**, bungkus semua langkah dalam satu `Pipeline`. Ini sekaligus mencegah kebocoran data, memudahkan pengujian, dan memastikan model bekerja sama persis saat dipakai nanti.
+ 
+Preprocessing yang benar membuat model sederhana bekerja dengan baik. Preprocessing yang salah membuat model tercanggih sekalipun menghasilkan angka yang tidak bisa dipercaya.
