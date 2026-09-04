@@ -1,16 +1,17 @@
 ---
 slug: dasar-anaconda-python
-title: "Dasar Anaconda dan Python"
+title: "Penggunaan Anaconda di Machine Learning"
 authors: topekox
 tags: [manchine learning, data mining, ai, data science, python]
 ---
 
-Anaconda adalah salah satu platform yang banyak digunakan untuk pengembangan **Python**, khususnya pada bidang **Data Science, Machine Learning, Artificial Intelligence, Scientific Computing**, dan analisis data.
+[**Anaconda**](https://www.anaconda.com/) adalah salah satu platform yang banyak digunakan untuk pengembangan **Python**, khususnya pada bidang **Data Science, Machine Learning, Artificial Intelligence, Scientific Computing**, dan analisis data.
 
 Anaconda tidak hanya menyediakan Python, tetapi juga menyediakan **package manager**, **environment manager**, serta kumpulan library yang memudahkan pengembangan aplikasi berbasis Python.
 
 Materi ini membahas:
 
+* Apa itu Python
 * Apa itu Anaconda
 * Hubungan Anaconda dengan Python
 * Apa itu package dan dependency
@@ -179,7 +180,7 @@ Misalnya:
 ```text
 scikit-learn
     ↓
-numpy
+  numpy
     ↓
 dependency lain
 ```
