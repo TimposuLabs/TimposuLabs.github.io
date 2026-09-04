@@ -2,7 +2,7 @@
 slug: algoritma-machine-learning-scikit-learn
 title: "Macam-Macam Algoritma dalam Machine Learning: Panduan Praktis dengan Scikit-Learn"
 authors: topekox
-tags: [manchine learning, data mining, ai, data science]
+tags: [manchine learning, data mining, ai, data science, python]
 ---
 
 Belajar machine learning sering terasa membingungkan karena banyaknya nama algoritma yang terdengar rumit. Padahal ide di balik sebagian besar algoritma itu sederhana dan bisa dijelaskan dengan analogi sehari-hari.
@@ -12,6 +12,20 @@ Artikel ini menjelaskan algoritma-algoritma yang paling sering dipakai, satu per
 Semua kode di sini memakai dataset bawaan scikit-learn, jadi Anda tidak perlu mengunduh data apa pun untuk mencobanya.
 
 <!-- truncate -->
+
+
+## Daftar Isi
+ 
+1. Sebelum Mulai: Istilah Dasar yang Perlu Dipahami
+2. Persiapan: Alat dan Pola Kode
+3. Algoritma untuk Memprediksi Angka
+4. Algoritma untuk Memprediksi Kategori
+5. Algoritma Berbasis Pohon Keputusan
+6. Algoritma untuk Data Tanpa Jawaban
+7. Cara Menilai Model Sudah Bagus atau Belum
+8. Panduan Memilih Algoritma
+9. Kesalahan Pemula yang Sering Terjadi
+10. Langkah Selanjutnya
 
 ## Sebelum Mulai: Istilah Dasar yang Perlu Dipahami
 

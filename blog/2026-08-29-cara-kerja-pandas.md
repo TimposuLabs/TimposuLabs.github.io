@@ -2,7 +2,7 @@
 slug: cara-kerja-pandas
 title: Cara Kerja Pandas dalam Python
 authors: topekox
-tags: [manchine learning, data mining, ai, data science]
+tags: [manchine learning, data mining, ai, data science, python]
 ---
 
 Pandas adalah library Python yang digunakan untuk mengolah, menganalisis, membersihkan, dan memanipulasi data. Pandas sangat populer dalam Data Science, Machine Learning, analisis data, dan pengolahan dataset.

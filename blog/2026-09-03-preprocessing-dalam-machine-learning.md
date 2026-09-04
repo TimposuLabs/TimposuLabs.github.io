@@ -2,7 +2,7 @@
 slug: preprocessing-dalam-machine-learning
 title: "Preprocessing dalam Machine Learning: Panduan Lengkap dengan Python"
 authors: topekox
-tags: [manchine learning, data mining, ai, data science]
+tags: [manchine learning, data mining, ai, data science, python]
 ---
 
 Banyak pemula mengira pekerjaan utama dalam machine learning adalah memilih algoritma yang tepat. Kenyataannya, sebagian besar waktu justru habis untuk membereskan data sebelum algoritma apa pun dijalankan. Proses membereskan itulah yang disebut **preprocessing**.
@@ -12,6 +12,26 @@ Artikel ini membahas setiap tahap preprocessing secara berurutan dengan bahasa s
 Kita akan memakai satu dataset contoh yang sengaja dibuat berantakan, dan membereskannya bersama-sama dari awal sampai akhir.
 
 <!-- truncate -->
+
+## Daftar Isi
+ 
+1. Apa Itu Preprocessing dan Kenapa Penting
+2. Istilah Dasar yang Perlu Dipahami
+3. Aturan Paling Penting: Jangan Sampai Data Bocor
+4. Menyiapkan Data Contoh
+5. Tahap 1: Mengenali Data Dulu
+6. Tahap 2: Membersihkan Data
+7. Tahap 3: Membagi Data Latih dan Data Uji
+8. Tahap 4: Menangani Data Kosong
+9. Tahap 5: Menangani Nilai Ekstrem
+10. Tahap 6: Mengubah Kata Menjadi Angka
+11. Tahap 7: Menyamakan Skala Angka
+12. Tahap 8: Membuat Fitur Baru
+13. Tahap 9: Memilih Fitur yang Berguna
+14. Tahap 10: Menangani Kelas yang Timpang
+15. Menggabungkan Semuanya dengan Pipeline
+16. Tabel Masalah dan Solusi
+17. Kesalahan Pemula yang Sering Terjadi
 
 ## Apa Itu Preprocessing dan Kenapa Penting
  
