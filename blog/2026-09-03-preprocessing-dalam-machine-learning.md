@@ -1,6 +1,6 @@
 ---
 slug: preprocessing-dalam-machine-learning
-title: "Preprocessing dalam Machine Learning: Panduan Lengkap dengan Python"
+title: "Preprocessing dalam Machine Learning: Panduan Machine Learning untuk Pemula #2"
 authors: topekox
 tags: [manchine learning, data mining, ai, data science, python]
 ---

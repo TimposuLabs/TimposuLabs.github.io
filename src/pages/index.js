@@ -6,7 +6,7 @@ import { FaYoutube, FaGithub, FaInstagram, FaTiktok, FaTelegramPlane } from 'rea
 function NavbarSection() {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -26,41 +26,43 @@ function NavbarSection() {
       WebkitBackdropFilter: 'blur(12px)',
       borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
     }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
+      <div style={{ width: '100%', padding: '0 24px', maxWidth: 'none' }}>
 
         {/* Top bar */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', width: '100%', height: '64px', justifyContent: 'space-between' }}>
 
           {/* Brand */}
-          <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
-            <img src="/img/timposulabs.png" alt="TimposuLabs Logo" style={{ width: '32px', height: '32px' }} />
-            <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#ffffff' }}>TimposuLabs</span>
-          </a>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', flex: '0 0 auto' }}>
+            <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <img src="/img/timposulabs.png" alt="TimposuLabs Logo" style={{ width: '32px', height: '32px' }} />
+              <span style={{ fontSize: '1.25rem', fontWeight: '700', color: '#ffffff' }}>TimposuLabs</span>
+            </a>
+          </div>
 
           {/* DESKTOP: Menu tengah */}
           {!isMobile && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', flex: '1 1 auto', marginLeft: 'auto', marginRight: 'auto' }}>
 
-              {/* Dropdown Tutorial */}
+              {/* Dropdown Programming */}
               <div style={{ position: 'relative' }}
-                onMouseEnter={() => setOpenDropdown('tutorial')}
+                onMouseEnter={() => setOpenDropdown('programming')}
                 onMouseLeave={() => setOpenDropdown(null)}>
                 <button style={{
                   background: 'none', border: 'none', color: '#e2e8f0',
                   fontWeight: '700', fontSize: '0.95rem', cursor: 'pointer',
                   display: 'flex', alignItems: 'center', gap: '4px',
-                  padding: '8px 12px', borderRadius: '6px', transition: 'all 0.15s ease',
+                  padding: '8px 12px', borderRadius: '6px', transition: 'all 0.15s ease', textAlign: 'left',
                 }}
                   onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
                   onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
-                  Tutorial
+                  Programming
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <path d="M6 9l6 6 6-6"/>
                   </svg>
                 </button>
                 <div style={{
                   position: 'absolute', top: '100%', left: '0', paddingTop: '8px',
-                  display: openDropdown === 'tutorial' ? 'block' : 'none',
+                  display: openDropdown === 'programming' ? 'block' : 'none',
                   minWidth: '200px', zIndex: 100,
                 }}>
                   <div style={{ backgroundColor: '#1e293b', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '8px', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
@@ -83,27 +85,155 @@ function NavbarSection() {
                       onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
                       onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
                       Node.js
+                    </a>      
+                  </div>
+                </div>
+              </div>
+
+              {/* Dropdown Java Technologies */}
+              <div style={{ position: 'relative' }}
+                onMouseEnter={() => setOpenDropdown('java-tech')}
+                onMouseLeave={() => setOpenDropdown(null)}>
+                <button style={{
+                  background: 'none', border: 'none', color: '#e2e8f0',
+                  fontWeight: '700', fontSize: '0.95rem', cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', gap: '4px',
+                  padding: '8px 12px', borderRadius: '6px', transition: 'all 0.15s ease', textAlign: 'left',
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
+                  onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
+                  Java
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </button>
+                <div style={{
+                  position: 'absolute', top: '100%', left: '0', paddingTop: '8px',
+                  display: openDropdown === 'java-tech' ? 'block' : 'none',
+                  minWidth: '200px', zIndex: 100,
+                }}>
+                  <div style={{ backgroundColor: '#1e293b', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '8px', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+                    <a href="/java" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
+                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
+                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
+                      Java
                     </a>
                     <a href="/spring" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
                       onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
                       onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
                       Spring
-                    </a>
-                    <a href="/docker" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
+                    </a>      
+                  </div>
+                </div>
+              </div>
+
+              {/* Dropdown Javascript Technologies */}
+              <div style={{ position: 'relative' }}
+                onMouseEnter={() => setOpenDropdown('javascript-tech')}
+                onMouseLeave={() => setOpenDropdown(null)}>
+                <button style={{
+                  background: 'none', border: 'none', color: '#e2e8f0',
+                  fontWeight: '700', fontSize: '0.95rem', cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', gap: '4px',
+                  padding: '8px 12px', borderRadius: '6px', transition: 'all 0.15s ease', textAlign: 'left',
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
+                  onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
+                  Javascript
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </button>
+                <div style={{
+                  position: 'absolute', top: '100%', left: '0', paddingTop: '8px',
+                  display: openDropdown === 'javascript-tech' ? 'block' : 'none',
+                  minWidth: '200px', zIndex: 100,
+                }}>
+                  <div style={{ backgroundColor: '#1e293b', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '8px', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+                    <a href="/nodejs" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
                       onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
                       onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
-                      Docker
+                      Node.js
+                    </a>
+                    <a href="/nodejs/express" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
+                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
+                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
+                      Express.js
                     </a>
                     <a href="/react" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
                       onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
                       onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
                       React
-                    </a>
+                    </a>      
                   </div>
                 </div>
               </div>
 
-              <a href="/blog" style={{ color: '#e2e8f0', fontWeight: '700', fontSize: '0.95rem', padding: '8px 12px', borderRadius: '6px', textDecoration: 'none' }}
+              {/* Dropdown DevOps */}
+              <div style={{ position: 'relative' }}
+                onMouseEnter={() => setOpenDropdown('devops')}
+                onMouseLeave={() => setOpenDropdown(null)}>
+                <button style={{
+                  background: 'none', border: 'none', color: '#e2e8f0',
+                  fontWeight: '700', fontSize: '0.95rem', cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', gap: '4px',
+                  padding: '8px 12px', borderRadius: '6px', transition: 'all 0.15s ease', textAlign: 'left',
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
+                  onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
+                  DevOps
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </button>
+                <div style={{
+                  position: 'absolute', top: '100%', left: '0', paddingTop: '8px',
+                  display: openDropdown === 'devops' ? 'block' : 'none',
+                  minWidth: '200px', zIndex: 100,
+                }}>
+                  <div style={{ backgroundColor: '#1e293b', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '8px', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+                    <a href="/docker" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
+                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
+                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
+                      Docker
+                    </a>      
+                  </div>
+                </div>
+              </div>
+
+              {/* Dropdown Machine Learning */}
+              <div style={{ position: 'relative' }}
+                onMouseEnter={() => setOpenDropdown('machine-learning')}
+                onMouseLeave={() => setOpenDropdown(null)}>
+                <button style={{
+                  background: 'none', border: 'none', color: '#e2e8f0',
+                  fontWeight: '700', fontSize: '0.95rem', cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', gap: '4px',
+                  padding: '8px 12px', borderRadius: '6px', transition: 'all 0.15s ease', textAlign: 'left',
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
+                  onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
+                  Machine Learning
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </button>
+                <div style={{
+                  position: 'absolute', top: '100%', left: '0', paddingTop: '8px',
+                  display: openDropdown === 'machine-learning' ? 'block' : 'none',
+                  minWidth: '200px', zIndex: 100,
+                }}>
+                  <div style={{ backgroundColor: '#1e293b', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '8px', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+                    <a href="/python" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
+                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
+                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
+                      Python
+                    </a>      
+                  </div>
+                </div>
+              </div>
+
+              <a href="/blog" style={{ color: '#e2e8f0', fontWeight: '700', fontSize: '0.95rem', padding: '8px 12px', borderRadius: '6px', textDecoration: 'none', textAlign: 'left' }}
                 onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
                 onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
                 Blog
@@ -114,7 +244,7 @@ function NavbarSection() {
 
           {/* DESKTOP: CTA buttons kanan */}
           {!isMobile && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'flex-end', flex: '0 0 auto' }}>
               <a href="/coming-soon" style={{ backgroundColor: '#16a34a', color: '#ffffff', padding: '8px 16px', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}
                 onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#15803d'; e.currentTarget.style.color = '#ffffff'; }}
                 onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#16a34a'; e.currentTarget.style.color = '#ffffff'; }}>
@@ -155,74 +285,85 @@ function NavbarSection() {
             paddingBottom: '16px',
             display: 'flex',
             flexDirection: 'column',
-            gap: '4px',
+            alignItems: 'center',
+            gap: '8px',
           }}>
-            {/* Tutorial accordion */}
-            <div>
-              <button
-                onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
-                style={{
-                  width: '100%', background: 'none', border: 'none',
-                  color: '#e2e8f0', fontWeight: '700', fontSize: '0.95rem',
-                  cursor: 'pointer', display: 'flex', alignItems: 'center',
-                  justifyContent: 'space-between', padding: '10px 12px',
-                  borderRadius: '8px',
-                }}>
-                Tutorial
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
-                  style={{ transform: mobileDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s ease' }}>
-                  <path d="M6 9l6 6 6-6"/>
-                </svg>
-              </button>
-              {mobileDropdownOpen && (
-                <div style={{ paddingLeft: '16px', paddingTop: '4px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                  <a href="/java" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#94a3b8', textDecoration: 'none' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = '#60a5fa'; e.currentTarget.style.backgroundColor = '#334155'; }}
-                    onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.backgroundColor = 'transparent'; }}>
-                    Java
-                  </a>
-                  <a href="/python" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#94a3b8', textDecoration: 'none' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = '#60a5fa'; e.currentTarget.style.backgroundColor = '#334155'; }}
-                    onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.backgroundColor = 'transparent'; }}>
-                    Python
-                  </a>
-                  <a href="/kotlin" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#94a3b8', textDecoration: 'none' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = '#60a5fa'; e.currentTarget.style.backgroundColor = '#334155'; }}
-                    onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.backgroundColor = 'transparent'; }}>
-                    Kotlin
-                  </a>
-                  <a href="/nodejs" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#94a3b8', textDecoration: 'none' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = '#60a5fa'; e.currentTarget.style.backgroundColor = '#334155'; }}
-                    onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.backgroundColor = 'transparent'; }}>
-                    Node.js
-                  </a>
-                  <a href="/spring" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#94a3b8', textDecoration: 'none' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = '#60a5fa'; e.currentTarget.style.backgroundColor = '#334155'; }}
-                    onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.backgroundColor = 'transparent'; }}>
-                    Spring
-                  </a>
-                  <a href="/docker" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#94a3b8', textDecoration: 'none' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = '#60a5fa'; e.currentTarget.style.backgroundColor = '#334155'; }}
-                    onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.backgroundColor = 'transparent'; }}>
-                    Docker
-                  </a>
-                  <a href="/react" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#94a3b8', textDecoration: 'none' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = '#60a5fa'; e.currentTarget.style.backgroundColor = '#334155'; }}
-                    onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.backgroundColor = 'transparent'; }}>
-                    React
-                  </a>
-                </div>
-              )}
-            </div>
+            {[
+              {
+                key: 'programming',
+                label: 'Programming',
+                items: [
+                  { label: 'Java', href: '/java' },
+                  { label: 'Python', href: '/python' },
+                  { label: 'Kotlin', href: '/kotlin' },
+                  { label: 'Node.js', href: '/nodejs' },
+                ],
+              },
+              {
+                key: 'java-tech',
+                label: 'Java',
+                items: [
+                  { label: 'Java', href: '/java' },
+                  { label: 'Spring', href: '/spring' },
+                ],
+              },
+              {
+                key: 'javascript-tech',
+                label: 'JavaScript',
+                items: [
+                  { label: 'Node.js', href: '/nodejs' },
+                  { label: 'Express.js', href: '/nodejs/express' },
+                  { label: 'React', href: '/react' },
+                ],
+              },
+              {
+                key: 'devops',
+                label: 'DevOps',
+                items: [
+                  { label: 'Docker', href: '/docker' },
+                ],
+              },
+            ].map((section) => (
+              <div key={section.key} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+                <button
+                  onClick={() => setMobileDropdownOpen(mobileDropdownOpen === section.key ? null : section.key)}
+                  style={{
+                    width: '100%', background: 'none', border: 'none',
+                    color: '#e2e8f0', fontWeight: '700', fontSize: '0.95rem',
+                    cursor: 'pointer', display: 'flex', alignItems: 'center',
+                    justifyContent: 'space-between', padding: '10px 12px', textAlign: 'left',
+                    borderRadius: '8px',
+                  }}>
+                  {section.label}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
+                    style={{ transform: mobileDropdownOpen === section.key ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s ease' }}>
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </button>
+                {mobileDropdownOpen === section.key && (
+                  <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '2px', paddingLeft: '16px' }}>
+                    {section.items.map((item) => (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#94a3b8', textDecoration: 'none', textAlign: 'left' }}
+                        onMouseEnter={e => { e.currentTarget.style.color = '#60a5fa'; e.currentTarget.style.backgroundColor = '#334155'; }}
+                        onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.backgroundColor = 'transparent'; }}>
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
 
-            <a href="/blog" style={{ display: 'block', padding: '10px 12px', borderRadius: '8px', fontSize: '0.95rem', fontWeight: '700', color: '#e2e8f0', textDecoration: 'none' }}
+            <a href="/blog" style={{ display: 'block', width: '100%', padding: '10px 12px', borderRadius: '8px', fontSize: '0.95rem', fontWeight: '700', color: '#e2e8f0', textDecoration: 'none', textAlign: 'left' }}
               onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
               onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
               Blog
             </a>
 
-            {/* CTA full width */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '8px', paddingTop: '12px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '8px', paddingTop: '12px', borderTop: '1px solid rgba(255,255,255,0.08)', width: '100%' }}>
               <a href="/coming-soon" style={{ display: 'block', textAlign: 'center', backgroundColor: '#16a34a', color: '#ffffff', padding: '10px 16px', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '600', textDecoration: 'none' }}>
                 📗 Download Ebook
               </a>
@@ -329,7 +470,7 @@ function FeaturesSection() {
             <h2 style={{ fontSize: '2rem', fontWeight: '700', color: '#ffffff', marginBottom: '16px' }}>Layanan & Keahlian Kami</h2>
             <p style={{ color: '#94a3b8' }}>Fokus pada performa dan pengalaman pengguna dengan teknologi terkini untuk hasil maksimal.</p>
           </div>
-          <a href="/docs/intro" style={{ color: '#60a5fa', textDecoration: 'none', fontWeight: '600' }}
+          <a href="/coming-soon" style={{ color: '#60a5fa', textDecoration: 'none', fontWeight: '600' }}
             onMouseEnter={e => { e.currentTarget.style.color = '#93c5fd'; }}
             onMouseLeave={e => { e.currentTarget.style.color = '#60a5fa'; }}>
             Lihat semua layanan →

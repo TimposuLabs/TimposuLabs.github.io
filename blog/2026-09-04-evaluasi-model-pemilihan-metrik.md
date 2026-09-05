@@ -1,6 +1,6 @@
 ---
 slug: evaluasi-model-pemilihan-metrik-machine-learning
-title: "Evaluasi Model dan Pemilihan Metrik: Panduan Machine Learning untuk Pemula"
+title: "Evaluasi Model dan Pemilihan Metrik: Panduan Machine Learning untuk Pemula #3"
 authors: topekox
 tags: [manchine learning, data mining, ai, data science, python]
 ---

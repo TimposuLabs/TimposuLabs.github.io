@@ -107,7 +107,7 @@ const config = {
           // },
           {
             position: 'left',
-            label: 'Tutorial',
+            label: 'Programming',
             items: [
               {
                 to: '/java/',
@@ -125,13 +125,33 @@ const config = {
                 to: '/nodejs/',
                 label: 'Node.js',
               },
+            ],
+          },
+          {
+            position: 'left',
+            label: 'Java',
+            items: [
+              {
+                to: '/java/',
+                label: 'Java',
+              },
               {
                 to: '/spring/',
                 label: 'Spring',
               },
+            ],
+          },
+          {
+            position: 'left',
+            label: 'Javascript',
+            items: [
               {
-                to: '/docker/',
-                label: 'Docker',
+                to: '/nodejs/',
+                label: 'Node.js',
+              },
+              {
+                to: '/nodejs/express',
+                label: 'Express.js',
               },
               {
                 to: '/react/',
@@ -139,20 +159,26 @@ const config = {
               },
             ],
           },
-          // {
-          //   position: 'left',
-          //   label: 'Linux Server',
-          //   items: [
-          //     {
-          //       to: '#',
-          //       label: 'Fedora 35',                
-          //     },
-          //     {
-          //       to: '#',
-          //       label: 'Ubuntu Server 20.04',
-          //     },
-          //   ],
-          // },
+          {
+            position: 'left',
+            label: 'DevOps',
+            items: [
+              {
+                to: '/docker/',
+                label: 'Docker',
+              },
+            ],
+          },
+          {
+            position: 'left',
+            label: 'Machine Learning',
+            items: [
+              {
+                to: '/python/',
+                label: 'Python',
+              },
+            ],
+          },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://saweria.co/TimposuLabs',

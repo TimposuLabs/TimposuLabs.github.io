@@ -1,6 +1,6 @@
 ---
 slug: algoritma-machine-learning-scikit-learn
-title: "Macam-Macam Algoritma dalam Machine Learning: Panduan Praktis dengan Scikit-Learn"
+title: "Macam-Macam Algoritma dalam Machine Learning menggunakan Scikit-Learn: Panduan Machine Learning untuk Pemula #1"
 authors: topekox
 tags: [manchine learning, data mining, ai, data science, python]
 ---
