@@ -174,6 +174,10 @@ const config = {
             label: 'Machine Learning',
             items: [
               {
+                to: '/machine-learning/',
+                label: 'Machine Learning',
+              },
+              {
                 to: '/python/',
                 label: 'Python',
               },
@@ -354,6 +358,15 @@ const config = {
           routeBasePath: 'python',
           sidebarPath: require.resolve('./sidebars.js'),
           // editUrl: 'https://github.com/TimposuLabs/TimposuLabs.github.io/tree/main/',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+          id: 'machine-learning',
+          path: 'tutorial/machine-learning',
+          routeBasePath: 'machine-learning',
+          sidebarPath: require.resolve('./sidebars.js'),
       },
     ],
     // search local plugin

@@ -714,7 +714,7 @@ buruk
 ```
 
 :::tip
-Misalnya kita memiliki data set yang `NaN` rincian:
+Misalnya kita memiliki dataset yang Missing Value (`NaN`) rincian:
 
 ```
 luas             6
@@ -725,7 +725,7 @@ harga            0
 dtype: int64
 ```
 
-Kita dapat melakukan preprocessing:
+Kita dapat melakukan preprocessing dengan memasukan nilai Median:
 
 ```python
  # mengisi data Nan dengan nilai Median pada data numerik
@@ -757,7 +757,10 @@ jumlah_kamar     0
 jarak_ke_kota    0
 kondisi          0
 harga            0
+dtype: int64
 ```
+
+Tidak terdapat lagi data yang Missing Value (`NaN`).
 :::
 
 ---
@@ -1247,6 +1250,15 @@ menjadi konsep:
 kondisi_baik
 kondisi_sedang
 kondisi_buruk
+```
+
+Setelah One Hot Encoding: 
+
+```
+kondisi_baik   kondisi_sedang   kondisi_buruk
+    1               0               0
+    0               1               0
+    0               0               1
 ```
 
 ---

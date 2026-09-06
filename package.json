@@ -20,6 +20,8 @@
     "@easyops-cn/docusaurus-search-local": "^0.46.1",
     "@mdx-js/react": "^3.0.0",
     "@tailwindcss/postcss": "^4.2.2",
+    "baseline-browser-mapping": "^2.11.21",
+    "caniuse-lite": "^1.0.30001810",
     "clsx": "^1.1.1",
     "docusaurus": "^1.14.7",
     "prism-react-renderer": "^2.1.0",

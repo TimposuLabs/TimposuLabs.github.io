@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: "Evolusi Data"
+title: "Evolusi Pengelolaan Data"
 ---
 
 ## Mengapa Machine Learning Dibutuhkan?

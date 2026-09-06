@@ -33,6 +33,10 @@ Pendekatan ini sangat berguna ketika kita ingin membuat aplikasi Machine Learnin
 
 Dengan ImageAI, kita dapat memanfaatkan model Machine Learning yang sudah dilatih untuk mengenali berbagai objek dalam gambar.
 
+:::tip
+Repositori: https://github.com/olafenwamoses/imageai
+:::
+
 ### Perubahan API pada Versi Terbaru
 
 Pada materi versi lama, ImageAI menggunakan:
@@ -100,6 +104,10 @@ predictions, probabilities = prediction.classifyImage(
 for eachPred, eachProb in zip(predictions, probabilities):
     print(f"{eachPred} : {eachProb}")
 ```
+
+:::tip
+Download model disini: https://imageai.readthedocs.io/en/latest/prediction/
+:::
 
 ---
 

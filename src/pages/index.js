@@ -10,10 +10,18 @@ function NavbarSection() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    const mobileQuery = window.matchMedia('(max-width: 1050px)');
+    const handleViewportChange = (event) => {
+      setIsMobile(event.matches);
+      if (!event.matches) {
+        setMobileMenuOpen(false);
+        setMobileDropdownOpen(null);
+      }
+    };
+
+    setIsMobile(mobileQuery.matches);
+    mobileQuery.addEventListener('change', handleViewportChange);
+    return () => mobileQuery.removeEventListener('change', handleViewportChange);
   }, []);
 
   return (
@@ -224,6 +232,11 @@ function NavbarSection() {
                   minWidth: '200px', zIndex: 100,
                 }}>
                   <div style={{ backgroundColor: '#1e293b', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '8px', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+                    <a href="/machine-learning" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
+                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
+                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
+                      Machine Learning
+                    </a>      
                     <a href="/python" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
                       onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
                       onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
@@ -248,7 +261,7 @@ function NavbarSection() {
               <a href="/coming-soon" style={{ backgroundColor: '#16a34a', color: '#ffffff', padding: '8px 16px', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}
                 onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#15803d'; e.currentTarget.style.color = '#ffffff'; }}
                 onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#16a34a'; e.currentTarget.style.color = '#ffffff'; }}>
-                📗 Ebook
+                📒 Ebook
               </a>
               <a href="/coming-soon" style={{ backgroundColor: '#2563eb', color: '#ffffff', padding: '8px 16px', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '600', textDecoration: 'none' }}
                 onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#3b82f6'; e.currentTarget.style.color = '#ffffff'; }}
@@ -261,7 +274,11 @@ function NavbarSection() {
           {/* MOBILE: Hamburger saja */}
           {isMobile && (
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              type="button"
+              aria-label={mobileMenuOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
+              onClick={() => setMobileMenuOpen(open => !open)}
               style={{ background: 'none', border: 'none', color: '#e2e8f0', cursor: 'pointer', padding: '8px', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               {mobileMenuOpen ? (
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -279,7 +296,7 @@ function NavbarSection() {
 
         {/* MOBILE: Full dropdown menu */}
         {isMobile && mobileMenuOpen && (
-          <div style={{
+          <div id="mobile-navigation" style={{
             borderTop: '1px solid rgba(255,255,255,0.08)',
             paddingTop: '12px',
             paddingBottom: '16px',
@@ -323,9 +340,19 @@ function NavbarSection() {
                   { label: 'Docker', href: '/docker' },
                 ],
               },
+              {
+                key: 'machine-learning',
+                label: 'Machine Learning',
+                items: [
+                  { label: 'Python', href: '/python' },
+                  { label: 'Machine Learning', href: '/machine-learning' },
+                ],
+              },
             ].map((section) => (
               <div key={section.key} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
                 <button
+                  type="button"
+                  aria-expanded={mobileDropdownOpen === section.key}
                   onClick={() => setMobileDropdownOpen(mobileDropdownOpen === section.key ? null : section.key)}
                   style={{
                     width: '100%', background: 'none', border: 'none',
@@ -365,7 +392,7 @@ function NavbarSection() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '8px', paddingTop: '12px', borderTop: '1px solid rgba(255,255,255,0.08)', width: '100%' }}>
               <a href="/coming-soon" style={{ display: 'block', textAlign: 'center', backgroundColor: '#16a34a', color: '#ffffff', padding: '10px 16px', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '600', textDecoration: 'none' }}>
-                📗 Download Ebook
+                📒 Ebook
               </a>
               <a href="/coming-soon" style={{ display: 'block', textAlign: 'center', backgroundColor: '#2563eb', color: '#ffffff', padding: '10px 16px', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '600', textDecoration: 'none' }}>
                 Gabung Kelas
@@ -393,7 +420,7 @@ function HeroSection() {
           <span style={{ color: '#3b82f6' }}>Lengkap & Terstruktur</span>
         </h1>
         <p style={{ color: '#94a3b8', fontSize: '1.125rem', maxWidth: '768px', margin: '0 auto 48px' }}>
-          Tutorial belajar Programming, Networking, DevOps, Cybersecurity dan teknologi lainnya.
+          Tutorial belajar Programming, Networking, DevOps, Machine Learning, Cybersecurity dan teknologi lainnya.
           Belajar dari dasar hingga mahir dengan materi terstruktur.
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px' }}>
