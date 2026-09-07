@@ -438,7 +438,7 @@ Contohnya:
 
 ```python
 car_sales_missing["Odometer"].fillna(
-    car_sales_missing["Odometer"].mean()
+    car_sales_missing["Odometer"].mean(numeric_only=True)
 )
 ```
 
@@ -501,7 +501,7 @@ Contohnya:
 
 ```python
 car_sales_missing["Odometer"] = car_sales_missing["Odometer"].fillna(
-    car_sales_missing["Odometer"].mean()
+    car_sales_missing["Odometer"].mean(numeric_only=true)
 )
 ```
 
@@ -537,7 +537,7 @@ Contohnya:
 
 ```python
 car_sales_missing["Odometer"].fillna(
-    car_sales_missing["Odometer"].mean(),
+    car_sales_missing["Odometer"].mean(numeric_only=true),
     inplace=True
 )
 ```
@@ -560,7 +560,7 @@ Ada dua pola yang perlu dipahami.
 
 ```python
 car_sales_missing["Odometer"] = car_sales_missing["Odometer"].fillna(
-    car_sales_missing["Odometer"].mean()
+    car_sales_missing["Odometer"].mean(numeric_only=true)
 )
 ```
 
@@ -570,7 +570,7 @@ Artinya hasil operasi disimpan kembali ke kolom.
 
 ```python
 car_sales_missing["Odometer"].fillna(
-    car_sales_missing["Odometer"].mean(),
+    car_sales_missing["Odometer"].mean(numeric_only=true),
     inplace=True
 )
 ```
@@ -595,7 +595,7 @@ Contohnya:
 
 ```python
 car_sales_missing["Odometer"] = car_sales_missing["Odometer"].fillna(
-    car_sales_missing["Odometer"].mean()
+    car_sales_missing["Odometer"].mean(numeric_only=true)
 )
 ```
 
@@ -762,7 +762,7 @@ Misalnya:
 
 ```python
 car_sales_missing["Odometer"] = car_sales_missing["Odometer"].fillna(
-    car_sales_missing["Odometer"].mean()
+    car_sales_missing["Odometer"].mean(numeric_only=true)
 )
 ```
 
@@ -899,7 +899,7 @@ car_sales_missing["Make"] = car_sales_missing["Make"].str.lower()
 
 # Mengisi missing value pada Odometer dengan mean
 car_sales_missing["Odometer"] = car_sales_missing["Odometer"].fillna(
-    car_sales_missing["Odometer"].mean()
+    car_sales_missing["Odometer"].mean(numeric_only=true)
 )
 
 # Menyimpan hasil
@@ -988,7 +988,7 @@ Contohnya:
 
 ```python
 car_sales_missing["Odometer"].fillna(
-    car_sales_missing["Odometer"].mean()
+    car_sales_missing["Odometer"].mean(numeric_only=true)
 )
 ```
 
@@ -1042,7 +1042,7 @@ car_sales["Make"] = car_sales["Make"].str.lower()
 
 ```python
 car_sales["Odometer"] = car_sales["Odometer"].fillna(
-    car_sales["Odometer"].mean()
+    car_sales["Odometer"].mean(numeric_only=true)
 )
 ```
 
@@ -1050,7 +1050,7 @@ car_sales["Odometer"] = car_sales["Odometer"].fillna(
 
 ```python
 car_sales["Odometer"].fillna(
-    car_sales["Odometer"].mean(),
+    car_sales["Odometer"].mean(numeric_only=true),
     inplace=True
 )
 ```
@@ -1102,7 +1102,7 @@ Contohnya:
 
 ```python
 car_sales["Odometer"] = car_sales["Odometer"].fillna(
-    car_sales["Odometer"].mean()
+    car_sales["Odometer"].mean(numeric_only=true)
 )
 ```
 

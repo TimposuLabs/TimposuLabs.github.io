@@ -1,6 +1,6 @@
 ---
 sidebar_position: 5
-title: "Manipulasi dan Visualisasi Data"
+title: "Manipulasi & Visualisasi Data"
 ---
 
 Setelah mempelajari cara melihat, memilih, dan melakukan filtering pada DataFrame, langkah berikutnya adalah mulai **menganalisis dan memvisualisasikan data**.
