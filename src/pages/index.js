@@ -242,6 +242,11 @@ function NavbarSection() {
                       onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
                       Python
                     </a>      
+                    <a href="/pandas" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
+                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
+                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
+                      Pandas
+                    </a>      
                   </div>
                 </div>
               </div>
@@ -344,8 +349,9 @@ function NavbarSection() {
                 key: 'machine-learning',
                 label: 'Machine Learning',
                 items: [
-                  { label: 'Python', href: '/python' },
                   { label: 'Machine Learning', href: '/machine-learning' },
+                  { label: 'Python', href: '/python' },
+                  { label: 'Pandas', href: '/pandas' },
                 ],
               },
             ].map((section) => (

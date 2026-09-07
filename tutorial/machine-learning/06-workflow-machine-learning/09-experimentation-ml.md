@@ -1490,5 +1490,3 @@ Evaluation
 ```
 
 kemudian melakukan eksperimen kembali.
-
-Pada tahap berikutnya, kita dapat mulai meninggalkan gambaran framework yang bersifat konseptual dan masuk ke **workflow Machine Learning menggunakan Python secara lebih teknis**, mulai dari menyiapkan dataset, Exploratory Data Analysis, preprocessing, train/test split, baseline model, evaluasi, hingga membangun pipeline Machine Learning.

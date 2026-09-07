@@ -181,6 +181,10 @@ const config = {
                 to: '/python/',
                 label: 'Python',
               },
+              {
+                to: '/pandas/',
+                label: 'Pandas',
+              },
             ],
           },
           {to: '/blog', label: 'Blog', position: 'left'},
@@ -366,6 +370,15 @@ const config = {
           id: 'machine-learning',
           path: 'tutorial/machine-learning',
           routeBasePath: 'machine-learning',
+          sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+          id: 'pandas',
+          path: 'tutorial/pandas',
+          routeBasePath: 'pandas',
           sidebarPath: require.resolve('./sidebars.js'),
       },
     ],
