@@ -206,6 +206,8 @@ Positive          TP             FP
 Negative          FN             TN
 ```
 
+![binary classification](/img/python/4.png)
+
 Keempat komponen tersebut adalah:
 
 - **TP - True Positive**
