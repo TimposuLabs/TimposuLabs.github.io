@@ -3,6 +3,8 @@ sidebar_position: 8
 title: "Tools Machine Learning"
 ---
 
+![machine learning tool](/img/python/3.png)
+
 ## Pengenalan Tools dalam Data Science dan Machine Learning
 
 Setelah memahami framework Machine Learning, kita perlu mengenal berbagai **tools** yang digunakan untuk mengimplementasikan setiap tahapnya.

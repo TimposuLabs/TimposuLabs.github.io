@@ -185,6 +185,10 @@ const config = {
                 to: '/pandas/',
                 label: 'Pandas',
               },
+              {
+                to: '/numpy/',
+                label: 'NumPy',
+              },
             ],
           },
           {to: '/blog', label: 'Blog', position: 'left'},
@@ -379,6 +383,15 @@ const config = {
           id: 'pandas',
           path: 'tutorial/pandas',
           routeBasePath: 'pandas',
+          sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+          id: 'numpy',
+          path: 'tutorial/numpy',
+          routeBasePath: 'numpy',
           sidebarPath: require.resolve('./sidebars.js'),
       },
     ],
