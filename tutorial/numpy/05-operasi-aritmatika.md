@@ -1,6 +1,6 @@
 ---
 sidebar_position: 6
-title: "Operasi Aritmatika"
+title: "Operasi Aritmatika & Broadcasting"
 ---
 
 Setelah mempelajari cara membuat array, mengenal atribut array, serta melakukan indexing dan slicing, langkah berikutnya adalah memanipulasi dan melakukan operasi matematika pada NumPy array.

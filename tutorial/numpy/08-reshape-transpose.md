@@ -1,6 +1,6 @@
 ---
 sidebar_position: 9
-title: "Reshape & Transpose Array"
+title: "Reshape & Transpose"
 ---
 
 Pada materi sebelumnya kita telah mempelajari operasi aritmatika, broadcasting, aggregation, variance, standard deviation, dan visualisasi data menggunakan NumPy.
@@ -605,7 +605,7 @@ transpose:
 
 ---
 
-## reshape Tidak Sama dengan Transpose
+## `reshape` Tidak Sama dengan Transpose
 
 Perhatikan contoh berikut:
 
