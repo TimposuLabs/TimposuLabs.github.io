@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunktimposu||=[]).push([[99465],{63495(s){s.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"numpy"}')}}]);
