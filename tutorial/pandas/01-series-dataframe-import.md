@@ -330,6 +330,10 @@ Values → BMW, Black, 50000, dan seterusnya
 
 Pemahaman terhadap bagian-bagian ini akan sangat membantu ketika mulai melakukan analisis data.
 
+#### Anatomi Pandas DataFrame
+
+![Anatomy of DataFrame Pandas](/img/python/9.png)
+
 ---
 
 ## Mengimpor Data dari File CSV
