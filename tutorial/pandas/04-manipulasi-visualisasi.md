@@ -614,17 +614,17 @@ Kode tersebut melakukan beberapa proses:
 ```text
 "$4,000.00"
       ↓
-hapus $
+    hapus $
       ↓
-hapus ,
+    hapus ,
       ↓
-hapus .
+    hapus .
       ↓
-"400000"
+   "400000"
       ↓
 ubah menjadi integer
       ↓
-400000
+    400000
 ```
 
 ---
@@ -769,8 +769,8 @@ Hasil:
 
 ```text
 400000
-    ↓
-4000
+   ↓
+ 4000
 ```
 
 Operator:
@@ -838,12 +838,12 @@ Alurnya:
 
 ```text
 "$4,000.00"
-       ↓
+    ↓
 "400000"
-       ↓
-400000
-       ↓
-4000
+    ↓
+ 400000
+    ↓
+  4000
 ```
 
 ---
@@ -875,7 +875,7 @@ Biasakan memahami:
 ```text
 Format Data
      ↓
-Masalah
+  Masalah
      ↓
 Transformasi yang Dibutuhkan
      ↓

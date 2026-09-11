@@ -868,7 +868,7 @@ Reassignment
    ↓
 Cari Missing Data
    ↓
-NaN
+  NaN
    ↓
 ┌───────────────┐
 │               │
