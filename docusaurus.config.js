@@ -189,6 +189,10 @@ const config = {
                 to: '/numpy/',
                 label: 'NumPy',
               },
+              {
+                to: '/matplotlib/',
+                label: 'Matplotlib',
+              },
             ],
           },
           {to: '/blog', label: 'Blog', position: 'left'},
@@ -392,6 +396,15 @@ const config = {
           id: 'numpy',
           path: 'tutorial/numpy',
           routeBasePath: 'numpy',
+          sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+          id: 'matplotlib',
+          path: 'tutorial/matplotlib',
+          routeBasePath: 'matplotlib',
           sidebarPath: require.resolve('./sidebars.js'),
       },
     ],

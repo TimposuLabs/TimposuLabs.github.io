@@ -756,19 +756,19 @@ Studi kasus ini dapat diringkas menjadi:
 ```text
 Data Penjualan
        ↓
-(5, 3)
+    (5, 3)
        ↓
 Jumlah Produk Terjual
        ×
-Harga Produk
+  Harga Produk
        ↓
 Transpose Harga
        ↓
-(3, 1)
+    (3, 1)
        ↓
-Dot Product
+  Dot Product
        ↓
-(5, 1)
+    (5, 1)
        ↓
 Total Pendapatan per Hari
        ↓
@@ -833,9 +833,9 @@ Secara umum:
 Total =
 
 Almond Sales × Almond Price
-+
+       +
 Peanut Sales × Peanut Price
-+
+       +
 Cashew Sales × Cashew Price
 ```
 
@@ -863,9 +863,9 @@ Contohnya:
 
 ```text
 Feature 1 × Weight 1
-+
+     +
 Feature 2 × Weight 2
-+
+     +
 Feature 3 × Weight 3
 ```
 
@@ -876,7 +876,7 @@ Pada studi kasus Nut Butter:
 ```text
 Jumlah Penjualan
        ×
-Harga
+     Harga
        ↓
 Total Pendapatan
 ```
@@ -885,9 +885,9 @@ Sedangkan pada Machine Learning:
 
 ```text
 Feature
-       ×
+  ×
 Weight
-       ↓
+  ↓
 Prediksi
 ```
 

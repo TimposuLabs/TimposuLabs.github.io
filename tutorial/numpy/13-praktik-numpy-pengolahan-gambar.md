@@ -863,10 +863,10 @@ imread()
      ↓
 NumPy ndarray
      ↓
-shape
-size
-ndim
-dtype
+   shape
+   size
+   ndim
+   dtype
      ↓
 Manipulasi dengan NumPy
      ↓

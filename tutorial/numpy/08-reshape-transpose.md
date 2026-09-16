@@ -301,7 +301,7 @@ dapat dilakukan menggunakan broadcasting.
 
 ---
 
-## Memahami reshape dan Broadcasting
+## Memahami `reshape` dan Broadcasting
 
 Perhatikan perubahan berikut:
 
@@ -895,7 +895,7 @@ Kebiasaan sederhana ini dapat membantu menemukan banyak masalah saat bekerja den
 
 ## Kesalahan yang Sering Terjadi
 
-### Menganggap reshape Mengubah Data
+### Menganggap `reshape` Mengubah Data
 
 `reshape()` mengubah **bentuk** array, bukan nilai datanya.
 
@@ -935,7 +935,7 @@ Karena itu, periksa juga isi array jika sedang melakukan debugging.
 
 ---
 
-### Menggunakan reshape untuk Semua Error
+### Menggunakan `reshape` untuk Semua Error
 
 Tidak semua error shape diselesaikan dengan `reshape()`.
 
