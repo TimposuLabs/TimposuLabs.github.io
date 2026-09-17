@@ -1059,7 +1059,7 @@ Setelah mempelajari materi ini, Anda seharusnya dapat:
 
 ## Latihan
 
-### Latihan 1 — Line Plot
+### Latihan 1 - Line Plot
 
 Buat data:
 
@@ -1077,7 +1077,7 @@ Kemudian:
 5. Tambahkan grid.
 6. Tampilkan grafik.
 
-### Latihan 2 — NumPy dan Matplotlib
+### Latihan 2 - NumPy dan Matplotlib
 
 Gunakan NumPy untuk membuat data:
 
@@ -1090,7 +1090,7 @@ y = x ** 2
 
 Kemudian visualisasikan menggunakan Matplotlib.
 
-### Latihan 3 — Figure dan Axes
+### Latihan 3 - Figure dan Axes
 
 Gunakan pendekatan Object-Oriented:
 
@@ -1111,7 +1111,7 @@ Tambahkan:
 - Y label.
 - Grid.
 
-### Latihan 4 — Menyimpan Grafik
+### Latihan 4 - Menyimpan Grafik
 
 Buat sebuah grafik kemudian simpan menggunakan:
 
