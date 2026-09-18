@@ -153,7 +153,7 @@ Figure
 
 ---
 
-## Memahami `fig`
+### Memahami `fig`
 
 Variabel:
 
@@ -187,7 +187,7 @@ maka Figure memiliki satu Axes.
 
 ---
 
-## Memahami `ax`
+### Memahami `ax`
 
 Variabel:
 
@@ -221,7 +221,7 @@ ax.scatter(...)
 
 ---
 
-## Mengatur Ukuran Figure
+### Mengatur Ukuran Figure
 
 Ukuran Figure dapat diatur menggunakan:
 
@@ -286,7 +286,7 @@ digunakan untuk menentukan warna titik berdasarkan nilai `target`.
 
 ---
 
-## Memahami Variabel `scatter`
+### Memahami Variabel `scatter`
 
 Perhatikan bahwa hasil `ax.scatter()` disimpan ke:
 
@@ -314,7 +314,7 @@ scatter.legend_elements()
 
 ---
 
-## Memahami Sumbu X
+### Memahami Sumbu X
 
 Pada contoh:
 
@@ -334,7 +334,7 @@ Artinya, posisi horizontal setiap titik menunjukkan nilai usia.
 
 ---
 
-## Memahami Sumbu Y
+### Memahami Sumbu Y
 
 Pada contoh:
 
@@ -354,7 +354,7 @@ Artinya, posisi vertikal setiap titik menunjukkan nilai kolesterol pada data yan
 
 ---
 
-## Memahami Parameter `c`
+### Memahami Parameter `c`
 
 Parameter:
 
@@ -406,9 +406,11 @@ Kode tersebut mengatur:
 - label sumbu X;
 - label sumbu Y.
 
+![matplotlib](/img/python/41.png)
+
 ---
 
-## Mengatur Judul
+### Mengatur Judul
 
 Kita dapat mengatur judul menggunakan:
 
@@ -428,7 +430,7 @@ ax.set(
 
 ---
 
-## Mengatur Label Sumbu X
+### Mengatur Label Sumbu X
 
 Gunakan:
 
@@ -450,7 +452,7 @@ Label tersebut membantu pembaca memahami bahwa sumbu X merepresentasikan usia.
 
 ---
 
-## Mengatur Label Sumbu Y
+### Mengatur Label Sumbu Y
 
 Gunakan:
 
@@ -472,7 +474,7 @@ Label ini menunjukkan bahwa sumbu Y merepresentasikan nilai kolesterol.
 
 ---
 
-## Menggunakan `ax.set()` Sekaligus
+### Menggunakan `ax.set()` Sekaligus
 
 Daripada menulis tiga perintah terpisah:
 
@@ -523,9 +525,11 @@ ax.legend(
 )
 ```
 
+![matplotlib](/img/python/42.png)
+
 ---
 
-## Memahami `legend_elements()`
+### Memahami `legend_elements()`
 
 Perhatikan:
 
@@ -556,7 +560,7 @@ memberikan elemen tersebut kepada `ax.legend()`.
 
 ---
 
-## Menambahkan Judul pada Legend
+### Menambahkan Judul pada Legend
 
 Parameter:
 
@@ -604,9 +608,11 @@ ax.axhline(
 )
 ```
 
+![matplotlib](/img/python/43.png)
+
 ---
 
-## Memahami `axhline()`
+### Memahami `axhline()`
 
 Method:
 
@@ -633,7 +639,7 @@ Garis tersebut membantu memberikan titik referensi untuk membaca posisi data ter
 
 ---
 
-## Memahami `linestyle="--"`
+### Memahami `linestyle="--"`
 
 Parameter:
 
@@ -663,7 +669,7 @@ Kita dapat menggunakan berbagai line style, misalnya:
 
 ---
 
-## Menghitung Mean
+### Menghitung Mean
 
 Mean atau rata-rata dapat dihitung menggunakan:
 
@@ -748,6 +754,8 @@ ax.axhline(
 # Menampilkan grafik
 plt.show()
 ```
+
+![matplotlib](/img/python/43.png)
 
 ---
 
