@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunktimposu||=[]).push([[25300],{95682(s){s.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"matplotlib"}')}}]);
