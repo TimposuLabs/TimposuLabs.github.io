@@ -193,6 +193,10 @@ const config = {
                 to: '/matplotlib/',
                 label: 'Matplotlib',
               },
+              {
+                to: '/scikit-learn/',
+                label: 'Scikit-learn',
+              },
             ],
           },
           {to: '/blog', label: 'Blog', position: 'left'},
@@ -405,6 +409,15 @@ const config = {
           id: 'matplotlib',
           path: 'tutorial/matplotlib',
           routeBasePath: 'matplotlib',
+          sidebarPath: require.resolve('./sidebars.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+          id: 'scikit-learn',
+          path: 'tutorial/scikit-learn',
+          routeBasePath: 'scikit-learn',
           sidebarPath: require.resolve('./sidebars.js'),
       },
     ],

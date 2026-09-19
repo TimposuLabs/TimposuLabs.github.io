@@ -257,6 +257,11 @@ function NavbarSection() {
                       onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
                       Matplotlib
                     </a>      
+                    <a href="/scikit-learn" style={{ display: 'block', padding: '10px 14px', borderRadius: '8px', fontSize: '0.9rem', fontWeight: '500', color: '#e2e8f0', textDecoration: 'none' }}
+                      onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#60a5fa'; }}
+                      onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#e2e8f0'; }}>
+                      Scikit-learn
+                    </a>      
                   </div>
                 </div>
               </div>
@@ -364,6 +369,7 @@ function NavbarSection() {
                   { label: 'Pandas', href: '/pandas' },
                   { label: 'NumPy', href: '/numpy' },
                   { label: 'Matplotlib', href: '/matplotlib' },
+                  { label: 'Scikit-learn', href: '/scikit-learn' },
                 ],
               },
             ].map((section) => (
