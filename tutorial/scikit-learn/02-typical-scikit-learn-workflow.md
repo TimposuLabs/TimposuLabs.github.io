@@ -110,7 +110,7 @@ Operating System
        ↓
 Conda Environment
        ↓
-Python
+    Python
        ↓
 Jupyter Notebook
        ↓
@@ -1103,11 +1103,11 @@ Dengan model yang sudah disimpan:
 ```text
 Training
    ↓
-Save
+ Save
    ↓
 Model File
    ↓
-Load
+ Load
    ↓
 Prediction
 ```

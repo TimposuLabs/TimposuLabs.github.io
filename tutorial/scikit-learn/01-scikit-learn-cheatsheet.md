@@ -1245,7 +1245,7 @@ Train/Test Split
    ↓
 Choose Model
    ↓
-Fit
+  Fit
    ↓
 Predict
    ↓

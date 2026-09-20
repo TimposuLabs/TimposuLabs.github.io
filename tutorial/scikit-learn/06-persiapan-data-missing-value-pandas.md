@@ -1,6 +1,6 @@
 ---
 sidebar_position: 6
-title: "Persiapan Data: Missing Values"
+title: "Persiapan Data: Missing Values dengan Pandas"
 ---
 
 Dalam dataset dunia nyata, tidak semua data selalu tersedia dengan lengkap.
