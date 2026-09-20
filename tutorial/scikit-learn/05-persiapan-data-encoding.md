@@ -570,6 +570,14 @@ array([[0.00000e+00, 1.00000e+00, 0.00000e+00, ..., 1.00000e+00,
 
 Jangan kaget jika hasilnya tidak terlihat seperti DataFrame biasa.
 
+:::tip
+Agar hasil transformed lebih rapi untuk dilihat, kita dapat memasukan nilainya ke dalam DataFrame:
+
+```python
+pd.DataFrame(transformer_X)
+```
+:::
+
 ## Sparse Matrix
 
 One-Hot Encoding dapat menghasilkan **sparse matrix**.
