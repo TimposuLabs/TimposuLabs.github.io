@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunktimposu||=[]).push([[57065],{68730(s){s.exports=JSON.parse('{"name":"docusaurus-plugin-content-docs","id":"scikit-learn"}')}}]);
