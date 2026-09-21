@@ -290,7 +290,7 @@ Hasilnya biasanya berada pada rentang:
 0 sampai 1
 ```
 
-## Rumus Min-Max Scaling
+### Rumus Min-Max Scaling
 
 Rumus sederhananya:
 
@@ -307,7 +307,7 @@ x_max   = nilai maksimum
 x_scaled = nilai setelah scaling
 ```
 
-## Contoh Min-Max Scaling
+### Contoh Min-Max Scaling
 
 Misalnya terdapat data:
 
@@ -353,7 +353,7 @@ Jadi:
 30 → 0.5
 ```
 
-## Contoh Hasil Min-Max Scaling
+### Contoh Hasil Min-Max Scaling
 
 Data:
 
@@ -387,7 +387,7 @@ dan nilai terbesar menjadi:
 1
 ```
 
-## MinMaxScaler pada Scikit-Learn
+### MinMaxScaler pada Scikit-Learn
 
 Scikit-Learn menyediakan:
 
@@ -407,7 +407,7 @@ Kemudian:
 scaler = MinMaxScaler()
 ```
 
-## Contoh MinMaxScaler
+### Contoh MinMaxScaler
 
 Misalnya:
 
@@ -470,7 +470,7 @@ Metode ini sering disebut:
 Z-score standardization
 ```
 
-## Rumus Standardization
+### Rumus Standardization
 
 Rumusnya:
 
@@ -490,7 +490,7 @@ x = nilai asli
 z = nilai setelah standardization
 ```
 
-## Contoh Sederhana
+### Contoh Sederhana
 
 Misalnya:
 
@@ -521,7 +521,7 @@ Artinya nilai tersebut berada sekitar:
 
 di atas mean.
 
-## StandardScaler pada Scikit-Learn
+### StandardScaler pada Scikit-Learn
 
 Scikit-Learn menyediakan:
 
@@ -541,7 +541,7 @@ Kemudian:
 scaler = StandardScaler()
 ```
 
-## Contoh StandardScaler
+### Contoh StandardScaler
 
 ```python
 import numpy as np

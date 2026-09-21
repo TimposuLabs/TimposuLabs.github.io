@@ -1,6 +1,6 @@
 ---
 sidebar_position: 7
-title: "Persiapan Data: Missing Values dengan Scikit-Learn"
+title: "Persiapan Data: Menangani Missing Values dengan Scikit-learn"
 ---
 
 Pada materi sebelumnya kita telah mempelajari beberapa cara menangani **missing values** menggunakan Pandas.
@@ -508,7 +508,7 @@ Make, Colour
 
 door_feature
     ↓
-Doors
+   Doors
 
 num_features
     ↓
@@ -552,15 +552,15 @@ Sekarang kita memiliki satu object yang mengetahui:
 ```text
 Make + Colour
        ↓
-"missing"
+    "missing"
 
-Doors
+     Doors
        ↓
-4
+       4
 
-Odometer
+    Odometer
        ↓
-mean
+      mean
 ```
 
 ## Mengapa Menggunakan ColumnTransformer?
@@ -580,7 +580,7 @@ Colour
 
 Doors
  ↓
-4
+ 4
 
 Odometer
  ↓
@@ -810,7 +810,7 @@ Imputation
     ↓
 Encoding
     ↓
-Model
+  Model
 ```
 
 dapat dikelola sebagai satu workflow.
@@ -886,7 +886,7 @@ Numerical Data
 SimpleImputer
       │
       ▼
-Mean
+    Mean
 ```
 
 ## Menggabungkan Pipeline dengan ColumnTransformer
