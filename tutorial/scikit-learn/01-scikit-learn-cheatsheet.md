@@ -522,6 +522,8 @@ Regression
 
 ### Memilih Model dengan Scikit-Learn
 
+![scikit-learn](/img/python/50.png)
+
 Scikit-Learn memiliki banyak estimator.
 
 Contohnya:

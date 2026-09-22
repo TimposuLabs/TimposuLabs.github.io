@@ -629,7 +629,7 @@ Training
     ↓
 fit_transform()
 
-Test
+  Test
     ↓
 transform()
 ```

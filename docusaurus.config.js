@@ -3,7 +3,6 @@
 
 const lightCodeTheme = require('prism-react-renderer').themes.github;
 const darkCodeTheme = require('prism-react-renderer').themes.dracula;
-
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'TimposuLabs',
@@ -419,6 +418,8 @@ const config = {
           path: 'tutorial/scikit-learn',
           routeBasePath: 'scikit-learn',
           sidebarPath: require.resolve('./sidebars.js'),
+          remarkPlugins: [require('remark-math').default],
+          rehypePlugins: [require('rehype-katex').default],
       },
     ],
     // search local plugin
