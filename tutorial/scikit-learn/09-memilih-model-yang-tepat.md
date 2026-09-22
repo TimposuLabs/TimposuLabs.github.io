@@ -9,10 +9,6 @@ Memilih algoritma bukan berarti langsung mencari satu model yang pasti paling ba
 
 Scikit-Learn menyediakan banyak estimator untuk berbagai jenis masalah, seperti **classification**, **regression**, **clustering**, dan lainnya.
 
-![scikit-learn](/img/python/51.png)
-
-> *Baca juga: https://scikit-learn.org/stable/machine_learning_map.html*
-
 ## Istilah Dasar dalam Scikit-Learn
 
 Sebelum memilih algoritma, kita perlu memahami beberapa istilah yang sering digunakan dalam Scikit-Learn.
@@ -122,16 +118,15 @@ Cara sederhananya:
 
 ```text
 Apa yang ingin diprediksi?
-
-        │
-        ▼
+            │
+            ▼
 Apakah hasilnya kategori?
-        │
-   ┌────┴────┐
-   │         │
-  Ya       Tidak
-   │         │
-   ▼         ▼
+            │
+   ┌────────┴───────┐
+   │                │
+  Ya              Tidak
+   │                │
+   ▼                ▼
 Classification   Regression
 ```
 
@@ -178,6 +173,10 @@ Secara umum, proses pemilihannya dapat dimulai dari beberapa pertanyaan:
 Salah satu konsep penting adalah **jangan langsung mengasumsikan satu algoritma pasti paling baik**.
 
 Gunakan algoritma sebagai titik awal eksperimen.
+
+![scikit-learn](/img/python/51.png)
+
+> *Baca juga: https://scikit-learn.org/stable/machine_learning_map.html*
 
 ## Langkah 1 - Periksa Jumlah Sampel
 
@@ -233,7 +232,7 @@ Sedangkan:
 
 ```text
 Prediksi harga rumah
-        ↓
+    ↓
 Regression
 ```
 

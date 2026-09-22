@@ -1,6 +1,6 @@
 ---
 sidebar_position: 10
-title: "Memilih Model yang Tepat (Regression)"
+title: "Memilih Model yang Tepat: Regression"
 ---
 
 Pada materi sebelumnya kita telah mempelajari cara memilih estimator untuk masalah machine learning.
@@ -51,6 +51,8 @@ Evaluasi kembali
 Proses seperti ini merupakan bagian penting dari **eksperimentasi machine learning**.
 
 ![scikit-learn](/img/python/51.png)
+
+> *Baca juga: https://scikit-learn.org/stable/machine_learning_map.html*
 
 ## Jangan Terpaku pada Satu Algoritma
 
