@@ -1,6 +1,6 @@
 ---
 sidebar_position: 11
-title: "Memilih Model yang Tepat: Classification"
+title: "Memilih Model: Classification"
 ---
 
 Pada materi sebelumnya kita telah mempelajari cara memilih estimator untuk masalah **regression**.

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 10
-title: "Memilih Model yang Tepat: Regression"
+title: "Memilih Model: Regression"
 ---
 
 Pada materi sebelumnya kita telah mempelajari cara memilih estimator untuk masalah machine learning.
@@ -755,25 +755,25 @@ Salah satu keterampilan penting dalam machine learning adalah kemampuan melakuka
 Misalnya:
 
 ```text
-Model A
+ Model A
     ↓
-Train
-    ↓
-Evaluate
-    ↓
-Catat hasil
-
-Model B
-    ↓
-Train
+  Train
     ↓
 Evaluate
     ↓
 Catat hasil
 
-Model C
+ Model B
     ↓
-Train
+  Train
+    ↓
+Evaluate
+    ↓
+Catat hasil
+
+ Model C
+    ↓
+  Train
     ↓
 Evaluate
     ↓
@@ -841,7 +841,7 @@ Hal-hal penting yang perlu diingat:
 
 Gunakan dataset California Housing yang sama dan lakukan eksperimen berikut.
 
-### Tantangan 1 — Bandingkan Ridge dan Random Forest
+### Tantangan 1 - Bandingkan Ridge dan Random Forest
 
 Bandingkan:
 
@@ -852,7 +852,7 @@ RandomForestRegressor
 
 Catat nilai R² masing-masing.
 
-### Tantangan 2 — Ubah Jumlah Tree
+### Tantangan 2 - Ubah Jumlah Tree
 
 Coba beberapa nilai:
 
@@ -865,7 +865,7 @@ n_estimators=200
 
 Kemudian catat perubahan performanya.
 
-### Tantangan 3 — Bandingkan Training dan Testing
+### Tantangan 3 - Bandingkan Training dan Testing
 
 Hitung:
 
@@ -881,7 +881,7 @@ model.score(X_test, y_test)
 
 Kemudian perhatikan perbedaan performanya.
 
-### Tantangan 4 — Eksperimen dengan Model Lain
+### Tantangan 4 - Eksperimen dengan Model Lain
 
 Coba beberapa estimator regression:
 
@@ -893,7 +893,7 @@ SVR
 
 Gunakan preprocessing yang sesuai untuk masing-masing model dan bandingkan hasilnya.
 
-### Tantangan 5 — Buat Tabel Eksperimen
+### Tantangan 5 - Buat Tabel Eksperimen
 
 Buat tabel seperti:
 

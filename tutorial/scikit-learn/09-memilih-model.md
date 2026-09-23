@@ -1,6 +1,6 @@
 ---
 sidebar_position: 9
-title: "Memilih Model yang Tepat"
+title: "Memilih Model"
 ---
 
 Setelah memahami workflow dasar Scikit-Learn, langkah berikutnya adalah menentukan **estimator atau algoritma** yang sesuai dengan masalah machine learning yang sedang kita hadapi.
