@@ -68,7 +68,7 @@ const config = {
       //   appId: "EA5OG72GYH",
       // },
       colorMode: {
-        defaultMode: 'dark',
+        defaultMode: 'light',
         disableSwitch: false,
         respectPrefersColorScheme: false,
       },

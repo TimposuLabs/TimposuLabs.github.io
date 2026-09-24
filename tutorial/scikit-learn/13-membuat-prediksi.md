@@ -1,6 +1,6 @@
 ---
-sidebar_position: 13
-title: "Membuat Prediksi"
+sidebar_position: 14
+title: "Membuat Prediksi: Classification"
 ---
 
 Setelah model berhasil dilatih menggunakan method `.fit()`, langkah berikutnya dalam workflow Scikit-Learn adalah menggunakan model tersebut untuk **membuat prediksi**.

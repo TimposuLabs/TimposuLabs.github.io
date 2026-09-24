@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Head from '@docusaurus/Head';
 import './homepage.css';
 import { FaYoutube, FaGithub, FaInstagram, FaTiktok, FaTelegramPlane } from 'react-icons/fa';
+import { FiSun, FiMoon } from 'react-icons/fi';
 
-function NavbarSection() {
+function NavbarSection({ theme, onToggleTheme }) {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(null);
@@ -29,7 +30,7 @@ function NavbarSection() {
       position: 'sticky',
       top: 0,
       zIndex: 50,
-      backgroundColor: 'rgba(9, 15, 30, 0.95)',
+      backgroundColor: 'var(--homepage-nav)',
       backdropFilter: 'blur(12px)',
       WebkitBackdropFilter: 'blur(12px)',
       borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
@@ -49,7 +50,7 @@ function NavbarSection() {
 
           {/* DESKTOP: Menu tengah */}
           {!isMobile && (
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', flex: '1 1 auto', marginLeft: 'auto', marginRight: 'auto' }}>
+            <div className="homepage-nav-links" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', flex: '1 1 auto', marginLeft: 'auto', marginRight: 'auto' }}>
 
               {/* Dropdown Programming */}
               <div style={{ position: 'relative' }}
@@ -278,6 +279,9 @@ function NavbarSection() {
           {/* DESKTOP: CTA buttons kanan */}
           {!isMobile && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'flex-end', flex: '0 0 auto' }}>
+              <button type="button" className="homepage-theme-toggle" onClick={onToggleTheme} aria-label={`Aktifkan theme ${theme === 'light' ? 'dark' : 'light'}`} aria-pressed={theme === 'dark'}>
+                <span className="homepage-theme-toggle-icon" aria-hidden="true">{theme === 'light' ? <FiMoon /> : <FiSun />}</span>
+              </button>
               <a href="/coming-soon" style={{ backgroundColor: '#16a34a', color: '#ffffff', padding: '8px 16px', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}
                 onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#15803d'; e.currentTarget.style.color = '#ffffff'; }}
                 onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#16a34a'; e.currentTarget.style.color = '#ffffff'; }}>
@@ -415,6 +419,9 @@ function NavbarSection() {
             </a>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '8px', paddingTop: '12px', borderTop: '1px solid rgba(255,255,255,0.08)', width: '100%' }}>
+              <button type="button" className="homepage-theme-toggle" onClick={onToggleTheme} aria-label={`Aktifkan theme ${theme === 'light' ? 'dark' : 'light'}`} aria-pressed={theme === 'dark'}>
+                <span className="homepage-theme-toggle-icon" aria-hidden="true">{theme === 'light' ? <FiMoon /> : <FiSun />}</span>
+              </button>
               <a href="/coming-soon" style={{ display: 'block', textAlign: 'center', backgroundColor: '#16a34a', color: '#ffffff', padding: '10px 16px', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '600', textDecoration: 'none' }}>
                 📒 Ebook
               </a>
@@ -432,9 +439,9 @@ function NavbarSection() {
 
 function HeroSection() {
   return (
-    <section style={{ backgroundColor: '#050d1a' }} className="relative overflow-hidden pt-16 pb-24 lg:pt-32">
-      <div style={{ position: 'absolute', top: '-10%', left: '-5%', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(29,78,216,0.45) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(40px)', pointerEvents: 'none', zIndex: 0 }} />
-      <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(29,78,216,0.35) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(40px)', pointerEvents: 'none', zIndex: 0 }} />
+    <section className="homepage-hero relative overflow-hidden pt-16 pb-24 lg:pt-32" style={{ backgroundColor: '#050d1a' }}>
+      <div className="homepage-hero-blue-glow" style={{ position: 'absolute', top: '-10%', left: '-5%', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(29,78,216,0.45) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(40px)', pointerEvents: 'none', zIndex: 0 }} />
+      <div className="homepage-hero-blue-glow" style={{ position: 'absolute', top: '-10%', right: '-5%', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(29,78,216,0.35) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(40px)', pointerEvents: 'none', zIndex: 0 }} />
       <div className="max-w-7xl mx-auto px-6 text-center relative" style={{ zIndex: 1 }}>
         <div style={{ display: 'inline-block', padding: '6px 16px', marginBottom: '24px', fontSize: '0.75rem', fontWeight: '600', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#60a5fa', backgroundColor: 'rgba(96,165,250,0.1)', borderRadius: '9999px' }}>
           Belajar Aja Dulu · Nanti Juga Kaya
@@ -448,13 +455,13 @@ function HeroSection() {
           Belajar dari dasar hingga mahir dengan materi terstruktur.
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px' }}>
-          <a href="/coming-soon"
+          <a className="homepage-start-learning-button" href="/coming-soon"
             style={{ color: '#0f172a', textDecoration: 'none', backgroundColor: '#ffffff', padding: '16px 32px', borderRadius: '12px', fontWeight: '700', fontSize: '1rem', boxShadow: '0 20px 40px rgba(0,0,0,0.2)', transition: 'background-color 0.15s ease', display: 'inline-block' }}
             onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#e2e8f0'; e.currentTarget.style.color = '#0f172a'; }}
             onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#ffffff'; e.currentTarget.style.color = '#0f172a'; }}>
             👩‍💻 Mulai Belajar Sekarang
           </a>
-          <a href="/blog/archive"
+          <a className="homepage-blog-button" href="/blog/archive"
             style={{ color: '#e2e8f0', textDecoration: 'none', backgroundColor: '#1e293b', border: '1px solid #334155', padding: '16px 32px', borderRadius: '12px', fontWeight: '700', fontSize: '1rem', transition: 'background-color 0.15s ease', display: 'inline-block' }}
             onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#334155'; e.currentTarget.style.color = '#e2e8f0'; }}
             onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#1e293b'; e.currentTarget.style.color = '#e2e8f0'; }}>
@@ -555,7 +562,7 @@ function CTASection() {
   return (
     <section style={{ backgroundColor: '#0f172a', padding: '80px 24px' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-        <div style={{ background: 'linear-gradient(to right, #2563eb, #4338ca)', borderRadius: '48px', padding: '64px 48px', textAlign: 'center', boxShadow: '0 25px 50px rgba(0,0,0,0.4)', overflow: 'hidden', position: 'relative' }}>
+        <div className="homepage-cta-card" style={{ background: 'linear-gradient(to right, #2563eb, #4338ca)', borderRadius: '48px', padding: '64px 48px', textAlign: 'center', boxShadow: '0 25px 50px rgba(0,0,0,0.4)', overflow: 'hidden', position: 'relative' }}>
           <h2 style={{ fontSize: '2.25rem', fontWeight: '700', color: '#ffffff', marginBottom: '24px', position: 'relative', zIndex: 10 }}>
             Siap Memulai Perjalanan Belajarmu?
           </h2>
@@ -600,7 +607,10 @@ function FooterSection() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12" style={{ marginBottom: '64px' }}>
           <div>
-            <div style={{ fontSize: '1.25rem', fontWeight: '700', color: '#ffffff', marginBottom: '24px' }}>TimposuLabs</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1.25rem', fontWeight: '700', color: '#ffffff', marginBottom: '24px' }}>
+              <img src="/img/timposulabs.png" alt="TimposuLabs Logo" style={{ width: '32px', height: '32px' }} />
+              <span>TimposuLabs</span>
+            </div>
             <p style={{ color: '#94a3b8', fontSize: '0.875rem', lineHeight: '1.6' }}>
               Platform tutorial programming, devops, networking, cyber security dan teknologi lainnya untuk anak Indonesia.
             </p>
@@ -621,12 +631,12 @@ function FooterSection() {
           </div>
           <div>
             <h4 style={{ color: '#ffffff', fontWeight: '700', marginBottom: '24px' }}>Social Media</h4>
-            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+            <div className="homepage-social-links" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
               {socials.map((item, i) => (
                 <a key={i} href={item.href} target="_blank" rel="noopener noreferrer"
-                  style={{ width: '40px', height: '40px', backgroundColor: '#1e293b', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', textDecoration: 'none', transition: 'background-color 0.15s ease' }}
+                  style={{ width: '40px', height: '40px', backgroundColor: 'var(--homepage-surface-strong)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', textDecoration: 'none', transition: 'background-color 0.15s ease' }}
                   onMouseEnter={e => { e.currentTarget.style.backgroundColor = item.hoverColor; e.currentTarget.style.color = '#ffffff'; }}
-                  onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#1e293b'; e.currentTarget.style.color = '#ffffff'; }}>
+                  onMouseLeave={e => { e.currentTarget.style.backgroundColor = 'var(--homepage-surface-strong)'; e.currentTarget.style.color = '#ffffff'; }}>
                   {item.icon}
                 </a>
               ))}
@@ -656,14 +666,21 @@ function FooterSection() {
 }
 
 export default function Home() {
+  const [theme, setTheme] = useState('light');
+
   useEffect(() => {
+    const savedTheme = window.localStorage.getItem('homepage-theme');
+    const initialTheme = savedTheme === 'dark' ? 'dark' : 'light';
+    setTheme(initialTheme);
+    document.documentElement.dataset.theme = initialTheme;
+
     const navbar = document.querySelector('.navbar');
     const footer = document.querySelector('.footer');
     if (navbar) navbar.style.display = 'none';
     if (footer) footer.style.display = 'none';
 
-    document.documentElement.style.backgroundColor = '#050d1a';
-    document.body.style.backgroundColor = '#050d1a';
+    document.documentElement.style.backgroundColor = 'var(--homepage-bg)';
+    document.body.style.backgroundColor = 'var(--homepage-bg)';
     document.body.style.fontFamily = "'Inter', sans-serif";
 
     const style = document.createElement('style');
@@ -688,8 +705,18 @@ export default function Home() {
       document.body.style.fontFamily = '';
       const injectedStyle = document.getElementById('homepage-link-style');
       if (injectedStyle) injectedStyle.remove();
+      delete document.documentElement.dataset.theme;
     };
   }, []);
+
+  const toggleTheme = () => {
+    setTheme(currentTheme => {
+      const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.dataset.theme = nextTheme;
+      window.localStorage.setItem('homepage-theme', nextTheme);
+      return nextTheme;
+    });
+  };
 
   return (
     <>
@@ -698,8 +725,8 @@ export default function Home() {
         <meta name="description" content="Dokumentasi dan tutorial programming untuk developer Indonesia." />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
       </Head>
-      <div id="homepage-root" style={{ backgroundColor: '#050d1a' }}>
-        <NavbarSection />
+      <div id="homepage-root" style={{ backgroundColor: 'var(--homepage-bg)' }}>
+        <NavbarSection theme={theme} onToggleTheme={toggleTheme} />
         <HeroSection />
         <StatsSection />
         <FeaturesSection />

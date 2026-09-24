@@ -1,2 +1,222 @@
 @tailwind components;
 @tailwind utilities;
+
+/* Shared homepage palette. Light theme is the default. */
+:root {
+	--homepage-bg: #f8fafc;
+	--homepage-section: #ffffff;
+	--homepage-section-alt: #f1f5f9;
+	--homepage-surface: #ffffff;
+	--homepage-surface-strong: #e2e8f0;
+	--homepage-text: #0f172a;
+	--homepage-text-muted: #475569;
+	--homepage-text-soft: #64748b;
+	--homepage-text-contrast: #ffffff;
+	--homepage-border: #cbd5e1;
+	--homepage-border-strong: #94a3b8;
+	--homepage-nav: rgba(255, 255, 255, 0.95);
+	--homepage-shadow: rgba(15, 23, 42, 0.18);
+}
+
+:root[data-theme='dark'] {
+	--homepage-bg: #050d1a;
+	--homepage-section: #0f172a;
+	--homepage-section-alt: #111827;
+	--homepage-surface: #1e293b;
+	--homepage-surface-strong: #334155;
+	--homepage-text: #e2e8f0;
+	--homepage-text-muted: #94a3b8;
+	--homepage-text-soft: #64748b;
+	--homepage-text-contrast: #ffffff;
+	--homepage-border: #334155;
+	--homepage-border-strong: #475569;
+	--homepage-nav: rgba(9, 15, 30, 0.95);
+	--homepage-shadow: rgba(0, 0, 0, 0.4);
+}
+
+#homepage-root {
+	background-color: var(--homepage-bg);
+	color: var(--homepage-text);
+	transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+#homepage-root nav,
+#homepage-root section,
+#homepage-root footer {
+	transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+#homepage-root nav {
+	border-bottom-color: var(--homepage-border) !important;
+}
+
+#homepage-root section {
+	background-color: var(--homepage-section) !important;
+}
+
+#homepage-root #stats {
+	background-color: var(--homepage-section-alt) !important;
+	border-top-color: var(--homepage-border) !important;
+	border-bottom-color: var(--homepage-border) !important;
+}
+
+#homepage-root #features {
+	background-color: var(--homepage-section) !important;
+}
+
+#homepage-root footer {
+	background-color: var(--homepage-bg) !important;
+	border-top-color: var(--homepage-border) !important;
+}
+
+#homepage-root h1,
+#homepage-root h2,
+#homepage-root h3,
+#homepage-root h4,
+#homepage-root nav span,
+#homepage-root footer div {
+	color: var(--homepage-text) !important;
+}
+
+#homepage-root p,
+#homepage-root footer a,
+#homepage-root footer {
+	color: var(--homepage-text-muted) !important;
+}
+
+#homepage-root #features > div > div > div {
+	background-color: var(--homepage-surface) !important;
+	border-color: var(--homepage-border) !important;
+}
+
+#homepage-root #features span {
+	background-color: var(--homepage-surface-strong) !important;
+	color: var(--homepage-text-muted) !important;
+}
+
+:root:not([data-theme='dark']) #homepage-root .homepage-hero {
+	background-color: var(--homepage-section) !important;
+	background-image: linear-gradient(rgba(148, 163, 184, 0.18) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(148, 163, 184, 0.18) 1px, transparent 1px) !important;
+	background-size: 32px 32px;
+}
+
+:root:not([data-theme='dark']) #homepage-root .homepage-hero-blue-glow {
+	display: none;
+}
+
+:root:not([data-theme='dark']) #homepage-root .homepage-start-learning-button {
+	background-color: #2563eb !important;
+	color: #ffffff !important;
+}
+
+:root:not([data-theme='dark']) #homepage-root .homepage-start-learning-button:hover {
+	background-color: #1d4ed8 !important;
+	color: #ffffff !important;
+}
+
+:root:not([data-theme='dark']) #homepage-root .homepage-blog-button {
+	background-color: #ffffff !important;
+	border-color: #cbd5e1 !important;
+	color: #0f172a !important;
+}
+
+:root:not([data-theme='dark']) #homepage-root .homepage-blog-button:hover {
+	background-color: #f1f5f9 !important;
+	color: #0f172a !important;
+}
+
+#homepage-root .homepage-nav-links button,
+#homepage-root .homepage-nav-links a,
+#homepage-root #mobile-navigation button,
+#homepage-root #mobile-navigation a {
+	color: var(--homepage-text) !important;
+}
+
+#homepage-root .homepage-nav-links button:hover,
+#homepage-root .homepage-nav-links a:hover,
+#homepage-root #mobile-navigation button:hover,
+#homepage-root #mobile-navigation a:hover {
+	color: #2563eb !important;
+}
+
+#homepage-root .homepage-nav-links > div > div > div > a {
+	color: var(--homepage-text-contrast) !important;
+}
+
+#homepage-root .homepage-nav-links > div > div > div > a:hover {
+	color: #60a5fa !important;
+}
+
+:root:not([data-theme='dark']) #homepage-root .homepage-nav-links button:hover,
+:root:not([data-theme='dark']) #homepage-root .homepage-nav-links a:hover,
+:root:not([data-theme='dark']) #homepage-root #mobile-navigation button:hover,
+:root:not([data-theme='dark']) #homepage-root #mobile-navigation a:hover {
+	background-color: #e2e8f0 !important;
+}
+
+:root:not([data-theme='dark']) #homepage-root .homepage-nav-links > div > div > div {
+	background-color: #e2e8f0 !important;
+}
+
+:root:not([data-theme='dark']) #homepage-root .homepage-nav-links > div > div > div > a {
+	color: #334155 !important;
+}
+
+:root:not([data-theme='dark']) #homepage-root .homepage-nav-links > div > div > div > a:hover {
+	background-color: #cbd5e1 !important;
+	color: #2563eb !important;
+}
+
+#homepage-root #stats > div > div > div > div:first-child {
+	color: var(--homepage-text) !important;
+}
+
+#homepage-root .homepage-cta-card h2 {
+	color: #ffffff !important;
+}
+
+#homepage-root .homepage-cta-card p {
+	color: #dbeafe !important;
+}
+
+#homepage-root .homepage-social-links a {
+	color: var(--homepage-text) !important;
+}
+
+#homepage-root .homepage-social-links a:nth-child(2):hover,
+#homepage-root .homepage-social-links a:nth-child(4):hover {
+	color: #ffffff !important;
+}
+
+#homepage-root .homepage-theme-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 12px;
+	border: 1px solid var(--homepage-border);
+	border-radius: 9999px;
+	background: var(--homepage-surface);
+	color: var(--homepage-text);
+	cursor: pointer;
+	font-size: 0.875rem;
+	font-weight: 600;
+	transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+#homepage-root .homepage-theme-toggle:hover {
+	background: var(--homepage-surface-strong);
+}
+
+#homepage-root .homepage-theme-toggle-icon {
+	font-size: 1rem;
+	line-height: 1;
+}
+
+@media (max-width: 1050px) {
+	#homepage-root .homepage-theme-toggle {
+		justify-content: center;
+		width: 100%;
+		border-radius: 8px;
+	}
+}
