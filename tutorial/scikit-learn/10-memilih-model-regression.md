@@ -207,6 +207,10 @@ Decision Tree N
 
 Kemudian prediksi dari pohon-pohon tersebut digabungkan untuk menghasilkan prediksi akhir.
 
+![Random Forest](https://miro.medium.com/v2/1*R3oJiyaQwyLUyLZL-scDpw.png)
+
+*Sumber: https://medium.com/@denizgunay/random-forest-af5bde5d7e1e*
+
 ## Random Forest untuk Regression
 
 Jika target yang ingin diprediksi berupa nilai numerik kontinu, kita dapat menggunakan:
