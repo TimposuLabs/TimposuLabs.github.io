@@ -280,7 +280,7 @@ function NavbarSection({ theme, onToggleTheme }) {
           {!isMobile && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'flex-end', flex: '0 0 auto' }}>
               <button type="button" className="homepage-theme-toggle" onClick={onToggleTheme} aria-label={`Aktifkan theme ${theme === 'light' ? 'dark' : 'light'}`} aria-pressed={theme === 'dark'}>
-                <span className="homepage-theme-toggle-icon" aria-hidden="true">{theme === 'light' ? <FiMoon /> : <FiSun />}</span>
+                <span className="homepage-theme-toggle-icon" aria-hidden="true">{theme === 'light' ? <FiSun /> : <FiMoon />}</span>
               </button>
               <a href="/coming-soon" style={{ backgroundColor: '#16a34a', color: '#ffffff', padding: '8px 16px', borderRadius: '8px', fontSize: '0.875rem', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}
                 onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#15803d'; e.currentTarget.style.color = '#ffffff'; }}

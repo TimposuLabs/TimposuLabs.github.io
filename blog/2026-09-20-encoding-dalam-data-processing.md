@@ -496,7 +496,7 @@ Bedakan:
 ```text
 Feature
    ↓
-X
+   X
 ```
 
 dan:
@@ -504,7 +504,7 @@ dan:
 ```text
 Target
    ↓
-y
+   y
 ```
 
 Pada Titanic:
@@ -515,11 +515,11 @@ Embarked
 Pclass
 Age
 Fare
-    ↓
+  ↓
 Features (X)
 
 Survived
-    ↓
+  ↓
 Target (y)
 ```
 
@@ -830,9 +830,9 @@ Input User
     ↓
 Preprocessing
     ↓
-Encoding
+ Encoding
     ↓
-Model
+  Model
     ↓
 Prediction
 ```
