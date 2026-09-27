@@ -742,3 +742,7 @@ Classification Metrics
 ```
 
 Setiap metrik memberikan informasi yang berbeda mengenai performa model.
+
+## 17. Referensi
+
+* https://scikit-learn.org/stable/modules/model_evaluation.html

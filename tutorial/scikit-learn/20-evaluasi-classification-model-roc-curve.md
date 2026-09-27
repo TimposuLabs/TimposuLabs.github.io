@@ -1065,3 +1065,7 @@ Singkatnya, hal yang perlu Anda ingat adalah:
 * ROC Curve dan metrik AUC merupakan metrik evaluasi untuk model klasifikasi biner (model yang memprediksi salah satu dari dua kemungkinan, misalnya apakah seseorang menderita penyakit jantung atau tidak).
 * ROC Curve membandingkan *true positive rate* (TPR) dengan *false positive rate* (FPR) pada berbagai ambang batas (*threshold*) klasifikasi.
 * Metrik AUC menunjukkan seberapa baik kemampuan model Anda dalam membedakan antar-kelas (contohnya, seberapa akurat model tersebut dalam menentukan apakah seseorang mengidap penyakit jantung atau tidak). Model yang sempurna akan memperoleh skor AUC sebesar 1.
+
+## 26. Referensi
+
+* https://scikit-learn.org/stable/modules/model_evaluation.html

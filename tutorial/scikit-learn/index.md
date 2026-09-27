@@ -1257,3 +1257,7 @@ Kerangka dasar yang perlu mulai kita biasakan:
 ```
 
 Tidak semua proyek harus mengikuti urutan tersebut secara persis, tetapi workflow ini dapat menjadi kerangka dasar untuk memahami bagaimana Scikit-Learn digunakan dalam proyek Machine Learning.
+
+## Baca Juga
+
+* https://scikit-learn.org/stable/user_guide.html

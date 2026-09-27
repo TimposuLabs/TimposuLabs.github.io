@@ -422,7 +422,9 @@ sns.heatmap(
     cm,
     annot=True,
     fmt="d",
-    cmap="Blues"
+    cmap="Blues",
+    linewidths=1.5,     # Mengatur ketebalan garis border (misal: 1.5 pixel)
+    linecolor="black"   # Mengatur warna garis border (bisa "black", "gray", "white", dll)
 )
 
 plt.xlabel("Predicted Label")
@@ -430,6 +432,8 @@ plt.ylabel("True Label")
 plt.title("Confusion Matrix")
 plt.show()
 ```
+
+![confusion matrix](/img/python/58.png)
 
 Parameter:
 
@@ -1043,3 +1047,4 @@ Confusion Matrix sangat penting karena tidak hanya menunjukkan **berapa banyak p
 ## 28. Referensi
 
 * https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html
+* https://scikit-learn.org/stable/modules/model_evaluation.html
