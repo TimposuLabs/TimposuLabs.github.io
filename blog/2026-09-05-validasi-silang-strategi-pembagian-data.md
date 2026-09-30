@@ -1,6 +1,6 @@
 ---
 slug: validasi-silang-strategi-pembagian-data
-title: "Validasi Silang dan Strategi Pembagian Data: Panduan Machine Learning untuk Pemula #4"
+title: "Validasi Silang (Cross Validation) dan Strategi Pembagian Data: Panduan Machine Learning untuk Pemula #4"
 authors: topekox
 tags: [manchine learning, data mining, ai, data science, python]
 ---
