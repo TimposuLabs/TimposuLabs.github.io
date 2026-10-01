@@ -1,6 +1,6 @@
 ---
 sidebar_position: 28
-title: "Evaluasi Model dengan Scikit-Learn Function"
+title: "Evaluasi Model dengan Function sklearn.metrics"
 ---
 
 Dalam proses Machine Learning, setelah model selesai dilatih dan menghasilkan prediksi, kita perlu mengetahui **seberapa baik performa model tersebut**.
@@ -185,7 +185,7 @@ Beberapa metrik klasifikasi yang umum digunakan:
 
 ---
 
-## `accuracy_score()`
+### `accuracy_score()`
 
 Accuracy mengukur proporsi prediksi yang benar dibandingkan dengan seluruh data.
 
@@ -241,7 +241,7 @@ Accuracy: 82.00%
 
 ---
 
-## `precision_score()`
+### `precision_score()`
 
 Precision menjawab pertanyaan:
 
@@ -280,7 +280,7 @@ Artinya, sekitar 85% dari prediksi positif model merupakan prediksi positif yang
 
 ---
 
-## `recall_score()`
+### `recall_score()`
 
 Recall menjawab pertanyaan:
 
@@ -319,7 +319,7 @@ Artinya, model berhasil menemukan sekitar 80% dari seluruh kasus positif yang se
 
 ---
 
-## `f1_score()`
+### `f1_score()`
 
 F1-score merupakan harmonic mean antara precision dan recall.
 
@@ -354,7 +354,7 @@ F1-score tidak hanya melihat jumlah prediksi benar secara keseluruhan, tetapi ju
 
 ---
 
-## Workflow Evaluasi Classification
+### Workflow Evaluasi Classification
 
 Secara umum, workflow klasifikasi menggunakan `sklearn.metrics` adalah:
 
@@ -395,7 +395,7 @@ Train/Test Split
 
 ---
 
-## Contoh Lengkap Classification
+### Contoh Lengkap Classification
 
 Berikut contoh workflow lengkap menggunakan `RandomForestClassifier`.
 
@@ -490,7 +490,7 @@ Beberapa metrik regresi yang umum digunakan:
 
 ---
 
-## `r2_score()`
+### `r2_score()`
 
 R² atau **Coefficient of Determination** mengukur seberapa baik variasi pada target dapat dijelaskan oleh model dibandingkan dengan baseline berupa prediksi rata-rata target.
 
@@ -533,7 +533,7 @@ Ini menunjukkan bahwa model memiliki performa yang lebih buruk daripada baseline
 
 ---
 
-## `mean_absolute_error()`
+### `mean_absolute_error()`
 
 MAE atau **Mean Absolute Error** menghitung rata-rata nilai absolut dari error prediksi.
 
@@ -575,7 +575,7 @@ MAE = 0         → prediksi sempurna
 
 ---
 
-## `mean_squared_error()`
+### `mean_squared_error()`
 
 MSE atau **Mean Squared Error** menghitung rata-rata kuadrat error.
 
@@ -625,7 +625,7 @@ MSE = 0         → prediksi sempurna
 
 ---
 
-## RMSE dari MSE
+### RMSE dari MSE
 
 Jika kita ingin mengubah MSE kembali ke skala target, kita dapat menggunakan akar kuadrat:
 
@@ -654,7 +654,7 @@ RMSE memiliki satuan yang sama dengan target sehingga sering lebih mudah diinter
 
 ---
 
-## Workflow Evaluasi Regression
+### Workflow Evaluasi Regression
 
 Workflow regresi menggunakan `sklearn.metrics` dapat digambarkan sebagai:
 
@@ -695,7 +695,7 @@ Train/Test Split
 
 ---
 
-## Contoh Lengkap Regression
+### Contoh Lengkap Regression
 
 Berikut contoh menggunakan `RandomForestRegressor`.
 
@@ -775,7 +775,7 @@ Terdapat perbedaan penting antara evaluasi menggunakan satu kali train/test spli
 
 ---
 
-## Single Train/Test Split
+### Single Train/Test Split
 
 Pada single train/test split, dataset dibagi satu kali.
 
@@ -828,7 +828,7 @@ Kekurangannya adalah hasil evaluasi dapat berubah jika pembagian data berubah.
 
 ---
 
-## Cross-Validation
+### Cross-Validation
 
 Pada cross-validation, dataset dibagi menjadi beberapa fold.
 
@@ -1235,6 +1235,10 @@ nama_metric(y_true, y_pred)
 
 Namun tidak semua metric memiliki signature yang sama, sehingga dokumentasi tetap perlu diperiksa sebelum digunakan.
 
+:::tip
+**Baca Dokumentasi:** https://scikit-learn.org/stable/api/sklearn.metrics.html
+:::
+
 ---
 
 ## Ringkasan
@@ -1377,3 +1381,4 @@ Pada tahap berikutnya, metrik-metrik ini akan menjadi dasar untuk membandingkan 
 ## Referensi
 
 * https://scikit-learn.org/stable/modules/model_evaluation.html
+* https://scikit-learn.org/stable/api/sklearn.metrics.html
