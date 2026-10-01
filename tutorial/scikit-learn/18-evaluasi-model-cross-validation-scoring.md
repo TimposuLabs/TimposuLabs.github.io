@@ -1,6 +1,6 @@
 ---
 sidebar_position: 19
-title: "Evaluasi Model: Cross-Validation & Parameter scoring"
+title: "Evaluasi Model: Cross-Validation"
 ---
 
 Pada materi sebelumnya kita telah mempelajari metode `.score()` untuk mengevaluasi model Machine Learning.
@@ -691,6 +691,10 @@ Gunakan accuracy untuk evaluasi.
 | `scoring='neg_mean_absolute_error'` | Negative MAE | Menghitung rata-rata kesalahan murni dalam satuan asli data (tanpa penalti kuadrat). |
 | `scoring='neg_mean_squared_error'` | Negative MSE | Memberikan penalti/hukuman berat pada tebakan yang melesetnya terlalu jauh. |
 | `scoring='neg_root_mean_squared_error'` | Negative RMSE | Sama seperti MSE (memberi penalti berat), namun satuannya kembali ke satuan asli data. |
+
+:::tip
+**Baca Juga:** [Evaluasi Model dengan Parameter scoring pada Cross-Validation](/scikit-learn/evaluasi-model-scoring-cross-validation).
+:::
 
 ---
 

@@ -3,7 +3,7 @@ sidebar_position: 27
 title: "Evaluasi Model dengan Parameter scoring pada Cross-Validation"
 ---
 
-Pada materi sebelumnya, kita telah mempelajari **Cross-Validation** menggunakan fungsi `cross_val_score()`.
+Pada [materi sebelumnya](/scikit-learn/evaluasi-model-cross-validation-scoring), kita telah mempelajari **Cross-Validation** menggunakan fungsi `cross_val_score()`.
 
 Cross-validation membantu kita mengevaluasi performa model dengan membagi dataset menjadi beberapa bagian atau **fold**. Model kemudian dilatih dan dievaluasi beberapa kali menggunakan kombinasi data train dan validation yang berbeda.
 
@@ -1487,3 +1487,8 @@ Hal terpenting yang perlu diingat:
 8. Negative MAE atau Negative MSE perlu dikonversi kembali jika ingin mendapatkan nilai error positif.
 9. Model harus dibandingkan menggunakan metrik yang sama pada data evaluasi yang sama.
 10. Pemilihan scoring harus disesuaikan dengan tujuan dan karakteristik masalah machine learning.
+
+## Referensi
+
+* https://scikit-learn.org/stable/modules/model_evaluation.html
+* https://scikit-learn.org/stable/modules/cross_validation.html
