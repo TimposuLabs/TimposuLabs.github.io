@@ -1377,7 +1377,6 @@ Dengan memahami berbagai metrik tersebut, kita tidak hanya mengetahui apakah mod
 
 Pada tahap berikutnya, metrik-metrik ini akan menjadi dasar untuk membandingkan model, memilih model yang sesuai, dan melakukan optimasi terhadap performa Machine Learning.
 
-
 ## Referensi
 
 * https://scikit-learn.org/stable/modules/model_evaluation.html
