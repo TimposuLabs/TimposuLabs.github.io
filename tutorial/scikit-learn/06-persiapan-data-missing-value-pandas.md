@@ -881,7 +881,7 @@ SimpleImputer
 OneHotEncoder
        │
        ▼
-Model
+     Model
 ```
 
 Sedangkan numeric features dapat memiliki pipeline sendiri:
@@ -893,7 +893,7 @@ Numerical Features
 SimpleImputer
        │
        ▼
-Model
+     Model
 ```
 
 Kemudian keduanya dapat digabungkan menggunakan:
@@ -1206,7 +1206,7 @@ Fit Preprocessor
 Transform Training
      │
      ▼
-Fit Model
+ Fit Model
 ```
 
 Ketika melakukan prediksi:
@@ -1218,7 +1218,7 @@ Test Data
 Transform menggunakan preprocessor yang sudah di-fit
      │
      ▼
-Model
+   Model
      │
      ▼
 Prediction
@@ -1372,7 +1372,7 @@ Pandas
   └── Encoding
        │
        ▼
-   Model
+     Model
 ```
 
 Pendekatan ini mudah dipahami ketika pertama kali belajar.
@@ -1380,20 +1380,34 @@ Pendekatan ini mudah dipahami ketika pertama kali belajar.
 ### Pendekatan Scikit-Learn Pipeline
 
 ```text
-Raw Data
-   │
-   ▼
-ColumnTransformer
-   │
-   ├── Numerical Pipeline
-   │      └── SimpleImputer
-   │
-   └── Categorical Pipeline
-          ├── SimpleImputer
-          └── OneHotEncoder
-   │
-   ▼
-Model
+                    RAW DATA
+                       │
+                       ▼
+              ┌──────────────────┐
+              │ ColumnTransformer│
+              └────────┬─────────┘
+                       │
+          ┌────────────┴────────────┐
+          │                         │
+          ▼                         ▼
+   NUMERICAL COLUMNS        CATEGORICAL COLUMNS
+          │                         │
+          ▼                         ▼
+    SimpleImputer            SimpleImputer
+      (median)              (most_frequent)
+          │                         │
+          │                         ▼
+          │                   OneHotEncoder
+          │                         │
+          └──────────┬──────────────┘
+                     ▼
+              PREPROCESSED DATA
+                     │
+                     ▼
+                   MODEL
+                     │
+                     ▼
+                PREDICTION
 ```
 
 Pendekatan Pipeline lebih cocok untuk workflow Machine Learning yang lebih terstruktur.
@@ -1431,7 +1445,7 @@ Train-Test Split
        ↓
 Preprocessing
        ↓
-Model
+     Model
        ↓
 Cross Validation
        ↓
@@ -1590,7 +1604,7 @@ OneHotEncoder
       +
 ColumnTransformer
       +
-Pipeline
+  Pipeline
       +
 Machine Learning Model
 ```

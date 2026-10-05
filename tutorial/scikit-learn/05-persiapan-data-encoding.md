@@ -56,6 +56,10 @@ Karena itu, data perlu di-encode.
 
 ![Scikit Learn](/img/python/49.png)
 
+:::tip
+**Baca Juga:** [Encoding Data dalam Data Preprocessing pada Machine Learning](/blog/encoding-dalam-data-processing)
+:::
+
 ## Mengapa Data Harus Berbentuk Numerik?
 
 Banyak algoritma Machine Learning melakukan perhitungan matematis terhadap data.
@@ -1243,3 +1247,7 @@ Dengan pendekatan tersebut, preprocessing dapat diterapkan secara konsisten dan 
 | Melihat nama fitur | `transformer.get_feature_names_out()` |
 | Pandas dummy encoding | `pd.get_dummies(data)` |
 | Membuat Pipeline | `Pipeline(steps=[...])` |
+
+## Baca Juga
+
+* [Encoding Data dalam Data Preprocessing pada Machine Learning](/blog/encoding-dalam-data-processing)

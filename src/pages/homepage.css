@@ -84,7 +84,7 @@
 	color: var(--homepage-text-muted) !important;
 }
 
-#homepage-root #features > div > div > div {
+#homepage-root #features .homepage-feature-grid > div {
 	background-color: var(--homepage-surface) !important;
 	border-color: var(--homepage-border) !important;
 }

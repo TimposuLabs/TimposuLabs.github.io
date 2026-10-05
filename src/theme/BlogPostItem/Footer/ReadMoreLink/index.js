@@ -9,10 +9,10 @@ export default function BlogPostItemFooterReadMoreLink(props) {
       {...linkProps}
       aria-label={
         blogPostTitle
-          ? `Baca selengkapnya tentang ${blogPostTitle}`
-          : 'Baca selengkapnya'
+          ? `Read more about ${blogPostTitle}`
+          : 'Read more'
       }>
-      <b>Baca selengkapnya</b>
+      <b>Read more</b>
     </Link>
   );
 }

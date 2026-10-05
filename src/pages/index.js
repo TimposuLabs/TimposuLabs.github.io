@@ -534,7 +534,7 @@ function FeaturesSection() {
             Lihat semua layanan →
           </a>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="homepage-feature-grid grid grid-cols-1 md:grid-cols-3 gap-8">
           {cards.map((card, i) => (
             <div key={i}
               style={{ padding: '32px', borderRadius: '24px', backgroundColor: 'rgba(30,41,59,0.4)', border: '1px solid #334155', transition: 'all 0.3s ease' }}

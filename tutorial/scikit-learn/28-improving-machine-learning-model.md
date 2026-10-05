@@ -191,11 +191,11 @@ Model mempelajarinya:
 ```text
 Training Data
       ↓
-   Algorithm
+  Algorithm
       ↓
 Learn Parameters
       ↓
-Predictions
+ Predictions
 ```
 
 Karena itu, parameter merupakan bagian internal model yang dipelajari berdasarkan data.

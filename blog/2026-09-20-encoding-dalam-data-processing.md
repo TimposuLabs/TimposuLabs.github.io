@@ -1,11 +1,17 @@
 ---
 slug: encoding-dalam-data-processing
-title: "Encoding Data dalam Data Preprocessing"
+title: "Encoding Data dalam Data Preprocessing pada Machine Learning"
 authors: topekox
 tags: [manchine learning, data mining, ai, deep learning, data science, python]
 ---
 
 Encoding adalah salah satu tahap penting dalam **data preprocessing** yang digunakan untuk mengubah data kategorikal menjadi bentuk numerik sehingga dapat diproses oleh algoritma Machine Learning.
+
+:::info
+Pada tulisan ini, dataset yang digunakan adalah:
+* [dataset Titanic](https://www.kaggle.com/datasets/yasserh/titanic-dataset/data)
+* [dataset FIFA23](https://www.kaggle.com/datasets/bryanb/fifa-player-stats-database)
+:::
 
 ## 1. Apa Itu Encoding?
 
@@ -55,7 +61,7 @@ Data kategorikal
        ↓
     Encoding
        ↓
-Data numerik
+  Data numerik
        ↓
 Machine Learning
 ```
@@ -231,7 +237,7 @@ Embarked_C    Embarked_Q    Embarked_S
 
 Nilai `1` berarti data termasuk kategori tersebut, sedangkan `0` berarti tidak termasuk.
 
-## 10. One-Hot Encoding dengan Pandas
+## 10. One-Hot Encoding dengan Pandas menggunakan `get_dummies()`
 
 Gunakan:
 
@@ -488,6 +494,14 @@ Abnormal → 1
 ```
 
 umumnya lebih sesuai sebagai label kelas.
+
+### Perbandingan Penanganan Data Kategori
+
+| Jumlah Kategori |	Tipe Data |	Metode yang Tepat |	Catatan |
+| --- | --- | --- | --- |
+| **2 Kategori** (*Biner*) |	Bebas (Normal/Abnormal, Laki/Perempuan) |	**Label Encoding (0 dan 1)**	| Sangat disarankan karena efisien dan tidak membingungkan model.|
+| **> 2 Kategori** |	Nominal (Tanpa Urutan: Kucing, Anjing, Burung) |	**One-Hot Encoding**	| Wajib dihindari menggunakan Label Encoding biasa agar model tidak salah paham. |
+| **> 2 Kategori** |	Ordinal (Berurutan: Low, Medium, High) |	**Label Encoding**	| Bagus digunakan karena urutan angkanya mencerminkan dunia nyata. |
 
 ## 20. Encoding Target dan Encoding Feature
 
