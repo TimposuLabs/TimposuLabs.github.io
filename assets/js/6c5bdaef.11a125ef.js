@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunktimposu||=[]).push([[17291],{83016(a){a.exports=JSON.parse('{"tag":{"label":"vibe coding","permalink":"/blog/tags/vibe-coding","allTagsPath":"/blog/tags","count":1,"unlisted":false},"listMetadata":{"permalink":"/blog/tags/vibe-coding","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
