@@ -322,15 +322,15 @@
 <p>Di balik AI coding assistant terdapat berbagai komponen yang saling berhubungan.</p>
 <p>Sembilan istilah yang penting untuk dipahami adalah:</p>
 <ol>
-<li class=""><strong>Model</strong> -otak AI.</li>
-<li class=""><strong>Token</strong> -unit informasi yang diproses AI.</li>
-<li class=""><strong>Context Window</strong> -kapasitas informasi yang tersedia dalam konteks.</li>
-<li class=""><strong>Hallucination</strong> -kesalahan AI ketika menghasilkan informasi yang tidak benar.</li>
-<li class=""><strong>Tool</strong> -kemampuan AI berinteraksi dengan environment.</li>
-<li class=""><strong>Agent</strong> -kemampuan AI menjalankan rangkaian tindakan secara mandiri.</li>
-<li class=""><strong>Harness</strong> -lingkungan yang mengorkestrasi model dan berbagai komponen AI.</li>
-<li class=""><strong>MCP</strong> -protokol untuk menghubungkan AI dengan sistem eksternal.</li>
-<li class=""><strong>Skill</strong> -instruksi khusus yang membantu AI menjalankan tugas secara konsisten.</li>
+<li class=""><strong>Model</strong> - otak AI.</li>
+<li class=""><strong>Token</strong> - unit informasi yang diproses AI.</li>
+<li class=""><strong>Context Window</strong> - kapasitas informasi yang tersedia dalam konteks.</li>
+<li class=""><strong>Hallucination</strong> - kesalahan AI ketika menghasilkan informasi yang tidak benar.</li>
+<li class=""><strong>Tool</strong> - kemampuan AI berinteraksi dengan environment.</li>
+<li class=""><strong>Agent</strong> - kemampuan AI menjalankan rangkaian tindakan secara mandiri.</li>
+<li class=""><strong>Harness</strong> - lingkungan yang mengorkestrasi model dan berbagai komponen AI.</li>
+<li class=""><strong>MCP</strong> - protokol untuk menghubungkan AI dengan sistem eksternal.</li>
+<li class=""><strong>Skill</strong> - instruksi khusus yang membantu AI menjalankan tugas secara konsisten.</li>
 </ol>
 <p>Pemahaman terhadap istilah-istilah tersebut membuat developer tidak hanya menjadi <strong>pengguna AI</strong>, tetapi juga mampu memahami bagaimana AI digunakan sebagai bagian dari workflow software development.</p>
 <p>Pada akhirnya, tujuan Vibe Coding bukan menggantikan developer.</p>
