@@ -192,12 +192,20 @@ import re
 
 pola = re.compile(r"([a-zA-Z]).(a)")
 
-hasil = pola.search("Python")
+hasil = pola.search("Boa")
 
 if hasil:
     print(hasil.group())
     print(hasil.group(1))
     print(hasil.group(2))
+```
+
+Output:
+
+```text
+Boa
+B
+a
 ```
 
 `group()` tanpa angka digunakan untuk mengambil keseluruhan hasil pencocokan.
@@ -244,6 +252,9 @@ Struktur polanya:
 ([a-z]+) → Group 2
 (\d+)    → Group 3
 ```
+
+> `+`: Tanda tambah berarti huruf kecil / angka tersebut harus muncul minimal 1 kali atau lebih (contoh: `a`, `abc`, `txt`, `1`, `99`, `2026`).
+
 
 Sehingga masing-masing bagian dapat diambil secara terpisah.
 
@@ -442,7 +453,7 @@ Kita dapat membangun pattern secara bertahap dan menguji setiap perubahan.
 ## 12. Ringkasan Special Sequences
 
 | Pattern | Fungsi |
-|||
+|---|---|
 | `\d` | Mencocokkan satu digit |
 | `[a-zA-Z]` | Mencocokkan satu huruf kecil atau besar |
 | `.` | Mencocokkan satu karakter apa saja kecuali newline dalam penggunaan normal |
