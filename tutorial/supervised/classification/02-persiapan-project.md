@@ -9,6 +9,8 @@ Project ini menggunakan pendekatan **Supervised Learning**, khususnya **Binary C
 
 Sebelum menulis kode program, kita perlu memahami alur project dan menentukan tujuan yang ingin dicapai.
 
+![End to End](/img/python/62.png)
+
 ## 6 Langkah Machine Learning Framework
 
 Machine Learning Framework membantu kita mengerjakan project secara sistematis, mulai dari mendefinisikan masalah hingga melakukan eksperimen untuk meningkatkan performa model.

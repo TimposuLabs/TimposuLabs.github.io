@@ -9,6 +9,8 @@ Pada tahap ini, kita akan mengimpor library untuk analisis data, visualisasi, pe
 
 Dengan menyiapkan library di awal, kita dapat menjalankan eksperimen dengan lebih terstruktur dan mengurangi kebutuhan untuk mengimpor library berulang kali.
 
+![End to End](/img/python/62.png)
+
 ## Library untuk Analisis Data dan Visualisasi
 
 Library berikut digunakan untuk membaca, memanipulasi, dan memahami dataset.
