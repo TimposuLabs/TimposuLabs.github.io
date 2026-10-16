@@ -1,4 +1,5 @@
 @import 'katex/dist/katex.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap');
 
 /**
  * Docusaurus default CSS - jangan modifikasi untuk homepage
@@ -13,6 +14,11 @@
   --ifm-color-primary-lightest: #3cad6e;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+:root:not(:has(#homepage-root)) {
+  --ifm-font-family-base: 'Source Sans 3', sans-serif;
+  --ifm-heading-font-family: 'Manrope', sans-serif;
 }
 
 .blog-sidebar-more {

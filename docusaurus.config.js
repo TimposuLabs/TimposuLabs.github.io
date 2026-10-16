@@ -196,6 +196,10 @@ const config = {
                 to: '/scikit-learn/',
                 label: 'Scikit-learn',
               },
+              {
+                to: '/supervised/',
+                label: 'Supervised Learning',
+              },
             ],
           },
           {to: '/blog', label: 'Blog', position: 'left'},
@@ -417,6 +421,17 @@ const config = {
           id: 'scikit-learn',
           path: 'tutorial/scikit-learn',
           routeBasePath: 'scikit-learn',
+          sidebarPath: require.resolve('./sidebars.js'),
+          remarkPlugins: [require('remark-math').default],
+          rehypePlugins: [require('rehype-katex').default],
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+          id: 'supervised',
+          path: 'tutorial/supervised',
+          routeBasePath: 'supervised',
           sidebarPath: require.resolve('./sidebars.js'),
           remarkPlugins: [require('remark-math').default],
           rehypePlugins: [require('rehype-katex').default],
