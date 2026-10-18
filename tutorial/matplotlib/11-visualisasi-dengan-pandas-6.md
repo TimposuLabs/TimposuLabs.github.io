@@ -1,9 +1,7 @@
 ---
 sidebar_position: 12
-title: "Visualisasi Data dari Pandas - 6"
+title: "Visualisasi Data dari Pandas: Object-Oriented Matplotlib dari Awal"
 ---
-
-## Membuat Visualisasi dengan Object-Oriented Matplotlib dari Awal
 
 Pada materi sebelumnya kita telah mempelajari perbedaan antara **Pyplot Method** dan **Object-Oriented (OO) Method** pada Matplotlib.
 

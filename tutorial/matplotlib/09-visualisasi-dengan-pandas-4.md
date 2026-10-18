@@ -1,9 +1,7 @@
 ---
 sidebar_position: 10
-title: "Visualisasi Data dari Pandas - 4"
+title: "Visualisasi Data dari Pandas: Distribusi Data & Subplots"
 ---
-
-## Visualisasi Distribusi Data dan Subplots dengan Pandas dan Matplotlib
 
 Dalam proses **Exploratory Data Analysis (EDA)**, memahami distribusi data merupakan salah satu langkah penting sebelum melakukan analisis lebih lanjut atau membangun model Machine Learning.
 

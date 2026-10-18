@@ -1,6 +1,6 @@
 ---
 sidebar_position: 14
-title: "Visualisasi Data dari Pandas - 7"
+title: "Visualisasi Data dari Pandas: Subplots dengan Object-Oriented Matplotlib"
 ---
 
 ## Subplots dengan Object-Oriented Matplotlib dan Shared X-Axis
