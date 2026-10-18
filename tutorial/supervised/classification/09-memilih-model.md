@@ -277,6 +277,8 @@ def fit_and_score(
         Dictionary berisi nama model dan akurasi testing.
     """
 
+    # tambahkan np.random.seed(42), jika model belum memiliki parameter random_state
+
     model_scores = {}
 
     for name, model in models.items():
