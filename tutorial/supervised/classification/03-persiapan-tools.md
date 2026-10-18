@@ -9,7 +9,7 @@ Pada tahap ini, kita akan mengimpor library untuk analisis data, visualisasi, pe
 
 Dengan menyiapkan library di awal, kita dapat menjalankan eksperimen dengan lebih terstruktur dan mengurangi kebutuhan untuk mengimpor library berulang kali.
 
-![End to End](/img/python/62.png)
+![workflow](/img/python/62.webp)
 
 ## Library untuk Analisis Data dan Visualisasi
 
@@ -43,6 +43,10 @@ Keterangan:
 - `import matplotlib.pyplot as plt` mengimpor fungsi plotting dari Matplotlib.
 - `import seaborn as sns` mengimpor Seaborn untuk visualisasi statistik.
 - `%matplotlib inline` merupakan IPython magic command yang menampilkan grafik langsung di dalam notebook pada lingkungan yang mendukungnya.
+
+:::info
+Perintah `%matplotlib inline` wajib ditulis pada versi Jupyter yang lama (terutama saat pertama kali dirilis) agar browser tahu bahwa grafik harus digambar di dalam sel halaman web, bukan dilempar ke jendela pop-up terpisah.
+:::
 
 ## Library untuk Model Machine Learning
 

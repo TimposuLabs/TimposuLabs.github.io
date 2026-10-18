@@ -4,6 +4,8 @@ sidebar_position: 7
 
 # Workflow Machine Learning
 
+![workflow](/img/python/62.webp)
+
 Machine Learning bukan hanya tentang memilih algoritma kemudian menjalankan kode Python. Dalam proyek Machine Learning yang sebenarnya, terdapat serangkaian tahapan yang perlu dilakukan agar proses penyelesaian masalah dapat berjalan secara terstruktur.
 
 Salah satu cara sederhana untuk memahami alur kerja Machine Learning adalah menggunakan **6 Step Machine Learning Framework**.

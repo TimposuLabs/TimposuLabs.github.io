@@ -9,6 +9,10 @@ Sebagai contoh, kita akan membuat proyek baru bernama `heart-disease-project` un
 
 Pada materi ini, kita akan mempelajari cara membuat folder proyek, mengekspor konfigurasi environment Conda, membuat environment baru, dan menjalankan Jupyter Notebook.
 
+:::info
+Download [Heart Disease Dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset).
+:::
+
 ## 1. Membuat Folder Proyek
 
 Setiap proyek sebaiknya memiliki folder tersendiri agar file tidak tercampur dengan proyek lain.

@@ -16,11 +16,11 @@ Secara sederhana:
 ```text
 Problem
    ↓
-Data
+ Data
    ↓
 Pattern
    ↓
-Model
+ Model
    ↓
 Prediction
 ```

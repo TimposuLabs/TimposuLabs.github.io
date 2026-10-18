@@ -9,7 +9,7 @@ Project ini menggunakan pendekatan **Supervised Learning**, khususnya **Binary C
 
 Sebelum menulis kode program, kita perlu memahami alur project dan menentukan tujuan yang ingin dicapai.
 
-![End to End](/img/python/62.png)
+![workflow](/img/python/62.webp)
 
 ## 6 Langkah Machine Learning Framework
 
@@ -139,11 +139,11 @@ Dengan demikian, notebook tidak hanya berisi kode, tetapi juga dokumentasi menge
 
 Pada materi ini, kita telah mempelajari enam langkah Machine Learning Framework:
 
-1. **Problem Definition** — menentukan masalah yang akan diselesaikan.
-2. **Data** — memahami sumber dan karakteristik dataset.
-3. **Evaluation** — menentukan metrik keberhasilan model.
-4. **Features** — memahami fitur melalui Data Dictionary.
-5. **Modelling** — membangun dan melatih model.
-6. **Experimentation** — melakukan eksperimen untuk meningkatkan performa.
+1. **Problem Definition** - menentukan masalah yang akan diselesaikan.
+2. **Data** - memahami sumber dan karakteristik dataset.
+3. **Evaluation** - menentukan metrik keberhasilan model.
+4. **Features** - memahami fitur melalui Data Dictionary.
+5. **Modelling** - membangun dan melatih model.
+6. **Experimentation** - melakukan eksperimen untuk meningkatkan performa.
 
 Framework ini akan menjadi panduan selama kita mengembangkan project Heart Disease Classification dari awal hingga evaluasi model.

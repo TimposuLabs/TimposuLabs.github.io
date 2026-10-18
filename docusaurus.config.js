@@ -11,11 +11,13 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   markdown: {
+    mermaid: true,
     // @ts-ignore
     hooks: {
       onBrokenMarkdownLinks: 'warn', // or 'throw', 'ignore', or a custom function
     },
   },
+  themes: ['@docusaurus/theme-mermaid'],
   favicon: 'img/timposulabs.png',
   organizationName: 'TimposuLabs', // Usually your GitHub org/user name.
   projectName: 'TimposuLabs.github.io', // Usually your repo name.
