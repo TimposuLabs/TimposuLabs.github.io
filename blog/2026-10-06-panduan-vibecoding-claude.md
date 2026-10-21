@@ -764,3 +764,7 @@ Pada akhirnya, tujuan Vibe Coding bukan menggantikan developer.
 Tujuannya adalah membuat developer menjadi **lebih produktif, lebih cepat melakukan eksperimen, dan lebih fokus pada problem solving**, sambil tetap mempertahankan kontrol manusia terhadap kode dan keputusan teknis.
 
 > **AI dapat menulis kode, tetapi developer tetap harus memahami, memverifikasi, dan bertanggung jawab terhadap kode tersebut.**
+
+## Referensi
+
+* https://www.youtube.com/watch?v=OVY4e0qB4hk
