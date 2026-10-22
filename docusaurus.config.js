@@ -11,11 +11,13 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   markdown: {
+    mermaid: true,
     // @ts-ignore
     hooks: {
       onBrokenMarkdownLinks: 'warn', // or 'throw', 'ignore', or a custom function
     },
   },
+  themes: ['@docusaurus/theme-mermaid'],
   favicon: 'img/timposulabs.png',
   organizationName: 'TimposuLabs', // Usually your GitHub org/user name.
   projectName: 'TimposuLabs.github.io', // Usually your repo name.
@@ -61,6 +63,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      image: 'img/timposulabs-home.png',
       // // algolia search
       // algolia: {
       //   apiKey: "86bb44d643cacc23505267e5049716b9",
@@ -195,6 +198,10 @@ const config = {
               {
                 to: '/scikit-learn/',
                 label: 'Scikit-learn',
+              },
+              {
+                to: '/supervised/',
+                label: 'Supervised Learning',
               },
             ],
           },
@@ -417,6 +424,17 @@ const config = {
           id: 'scikit-learn',
           path: 'tutorial/scikit-learn',
           routeBasePath: 'scikit-learn',
+          sidebarPath: require.resolve('./sidebars.js'),
+          remarkPlugins: [require('remark-math').default],
+          rehypePlugins: [require('rehype-katex').default],
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+          id: 'supervised',
+          path: 'tutorial/supervised',
+          routeBasePath: 'supervised',
           sidebarPath: require.resolve('./sidebars.js'),
           remarkPlugins: [require('remark-math').default],
           rehypePlugins: [require('rehype-katex').default],

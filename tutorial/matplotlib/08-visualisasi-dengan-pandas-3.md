@@ -1,9 +1,7 @@
 ---
 sidebar_position: 9
-title: "Visualisasi Data dari Pandas - 3"
+title: "Visualisasi Data dari Pandas: Plotting Bar Graph & Histogram"
 ---
-
-## Plotting Bar Graph dan Histogram dari Pandas DataFrame
 
 Pada materi sebelumnya kita telah mempelajari bagaimana membuat **line plot** dan **scatter plot** menggunakan Pandas DataFrame.
 

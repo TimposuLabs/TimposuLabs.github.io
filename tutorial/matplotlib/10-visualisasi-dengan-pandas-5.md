@@ -1,9 +1,7 @@
 ---
 sidebar_position: 11
-title: "Visualisasi Data dari Pandas - 5"
+title: "Visualisasi Data dari Pandas: Pyplot vs Object-Oriented Method"
 ---
-
-## Pyplot vs Object-Oriented Method dengan Pandas dan Matplotlib
 
 Matplotlib menyediakan beberapa cara untuk membuat visualisasi data.
 

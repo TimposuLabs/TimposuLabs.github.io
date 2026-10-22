@@ -1,9 +1,7 @@
 ---
 sidebar_position: 8
-title: "Visualisasi Data dari Pandas - 2"
+title: "Visualisasi Data dari Pandas: Line Plot & Scatter Plot"
 ---
-
-## Manipulasi Data dan Visualisasi dari Pandas DataFrame (Line Plot dan Scatter Plot)
 
 Dalam proyek **Data Science**, data yang diperoleh dari sumber eksternal sering kali belum siap untuk langsung dianalisis.
 

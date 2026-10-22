@@ -9,22 +9,15 @@ Workflow merupakan urutan proses yang biasanya dilakukan ketika membangun model 
 
 Secara sederhana:
 
-```text
-Data
- ↓
-Prepare Data
- ↓
-Choose Model
- ↓
-Fit Model
- ↓
-Make Predictions
- ↓
-Evaluate
- ↓
-Improve
- ↓
-Save Model
+```mermaid
+flowchart TD
+    A[Data] --> B[Prepare Data]
+    B --> C[Choose Model]
+    C --> D[Fit Model]
+    D --> E[Make Predictions]
+    E --> F[Evaluate]
+    F --> G[Improve]
+    G --> H[Save Model]
 ```
 
 Workflow ini akan menjadi pola dasar yang akan sering kita gunakan ketika membangun model Machine Learning menggunakan Scikit-Learn.
@@ -53,47 +46,23 @@ Setelah mempelajari materi ini, kita diharapkan dapat:
 
 Workflow utama dapat digambarkan sebagai berikut:
 
-```text
-                 Dataset
-                    │
-                    ▼
-             Prepare Data
-                    │
-                    ▼
-             Define X and y
-                    │
-                    ▼
-             Split the Data
-                    │
-                    ▼
-          Choose Model / Estimator
-                    │
-                    ▼
-                Fit Model
-                    │
-                    ▼
-             Make Predictions
-                    │
-                    ▼
-             Evaluate Model
-                    │
-              ┌─────┴─────┐
-              │           │
-          Good Enough?    No
-              │           │
-             Yes          ▼
-              │      Improve Model
-              │           │
-              │           ▼
-              │      Tune Parameters
-              │           │
-              │           └──────┐
-              │                  │
-              ▼                  │
-           Save Model ◄──────────┘
-              │
-              ▼
-          Use / Deploy
+```mermaid
+flowchart TD
+    A[Dataset] --> B[Prepare Data]
+    B --> C[Define Features X and Target y]
+    C --> D[Split Data into Train and Test Sets]
+    D --> E[Choose Model / Estimator]
+    E --> F[Fit Model on Training Data]
+    F --> G[Make Predictions on Test Data]
+    G --> H[Evaluate Model]
+    H --> I{Performance Acceptable?}
+
+    I -- No --> J[Improve Model]
+    J --> K[Tune Hyperparameters]
+    K --> F
+
+    I -- Yes --> L[Save Final Model]
+    L --> M[Deploy / Use Model]
 ```
 
 Tidak semua proyek harus mengikuti diagram tersebut secara persis.
@@ -417,15 +386,13 @@ Pemilihan estimator bergantung pada jenis permasalahan.
 
 Secara umum:
 
-```text
-Machine Learning Problem
-          │
-     ┌────┴────┐
-     │         │
-Classification Regression
-     │         │
-     ▼         ▼
-Kategori     Angka
+```mermaid
+flowchart TD
+    A[Machine Learning Problem]
+    A --> B[Classification]
+    A --> C[Regression]
+    B --> D[Kategori]
+    C --> E[Angka]
 ```
 
 Contoh:
@@ -510,19 +477,13 @@ model = RandomForestRegressor(
 
 Perhatikan bahwa nama estimator berbeda:
 
-```text
-RandomForestClassifier
-        ↓
-Classification
-
-RandomForestRegressor
-        ↓
-Regression
+```mermaid
+flowchart TD
+    A[RandomForestClassifier] --> B[Classification]
+    C[RandomForestRegressor] --> D[Regression]
 ```
 
 ### Memilih Model dengan Scikit-Learn
-
-![scikit-learn](/img/python/50.png)
 
 Scikit-Learn memiliki banyak estimator.
 
@@ -549,6 +510,8 @@ Regression
 Tidak semua model harus dipelajari sekaligus.
 
 Mulailah dengan beberapa model yang sesuai dengan jenis permasalahan, kemudian lakukan eksperimen dan evaluasi.
+
+![scikit-learn](/img/python/50.png)
 
 ## Step 4 - Fit the Model
 
