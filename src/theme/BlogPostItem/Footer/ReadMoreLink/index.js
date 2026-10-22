@@ -12,7 +12,7 @@ export default function BlogPostItemFooterReadMoreLink(props) {
           ? `Read more about ${blogPostTitle}`
           : 'Read more'
       }>
-      <b>Read more</b>
+      <b>Read more »</b>
     </Link>
   );
 }
