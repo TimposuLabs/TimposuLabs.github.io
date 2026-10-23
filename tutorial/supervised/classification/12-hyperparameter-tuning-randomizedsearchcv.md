@@ -667,3 +667,7 @@ Pada materi ini, kita telah mempelajari:
 7. Penerapan RandomizedSearchCV pada training set.
 8. Perbedaan skor validasi dan skor test.
 9. Evaluasi model terpilih menggunakan classification report dan confusion matrix.
+
+## Baca Juga
+
+* [Tutorial Scikit-learn Hyperparameter Tuning dengan RandomizedSearchCV](/scikit-learn/hyperparameter-tuning-RandomizedSearchCV)
