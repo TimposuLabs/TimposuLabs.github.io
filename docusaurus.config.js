@@ -63,6 +63,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      image: 'img/timposulabs-home.png',
       // // algolia search
       // algolia: {
       //   apiKey: "86bb44d643cacc23505267e5049716b9",
