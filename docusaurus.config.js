@@ -32,6 +32,7 @@ const config = {
       crossorigin: 'anonymous',
     }
   ],
+  clientModules: ['./src/clientModules/gtag.js'],
 
   presets: [
     [
