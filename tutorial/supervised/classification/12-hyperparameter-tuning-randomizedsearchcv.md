@@ -38,6 +38,8 @@ Jika setiap parameter memiliki banyak pilihan, jumlah kombinasi yang perlu diper
 
 `RandomizedSearchCV` membantu mengatasi masalah tersebut dengan mengambil sejumlah kombinasi parameter dari ruang pencarian yang ditentukan.
 
+![RandomizedSearchCV](/img/python/3.jpg)
+
 ### 1.1 Apa Itu RandomizedSearchCV?
 
 `RandomizedSearchCV` adalah kelas Scikit-Learn yang menjalankan pencarian hyperparameter dengan memilih kombinasi parameter secara acak, lalu mengevaluasinya menggunakan Cross-Validation.
@@ -68,6 +70,8 @@ from sklearn.model_selection import RandomizedSearchCV
 | Jaminan kombinasi terbaik | Menguji semua kombinasi yang ditentukan | Tidak menjamin kombinasi terbaik dalam seluruh ruang |
 
 Randomized Search tidak otomatis lebih baik daripada Grid Search. Pemilihan metode bergantung pada ukuran ruang pencarian, anggaran komputasi, dan kebutuhan eksperimen.
+
+![RandomizedSearchCV vs GridSearchCV](/img/python/1.webp)
 
 ## 2. Memahami Cross-Validation
 
@@ -671,3 +675,4 @@ Pada materi ini, kita telah mempelajari:
 ## Baca Juga
 
 * [Tutorial Scikit-learn Hyperparameter Tuning dengan RandomizedSearchCV](/scikit-learn/hyperparameter-tuning-RandomizedSearchCV)
+* [Tutorial Scikit-learn Evaluasi Model: Cross-Validation](/scikit-learn/evaluasi-model-cross-validation-scoring)

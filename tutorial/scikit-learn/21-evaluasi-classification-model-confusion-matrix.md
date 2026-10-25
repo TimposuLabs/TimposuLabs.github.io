@@ -3,14 +3,14 @@ sidebar_position: 22
 title: "Evaluasi Classification Model: Confusion Matrix"
 ---
 
-![binary classification](/img/python/4.png)
-
 **Confusion Matrix** adalah tabel yang digunakan untuk mengevaluasi performa model klasifikasi dengan membandingkan:
 
 - **Actual / True Label** → label sebenarnya
 - **Predicted Label** → label yang diprediksi oleh model
 
 Confusion Matrix tidak hanya menunjukkan berapa banyak prediksi yang benar, tetapi juga menunjukkan **jenis kesalahan yang dilakukan model**.
+
+![binary classification](/img/python/4.png)
 
 Hal ini membuat Confusion Matrix sangat berguna untuk memahami perilaku classification model.
 

@@ -32,6 +32,8 @@ Scikit-Learn kemudian akan:
 4. Memilih kombinasi dengan skor terbaik berdasarkan metrik yang digunakan.
 5. Melatih ulang model terbaik pada seluruh data training secara default.
 
+![GridSearchCV](/img/python/60.png)
+
 ### 1.2 Perbedaan GridSearchCV dan RandomizedSearchCV
 
 | Aspek | GridSearchCV | RandomizedSearchCV |
@@ -42,6 +44,8 @@ Scikit-Learn kemudian akan:
 | Penggunaan | Grid kecil dan pencarian terperinci | Pencarian awal atau ruang parameter besar |
 
 Keduanya menggunakan cross-validation untuk mengevaluasi kandidat berdasarkan konfigurasi yang ditetapkan.
+
+![RandomizedSearchCV vs GridSearchCV](/img/python/1.webp)
 
 **Penting:** `GridSearchCV` tidak menjamin menemukan konfigurasi terbaik secara universal. Hasil terbaik hanya berlaku untuk ruang parameter, data, metrik, dan strategi validasi yang digunakan.
 
@@ -583,3 +587,4 @@ GridSearchCV membantu melakukan eksperimen secara sistematis, tetapi kualitas ha
 ## Baca Juga
 
 * [Tutorial Scikit-learn Hyperparameter Tuning dengan GridSearchCV](/scikit-learn/hyperparameter-tuning-GridSearchCV)
+* [Tutorial Scikit-learn Evaluasi Model: Cross-Validation](/scikit-learn/evaluasi-model-cross-validation-scoring)
