@@ -43,7 +43,7 @@ export default function BlogSidebarDesktop({sidebar}) {
         />
         <div className="margin-top--md">
           <Link className="blog-sidebar-more" to="/blog/archive">
-            More &gt;&gt;&gt;
+            More »
           </Link>
         </div>
       </nav>

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 7
-title: "Visualisasi Data dari Pandas - 1"
+title: "Visualisasi Data dari Pandas"
 ---
 
 Dalam workflow **Data Science**, Pandas banyak digunakan untuk membaca, membersihkan, mengolah, dan menganalisis data dalam bentuk DataFrame.
