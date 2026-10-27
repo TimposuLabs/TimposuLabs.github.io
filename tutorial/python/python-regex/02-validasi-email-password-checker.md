@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-title: "Validasi Email & Password Checker"
+title: "Validasi Email & Latihan Password Checker"
 ---
 
 ## Aplikasi Nyata RegEx: Validasi Email & Latihan Password Checker

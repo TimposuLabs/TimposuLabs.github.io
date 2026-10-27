@@ -747,15 +747,15 @@ Di balik AI coding assistant terdapat berbagai komponen yang saling berhubungan.
 
 Sembilan istilah yang penting untuk dipahami adalah:
 
-1. **Model** -otak AI.
-2. **Token** -unit informasi yang diproses AI.
-3. **Context Window** -kapasitas informasi yang tersedia dalam konteks.
-4. **Hallucination** -kesalahan AI ketika menghasilkan informasi yang tidak benar.
-5. **Tool** -kemampuan AI berinteraksi dengan environment.
-6. **Agent** -kemampuan AI menjalankan rangkaian tindakan secara mandiri.
-7. **Harness** -lingkungan yang mengorkestrasi model dan berbagai komponen AI.
-8. **MCP** -protokol untuk menghubungkan AI dengan sistem eksternal.
-9. **Skill** -instruksi khusus yang membantu AI menjalankan tugas secara konsisten.
+1. **Model** - otak AI.
+2. **Token** - unit informasi yang diproses AI.
+3. **Context Window** - kapasitas informasi yang tersedia dalam konteks.
+4. **Hallucination** - kesalahan AI ketika menghasilkan informasi yang tidak benar.
+5. **Tool** - kemampuan AI berinteraksi dengan environment.
+6. **Agent** - kemampuan AI menjalankan rangkaian tindakan secara mandiri.
+7. **Harness** - lingkungan yang mengorkestrasi model dan berbagai komponen AI.
+8. **MCP** - protokol untuk menghubungkan AI dengan sistem eksternal.
+9. **Skill** - instruksi khusus yang membantu AI menjalankan tugas secara konsisten.
 
 Pemahaman terhadap istilah-istilah tersebut membuat developer tidak hanya menjadi **pengguna AI**, tetapi juga mampu memahami bagaimana AI digunakan sebagai bagian dari workflow software development.
 

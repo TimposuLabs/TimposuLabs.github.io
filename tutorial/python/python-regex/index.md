@@ -32,6 +32,12 @@ if match:
     print("Ditemukan match object:", match)
 ```
 
+Contoh hasil:
+
+```
+Ditemukan match object: <re.Match object; span=(0, 9), match='pencarian'>
+```
+
 ## Match Object
 
 Ketika `re.search()` menemukan kecocokan, Python mengembalikan sebuah **Match Object**.
@@ -48,7 +54,7 @@ if match:
 Contoh hasil:
 
 ```text
-(0, 10)
+(0, 9)
 ```
 
 ### `match.start()`
@@ -147,6 +153,12 @@ if hasil:
     print("Seluruh teks cocok.")
 ```
 
+Output:
+
+```text
+Seluruh text cocok.
+```
+
 `fullmatch()` hanya menghasilkan Match Object apabila seluruh teks sesuai dengan pola.
 
 ## Mencocokkan dari Awal dengan `match()`
@@ -164,6 +176,12 @@ hasil = pola_awal.match(teks)
 
 if hasil:
     print("Pola ditemukan di awal teks.")
+```
+
+Output:
+
+```text
+Pola ditemukan di awal teks.
 ```
 
 Karena teks dimulai dengan kata `pencarian`, pola tersebut berhasil dicocokkan.
